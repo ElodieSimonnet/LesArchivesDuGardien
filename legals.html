@@ -5,64 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Les Archives Du Gardien</title>
+    <title>Mentions légales</title>
 </head>
 <body>
-    <header class="bg-primary-black border-primary-orange border-b-1 relative h-32
-                   lg:h-42">
-        <nav class="flex items-center justify-between h-full w-full">
-            <section class="flex items-center md:w-2/5">
-                <button class="md:hidden bg-primary-orange text-primary-black rounded-lg ml-5">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+    <header class="bg-primary-black border-primary-orange border-b px-8 py-8">
+        <nav class="max-w-full mx-auto flex items-center" aria-label="Navigation principale">
+            <div class="flex items-center lg:flex-1">
+                <button type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu">
+                    <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
                 </button>
-                <div class="hidden md:flex space-x-6 ml-6
-                            pl-24
-                            md:pl-0
-                            md:ml-0
-                            md:w-full
-                            md:space-x-0
-                            justify-around
-                            ">
-                    <a href="#" class="text-primary-white font-bold text-sm
-                                       lg:text-lg
-                                       2xl:text-2xl" >MONTURES</a>
-                    <a href="#" class="text-primary-white font-bold text-sm
-                                       lg:text-lg
-                                       2xl:text-2xl">MASCOTTES</a>
-                    <a href="#" class="text-primary-white font-bold text-sm
-                                       lg:text-lg
-                                       2xl:text-2xl">APPARENCES</a>
-                </div> 
-            </section>
-         
-            <figure class="absolute left-1/2 -translate-x-1/2 flex items-center w-1/5">
-                <img src="assets/images/home_icons/dragon_logo.png" alt="logo qui représente une tête de dragon couleur or" class="md:w-1/2 md:mx-auto">
-            </figure>
-            <section class="flex justify-end items-center md:w-2/5">
-                <button class="md:hidden border-2 border-primary-orange text-primary-orange rounded-lg mr-5">
-                    <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                </button>
-                <div class="hidden md:flex items-center space-x-6 text-sm mr-5
-                            lg:space-x-14 text-xl
-                            md:space-x-0 pr-40 2xl:text-3xl md:text-lg md:pr-0 md:mr-0 md:w-full md:flex md:justify-around">
-                    <button class="bg-primary-orange text-black font-bold px-6 md:px-2 py-2 rounded">CONNEXION</button>
-                    <button class="bg-primary-orange text-black font-bold px-6 md:px-2 py-2 rounded">INSCRIPTION</button>
+                <a href="#" class="hidden lg:block flex-shrink-0">
+                    <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-30 w-30">
+                </a>
+                <ul class="hidden lg:flex items-center gap-12 ml-8 text-primary-white font-semibold uppercase text-lg tracking-wider">
+                    <li><a href="#" class="hover:text-primary-orange">Montures</a></li>
+                    <li><a href="#" class="hover:text-primary-orange">Mascottes</a></li>
+                    <li><a href="#" class="hover:text-primary-orange">Apparences</a></li>
+                </ul>
+            </div>
+            <div class="lg:hidden flex-1 flex justify-center">
+                <a href="/">
+                    <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-30 w-30">
+                </a>
+            </div>
+            <div class="flex items-center justify-end gap-4 lg:flex-none">
+                <div class="hidden lg:flex gap-6">
+                    <a href="#" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Connexion</a>
+                    <a href="#" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Inscription</a>
                 </div>
-            </section>
+                <button type="button" class="lg:hidden p-2 border-2 border-primary-orange rounded-xl text-primary-orange" aria-label="Profil">
+                    <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                </button>
+            </div>
         </nav>
     </header>
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16
+    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="bg-primary-brown rounded-xl p-2 border-2 border-primary-orange w-4/5 mx-auto
                     lg:w-3/5">
             <h1 class="text-2xl font-semibold text-center text-primary-orange p-4
-                       lg:text-5xl">MENTIONS LÉGALES</h1>
+                       lg:text-3xl">MENTIONS LÉGALES</h1>
         </div>
         <section class="bg-primary-brown rounded-xl p-2 border-2 border-primary-orange w-4/5 mx-auto mt-4
                         lg:w-3/5">
             <article class="mt-4">
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2
-                           lg:text-3xl">ÉDITEUR DU SITE</h2>
+                           lg:text-2xl">ÉDITEUR DU SITE</h2>
                 <p class="text-sm font-semibold text-justify text-primary-white p-4
                           lg:text-xl">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
             </article>
@@ -71,7 +63,7 @@
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2
-                           lg:text-3xl">PROPRIÉTÉ INTELLECTUELLE</h2>
+                           lg:text-2xl">PROPRIÉTÉ INTELLECTUELLE</h2>
                 <p class="text-sm font-semibold text-justify text-primary-white p-4
                           lg:text-xl">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
             </article>
@@ -80,11 +72,43 @@
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2
-                           lg:text-3xl">DONNÉES PERSONNELLES</h2>
+                           lg:text-2xl">DONNÉES PERSONNELLES</h2>
                 <p class="text-sm font-semibold text-justify text-primary-white p-4
                           lg:text-xl">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
             </article>
         </section>
     </main>
+    <footer class="bg-primary-black text-primary-white border-t border-primary-orange py-8 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-4">
+            <nav>
+                <ul class="flex flex-row items-center gap-10 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
+                    <li>
+                        <a href="#" class="hover:text-primary-orange uppercase">Nouveautés</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-primary-orange uppercase">F.A.Q</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:text-primary-orange uppercase">Mentions Légales</a>
+                    </li>
+                </ul>
+            </nav>
+        <div class="flex flex-col items-center gap-4 lg:flex-row lg:gap-6">
+            <span class="text-primary-orange font-extrabold uppercase tracking-widest text-base lg:text-lg">
+                Suivez-nous :
+            </span>
+            <div class="flex items-center gap-8">
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Discord">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" class="w-6 h-6" alt="logo discord">
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Twitch">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" class="w-6 h-6" alt="logo twitch">
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="YouTube">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" class="w-6 h-6" alt="logo youtube">
+                </a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
