@@ -7,7 +7,7 @@
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Les Archives Du Gardien</title>
 </head>
-<body>
+<body class="min-h-screen flex flex-col">
     <header class="bg-primary-black border-primary-orange border-b px-8 py-8">
         <nav class="max-w-full mx-auto flex items-center" aria-label="Navigation principale">
             <div class="flex items-center lg:flex-1">
@@ -46,7 +46,7 @@
 
 
 
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16
+    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="mx-auto max-w-xl 
                     md:bg-primary-brown md:rounded-lg md:border-2 md:border-primary-orange md:p-6 md:max-w-[40rem]
@@ -100,38 +100,39 @@
                 </li>
             </ul>
         </section>
-        <footer class="bg-black text-primary-orange py-8 px-4 fixed bottom-0 left-0 z-20 w-full">
-            <div class="flex flex-col md:flex-row justify-between md:justify-around max-w-7xl mx-auto">
-                <nav class="flex justify-between text-xs md:justify-center md:space-x-6">
-                    <a href="#" class="text-primary-orange font-bold text-xs p-4">NOUVEAUTÉS</a>
-                    <a href="#" class="text-primary-orange font-bold text-xs p-4">F.A.Q</a>
-                    <a href="#" class="text-primary-orange font-bold text-xs p-4">MENTIONS LÉGALES</a>
-                </nav>
-
-            <section class="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 mt-8 md:mt-0">
-                <div class="flex items-center space-x-2">
-                    <h3 class="text-primary-orange font-bold text-xs">SUIVEZ-NOUS :</h3>
-                </div>
-                <ul class="flex space-x-8 md:ml-4">
+    </main>
+    
+    <footer class="bg-primary-black text-primary-white border-t border-primary-orange py-8 px-4">
+        <div class="max-w-6xl mx-auto flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-4">
+            <nav>
+                <ul class="flex flex-row items-center gap-10 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
                     <li>
-                        <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center md:ml-2" aria-label="Discord">
-                            <i class="ph ph-discord-logo text-primary-black text-xl"></i>
-                        </a>
+                        <a href="#" class="hover:text-primary-orange uppercase">Nouveautés</a>
                     </li>
                     <li>
-                        <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center" aria-label="Twitch">
-                            <i class="ph ph-twitch-logo text-primary-black text-xl"></i>
-                        </a>
+                        <a href="#" class="hover:text-primary-orange uppercase">F.A.Q</a>
                     </li>
                     <li>
-                        <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center" aria-label="YouTube">
-                            <i class="ph ph-youtube-logo text-primary-black text-xl"></i>
-                        </a>
+                        <a href="#" class="hover:text-primary-orange uppercase">Mentions Légales</a>
                     </li>
                 </ul>
-            </section>
+            </nav>
+        <div class="flex flex-col items-center gap-4 lg:flex-row lg:gap-6">
+            <span class="text-primary-orange font-extrabold uppercase tracking-widest text-base lg:text-lg">
+                Suivez-nous :
+            </span>
+            <div class="flex items-center gap-8">
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Discord">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/discord.svg" class="w-6 h-6" alt="logo discord">
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Twitch">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" class="w-6 h-6" alt="logo twitch">
+                </a>
+                <a href="#" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="YouTube">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" class="w-6 h-6" alt="logo youtube">
+                </a>
             </div>
-        </footer>
-    </main>
+        </div>
+    </footer>
 </body>
 </html>
