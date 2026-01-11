@@ -2,6 +2,7 @@
 
 @theme {
       --color-primary-orange: oklch(0.8274 0.1415 71.71);
+      --color-primary-orange-hover: oklch(0.88 0.16 75);
       --color-primary-black: oklch(0.1349 0.0142 301.09);
       --color-primary-white: oklch(0.9702 0 0);
       --color-primary-brown: oklch(0.1772 0.0316 24.1);
