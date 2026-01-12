@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
+    <script src="./script.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Détails des montures</title>
 </head>
@@ -16,7 +17,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <a href="#" class="hidden lg:block flex-shrink-0">
+                <a href="index.html" class="hidden lg:block flex-shrink-0">
                     <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-30 w-30">
                 </a>
                 <ul class="hidden lg:flex items-center gap-12 ml-8 text-primary-white font-semibold uppercase text-lg tracking-wider">
@@ -32,8 +33,8 @@
             </div>
             <div class="flex items-center justify-end gap-4 lg:flex-none">
                 <div class="hidden lg:flex gap-6">
-                    <a href="#" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Connexion</a>
-                    <a href="#" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Inscription</a>
+                    <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Connexion</a>
+                    <a href="#" onclick="toggleModal('registerModal')" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg">Inscription</a>
                 </div>
                 <button type="button" class="lg:hidden p-2 border-2 border-primary-orange rounded-xl text-primary-orange" aria-label="Profil">
                     <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
