@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="./script.js" defer></script>
+    <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/wishlist-heart.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Détails des montures</title>
 </head>
