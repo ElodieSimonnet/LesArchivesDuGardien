@@ -9,7 +9,15 @@
       --color-primary-grey: oklch(0.8853 0 0);
       --color-row-dark: oklch(0.2666 0.003 17.34);
       --color-row-light: oklch(0.3639 0.0155 17.88);
+      --color-line-faq: oklch(0.76 0.17 64.32);
 
+}
 
-
+@layer base {
+  html {
+    /* Réserve l'espace de la scrollbar pour éviter que tout bouge à gauche */
+    scrollbar-gutter: stable;
+    /* assure une fluidité de scroll sur toute la page */
+    scroll-behavior: smooth;
+  }
 }
