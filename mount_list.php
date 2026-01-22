@@ -51,19 +51,194 @@
                 </div>
             </div>
 
-        <div class="hidden lg:flex flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange">
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Statut</option></select>
+        <div class="hidden lg:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[999]">
+            <!-- Menu déroulant filtres statut -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Statut</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="statut" value="obtenu" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Obtenu</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="statut" value="manquant" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Manquant</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres types -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Type</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="terrestre" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Terrestre</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="volante" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Volante</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Aquatique</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres sources -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Source</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Butin" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Butin</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Vendeur" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Vendeur</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Quête" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Quête</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Haut-fait" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Haut-fait</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Métier" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Métier</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Boutique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Boutique</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Comptoir" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Comptoir</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Donjon" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Donjon</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Raid" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Raid</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres extensions -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Extension</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="World of Warcraft" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">World of Warcraft</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="The Burning Crusade" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">The Burning Crusade</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Wrath of the Lich King" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Wrath of the Lich King</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Cataclysm" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Cataclysm</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Mists of Pandaria" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Mists of Pandaria</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Warlords of Draenor" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Warlords of Draenor</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Legion" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Legion</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Battle for Azeroth" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Battle for Azeroth</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Shadowlands" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Shadowlands</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="Dragonflight" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Dragonflight</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="The War Within" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">The War Within</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres factions -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Faction</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Alliance" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Alliance</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Horde" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Horde</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Neutre" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Neutre</span>
+                    </label>
+                </div>
+            </div>
+
+
+
+
+
+        
+            <!-- <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Statut</option><option>Statut</option></select>
             <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Type</option></select>
             <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Source</option></select>
             <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Extension</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Faction</option></select>
+            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Faction</option></select> -->
+        </div>
+
+        <div id="active-filters-zone" class="flex flex-wrap items-center gap-3 mb-6">
+            <span class="text-xs uppercase text-primary-orange/60 font-bold tracking-widest">Filtres actifs :</span>
+    
+            <div class="flex items-center gap-2 bg-primary-orange/10 border border-primary-orange/40 px-3 py-1 rounded-full group hover:border-primary-orange transition-all">
+                <span class="text-xs text-primary-white">Extension: Dragonflight</span>
+                <button class="text-primary-orange hover:text-white transition-colors">
+                    <i class="ph-x-circle-bold"></i> </button>
+            </div>
+
+            <button class="text-xs text-zinc-500 hover:text-primary-orange underline underline-offset-4">Tout effacer</button>
         </div>
 
         <div class="flex flex-wrap -mx-3">
             
             <!-- CARTE 1 -->
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -74,7 +249,7 @@
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                             </svg>
                         </button>
-                        <img src="assets/images/mounts/cheval_bai.png" alt="Cheval Bai" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/cheval_bai.png" alt="Cheval Bai" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Cheval Bai</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -86,8 +261,8 @@
             </div>
 
              <!-- CARTE 2 -->
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -95,7 +270,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/hippocampe.png" alt="Étalon des marées argenté" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/hippocampe.png" alt="Étalon des marées argenté" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Étalon des marées argenté</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -106,14 +281,14 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
                         <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                        <img src="assets/images/mounts/souris.png" alt="Couineur l'entourloupeur" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/souris.png" alt="Couineur l'entourloupeur" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Couineur l'entourloupeur</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -125,14 +300,14 @@
             </div>
 
             
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'ailes" class="w-12 h-12">
                         </span>
                         <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                        <img src="assets/images/mounts/hyène.png" alt="Charognard des dunes" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/hyène.png" alt="Charognard des dunes" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Charognard des dunes</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -143,8 +318,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -152,7 +327,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/pieuvre.png" alt="Créature des grands fonds" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/pieuvre.png" alt="Créature des grands fonds" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Créature des grands fonds</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -163,8 +338,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -172,7 +347,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/oie.png" alt="Chasseur aile-du-désert" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/oie.png" alt="Chasseur aile-du-désert" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Chasseur aile-du-désert</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -183,8 +358,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -192,7 +367,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/main.png" alt="Main de Reshkigaal" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/main.png" alt="Main de Reshkigaal" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Main de Reshkigaal</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -203,8 +378,8 @@
                 </article>
             </div>
             
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -212,7 +387,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/griffon.png" alt="Griffon neigeux" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/griffon.png" alt="Griffon neigeux" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Griffon neigeux</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -223,8 +398,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -232,7 +407,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/dindon.png" alt="Dinde adulée" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/dindon.png" alt="Dinde adulée" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Dinde adulée</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -243,8 +418,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -252,7 +427,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/papillon.png" alt="Bruissaile éclatante" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/papillon.png" alt="Bruissaile éclatante" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Bruissaile éclatante</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -263,14 +438,14 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
                         <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
-                        <img src="assets/images/mounts/licornebleue.png" alt="Coursier purecoeur" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/licornebleue.png" alt="Coursier purecoeur" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Coursier purecoeur</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
@@ -281,8 +456,8 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6">
-                <article class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -290,7 +465,7 @@
                         <button class="absolute top-4 right-4 text-red-600">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                         </button>
-                        <img src="assets/images/mounts/cerf.png" alt="Cerf runique lumerêve" class="w-full h-48 object-contain mt-12 group-hover:scale-110 transition-transform">
+                        <img src="assets/images/mounts/cerf.png" alt="Cerf runique lumerêve" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Cerf runique lumerêve</h2>
                     </div>
                     <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">

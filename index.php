@@ -31,7 +31,7 @@
                 <li class="mx-auto max-w-[16rem] 
                           md:mx-auto md:max-w-none
                           lg:mx-auto lg:max-w-sm">
-                    <a href="mounts.html" class="block bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange">
+                    <a href="mount_list.php" class="block bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange">
                         <figure class="flex flex-col items-center">
                             <img src="assets/images/home_icons/dragon_icon.png" alt="icône de dragon doré représentant la catégorie monture">
                             <figcaption class="text-center font-bold text-lg text-primary-orange">MONTURES</figcaption>
@@ -42,7 +42,7 @@
                 <li class="mx-auto max-w-[16rem] 
                           md:mx-auto md:max-w-none
                           lg:mx-auto lg:max-w-md">
-                    <a href="pets.html" class="block bg-primary-brown rounded-xl p-4 border-2 border-primary-orange">
+                    <a href="pet_list.php" class="block bg-primary-brown rounded-xl p-4 border-2 border-primary-orange">
                         <figure class="flex flex-col items-center">
                             <img src="assets/images/home_icons/cat_icon.png" alt="icône de chat doré représentant la catégorie mascottes">
                             <figcaption class="text-center font-bold text-lg text-primary-orange">MASCOTTES</figcaption>
