@@ -51,7 +51,7 @@
                 </div>
             </div>
 
-        <div class="hidden lg:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[999]">
+        <div class="hidden lg:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[200]">
             <!-- Menu déroulant filtres statut -->
             <div class="relative group flex-1">
                 <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
@@ -262,7 +262,7 @@
 
              <!-- CARTE 2 -->
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -282,7 +282,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -301,7 +301,7 @@
 
             
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'ailes" class="w-12 h-12">
@@ -319,7 +319,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -339,7 +339,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -359,7 +359,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -379,7 +379,7 @@
             </div>
             
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -399,7 +399,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -419,7 +419,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -439,7 +439,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -457,7 +457,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">

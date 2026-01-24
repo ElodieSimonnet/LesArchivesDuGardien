@@ -1,4 +1,4 @@
-<div id="loginModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-8 hidden">
+<div id="loginModal" class="fixed inset-0  flex items-center justify-center bg-black/80 p-8 z-[300] hidden">
     
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full mx-auto max-w-lg relative">
         
@@ -36,7 +36,7 @@
 </div>
 
 
-<div id="registerModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-8 hidden">
+<div id="registerModal" class="fixed inset-0 z-300 flex items-center justify-center bg-black/80 p-8 hidden">
     
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full mx-auto max-w-lg relative">
         
