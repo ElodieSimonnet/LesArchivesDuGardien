@@ -1,3 +1,4 @@
+<?php include 'retrieveExtension.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -142,50 +143,14 @@
                     <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
                 </button>
                 <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="World of Warcraft" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">World of Warcraft</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="The Burning Crusade" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">The Burning Crusade</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Wrath of the Lich King" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Wrath of the Lich King</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Cataclysm" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Cataclysm</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Mists of Pandaria" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Mists of Pandaria</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Warlords of Draenor" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Warlords of Draenor</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Legion" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Legion</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Battle for Azeroth" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Battle for Azeroth</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Shadowlands" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Shadowlands</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="Dragonflight" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Dragonflight</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="The War Within" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">The War Within</span>
-                    </label>
+                    <?php 
+                        foreach ($expansions as $expansion) {
+                            echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="'.$expansion["expansion"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$expansion["expansion"].'</span>
+                    </label>';
+                        }
+                    ?>
                 </div>
             </div>
             <!-- Menu déroulant filtres factions -->
