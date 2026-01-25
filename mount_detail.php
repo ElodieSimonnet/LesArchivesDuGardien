@@ -1,3 +1,4 @@
+<?php include 'retrieveMount.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -17,10 +18,10 @@
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto
                             lg:w-full mb-8">
                 <h1 class="text-xl font-semibold text-center uppercase text-primary-orange pt-4
-                       md:text-3xl">charognard des dunes capturé
+                       md:text-3xl"><?=$mount['name'];?>
                 </h1>
                 <p class="text-lg font-semibold text-justify text-primary-white p-4
-                      lg:text-xl">"Ces charognards très résistants peuvent survivre plusieurs mois dans le désert de Vol'dun avec très peu d'eau ou de nourriture."
+                      lg:text-xl"><?=$mount['description']?>
                 </p>
             </section>
         
@@ -71,14 +72,14 @@
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-2xl text-primary-white text-center">0,1 %</dd>
+                            <dd class="text-2xl text-primary-white text-center"><?=$mount['droprate']."%"?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Extension :</dt>
-                            <dd class="text-2xl text-primary-white text-center">Battle For Azeroth</dd>
+                            <dd class="text-2xl text-primary-white text-center"><?= $mountExpansion['expansion']?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
                                        lg:hidden">
                         </div>
