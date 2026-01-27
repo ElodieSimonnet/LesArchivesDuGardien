@@ -1,3 +1,4 @@
+<?php include 'retrieveExpansions.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -39,7 +40,7 @@
     
                         <div class="flex-1 flex items-center justify-center border-r border-primary-orange z-10">
                             <span id="status-text" class="italic font-bold text-primary-white transition-opacity duration-500 text-xs tracking-tighter group-[.is-off]:opacity-50">
-                                Disponible
+                                Acquis
                             </span>
                         </div>
 
@@ -51,12 +52,140 @@
                 </div>
             </div>
 
-        <div class="hidden lg:flex flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange">
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Statut</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Famille</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Source</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Extension</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Faction</option></select>
+        <div class="hidden md:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[200]">
+            
+            <!-- Menu déroulant filtres familles -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Famille</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="terrestre" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Humanoïde</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="volante" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Draconien</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Aérien</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Mort-vivant</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Bestiole</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Magique</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Elémentaire</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Bête</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Aquatique</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Machine</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres sources -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Source</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Butin" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Butin</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Vendeur" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Vendeur</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Quête" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Quête</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Haut-fait" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Haut-fait</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Métier" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Métier</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Boutique" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Boutique</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Comptoir" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Comptoir</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Donjon" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Donjon</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="Raid" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Raid</span>
+                    </label>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres extensions -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Extension</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
+                    <?php 
+                        foreach ($expansions as $expansion) {
+                            echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="expansion" value="'.$expansion["expansion"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$expansion["expansion"].'</span>
+                    </label>';
+                        }
+                    ?>
+                </div>
+            </div>
+            <!-- Menu déroulant filtres factions -->
+            <div class="relative group flex-1">
+                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
+                    <span>Faction</span>
+                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
+                </button>
+                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Alliance" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Alliance</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Horde" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Horde</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="Neutre" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">Neutre</span>
+                    </label>
+                </div>
+            </div>
         </div>
 
         <div class="flex flex-wrap -mx-3">

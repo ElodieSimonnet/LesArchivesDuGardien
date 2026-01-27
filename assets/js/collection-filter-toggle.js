@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOff = toggleBtn.classList.toggle('is-off');
-            if (toggleTxt) toggleTxt.innerText = isOff ? "Indisponible" : "Disponible";
+            if (toggleTxt) toggleTxt.innerText = isOff ? "Manquant" : "Acquis";
         });
     }
 

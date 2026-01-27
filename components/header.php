@@ -12,7 +12,6 @@
                 <ul class="hidden lg:flex items-center gap-12 ml-8 text-primary-white font-semibold uppercase text-lg tracking-wider">
                     <li><a href="mount_list.php" class="hover:text-primary-orange">Montures</a></li>
                     <li><a href="pet_list.php" class="hover:text-primary-orange">Mascottes</a></li>
-                    <li><a href="transmo_list.php" class="hover:text-primary-orange">Apparences</a></li>
                 </ul>
             </div>
             <div class="lg:hidden flex-1 flex justify-center">

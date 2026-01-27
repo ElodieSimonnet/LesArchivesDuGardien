@@ -39,8 +39,8 @@
                     <div id="status-container" class="group relative flex items-center w-48 h-10 p-1.5 max-w-xs bg-primary-brown/60 border border-primary-orange rounded-lg cursor-pointer transition-all duration-500 mx-auto group-[.is-off]:border-zinc-600">
     
                         <div class="flex-1 flex items-center justify-center border-r border-primary-orange z-10">
-                            <span id="status-text" class="italic font-bold text-primary-white transition-opacity duration-500 text-xs tracking-tighter group-[.is-off]:opacity-50">
-                                Disponible
+                            <span id="status-text" class="uppercase font-bold text-primary-white transition-opacity duration-500 text-[0.65rem] tracking-widest group-[.is-off]:opacity-50">
+                                Acquis
                             </span>
                         </div>
 
@@ -52,24 +52,8 @@
                 </div>
             </div>
 
-        <div class="hidden lg:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[200]">
-            <!-- Menu déroulant filtres statut -->
-            <div class="relative group flex-1">
-                <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
-                    <span>Statut</span>
-                    <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
-                </button>
-                <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="statut" value="obtenu" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Obtenu</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="statut" value="manquant" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Manquant</span>
-                    </label>
-                </div>
-            </div>
+        <div class="hidden md:flex relative flex-wrap gap-12 mb-8 p-4 bg-primary-black/40 backdrop-blur-md border-t border-b border-t-primary-orange border-b-primary-orange z-[200]">
+            
             <!-- Menu déroulant filtres types -->
             <div class="relative group flex-1">
                 <button class="w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:border-none hover:bg-primary-orange hover:text-primary-black transition-colors">
