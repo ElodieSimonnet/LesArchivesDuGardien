@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
+    <script src="assets/js/card-clic.js" defer></script>
     <script src="assets/js/collection-filter-toggle.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Liste des montures</title>
@@ -186,8 +188,8 @@
         <div class="flex flex-wrap -mx-3">
             
             <!-- CARTE 1 -->
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -210,14 +212,17 @@
             </div>
 
              <!-- CARTE 2 -->
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/hippocampe.png" alt="Étalon des marées argenté" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Étalon des marées argenté</h2>
@@ -230,13 +235,18 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
                         <img src="assets/images/mounts/souris.png" alt="Couineur l'entourloupeur" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Couineur l'entourloupeur</h2>
                     </div>
@@ -249,13 +259,18 @@
             </div>
 
             
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-url="mount_detail.php?id=hyene" data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'ailes" class="w-12 h-12">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
                         <img src="assets/images/mounts/hyène.png" alt="Charognard des dunes" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Charognard des dunes</h2>
                     </div>
@@ -267,14 +282,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/pieuvre.png" alt="Créature des grands fonds" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Créature des grands fonds</h2>
@@ -287,14 +305,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/oie.png" alt="Chasseur aile-du-désert" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Chasseur aile-du-désert</h2>
@@ -307,14 +328,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/main.png" alt="Main de Reshkigaal" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Main de Reshkigaal</h2>
@@ -327,14 +351,17 @@
                 </article>
             </div>
             
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/griffon.png" alt="Griffon neigeux" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Griffon neigeux</h2>
@@ -347,14 +374,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/dindon.png" alt="Dinde adulée" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Dinde adulée</h2>
@@ -367,14 +397,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/papillon.png" alt="Bruissaile éclatante" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Bruissaile éclatante</h2>
@@ -387,13 +420,18 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
                         <img src="assets/images/mounts/licornebleue.png" alt="Coursier purecoeur" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest px-2 leading-tight">Coursier purecoeur</h2>
                     </div>
@@ -405,14 +443,17 @@
                 </article>
             </div>
 
-            <div class="w-full sm:w-1/2 lg:w-1/4 px-3 mb-6 mount-item">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+            <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
+                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
                         </span>
-                        <button class="absolute top-4 right-4 text-red-600">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                        <button class="wishlist-btn group absolute top-4 right-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
+                            text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
                         </button>
                         <img src="assets/images/mounts/cerf.png" alt="Cerf runique lumerêve" class="w-full h-48 object-contain mt-12 transition-transform">
                         <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest">Cerf runique lumerêve</h2>

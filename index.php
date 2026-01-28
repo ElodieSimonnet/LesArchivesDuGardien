@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/modal.js" defer></script>
+    <script src="assets/js/burger-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <title>Les Archives Du Gardien</title>
 </head>
 <body class="min-h-screen flex flex-col">
