@@ -1,44 +1,35 @@
 <?php
-// Se connecter à la BDD.
 include "components/utils/db_connection.php";
 
-// Ecrire la requete qui permet de récupérer toutes les informations d'une monture.
-
-// Permet de choisir quelle monture on affiche dans la page 
 $mountId = 2;
 
-$sql = "SELECT * FROM adg_mounts WHERE ID = $mountId";
+$sql = "SELECT 
+            adg_mounts.*, 
+            adg_expansions.expansion, 
+            adg_factions.faction, 
+            adg_sources.source, 
+            adg_difficulties.difficulty,
+            adg_mount_types.type,
+            adg_targets.target,      
+            adg_zones.zone
+        FROM adg_mounts
+        INNER JOIN adg_expansions   ON adg_mounts.id_expansion  = adg_expansions.id
+        INNER JOIN adg_factions     ON adg_mounts.id_faction    = adg_factions.id
+        INNER JOIN adg_sources      ON adg_mounts.id_source     = adg_sources.id
+        INNER JOIN adg_difficulties ON adg_mounts.id_difficulty = adg_difficulties.id
+        INNER JOIN adg_mount_types  ON adg_mounts.id_type       = adg_mount_types.id
+        LEFT JOIN adg_zones         ON adg_mounts.id_zone       = adg_zones.id_zone
+        LEFT JOIN adg_targets       ON adg_mounts.id_target     = adg_targets.id
+        WHERE adg_mounts.id = :id";
 
-// préparation de la requête
-$query = $db->prepare( $sql );
-
-// execution de la requête
-$query->execute();
-
-// récupération des résultats
+$query = $db->prepare($sql);
+$query->execute(['id' => $mountId]); // on passe l'ID ici pour la sécurité
 $mount = $query->fetch();
 
-// affichage des résultats : CONTIENT LES INFORMATION DE LA MONTURE
-//var_dump($mount);
+// GESTION DE L'IMAGE DU TYPE DE MONTURE
 
-// Afficher l'image'
-switch ($mount['id_type']) {
-    case 3:
-        $mountTypeLink="assets/images/mounts/horsehoe.png";
-        break;
-    case 1:
-        $mountTypeLink="assets/images/mounts/wings.png";
-        break;
-    case 2:
-        $mountTypeLink="assets/images/mounts/wave.png";
-        break;
-}
-
-// Récupérer le nom de l'extension à partir de l'id.
-
-$sql2 = "SELECT expansion FROM adg_expansions WHERE id = " . $mount['id_expansion'];
-$query2 = $db->prepare( $sql2 );
-$query2->execute();
-$mountExpansion = $query2->fetch();
-
+$mountTypeLink = "assets/images/mounts/" . $mount['type'] . ".png";
 ?>
+
+
+

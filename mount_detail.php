@@ -31,16 +31,16 @@
                                 lg:w-full lg:mx-0 flex flex-col">
             
                     <header class="flex px-4 py-2">
-                        <img src="assets/images/mounts/horsehoe.png" alt="logo de fer à cheval doré pour les montures terrestres" class="w-20 h-auto pt-1">
+                        <img src="<?= $mountTypeLink ?>" alt="icône <?= $mount['type'] ?>" class="w-20 h-auto pt-1">
                         <i class="ph-bold ph-heart text-7xl text-red-500 pr-2 pt-2 ml-auto"></i>
                         <i class="ph-fill ph-heart-straight absolute hidden"></i> 
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
-                        <img src="assets/images/mounts/hyène.png" alt="Image du Charognard des Dunes" class="w-3/5 h-auto">
+                        <img src="<?= $mount['image'] ?>" alt="Image de <?=$mount['name']?>" class="w-3/5 h-auto">
                         <h2 class="text-base text-primary-white text-center pb-4 uppercase mt-0 mb-0
                                    md:text-2xl">
-                        charognard des dunes capturé
+                        <?= $mount['name'] ?>
                         </h2>
                     </div>
 
@@ -48,11 +48,17 @@
 
                     <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto">
 
+
+                    <?php 
+                        $color = "text-green-500";
+                        if (strtolower($mount['difficulty']) == 'difficile') $color = "text-red-500";
+                        if (strtolower($mount['difficulty']) == 'moyen') $color = "text-orange-500";
+                    ?>
                     <footer class="flex justify-center items-center h-16
                                    lg:h-20">
-                        <span class="text-right text-red-500 text-3xl w-1/5 h-auto leading-none">★</span>
-                        <span class="text-center text-xl text-red-500 font-bold uppercase w-3/5 h-auto">difficile</span>
-                        <span class="text-left text-red-500 text-3xl w-1/5 h-auto">★</span>
+                        <span class="<?= $color ?> text-right text-3xl w-1/5 h-auto leading-none">★</span>
+                        <span class="text-center text-xl <?= $color ?> font-bold uppercase w-3/5 h-auto"><?= $mount['difficulty'] ?></span>
+                        <span class="text-left <?= $color ?> text-3xl w-1/5 h-auto">★</span>
                     </footer>
                 </article>
                 <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto mt-4
@@ -66,35 +72,35 @@
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>
-                            <dd class="text-2xl text-primary-white text-center">Butin</dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['source'] ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-2xl text-primary-white text-center"><?=$mount['droprate']."%"?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['droprate']."%"?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Extension :</dt>
-                            <dd class="text-2xl text-primary-white text-center"><?= $mountExpansion['expansion']?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['expansion'] ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
-                            <dd class="text-2xl text-primary-white text-center">Vol'dun</dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['zone'] ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start mb-4">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Cible :</dt>
-                            <dd class="text-2xl text-primary-white text-center">Sephraks</dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['target'] ?></dd>
                         </div>
                     </dl>
             

@@ -1,4 +1,7 @@
 <?php include 'retrieveExpansions.php';?>
+<?php include 'retrieveFactions.php';?>
+<?php include 'retrieveSources.php';?>
+<?php include 'retrieveTypes.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -63,18 +66,14 @@
                     <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
                 </button>
                 <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="type" value="terrestre" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Terrestre</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="type" value="volante" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Volante</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="type" value="aquatique" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Aquatique</span>
-                    </label>
+                    <?php 
+                        foreach ($types as $type) {
+                            echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="type" value="'.$type["type"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$type["type"].'</span>
+                    </label>';
+                        }
+                    ?>
                 </div>
             </div>
             <!-- Menu déroulant filtres sources -->
@@ -84,42 +83,14 @@
                     <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
                 </button>
                 <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 p-2 shadow-2xl rounded-lg pointer-events-auto z-[100]">
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Butin" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Butin</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Vendeur" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Vendeur</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Quête" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Quête</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Haut-fait" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Haut-fait</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Métier" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Métier</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Boutique" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Boutique</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Comptoir" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Comptoir</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Donjon" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Donjon</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="source" value="Raid" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Raid</span>
-                    </label>
+                    <?php 
+                        foreach ($sources as $source) {
+                            echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="source" value="'.$source["source"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$source["source"].'</span>
+                    </label>';
+                        }
+                    ?>
                 </div>
             </div>
             <!-- Menu déroulant filtres extensions -->
@@ -146,31 +117,16 @@
                     <i class="ph-caret-down text-primary-orange group-hover:text-primary-black transition-colors"></i>
                 </button>
                 <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="faction" value="Alliance" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Alliance</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="faction" value="Horde" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Horde</span>
-                    </label>
-                    <label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="faction" value="Neutre" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">Neutre</span>
-                    </label>
+                    <?php 
+                        foreach ($factions as $faction) {
+                            echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                        <input type="checkbox" data-filter="faction" value="'.$faction["faction"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$faction["faction"].'</span>
+                    </label>';
+                        }
+                    ?>
                 </div>
             </div>
-
-
-
-
-
-        
-            <!-- <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Statut</option><option>Statut</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Type</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Source</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Extension</option></select>
-            <select class="flex-1 bg-primary-brown/60 border border-primary-orange rounded-lg px-6 py-2 text-sm text-center appearance-none focus:outline-none bg-[position:right_1rem_center] bg-[length:1.6em] bg-no-repeat bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E')]"><option>Faction</option></select> -->
         </div>
 
         <div id="active-filters-zone" class="flex flex-wrap items-center gap-3 mb-6">
@@ -189,10 +145,10 @@
             
             <!-- CARTE 1 -->
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Terrestre" data-source="Vendeur" data-expansion="World of Warcraft" data-faction="Alliance" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
-                            <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
+                            <img src="assets/images/mounts/<?= $mount['type'] ?>.png" alt="Icône de type <?= $mount['type'] ?>" class="w-12 h-12">
                         </span>
                         <button class="wishlist-btn group absolute top-4 right-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300
@@ -213,7 +169,7 @@
 
              <!-- CARTE 2 -->
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -236,7 +192,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Volante" data-source="Boutique" data-expansion="Battle for Azeroth" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-cyan-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -260,7 +216,7 @@
 
             
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-url="mount_detail.php?id=hyene" data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+                <article data-url="mount_detail.php?id=hyene" data-statut="obtenu" data-type="Terrestre" data-source="Butin" data-expansion="Battle for Azeroth" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'ailes" class="w-12 h-12">
@@ -283,7 +239,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="aquatique" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Aquatique" data-source="Butin" data-expansion="Legion" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-orange-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wave.png" alt="Icône d'une vague" class="w-15 h-15">
@@ -306,7 +262,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Volante" data-source="Métier" data-expansion="Shadowlands" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -329,7 +285,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Terrestre" data-source="Comptoir" data-expansion="The War Within" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -352,7 +308,7 @@
             </div>
             
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Volante" data-source="Vendeur" data-expansion="The Burning Crusade" data-faction="Alliance" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -375,7 +331,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Terrestre" data-source="Comptoir" data-expansion="The War Within" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
@@ -398,7 +354,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Volante" data-source="Vendeur" data-expansion="Shadowlands" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4 text-primary-orange">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -421,7 +377,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="volante" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Volante" data-source="Haut-fait" data-expansion="Battle for Azeroth" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-red-600 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/wings.png" alt="Icône d'ailes" class="w-14 h-14">
@@ -444,7 +400,7 @@
             </div>
 
             <div class="w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 mount-item flex justify-center">
-                <article data-statut="obtenu" data-type="terrestre" data-source="Butin" data-expansion="Dragonflight" data-faction="Horde" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
+                <article data-statut="obtenu" data-type="Terrestre" data-source="Quête" data-expansion="Shadowlands" data-faction="Neutre" class="mount-card max-w-[380px] w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col hover:border-green-500 transition-all group shadow-2xl">
                     <div class="relative p-6 flex-grow flex flex-col items-center">
                         <span class="absolute top-4 left-4">
                             <img src="assets/images/mounts/horsehoe.png" alt="Icône d'un fer à cheval" class="w-12 h-12">
