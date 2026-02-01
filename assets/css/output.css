@@ -642,9 +642,6 @@
   .cursor-pointer {
     cursor: pointer;
   }
-  .appearance-none {
-    appearance: none;
-  }
   .grid-cols-1 {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
@@ -952,14 +949,8 @@
   .bg-row-light {
     background-color: var(--color-row-light);
   }
-  .bg-\[url\(\'data\:image\/svg\+xml\;charset\=utf-8\,\%3Csvg\%20xmlns\%3D\%22http\%3A\%2F\%2Fwww\.w3\.org\%2F2000\%2Fsvg\%22\%20fill\%3D\%22none\%22\%20viewBox\%3D\%220\%200\%2024\%2024\%22\%20stroke\%3D\%22\%23f0f0f0\%22\%3E\%3Cpath\%20stroke-linecap\%3D\%22round\%22\%20stroke-linejoin\%3D\%22round\%22\%20stroke-width\%3D\%222\%22\%20d\%3D\%22M19\%209l-7\%207-7-7\%22\%20\%2F\%3E\%3C\%2Fsvg\%3E\'\)\] {
-    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20fill%3D%22none%22%20viewBox%3D%220%200%2024%2024%22%20stroke%3D%22%23f0f0f0%22%3E%3Cpath%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%20d%3D%22M19%209l-7%207-7-7%22%20%2F%3E%3C%2Fsvg%3E');
-  }
   .bg-\[url\(\.\.\/images\/lava_cave_mobile\.jpg\)\] {
     background-image: url(../images/lava_cave_mobile.jpg);
-  }
-  .bg-\[length\:1\.6em\] {
-    background-size: 1.6em;
   }
   .bg-cover {
     background-size: cover;
@@ -967,14 +958,8 @@
   .bg-fixed {
     background-attachment: fixed;
   }
-  .bg-\[position\:right_1rem_center\] {
-    background-position: right 1rem center;
-  }
   .bg-center {
     background-position: center;
-  }
-  .bg-no-repeat {
-    background-repeat: no-repeat;
   }
   .fill-transparent {
     fill: transparent;
