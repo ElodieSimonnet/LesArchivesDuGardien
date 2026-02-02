@@ -1,9 +1,9 @@
-<header class="bg-primary-black border-primary-orange border-b px-8 h-28 relative flex items-center">
-    <nav class="w-full flex items-center justify-between" aria-label="Navigation principale">
+<header class="bg-primary-black border-primary-orange border-b px-8 py-8">
+    <nav class="max-w-full mx-auto flex items-center justify-between" aria-label="Navigation principale">
         
         <div class="flex items-center gap-8">
             <a href="index.php" class="flex-shrink-0">
-                <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-20 w-20 lg:h-30 lg:w-30">
+                <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-24 w-24 md:h-30 md:w-30">
             </a>
 
             <ul class="hidden lg:flex items-center gap-12 text-primary-white font-semibold uppercase text-lg tracking-wider">
@@ -12,17 +12,30 @@
             </ul>
         </div>
 
-        <div class="flex items-center">
-            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black relative z-50">
+        <div class="flex items-center gap-4">
+            
+            <div class="hidden lg:flex gap-8 items-center">
+                <?php if (isset($_SESSION['username'])): ?>
+                    <span class="text-primary-white text-xl font-bold">
+                        Bienvenue, 
+                        <a href="profile.php" class="text-primary-orange hover:underline uppercase transition-all">
+                            <?php echo htmlspecialchars($_SESSION['username']); ?>
+                        </a>
+                    </span>
+                    <a href="logout.php" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-amber-500 transition-all shadow-md">
+                        Déconnexion
+                    </a>
+                <?php else: ?>
+                    <a href="#" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Connexion</a>
+                    <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Inscription</a>
+                <?php endif; ?>
+            </div>
+
+            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu">
                 <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
-
-            <div class="hidden lg:flex items-center gap-6">
-                <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-white transition-colors">Connexion</a>
-                <a href="#" onclick="toggleModal('registerModal')" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-white transition-colors">Inscription</a>
-            </div>
         </div>
 
     </nav>
@@ -41,7 +54,6 @@
     </div>
 
     <div class="flex-1 overflow-y-auto px-8 py-10 flex flex-col">
-        
         <ul class="flex flex-col gap-6 mt-4 text-primary-white font-bold uppercase tracking-wider">
             <li>
                 <a href="mount_list.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
@@ -51,7 +63,6 @@
                     </div>
                 </a>
             </li>
-
             <li>
                 <a href="pet_list.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
                     <div class="flex items-center gap-4">
@@ -60,31 +71,37 @@
                     </div>
                 </a>
             </li>
-
             <li>
-                <a href="news.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
-                    <div class="flex items-center gap-4">
-                        <i class="fas fa-bullhorn text-primary-orange text-xl"></i>
-                        <span class="text-xl">Nouveautés</span>
-                    </div>
+                <a href="news.php" class="flex items-center gap-4 p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
+                    <i class="fas fa-bullhorn text-primary-orange text-xl"></i>
+                    <span class="text-xl">Nouveautés</span>
                 </a>
             </li>
-
             <li>
-                <a href="faq.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
-                    <div class="flex items-center gap-4">
-                        <i class="fas fa-question-circle text-primary-orange text-xl"></i>
-                        <span class="text-xl">F.A.Q</span>
-                    </div>
+                <a href="faq.php" class="flex items-center gap-4 p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
+                    <i class="fas fa-question-circle text-primary-orange text-xl"></i>
+                    <span class="text-xl">F.A.Q</span>
                 </a>
             </li>
         </ul>
 
         <div class="flex flex-col gap-6 mt-12">
-            <div class="flex flex-col gap-4">
-                <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</a>
-                <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</a>
-            </div>
+            <?php if (isset($_SESSION['username'])): ?>
+        <div class="flex flex-col gap-4">
+            <a href="profile.php" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg flex items-center justify-center gap-3">
+                <i class="fas fa-user-circle"></i>
+                Mon Profil
+            </a>
+            <a href="logout.php" class="bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg">
+                Déconnexion
+            </a>
+        </div>
+    <?php else: ?>
+        <div class="flex flex-col gap-4">
+            <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</a>
+            <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</a>
+        </div>
+    <?php endif; ?>
         </div>
     </div>
 </div>

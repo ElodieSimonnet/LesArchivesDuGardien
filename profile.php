@@ -1,3 +1,18 @@
+<?php
+session_start();
+require_once 'components/utils/db_connection.php';
+
+// Si l'utilisateur n'est pas connecté, on le renvoie à l'accueil
+if (!isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit();
+}
+
+// On récupère les infos de la BDD pour cet utilisateur
+$stmt = $db->prepare("SELECT * FROM adg_users WHERE id = ?");
+$stmt->execute([$_SESSION['user_id']]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -10,7 +25,7 @@
     <title>Page profil utilisateur</title>
 </head>
 <body>
-    <?php include 'components/header_connected.php'; ?>
+    <?php include 'components/header.php'; ?>
     <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="max-w-6xl mx-auto px-4 flex flex-col gap-6">
@@ -42,7 +57,7 @@
                         </label>
                     </form>
                     
-                    <h1 class="text-primary-orange text-2xl font-bold uppercase tracking-widest">Yanara</h1>
+                    <h1 class="text-primary-orange text-2xl font-bold uppercase tracking-widest"><?php echo htmlspecialchars($user['username']);?></h1>
                     <p class="text-sm font-medium mt-1 text-primary-white">Gardienne des flammes</p>
                 </article>
 
