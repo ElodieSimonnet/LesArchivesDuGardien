@@ -2,6 +2,7 @@
 session_start();
 require_once 'components/utils/db_connection.php';
 
+
 // Si l'utilisateur n'est pas connecté, on le renvoie à l'accueil
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
@@ -13,6 +14,8 @@ $stmt = $db->prepare("SELECT * FROM adg_users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+<?php include 'retrieveUserTitle.php';?>
+<?php include 'countUserCollections.php';?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -58,7 +61,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     </form>
                     
                     <h1 class="text-primary-orange text-2xl font-bold uppercase tracking-widest"><?php echo htmlspecialchars($user['username']);?></h1>
-                    <p class="text-sm font-medium mt-1 text-primary-white">Gardienne des flammes</p>
+                    <p class="text-sm font-medium mt-1 text-primary-white"><?php echo htmlspecialchars($displayTitle); ?></p>
                 </article>
 
                 <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
@@ -66,7 +69,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         <img src="assets/images/home_icons/dragon_icon.png" alt="Icone Monture" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Montures obtenues</h2>
-                    <p class="text-primary-white text-xl font-bold mt-2 font-mono">732 / 952</p>
+                    <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?php echo $countOwnedMounts; ?> / <?php echo $countTotalMounts; ?></p>
                 </article>
 
                 <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
@@ -74,7 +77,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         <img src="assets/images/home_icons/cat_icon.png" alt="Icone Mascotte" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Mascottes obtenues</h2>
-                    <p class="text-primary-white text-xl font-bold mt-2 font-mono">1801 / 2019</p>
+                    <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?php echo $countOwnedPets; ?> / <?php echo $countTotalPets; ?></p>
                 </article>
             </section>
 
@@ -90,7 +93,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         <div class="flex flex-col md:flex-row md:items-center gap-4">
                             <label for="email" class="text-primary-orange text-sm font-bold w-32 shrink-0">Email :</label>
                             <div class="flex flex-1 gap-3">
-                                <input type="email" id="email" value="S****************8@gmail.com" 
+                                <input type="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>" 
                                 class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                 <button title="Modifier l'email" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
                                     <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -103,7 +106,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="flex flex-col md:flex-row md:items-center gap-4">
                         <label for="name" class="text-primary-orange text-sm font-bold w-32 shrink-0">Nom d'utilisateur :</label>
                         <div class="flex flex-1 gap-3">
-                            <input type="text" id="name" value="ex: Yanara" 
+                            <input type="text" id="name" value="<?php echo htmlspecialchars($user['username']); ?>" 
                             class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                             <button title="Modifier le nom" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
                                 <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -125,9 +128,11 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                             </button>
                         </div>
                     </div>
-                        <button class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm tracking-widest transition-all active:scale-[0.98]">
-                        Supprimer son compte
+                        <form action="delete_account.php" method="POST" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer votre compte ? Toutes vos collections seront perdues.');">
+                            <button type="submit" name="confirm_delete" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm tracking-widest transition-all active:scale-[0.98]">
+                            Supprimer son compte
                         </button>
+                        </form>
                     </div>
                 </article>
 
