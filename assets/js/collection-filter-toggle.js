@@ -1,112 +1,173 @@
-// // BOUTON TOGGLE DISPONIBLE/INDISPONIBLE
-
-// let statusContainer = document.getElementById('status-container');
-// let statusText = document.getElementById('status-text');
-
-// // définit ce qui se passe quand on clique sur le conteneur
-// statusContainer.onclick = function() {
-
-// // bascule la classe 'is-off' (elle s'ajoute ou s'enlève)
-// // stocke le résultat dans 'isOff' (sera vrai ou faux)
-// let isOff = statusContainer.classList.toggle('is-off');
-
-// // change le texte selon que 'isOff' est vrai ou faux
-// if (isOff) {
-// // Si l'étiquette 'is-off' est présente
-// statusText.innerText = "Indisponible";
-//    } else {
-// // Si l'étiquette 'is-off' n'est pas là
-// statusText.innerText = "Disponible";
-//    }
-// };
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    //  BOUTON TOGGLE DISPONIBLE
-    const toggleBtn = document.getElementById('status-container');
-    const toggleTxt = document.getElementById('status-text');
+    // --- SÉLECTEURS ---
+    const activeFiltersZone = document.getElementById('active-filters-zone');
+    const checkboxes = document.querySelectorAll('.filter-checkbox');
+    // On récupère les radios Desktop ET Mobile
+    const statusRadios = document.querySelectorAll('.status-radio, .status-radio-mobile');
+    const mountItems = document.querySelectorAll('.mount-item');
+    const clearAllBtn = document.getElementById('clear-all-filters');
+    const statusLabel = document.getElementById('current-status-label');
+    const dropdowns = document.querySelectorAll('.dropdown-container');
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', (e) => {
+    // --- 1. GESTION DES MENUS DÉROULANTS (Desktop) ---
+    dropdowns.forEach(container => {
+        const btn = container.querySelector('.dropdown-button');
+        const content = container.querySelector('.dropdown-content');
+        const icon = btn?.querySelector('i');
+
+        btn?.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOff = toggleBtn.classList.toggle('is-off');
-            if (toggleTxt) toggleTxt.innerText = isOff ? "Manquant" : "Acquis";
+            dropdowns.forEach(other => {
+                if (other !== container) {
+                    other.querySelector('.dropdown-content').classList.add('hidden');
+                    const otherIcon = other.querySelector('.dropdown-button i');
+                    if (otherIcon) otherIcon.classList.remove('rotate-180');
+                }
+            });
+
+            const isOpened = content.classList.toggle('hidden');
+            if (icon) {
+                isOpened ? icon.classList.remove('rotate-180') : icon.classList.add('rotate-180');
+            }
+        });
+    });
+
+    document.addEventListener('click', () => {
+        document.querySelectorAll('.dropdown-content').forEach(menu => menu.classList.add('hidden'));
+        document.querySelectorAll('.dropdown-button i').forEach(i => i.classList.remove('rotate-180'));
+    });
+
+    // --- 2. SYSTÈME DE FILTRAGE GLOBAL ---
+    function applyAllFilters() {
+        const activeFilters = {};
+        
+        // A. Récupérer les catégories (Type, Source, etc.)
+        checkboxes.forEach(chk => {
+            if (chk.checked) {
+                const category = chk.dataset.filter;
+                if (!activeFilters[category]) activeFilters[category] = [];
+                activeFilters[category].push(chk.value);
+            }
+        });
+
+        // B. Récupérer le statut (Synchronisé Desktop/Mobile)
+        const activeRadio = document.querySelector('input[name="filter-status"]:checked, input[name="filter-status-mobile"]:checked');
+        const statusValue = activeRadio ? activeRadio.value : 'all';
+        
+        // Synchro visuelle des radios
+        statusRadios.forEach(radio => {
+            if (radio.value === statusValue) radio.checked = true;
+        });
+
+        // Mise à jour du texte label Desktop
+        if (statusLabel) {
+            const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
+            statusLabel.innerText = labels[statusValue];
+        }
+
+        // C. Filtrage des montures
+        mountItems.forEach(item => {
+            const card = item.querySelector('.mount-card');
+            if (!card) return;
+
+            const cardOwned = card.dataset.owned;
+            const matchStatus = (statusValue === 'all') || (cardOwned === statusValue);
+
+            let matchCategories = true;
+            for (const category in activeFilters) {
+                const cardValue = card.dataset[category];
+                if (!activeFilters[category].includes(cardValue)) {
+                    matchCategories = false;
+                    break;
+                }
+            }
+
+            item.style.display = (matchStatus && matchCategories) ? 'flex' : 'none';
+        });
+
+        updateBadges(activeFilters, statusValue);
+    }
+
+    // --- 3. GESTION DES BADGES DYNAMIQUES ---
+    function updateBadges(activeFilters, statusValue) {
+        const container = document.getElementById('badges-dynamic-container');
+        if (!container || !activeFiltersZone) return;
+
+        container.innerHTML = '';
+        let hasFilters = false;
+
+        // Ajouter le badge pour le Statut (sauf si "Toutes")
+        if (statusValue !== 'all') {
+            hasFilters = true;
+            const statusText = statusValue === '1' ? 'Acquises' : 'Manquantes';
+            createBadge(container, 'Statut', statusText, () => {
+                const allRadios = document.querySelectorAll('input[value="all"]');
+                allRadios.forEach(r => r.checked = true);
+                applyAllFilters();
+            });
+        }
+
+        // Ajouter les badges pour les catégories
+        for (const category in activeFilters) {
+            activeFilters[category].forEach(value => {
+                hasFilters = true;
+                createBadge(container, category, value, () => {
+                    const targetCheckboxes = document.querySelectorAll(`.filter-checkbox[data-filter="${category}"][value="${value}"]`);
+                    targetCheckboxes.forEach(cb => cb.checked = false);
+                    applyAllFilters();
+                });
+            });
+        }
+        
+        activeFiltersZone.style.display = hasFilters ? 'block' : 'none';
+    }
+
+    function createBadge(container, label, value, removeCallback) {
+        const badge = document.createElement('div');
+        badge.className = "flex items-center gap-2 bg-primary-orange/10 border border-primary-orange/40 px-3 py-1 rounded-full group hover:border-primary-orange transition-all";
+        badge.innerHTML = `
+            <span class="text-[10px] md:text-xs text-primary-white uppercase font-bold tracking-tight">${label}: ${value}</span>
+            <button class="text-primary-orange hover:text-white transition-colors">
+                <i class="ph-x-circle-bold text-lg"></i>
+            </button>
+        `;
+        badge.querySelector('button').addEventListener('click', removeCallback);
+        container.appendChild(badge);
+    }
+
+    // --- 4. ÉCOUTEURS ---
+    checkboxes.forEach(box => box.addEventListener('change', applyAllFilters));
+    statusRadios.forEach(radio => radio.addEventListener('change', applyAllFilters));
+
+    if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', () => {
+            checkboxes.forEach(chk => chk.checked = false);
+            const allRadios = document.querySelectorAll('input[value="all"]');
+            allRadios.forEach(r => r.checked = true);
+            applyAllFilters();
         });
     }
 
-    // LOGIQUE DES MENUS DÉROULANTS
-    const filterGroups = document.querySelectorAll('.relative.group');
-
-    filterGroups.forEach(group => {
-        const btn = group.querySelector('button');
-        const menu = group.querySelector('div.absolute');
-
-        if (btn && menu) {
-            btn.addEventListener('click', (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                // Ferme les autres menus
-                document.querySelectorAll('.relative.group div.absolute').forEach(other => {
-                    if (other !== menu) other.classList.add('hidden');
-                });
-
-                menu.classList.toggle('hidden');
-            });
-
-            // Empêche toute interaction de sortir du menu
-            // On bloque 'click' et 'change' pour ne pas que les cartes dessous réagissent
-            menu.addEventListener('click', (e) => e.stopPropagation());
-            menu.addEventListener('change', (e) => e.stopPropagation());
+    // --- 5. ACCORDÉONS MOBILE ---
+document.querySelectorAll('.mobile-accordion-header').forEach(header => {
+    header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const svgIcon = header.querySelector('svg:not(.w-9)'); // On ignore la croix de fermeture
+        
+        const isOpening = content.classList.contains('hidden');
+        content.classList.toggle('hidden');
+        
+        if (isOpening) {
+            header.classList.add('active');
+            if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
+        } else {
+            header.classList.remove('active');
+            if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
         }
     });
+});
 
-    // FERMETURE SI CLIC EXTÉRIEUR
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.relative.group')) {
-            document.querySelectorAll('.relative.group div.absolute').forEach(m => {
-                m.classList.add('hidden');
-            });
-        }
-    });
-
-    // SYSTÈME DE FILTRAGE DES CARTES
-    const checkboxes = document.querySelectorAll('.filter-checkbox');
-    const mountItems = document.querySelectorAll('.mount-item');
-
-    checkboxes.forEach(box => {
-        // On écoute le changement sur chaque checkbox
-        box.addEventListener('change', () => {
-            const activeFilters = {};
-            
-            // On regroupe les filtres cochés
-            checkboxes.forEach(chk => {
-                if (chk.checked) {
-                    const category = chk.dataset.filter;
-                    if (!activeFilters[category]) activeFilters[category] = [];
-                    activeFilters[category].push(chk.value);
-                }
-            });
-
-            // On filtre les cartes
-            mountItems.forEach(item => {
-                const card = item.querySelector('.mount-card');
-                if (!card) return;
-
-                let shouldShow = true;
-                for (const category in activeFilters) {
-                    const cardValue = card.dataset[category];
-                    if (!activeFilters[category].includes(cardValue)) {
-                        shouldShow = false;
-                        break;
-                    }
-                }
-
-                // Utilisation de display au lieu de toggle class
-                // Cela évite les bugs qui ferment les menus
-                item.style.display = shouldShow ? 'block' : 'none';
-            });
-        });
-      });
+    // Lancement initial
+    applyAllFilters();
 });
