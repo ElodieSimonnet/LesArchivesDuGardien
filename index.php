@@ -1,4 +1,4 @@
-<?php session_start(); ?>
+<?php require_once 'components/utils/db_connection.php'; ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>

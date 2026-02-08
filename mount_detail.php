@@ -1,3 +1,4 @@
+<?php require_once 'components/utils/db_connection.php'; ?>
 <?php include 'retrieveMount.php';?>
 <!DOCTYPE html>
 <html lang="fr">

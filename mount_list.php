@@ -1,3 +1,4 @@
+<?php require_once 'components/utils/db_connection.php'; ?>
 <?php include 'retrieveExpansions.php';?>
 <?php include 'retrieveFactions.php';?>
 <?php include 'retrieveSources.php';?>

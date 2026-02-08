@@ -11,6 +11,7 @@
         </div>
 
         <form id="loginForm" class="space-y-4">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div>
                 <label class="block text-primary-white text-lg mb-1">Identifiant</label>
                 <input type="text" name="username" id="loginId" placeholder="Nom d'aventurier ou email" required
@@ -49,6 +50,7 @@
         </div>
 
         <form id="registerForm" class="space-y-4">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             <div>
                 <label class="block text-primary-white text-lg mb-1">Nom d'utilisateur</label>
                 <input type="text" name="username" placeholder="ex: Thrall" required

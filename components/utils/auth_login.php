@@ -1,8 +1,16 @@
 <?php
 require_once 'db_connection.php';
-session_start();
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    
+    // VÉRIFICATION DU JETON CSRF
+    // On compare le jeton reçu du formulaire avec celui en session
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        // En cas d'échec, on arrête tout immédiatement
+        echo "Erreur de sécurité : session expirée ou requête invalide.";
+        exit;
+    }
+
     $identifier = trim($_POST['username']);
     $password = $_POST['password'];
 

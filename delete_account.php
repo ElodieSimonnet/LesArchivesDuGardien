@@ -1,9 +1,15 @@
 <?php
-session_start();
 require_once 'components/utils/db_connection.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && isset($_SESSION['user_id'])) {
     
+    // VÉRIFICATION DU JETON CSRF
+    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        // Si le jeton est mauvais, on bloque tout
+        header("Location: profile.php?error=security_breach");
+        exit();
+    }
+
     $userId = $_SESSION['user_id'];
 
     try {
@@ -12,6 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         $stmt->execute([$userId]);
 
         // On nettoie la session et on déconnecte
+        session_unset(); // On vide les variables de session d'abord
         session_destroy();
         
         // Retour à l'accueil
@@ -19,12 +26,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         exit();
 
     } catch (PDOException $e) {
-        // En cas de pépin SQL
         header("Location: profile.php?error=delete_failed");
         exit();
     }
 } else {
-    // Si on arrive ici par erreur, on renvoie au profil
     header("Location: profile.php");
     exit();
 }

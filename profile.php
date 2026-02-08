@@ -1,19 +1,12 @@
 <?php
-session_start();
 require_once 'components/utils/db_connection.php';
-
-
 // Si l'utilisateur n'est pas connecté, on le renvoie à l'accueil
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
 }
-
-// On récupère les infos de la BDD pour cet utilisateur
-$stmt = $db->prepare("SELECT * FROM adg_users WHERE id = ?");
-$stmt->execute([$_SESSION['user_id']]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+<?php include 'retrieveUserData.php';?>
 <?php include 'retrieveUserTitle.php';?>
 <?php include 'countUserCollections.php';?>
 <!DOCTYPE html>
@@ -34,12 +27,15 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
         <div class="max-w-6xl mx-auto px-4 flex flex-col gap-6">
             <section class="flex flex-col md:flex-row gap-6">
                 <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
-                    <form action="upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
+                    <form action="components/utils/upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <label for="profileAvatarInput" class="relative w-32 h-32 mb-4 flex items-center justify-center group cursor-pointer" title="Cliquez pour changer votre avatar">
                             
                             <div class="absolute inset-0 border-4 border-double border-primary-orange rounded-full transition-colors"></div>
                             
-                            <img src="assets/images/avatar-profile.png" alt="Portrait de Yanara" class="rounded-full w-[110px] h-[110px] object-cover group-hover:opacity-40 transition-opacity">
+                            <img src="<?php echo !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.png'; ?>" 
+                            alt="Portrait de <?php echo htmlspecialchars($user['username']); ?>" 
+                            class="rounded-full w-[110px] h-[110px] object-cover group-hover:opacity-40 transition-opacity">
                             
                             <div class="hidden md:flex absolute inset-0 flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-all scale-75 group-hover:scale-100">
                                 <svg class="w-8 h-8 text-primary-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -129,6 +125,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
                         </div>
                     </div>
                         <form action="delete_account.php" method="POST" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer votre compte ? Toutes vos collections seront perdues.');">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button type="submit" name="confirm_delete" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm tracking-widest transition-all active:scale-[0.98]">
                             Supprimer son compte
                         </button>

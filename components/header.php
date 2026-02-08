@@ -22,9 +22,12 @@
                             <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                     </span>
-                    <a href="logout.php" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-amber-500 transition-all shadow-md">
-                        Déconnexion
-                    </a>
+                    <form action="logout.php" method="POST" class="inline">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <button type="submit" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-amber-500 transition-all shadow-md">
+                            Déconnexion
+                        </button>
+                    </form>
                 <?php else: ?>
                     <a href="#" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Connexion</a>
                     <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Inscription</a>
@@ -87,21 +90,24 @@
 
         <div class="flex flex-col gap-6 mt-12">
             <?php if (isset($_SESSION['username'])): ?>
-        <div class="flex flex-col gap-4">
-            <a href="profile.php" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg flex items-center justify-center gap-3">
-                <i class="fas fa-user-circle"></i>
-                Mon Profil
-            </a>
-            <a href="logout.php" class="bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg">
-                Déconnexion
-            </a>
-        </div>
-    <?php else: ?>
-        <div class="flex flex-col gap-4">
-            <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</a>
-            <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</a>
-        </div>
-    <?php endif; ?>
+                <div class="flex flex-col gap-4">
+                    <a href="profile.php" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg flex items-center justify-center gap-3">
+                        <i class="fas fa-user-circle"></i>
+                        Mon Profil
+                    </a>
+                    <form action="logout.php" method="POST" class="w-full">
+                        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                        <button type="submit" class="w-full bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg">
+                            Déconnexion
+                        </button>
+                    </form>
+                </div>
+            <?php else: ?>
+                <div class="flex flex-col gap-4">
+                    <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</a>
+                    <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</a>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
