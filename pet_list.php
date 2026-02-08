@@ -159,9 +159,10 @@
                 <div class="hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-50 p-2 shadow-2xl rounded-lg">
                     <?php 
                         foreach ($expansions as $expansion) {
+                            $eExpansion = htmlspecialchars($expansion["expansion"], ENT_QUOTES, 'UTF-8');
                             echo '<label class="flex items-center gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                        <input type="checkbox" data-filter="expansion" value="'.$expansion["expansion"].'" class="filter-checkbox accent-primary-orange w-4 h-4">
-                        <span class="text-sm">'.$expansion["expansion"].'</span>
+                        <input type="checkbox" data-filter="expansion" value="'.$eExpansion.'" class="filter-checkbox accent-primary-orange w-4 h-4">
+                        <span class="text-sm">'.$eExpansion.'</span>
                     </label>';
                         }
                     ?>

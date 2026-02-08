@@ -126,13 +126,20 @@ document.addEventListener('DOMContentLoaded', () => {
     function createBadge(container, label, value, removeCallback) {
         const badge = document.createElement('div');
         badge.className = "flex items-center gap-2 bg-primary-orange/10 border border-primary-orange/40 px-3 py-1 rounded-full group hover:border-primary-orange transition-all";
-        badge.innerHTML = `
-            <span class="text-[10px] md:text-xs text-primary-white uppercase font-bold tracking-tight">${label}: ${value}</span>
-            <button class="text-primary-orange hover:text-white transition-colors">
-                <i class="ph-x-circle-bold text-lg"></i>
-            </button>
-        `;
-        badge.querySelector('button').addEventListener('click', removeCallback);
+
+        const span = document.createElement('span');
+        span.className = "text-[10px] md:text-xs text-primary-white uppercase font-bold tracking-tight";
+        span.textContent = `${label}: ${value}`;
+
+        const button = document.createElement('button');
+        button.className = "text-primary-orange hover:text-white transition-colors";
+        const icon = document.createElement('i');
+        icon.className = "ph-x-circle-bold text-lg";
+        button.appendChild(icon);
+        button.addEventListener('click', removeCallback);
+
+        badge.appendChild(span);
+        badge.appendChild(button);
         container.appendChild(badge);
     }
 

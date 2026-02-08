@@ -20,10 +20,10 @@
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto
                             lg:w-full mb-8">
                 <h1 class="text-xl font-semibold text-center uppercase text-primary-orange pt-4
-                       md:text-3xl"><?=$mount['name'];?>
+                       md:text-3xl"><?=htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8');?>
                 </h1>
                 <p class="text-lg font-semibold text-justify text-primary-white p-4
-                      lg:text-xl"><?=$mount['description']?>
+                      lg:text-xl"><?=htmlspecialchars($mount['description'], ENT_QUOTES, 'UTF-8')?>
                 </p>
             </section>
         
@@ -32,16 +32,16 @@
                                 lg:w-full lg:mx-0 flex flex-col">
             
                     <header class="flex px-4 py-2">
-                        <img src="<?= $mountTypeLink ?>" alt="icône <?= $mount['type'] ?>" class="w-20 h-auto pt-1">
+                        <img src="<?= htmlspecialchars($mountTypeLink, ENT_QUOTES, 'UTF-8') ?>" alt="icône <?= htmlspecialchars($mount['type'], ENT_QUOTES, 'UTF-8') ?>" class="w-20 h-auto pt-1">
                         <i class="ph-bold ph-heart text-7xl text-red-500 pr-2 pt-2 ml-auto"></i>
                         <i class="ph-fill ph-heart-straight absolute hidden"></i> 
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
-                        <img src="<?= $mount['image'] ?>" alt="Image de <?=$mount['name']?>" class="w-3/5 h-auto">
+                        <img src="<?= htmlspecialchars($mount['image'], ENT_QUOTES, 'UTF-8') ?>" alt="Image de <?=htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8')?>" class="w-3/5 h-auto">
                         <h2 class="text-base text-primary-white text-center pb-4 uppercase mt-0 mb-0
                                    md:text-2xl">
-                        <?= $mount['name'] ?>
+                        <?= htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') ?>
                         </h2>
                     </div>
 
@@ -58,7 +58,7 @@
                     <footer class="flex justify-center items-center h-16
                                    lg:h-20">
                         <span class="<?= $color ?> text-right text-3xl w-1/5 h-auto leading-none">★</span>
-                        <span class="text-center text-xl <?= $color ?> font-bold uppercase w-3/5 h-auto"><?= $mount['difficulty'] ?></span>
+                        <span class="text-center text-xl <?= $color ?> font-bold uppercase w-3/5 h-auto"><?= htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8') ?></span>
                         <span class="text-left <?= $color ?> text-3xl w-1/5 h-auto">★</span>
                     </footer>
                 </article>
@@ -73,35 +73,35 @@
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['source'] ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['source'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['droprate']."%"?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8')."%"?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Extension :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['expansion'] ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['zone'] ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start mb-4">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Cible :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['target'] ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') ?></dd>
                         </div>
                     </dl>
             

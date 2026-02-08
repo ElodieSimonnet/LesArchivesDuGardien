@@ -51,8 +51,8 @@
                 <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($types as $type): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
-                            <?= $type['type'] ?>
-                            <input type="checkbox" data-filter="type" value="<?= $type['type'] ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
+                            <?= htmlspecialchars($type['type'], ENT_QUOTES, 'UTF-8') ?>
+                            <input type="checkbox" data-filter="type" value="<?= htmlspecialchars($type['type'], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
                         </label>
                     <?php endforeach; ?>
                 </div>
@@ -70,8 +70,8 @@
                 <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($sources as $source): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
-                            <?= $source['source'] ?>
-                            <input type="checkbox" data-filter="source" value="<?= $source['source'] ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
+                            <?= htmlspecialchars($source['source'], ENT_QUOTES, 'UTF-8') ?>
+                            <input type="checkbox" data-filter="source" value="<?= htmlspecialchars($source['source'], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
                         </label>
                     <?php endforeach; ?>
                 </div>
@@ -89,8 +89,8 @@
                 <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($expansions as $expansion): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
-                            <?= $expansion['expansion'] ?>
-                            <input type="checkbox" data-filter="expansion" value="<?= $expansion['expansion'] ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
+                            <?= htmlspecialchars($expansion['expansion'], ENT_QUOTES, 'UTF-8') ?>
+                            <input type="checkbox" data-filter="expansion" value="<?= htmlspecialchars($expansion['expansion'], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
                         </label>
                     <?php endforeach; ?>
                 </div>
@@ -108,8 +108,8 @@
                 <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($factions as $faction): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
-                            <?= $faction['faction'] ?>
-                            <input type="checkbox" data-filter="faction" value="<?= $faction['faction'] ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
+                            <?= htmlspecialchars($faction['faction'], ENT_QUOTES, 'UTF-8') ?>
+                            <input type="checkbox" data-filter="faction" value="<?= htmlspecialchars($faction['faction'], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-6 h-6">
                         </label>
                     <?php endforeach; ?>
                 </div>

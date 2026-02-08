@@ -1,15 +1,14 @@
 <?php
 
 // CONFIGURATION SÉCURITÉ SESSIONS
-session_set_cookie_params([
-    'lifetime' => 0,
-    'path' => '/',
-    'secure' => false, // à mettre à true quand on est en ligne avec https
-    'httponly' => true,
-    'samesite' => 'Lax'
-]);
-
 if (session_status() === PHP_SESSION_NONE) {
+    session_set_cookie_params([
+        'lifetime' => 0,
+        'path' => '/',
+        'secure' => false, // à mettre à true quand on est en ligne avec https
+        'httponly' => true,
+        'samesite' => 'Lax'
+    ]);
     session_start();
 }
 

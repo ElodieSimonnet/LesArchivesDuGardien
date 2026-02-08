@@ -102,8 +102,8 @@
                     <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60 custom-scrollbar">
                         <?php foreach ($group['data'] as $item): ?>
                             <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
-                                <input type="checkbox" data-filter="<?= $group['key'] ?>" value="<?= $item[$group['key']] ?>" class="filter-checkbox accent-primary-orange w-4 h-4">
-                                <span class="text-sm"><?= $item[$group['key']] ?></span>
+                                <input type="checkbox" data-filter="<?= htmlspecialchars($group['key'], ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars($item[$group['key']], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-4 h-4">
+                                <span class="text-sm"><?= htmlspecialchars($item[$group['key']], ENT_QUOTES, 'UTF-8') ?></span>
                             </label>
                         <?php endforeach; ?>
                     </div>
@@ -126,29 +126,37 @@
                         $is_owned = ($mount['id'] % 2 == 0); 
                         $statusValue = $is_owned ? '1' : '0';
 
+                        $eName = htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8');
+                        $eType = htmlspecialchars($mount['type'], ENT_QUOTES, 'UTF-8');
+                        $eSource = htmlspecialchars($mount['source'], ENT_QUOTES, 'UTF-8');
+                        $eExpansion = htmlspecialchars($mount['expansion'], ENT_QUOTES, 'UTF-8');
+                        $eFaction = htmlspecialchars($mount['faction'], ENT_QUOTES, 'UTF-8');
+                        $eImage = htmlspecialchars($mount['image'], ENT_QUOTES, 'UTF-8');
+                        $eDifficulty = htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8');
+
                         echo('
                         <div class="mount-item flex justify-center">
-                            <article data-owned="'.$statusValue.'" 
-                                    data-type="'.$mount['type'].'" 
-                                    data-source="'.$mount['source'].'" 
-                                    data-expansion="'.$mount['expansion'].'" 
-                                    data-faction="'.$mount['faction'].'" 
+                            <article data-owned="'.$statusValue.'"
+                                    data-type="'.$eType.'"
+                                    data-source="'.$eSource.'"
+                                    data-expansion="'.$eExpansion.'"
+                                    data-faction="'.$eFaction.'"
                                     class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl">
-                                
+
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
-                                    <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$mount['type'].'.png" class="w-12 h-12"></span>
+                                    <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$eType.'.png" class="w-12 h-12"></span>
                                     <button class="wishlist-btn group absolute top-4 right-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                         </svg>
                                     </button>
-                                    <img src="'.$mount['image'].'" alt="'.$mount['name'].'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105">
-                                    <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$mount['name'].'</h2>
+                                    <img src="'.$eImage.'" alt="'.$eName.'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105">
+                                    <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$eName.'</h2>
                                 </div>
 
                                 <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
                                     <span class="'.$difficultyColor.' text-lg">★</span>
-                                    <span class="'.$difficultyColor.' text-sm font-bold uppercase tracking-[0.2em]">'.$mount['difficulty'].'</span>
+                                    <span class="'.$difficultyColor.' text-sm font-bold uppercase tracking-[0.2em]">'.$eDifficulty.'</span>
                                     <span class="'.$difficultyColor.' text-lg">★</span>
                                 </div>
                             </article>
