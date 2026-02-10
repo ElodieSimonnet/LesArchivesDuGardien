@@ -20,14 +20,14 @@
             <div class="h-8 w-px bg-primary-orange/30"></div>
 
             <a href="logout.php" class="flex items-center justify-center text-primary-orange hover:text-red-500 transition-all group" title="Se déconnecter">
-                <i class="ph ph-sign-out text-3xl lg:text-4xl group-hover:translate-x-1 transition-transform"></i>
+                <i class="ph ph-sign-out text-3xl xl:text-4xl group-hover:translate-x-1 transition-transform"></i>
             </a>
         </div>
     </header>
 
     <div class="flex flex-1 overflow-hidden">
       
-      <aside class="hidden lg:flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed h-full">
+      <aside class="hidden xl:flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed h-full">
         <div class="p-6 flex flex-col items-center">
           <nav class="w-full space-y-8 mt-4">
             <a href="dashboard_admin.php" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">

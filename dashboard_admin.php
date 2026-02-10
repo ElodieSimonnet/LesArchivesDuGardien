@@ -47,11 +47,11 @@ restrictToAdmin();
       <aside class="hidden lg:flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed h-full">
         <div class="p-6 flex flex-col items-center">
           <nav class="w-full space-y-8 mt-4">
-            <a href="dashboard_admin.php" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Tableau de bord
+            <a href="dashboard_admin.php" class="flex items-center gap-3 p-3 bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange  uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 bg-primary-orange rounded-sm"></span> Tableau de bord
             </a>
-            <a href="admin_user_gestion.php" class="flex items-center gap-3 p-3 bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 bg-primary-orange rounded-sm"></span> Utilisateurs
+            <a href="admin_user_gestion.php" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
+              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Utilisateurs
             </a>
             <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
               <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Montures
