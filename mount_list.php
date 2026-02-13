@@ -22,7 +22,7 @@
 <body>
     <?php include 'components/header.php'; ?>
     
-   <main class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
+   <main class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center bg-fixed lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
     <div class="max-w-7xl mx-auto">
         
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des montures</h1>
@@ -35,8 +35,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </span>
-                    <input type="text" 
-                           placeholder="Rechercher une monture par son nom" 
+                    <input type="text" id="search-input"
+                           placeholder="Rechercher une monture par son nom"
                            class="w-full h-full bg-primary-brown/60 border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
                 </div>
 
@@ -47,8 +47,8 @@
                 </button>
             </div>
 
-<div id="active-filters-zone" class="mb-6 w-full">
-    <div class="mx-auto md:mx-0 w-full sm:max-w-none sm:grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div id="active-filters-zone" class="mb-6 w-full min-h-[40px] flex items-center">
+    <div id="active-filters-content" class="hidden mx-auto md:mx-0 w-full">
         <div class="col-span-full flex flex-wrap items-center gap-3">
             <span class="text-xs uppercase text-primary-orange/60 font-bold tracking-widest">Filtres actifs :</span>
             <div id="badges-dynamic-container" class="flex flex-wrap gap-2"></div>
@@ -57,7 +57,7 @@
                     Tout effacer
                 </span>
                 <div class="text-primary-orange group-hover:text-white transition-colors">
-                   <i class="ph-x-circle-bold text-lg"></i> 
+                   <i class="ph-x-circle-bold text-lg"></i>
                 </div>
             </button>
         </div>

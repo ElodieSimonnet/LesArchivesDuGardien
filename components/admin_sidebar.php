@@ -1,11 +1,21 @@
+<?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 <div class="min-h-screen flex flex-col">
 
     <header class="sticky top-0 z-50 flex justify-between items-center p-4 bg-[#1a0f0a] border-b border-primary-orange/70 w-full h-30 shrink-0">
         <div class="flex items-center">
             <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-30 w-auto">
             <div class="flex flex-col text-[10px] uppercase font-bold text-amber-800 md:text-sm">
-                <span>Les Archives Du Gardien</span> 
-                <span class="text-amber-600">/ UTILISATEURS</span>
+                <span>Les Archives Du Gardien</span>
+                <?php
+                    $sidebarLabel = match($currentPage) {
+                        'admin_mount_gestion.php' => 'MONTURES',
+                        'admin_user_gestion.php' => 'UTILISATEURS',
+                        'admin_pet_gestion.php' => 'MASCOTTES',
+                        'dashboard_admin.php' => 'TABLEAU DE BORD',
+                        default => 'ADMINISTRATION',
+                    };
+                ?>
+                <span class="text-amber-600">/ <?php echo $sidebarLabel; ?></span>
             </div>
         </div>
 
@@ -30,17 +40,17 @@
       <aside class="hidden xl:flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed h-full">
         <div class="p-6 flex flex-col items-center">
           <nav class="w-full space-y-8 mt-4">
-            <a href="dashboard_admin.php" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Tableau de bord
+            <a href="dashboard_admin.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'dashboard_admin.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'dashboard_admin.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Tableau de bord
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 bg-primary-orange rounded-sm"></span> Utilisateurs
+            <a href="admin_user_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_user_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'admin_user_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Utilisateurs
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Montures
+            <a href="admin_mount_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_mount_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'admin_mount_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Montures
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Mascottes
+            <a href="admin_pet_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_pet_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'admin_pet_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Mascottes
             </a>
             <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
               <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Nouveautés

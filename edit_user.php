@@ -73,15 +73,9 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     
-                    <div class="flex flex-col gap-2">
+                    <div class="flex flex-col gap-2 md:col-span-2 md:max-w-md md:mx-auto md:w-full">
                         <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom d'utilisateur</label>
                         <input type="text" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" 
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Email</label>
-                        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" 
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 

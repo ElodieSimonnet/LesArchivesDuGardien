@@ -3,9 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SÉLECTEURS ---
     const activeFiltersContent = document.getElementById('active-filters-content');
     const checkboxes = document.querySelectorAll('.filter-checkbox');
-    // On récupère les radios Desktop ET Mobile
     const statusRadios = document.querySelectorAll('.status-radio, .status-radio-mobile');
-    const mountItems = document.querySelectorAll('.mount-item');
+    const petItems = document.querySelectorAll('.pet-item');
     const clearAllBtn = document.getElementById('clear-all-filters');
     const statusLabel = document.getElementById('current-status-label');
     const dropdowns = document.querySelectorAll('.dropdown-container');
@@ -46,8 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. SYSTÈME DE FILTRAGE GLOBAL ---
     function applyAllFilters() {
         const activeFilters = {};
-        
-        // A. Récupérer les catégories (Type, Source, etc.)
+
         checkboxes.forEach(chk => {
             if (chk.checked) {
                 const category = chk.dataset.filter;
@@ -56,26 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // B. Récupérer le statut (Synchronisé Desktop/Mobile)
         const activeRadio = document.querySelector('input[name="filter-status"]:checked, input[name="filter-status-mobile"]:checked');
         const statusValue = activeRadio ? activeRadio.value : 'all';
-        
-        // Synchro visuelle des radios
+
         statusRadios.forEach(radio => {
             if (radio.value === statusValue) radio.checked = true;
         });
 
-        // Mise à jour du texte label Desktop
         if (statusLabel) {
             const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
             statusLabel.innerText = labels[statusValue];
         }
 
-        // C. Filtrage des montures
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
-        mountItems.forEach(item => {
-            const card = item.querySelector('.mount-card');
+        petItems.forEach(item => {
+            const card = item.querySelector('.pet-card');
             if (!card) return;
 
             const cardOwned = card.dataset.owned;
@@ -107,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = '';
         let hasFilters = false;
 
-        // Ajouter le badge pour le Statut (sauf si "Toutes")
         if (statusValue !== 'all') {
             hasFilters = true;
             const statusText = statusValue === '1' ? 'Acquises' : 'Manquantes';
@@ -118,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
 
-        // Ajouter les badges pour les catégories
         for (const category in activeFilters) {
             activeFilters[category].forEach(value => {
                 hasFilters = true;
@@ -129,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         }
-        
+
         hasFilters ? activeFiltersContent.classList.remove('hidden') : activeFiltersContent.classList.add('hidden');
     }
 
@@ -171,23 +163,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 5. ACCORDÉONS MOBILE ---
-document.querySelectorAll('.mobile-accordion-header').forEach(header => {
-    header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const svgIcon = header.querySelector('svg:not(.w-9)'); // On ignore la croix de fermeture
-        
-        const isOpening = content.classList.contains('hidden');
-        content.classList.toggle('hidden');
-        
-        if (isOpening) {
-            header.classList.add('active');
-            if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
-        } else {
-            header.classList.remove('active');
-            if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
-        }
+    document.querySelectorAll('.mobile-accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const svgIcon = header.querySelector('svg:not(.w-9)');
+
+            const isOpening = content.classList.contains('hidden');
+            content.classList.toggle('hidden');
+
+            if (isOpening) {
+                header.classList.add('active');
+                if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
+            } else {
+                header.classList.remove('active');
+                if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
+            }
+        });
     });
-});
 
     // Lancement initial
     applyAllFilters();

@@ -6,17 +6,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterForm = document.getElementById('filterForm');
 
     // Recherche en temps réel
-    const searchInput = document.getElementById('search-user');
+    const searchInput = document.getElementById('search-pet');
     if (searchInput) {
-        const rows = document.querySelectorAll('.user-row');
+        const rows = document.querySelectorAll('.pet-row');
 
         searchInput.addEventListener('input', () => {
             const term = searchInput.value.toLowerCase().trim();
 
             rows.forEach(row => {
-                const username = row.dataset.username || '';
-                const email = row.dataset.email || '';
-                row.style.display = (username.startsWith(term) || email.startsWith(term)) ? '' : 'none';
+                const name = row.dataset.name || '';
+                row.style.display = name.startsWith(term) ? '' : 'none';
             });
         });
     }
@@ -24,43 +23,51 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!overlay || !menu || !openBtn) return;
 
     const openFilters = () => {
-        // 1. On affiche le conteneur
         overlay.classList.remove('hidden');
-        
         setTimeout(() => {
-            // 2. On anime l'apparition : opaque + remonte à sa place + devient cliquable
             overlay.classList.add('opacity-100');
             menu.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
             menu.classList.add('opacity-100', 'translate-y-0');
         }, 10);
-
         document.body.style.overflow = 'hidden';
     };
 
     const closeFilters = () => {
-        // 1. On anime la disparition
         overlay.classList.remove('opacity-100');
         menu.classList.remove('opacity-100', 'translate-y-0');
         menu.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
-
         setTimeout(() => {
-            // 2. On cache tout après l'anim
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }, 500);
     };
 
-    // Listeners
     openBtn.addEventListener('click', openFilters);
     if (closeBtn) closeBtn.addEventListener('click', closeFilters);
     overlay.addEventListener('click', closeFilters);
 
-    // Echap
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-    // Accordéons (inchangé)
+    // Gestion des "Tout sélectionner"
+    document.querySelectorAll('.select-all').forEach(selectAll => {
+        const section = selectAll.closest('.mobile-accordion-content');
+        const checkboxes = section.querySelectorAll('.filter-checkbox');
+
+        selectAll.addEventListener('change', () => {
+            checkboxes.forEach(cb => cb.checked = selectAll.checked);
+        });
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                selectAll.checked = [...checkboxes].every(c => c.checked);
+            });
+        });
+
+        selectAll.checked = checkboxes.length > 0 && [...checkboxes].every(c => c.checked);
+    });
+
     document.querySelectorAll('.mobile-accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
@@ -76,21 +83,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Submit : redirige avec les filtres en paramètres GET
     if (filterForm) {
         filterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(filterForm);
             const params = new URLSearchParams();
 
+            const grouped = {};
             for (const [key, value] of formData.entries()) {
-                if (value && value !== 'all') {
-                    params.set(key, value);
+                if (!grouped[key]) grouped[key] = [];
+                grouped[key].push(value);
+            }
+
+            for (const [key, values] of Object.entries(grouped)) {
+                for (const value of values) {
+                    params.append(key, value);
                 }
             }
 
             const query = params.toString();
-            window.location.href = 'admin_user_gestion.php' + (query ? '?' + query : '');
+            window.location.href = 'admin_pet_gestion.php' + (query ? '?' + query : '');
         });
     }
 });
