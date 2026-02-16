@@ -73,8 +73,8 @@ if (!$user) {
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Tentatives de connexion échouées</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 <?php echo $user['wrong_login'] >= 3 ? 'text-red-500 font-bold' : 'text-primary-white'; ?>">
-                            <?php echo (int) $user['wrong_login']; ?> / 3
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 <?php echo $user['failed_attempts'] >= 3 ? 'text-red-500 font-bold' : 'text-primary-white'; ?>">
+                            <?php echo (int) $user['failed_attempts']; ?> / 3
                         </span>
                     </div>
 
