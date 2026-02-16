@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Connexion - Archives</title>
+    <title>Connexion | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-[#1a0f0a] flex items-center justify-center min-h-screen">
 

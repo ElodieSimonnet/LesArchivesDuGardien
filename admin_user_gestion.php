@@ -13,7 +13,7 @@ restrictToAdmin();
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/admin-messages.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Gestion des utilisateurs</title>
+    <title>Gestion des utilisateurs | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black"> 
     <?php include 'components/admin_sidebar.php'; ?>

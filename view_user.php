@@ -31,7 +31,7 @@ if (!$user) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Profil utilisateur | Les Archives</title>
+    <title>Profil utilisateur | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>

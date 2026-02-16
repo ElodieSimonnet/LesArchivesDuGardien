@@ -16,7 +16,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/admin-messages.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Ajouter un utilisateur | Les Archives</title>
+    <title>Ajouter un utilisateur | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>

@@ -26,6 +26,6 @@ try {
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
 } catch (PDOException $e) {
-    die("Erreur de connexion : " . $e->getMessage());
+    die("Une erreur est survenue. Veuillez réessayer plus tard.");
 }
 ?>

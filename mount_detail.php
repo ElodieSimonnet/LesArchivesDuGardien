@@ -10,11 +10,12 @@
     <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Détails des montures</title>
+    <title>Détail monture | Les Archives du Gardien</title>
+    <meta name="description" content="Consultez les détails de cette monture World of Warcraft : source d'obtention, extension, faction et difficulté.">
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 pb-36
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 pb-36
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto

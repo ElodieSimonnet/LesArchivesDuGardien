@@ -2,7 +2,7 @@
     
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full mx-auto max-w-lg relative">
         
-        <button onclick="toggleModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-primary-orange text-4xl">&times;</button>
+        <button onclick="toggleModal('loginModal')" class="absolute top-4 right-4 text-gray-400 hover:text-primary-orange text-4xl" aria-label="Fermer la fenêtre de connexion">&times;</button>
         
         <h2 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Connexion</h2>
 
@@ -41,7 +41,7 @@
     
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full mx-auto max-w-lg relative">
         
-        <button onclick="toggleModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-primary-orange text-4xl">&times;</button>
+        <button onclick="toggleModal('registerModal')" class="absolute top-4 right-4 text-gray-400 hover:text-primary-orange text-4xl" aria-label="Fermer la fenêtre d'inscription">&times;</button>
         
         <h2 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Inscription</h2>
 

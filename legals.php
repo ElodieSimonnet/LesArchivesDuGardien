@@ -7,7 +7,8 @@
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/burger-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Mentions légales</title>
+    <title>Mentions légales | Les Archives du Gardien</title>
+    <meta name="description" content="Mentions légales du site Les Archives du Gardien.">
 </head>
 <body>
     <?php include 'components/header.php'; ?>

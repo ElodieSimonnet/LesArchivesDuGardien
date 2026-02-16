@@ -10,11 +10,12 @@
     <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Détails des mascottes</title>
+    <title>Détail mascotte | Les Archives du Gardien</title>
+    <meta name="description" content="Consultez les détails de cette mascotte World of Warcraft : famille, source d'obtention, extension et sorts.">
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 pb-36
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 pb-36
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto
@@ -43,14 +44,12 @@
 
                     <div class="flex flex-col justify-center items-center flex-grow">
                         <img src="<?= htmlspecialchars($pet['image'], ENT_QUOTES, 'UTF-8') ?>" alt="Image de <?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-3/5 h-auto">
+                        <h2 class="text-base font-black uppercase text-center mt-4 mb-6 tracking-widest text-white"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
-                    <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto">
-
-                    <footer class="flex justify-center items-center h-16
-                                   lg:h-20">
-                        <h2 class="text-center text-xl text-primary-orange font-bold uppercase w-3/5 h-auto"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
-                    </footer>
+                    <div class="bg-black border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl">
+                        <span class="text-primary-orange text-base font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></span>
+                    </div>
                 </article>
                 <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto mt-4
                               lg:w-full lg:mx-0">
@@ -59,7 +58,7 @@
                     <hr class="my-6 bg-primary-orange h-0.5 border-none w-full mx-auto">
 
                     <dl class="space-y-4
-                               lg:px-12 flex-grow lg:space-y-6">
+                               lg:px-12 flex-grow lg:space-y-10">
                         <div class="flex flex-col lg:flex-row items-center lg:items-start mt-8">
                             <dt class="font-semibold text-xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>

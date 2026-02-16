@@ -1,9 +1,10 @@
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:bg-primary-orange focus:text-primary-black focus:px-4 focus:py-2 focus:font-bold">Aller au contenu principal</a>
 <header class="bg-primary-black border-primary-orange border-b px-8 py-8">
     <nav class="max-w-full mx-auto flex items-center justify-between" aria-label="Navigation principale">
         
         <div class="flex items-center gap-8">
             <a href="index.php" class="flex-shrink-0">
-                <img src="assets/images/home_icons/dragon_logo.png" alt="Logo" class="h-24 w-24 md:h-30 md:w-30">
+                <img src="assets/images/home_icons/dragon_logo.png" alt="Les Archives du Gardien - Accueil" class="h-24 w-24 md:h-30 md:w-30">
             </a>
 
             <ul class="hidden lg:flex items-center gap-12 text-primary-white font-semibold uppercase text-lg tracking-wider">
@@ -49,7 +50,7 @@
     
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Menu</span>
-        <button id="close-menu" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
+        <button id="close-menu" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer le menu">
             <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>

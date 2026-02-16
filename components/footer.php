@@ -18,7 +18,7 @@
                 Suivez-nous :
             </span>
             <div class="flex items-center gap-8">
-                <a href="https://www.facebook.com/WorldofWarcraft.fr/?brand_redir=138011799033" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Discord">
+                <a href="https://www.facebook.com/WorldofWarcraft.fr/?brand_redir=138011799033" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Facebook">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" class="w-6 h-6" alt="logo facebook">
                 </a>
                 <a href="https://www.twitch.tv/warcraft" target="_blank" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Twitch">

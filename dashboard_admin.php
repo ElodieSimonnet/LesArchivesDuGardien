@@ -12,7 +12,7 @@ restrictToAdmin();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Dashboard</title>
+    <title>Dashboard | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black">
     <?php include 'components/admin_sidebar.php'; ?>

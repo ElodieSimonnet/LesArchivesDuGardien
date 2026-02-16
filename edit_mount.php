@@ -38,7 +38,7 @@ $all_targets = $db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetc
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/admin-messages.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Modifier la monture | Les Archives</title>
+    <title>Modifier la monture | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>

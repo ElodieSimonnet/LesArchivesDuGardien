@@ -18,12 +18,13 @@
     <script src="assets/js/pet-collection-filter-toggle.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Liste des mascottes</title>
+    <title>Mascottes | Les Archives du Gardien</title>
+    <meta name="description" content="Parcourez la liste complète des mascottes World of Warcraft. Filtrez par famille, source, extension et faction pour retrouver vos mascottes.">
 </head>
 <body>
     <?php include 'components/header.php'; ?>
 
-   <main class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center bg-fixed lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
+   <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center bg-fixed lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
     <div class="max-w-7xl mx-auto">
 
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des mascottes</h1>
@@ -36,12 +37,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </span>
+                    <label for="search-input" class="sr-only">Rechercher une mascotte</label>
                     <input type="text" id="search-input"
                            placeholder="Rechercher une mascotte par son nom"
                            class="w-full h-full bg-primary-brown/60 border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
                 </div>
 
-                <button id="mobile-filter-trigger" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
+                <button id="mobile-filter-trigger" aria-label="Ouvrir les filtres" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
@@ -151,13 +153,13 @@
                                     class="pet-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col transition-all duration-300 group shadow-2xl cursor-pointer">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
-                                    <span class="absolute top-4 left-4"><img src="assets/images/pets/'.$familyIcon.'.png" alt="Icône '.$eFamily.'" class="w-12 h-12"></span>
-                                    <button class="wishlist-btn group absolute top-4 right-4">
+                                    <span class="absolute top-4 left-4"><img src="assets/images/pets/'.$familyIcon.'.png" alt="Icône '.$eFamily.'" class="w-12 h-12" loading="lazy"></span>
+                                    <button class="wishlist-btn group absolute top-4 right-4" aria-label="Ajouter '.$eName.' aux favoris">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                                         </svg>
                                     </button>
-                                    <img src="'.$eImage.'" alt="'.$eName.'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105">
+                                    <img src="'.$eImage.'" alt="'.$eName.'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105" loading="lazy">
                                     <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$eName.'</h2>
                                 </div>
 

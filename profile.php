@@ -18,7 +18,8 @@ if (!isset($_SESSION['user_id'])) {
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/burger-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
-    <title>Page profil utilisateur</title>
+    <title>Mon profil | Les Archives du Gardien</title>
+    <meta name="description" content="Gérez votre profil et suivez l'avancement de vos collections de montures et mascottes World of Warcraft.">
 </head>
 <body>
     <?php include 'components/header.php'; ?>

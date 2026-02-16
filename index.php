@@ -9,13 +9,14 @@
     <script src="assets/js/burger-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>Les Archives Du Gardien</title>
+    <title>Accueil | Les Archives du Gardien</title>
+    <meta name="description" content="Suivez et gérez votre collection de montures et mascottes World of Warcraft. Consultez les dernières nouveautés et gardez une trace de vos trésors d'Azeroth.">
 </head>
 <body class="min-h-screen flex flex-col">
     
     <?php include 'components/header.php'; ?>
 
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow px-16 lg:bg-[url(../images/lava_cave.jpg)]">
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow px-16 lg:bg-[url(../images/lava_cave.jpg)]">
     
     <div class="mx-auto max-w-xl md:bg-primary-brown md:rounded-lg md:border-2 md:border-primary-orange md:p-6 md:max-w-4xl lg:max-w-5xl">
         <header class="text-center">

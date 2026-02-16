@@ -11,6 +11,8 @@
                         'admin_mount_gestion.php' => 'MONTURES',
                         'admin_user_gestion.php' => 'UTILISATEURS',
                         'admin_pet_gestion.php' => 'MASCOTTES',
+                        'admin_news_gestion.php' => 'ACTUALITÉS',
+                        'admin_faq_gestion.php' => 'F.A.Q',
                         'dashboard_admin.php' => 'TABLEAU DE BORD',
                         default => 'ADMINISTRATION',
                     };
@@ -52,11 +54,11 @@
             <a href="admin_pet_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_pet_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
               <span class="w-5 h-5 <?php echo ($currentPage === 'admin_pet_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Mascottes
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> Nouveautés
+            <a href="admin_news_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_news_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'admin_news_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Nouveautés
             </a>
-            <a href="#" class="flex items-center gap-3 p-3 text-amber-600/60 hover:text-primary-orange uppercase text-xs font-bold tracking-widest transition-all">
-              <span class="w-5 h-5 bg-amber-900/20 rounded-sm"></span> F.A.Q
+            <a href="admin_faq_gestion.php" class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'admin_faq_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'admin_faq_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> F.A.Q
             </a>
           </nav>
         </div>
