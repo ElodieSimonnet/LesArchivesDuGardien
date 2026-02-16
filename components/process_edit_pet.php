@@ -20,9 +20,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_source = (int) $_POST['id_source'];
     $id_expansion = (int) $_POST['id_expansion'];
     $id_faction = (int) $_POST['id_faction'];
-    $droprate = (float) $_POST['droprate'];
-    $cost = (int) $_POST['cost'];
+    $droprate = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+    $cost = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
     $is_available = (int) $_POST['is_available'];
+    $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+    $id_currency = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
 
     // Validation minimale
     if (empty($name)) {
@@ -73,7 +75,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 id_faction = :id_faction,
                 droprate = :droprate,
                 cost = :cost,
-                is_available = :is_available
+                is_available = :is_available,
+                id_zone = :id_zone,
+                id_currency = :id_currency
                 WHERE id = :id";
 
         $stmt = $db->prepare($sql);
@@ -88,6 +92,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':droprate' => $droprate,
             ':cost' => $cost,
             ':is_available' => $is_available,
+            ':id_zone' => $id_zone,
+            ':id_currency' => $id_currency,
             ':id' => $pet_id
         ]);
 

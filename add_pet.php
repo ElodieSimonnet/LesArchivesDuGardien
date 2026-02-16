@@ -8,6 +8,8 @@ $all_families = $db->query("SELECT * FROM adg_pet_families ORDER BY family ASC")
 $all_sources = $db->query("SELECT * FROM adg_sources ORDER BY source ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_expansions = $db->query("SELECT * FROM adg_expansions ORDER BY expansion ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_factions = $db->query("SELECT * FROM adg_factions ORDER BY faction ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_zones = $db->query("SELECT * FROM adg_zones ORDER BY zone ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -132,8 +134,32 @@ $all_factions = $db->query("SELECT * FROM adg_factions ORDER BY faction ASC")->f
                     </div>
 
                     <div class="flex flex-col gap-2">
+                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</label>
+                        <select name="id_zone" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                            <option value="">Aucune</option>
+                            <?php foreach ($all_zones as $zone) : ?>
+                                <option value="<?php echo $zone['id_zone']; ?>">
+                                    <?php echo htmlspecialchars($zone['zone']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Monnaie</label>
+                        <select name="id_currency" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                            <option value="">Aucune</option>
+                            <?php foreach ($all_currencies as $currency) : ?>
+                                <option value="<?php echo $currency['id']; ?>">
+                                    <?php echo htmlspecialchars($currency['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
                         <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Coût</label>
-                        <input type="number" name="cost" step="1" min="0" value="0"
+                        <input type="number" name="cost" step="1" min="0"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 

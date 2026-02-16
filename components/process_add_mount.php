@@ -20,7 +20,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_expansion = (int) $_POST['id_expansion'];
     $id_faction = (int) $_POST['id_faction'];
     $id_difficulty = (int) $_POST['id_difficulty'];
-    $droprate = (float) $_POST['droprate'];
+    $droprate = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+    $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+    $id_target = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
 
     // Validation : nom non vide
     if (empty($name)) {
@@ -77,8 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO adg_mounts (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate)
-                VALUES (:name, :description, :image, :id_type, :id_source, :id_expansion, :id_faction, :id_difficulty, :droprate)";
+        $sql = "INSERT INTO adg_mounts (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate, id_zone, id_target)
+                VALUES (:name, :description, :image, :id_type, :id_source, :id_expansion, :id_faction, :id_difficulty, :droprate, :id_zone, :id_target)";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
@@ -91,6 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id_faction' => $id_faction,
             ':id_difficulty' => $id_difficulty,
             ':droprate' => $droprate,
+            ':id_zone' => $id_zone,
+            ':id_target' => $id_target,
         ]);
 
         header('Location: ../admin_mount_gestion.php?success=mount_added');

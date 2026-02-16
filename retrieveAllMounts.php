@@ -1,11 +1,11 @@
 <?php
 include "components/utils/db_connection.php";
 
-$sql = "SELECT 
+$sql = "SELECT
             adg_mounts.*,
-            adg_expansions.expansion, 
-            adg_factions.faction, 
-            adg_sources.source,  
+            adg_expansions.expansion,
+            adg_factions.faction,
+            adg_sources.source,
             adg_difficulties.difficulty,
             adg_mount_types.type
         FROM adg_mounts

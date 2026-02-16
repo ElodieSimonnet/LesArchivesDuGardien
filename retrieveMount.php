@@ -1,7 +1,7 @@
 <?php
 include "components/utils/db_connection.php";
 
-$mountId = 2;
+$mountId = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 $sql = "SELECT 
             adg_mounts.*, 

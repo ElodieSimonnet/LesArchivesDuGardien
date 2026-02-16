@@ -3,13 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- SÉLECTEURS ---
     const activeFiltersContent = document.getElementById('active-filters-content');
     const checkboxes = document.querySelectorAll('.filter-checkbox');
-    // On récupère les radios Desktop ET Mobile
     const statusRadios = document.querySelectorAll('.status-radio, .status-radio-mobile');
     const mountItems = document.querySelectorAll('.mount-item');
     const clearAllBtn = document.getElementById('clear-all-filters');
     const statusLabel = document.getElementById('current-status-label');
     const dropdowns = document.querySelectorAll('.dropdown-container');
     const searchInput = document.getElementById('search-input');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreCount = document.getElementById('load-more-count');
+
+    // --- PAGINATION "CHARGER PLUS" ---
+    const ITEMS_PER_PAGE = 12;
+    let currentLimit = ITEMS_PER_PAGE;
 
     // --- 1. GESTION DES MENUS DÉROULANTS (Desktop) ---
     dropdowns.forEach(container => {
@@ -46,8 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 2. SYSTÈME DE FILTRAGE GLOBAL ---
     function applyAllFilters() {
         const activeFilters = {};
-        
-        // A. Récupérer les catégories (Type, Source, etc.)
+
         checkboxes.forEach(chk => {
             if (chk.checked) {
                 const category = chk.dataset.filter;
@@ -56,24 +60,21 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // B. Récupérer le statut (Synchronisé Desktop/Mobile)
         const activeRadio = document.querySelector('input[name="filter-status"]:checked, input[name="filter-status-mobile"]:checked');
         const statusValue = activeRadio ? activeRadio.value : 'all';
-        
-        // Synchro visuelle des radios
+
         statusRadios.forEach(radio => {
             if (radio.value === statusValue) radio.checked = true;
         });
 
-        // Mise à jour du texte label Desktop
         if (statusLabel) {
             const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
             statusLabel.innerText = labels[statusValue];
         }
 
-        // C. Filtrage des montures
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
+        let matchCount = 0;
         mountItems.forEach(item => {
             const card = item.querySelector('.mount-card');
             if (!card) return;
@@ -93,10 +94,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardName = (card.querySelector('h2')?.textContent || '').trim().toLowerCase();
             const matchSearch = !searchTerm || cardName.startsWith(searchTerm);
 
-            item.style.display = (matchStatus && matchCategories && matchSearch) ? 'flex' : 'none';
+            const matchAll = matchStatus && matchCategories && matchSearch;
+            if (matchAll) {
+                matchCount++;
+                item.style.display = matchCount <= currentLimit ? 'flex' : 'none';
+            } else {
+                item.style.display = 'none';
+            }
         });
 
+        const shownCount = Math.min(matchCount, currentLimit);
+        if (loadMoreCount) {
+            loadMoreCount.textContent = `Vous avez vu ${shownCount} montures sur ${matchCount}`;
+            loadMoreCount.style.display = matchCount > 0 ? '' : 'none';
+        }
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = matchCount > currentLimit ? '' : 'none';
+        }
+
         updateBadges(activeFilters, statusValue);
+    }
+
+    function resetAndApply() {
+        currentLimit = ITEMS_PER_PAGE;
+        applyAllFilters();
     }
 
     // --- 3. GESTION DES BADGES DYNAMIQUES ---
@@ -107,29 +128,27 @@ document.addEventListener('DOMContentLoaded', () => {
         container.innerHTML = '';
         let hasFilters = false;
 
-        // Ajouter le badge pour le Statut (sauf si "Toutes")
         if (statusValue !== 'all') {
             hasFilters = true;
             const statusText = statusValue === '1' ? 'Acquises' : 'Manquantes';
             createBadge(container, 'Statut', statusText, () => {
                 const allRadios = document.querySelectorAll('input[value="all"]');
                 allRadios.forEach(r => r.checked = true);
-                applyAllFilters();
+                resetAndApply();
             });
         }
 
-        // Ajouter les badges pour les catégories
         for (const category in activeFilters) {
             activeFilters[category].forEach(value => {
                 hasFilters = true;
                 createBadge(container, category, value, () => {
                     const targetCheckboxes = document.querySelectorAll(`.filter-checkbox[data-filter="${category}"][value="${value}"]`);
                     targetCheckboxes.forEach(cb => cb.checked = false);
-                    applyAllFilters();
+                    resetAndApply();
                 });
             });
         }
-        
+
         hasFilters ? activeFiltersContent.classList.remove('hidden') : activeFiltersContent.classList.add('hidden');
     }
 
@@ -154,40 +173,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. ÉCOUTEURS ---
-    checkboxes.forEach(box => box.addEventListener('change', applyAllFilters));
-    statusRadios.forEach(radio => radio.addEventListener('change', applyAllFilters));
+    checkboxes.forEach(box => box.addEventListener('change', resetAndApply));
+    statusRadios.forEach(radio => radio.addEventListener('change', resetAndApply));
 
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
             checkboxes.forEach(chk => chk.checked = false);
             const allRadios = document.querySelectorAll('input[value="all"]');
             allRadios.forEach(r => r.checked = true);
-            applyAllFilters();
+            resetAndApply();
         });
     }
 
     if (searchInput) {
-        searchInput.addEventListener('input', applyAllFilters);
+        searchInput.addEventListener('input', resetAndApply);
+    }
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            currentLimit += ITEMS_PER_PAGE;
+            applyAllFilters();
+        });
     }
 
     // --- 5. ACCORDÉONS MOBILE ---
-document.querySelectorAll('.mobile-accordion-header').forEach(header => {
-    header.addEventListener('click', () => {
-        const content = header.nextElementSibling;
-        const svgIcon = header.querySelector('svg:not(.w-9)'); // On ignore la croix de fermeture
-        
-        const isOpening = content.classList.contains('hidden');
-        content.classList.toggle('hidden');
-        
-        if (isOpening) {
-            header.classList.add('active');
-            if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
-        } else {
-            header.classList.remove('active');
-            if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
-        }
+    document.querySelectorAll('.mobile-accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const svgIcon = header.querySelector('svg:not(.w-9)');
+
+            const isOpening = content.classList.contains('hidden');
+            content.classList.toggle('hidden');
+
+            if (isOpening) {
+                header.classList.add('active');
+                if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
+            } else {
+                header.classList.remove('active');
+                if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
+            }
+        });
     });
-});
 
     // Lancement initial
     applyAllFilters();

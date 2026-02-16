@@ -21,7 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_expansion = (int) $_POST['id_expansion'];
     $id_faction = (int) $_POST['id_faction'];
     $id_difficulty = (int) $_POST['id_difficulty'];
-    $droprate = (float) $_POST['droprate'];
+    $droprate = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+    $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+    $id_target = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
 
     // Validation minimale
     if (empty($name)) {
@@ -79,7 +81,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 id_expansion = :id_expansion,
                 id_faction = :id_faction,
                 id_difficulty = :id_difficulty,
-                droprate = :droprate
+                droprate = :droprate,
+                id_zone = :id_zone,
+                id_target = :id_target
                 WHERE id = :id";
 
         $stmt = $db->prepare($sql);
@@ -93,6 +97,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id_faction' => $id_faction,
             ':id_difficulty' => $id_difficulty,
             ':droprate' => $droprate,
+            ':id_zone' => $id_zone,
+            ':id_target' => $id_target,
             ':id' => $mount_id
         ]);
 

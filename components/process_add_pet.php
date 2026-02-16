@@ -19,9 +19,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_source = (int) $_POST['id_source'];
     $id_expansion = (int) $_POST['id_expansion'];
     $id_faction = (int) $_POST['id_faction'];
-    $droprate = (float) $_POST['droprate'];
-    $cost = (int) $_POST['cost'];
+    $droprate = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+    $cost = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
     $is_available = (int) $_POST['is_available'];
+    $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+    $id_currency = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
 
     // Validation : nom non vide
     if (empty($name)) {
@@ -70,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO adg_pets (name, description, image, id_family, id_source, id_expansion, id_faction, droprate, cost, is_available)
-                VALUES (:name, :description, :image, :id_family, :id_source, :id_expansion, :id_faction, :droprate, :cost, :is_available)";
+        $sql = "INSERT INTO adg_pets (name, description, image, id_family, id_source, id_expansion, id_faction, droprate, cost, is_available, id_zone, id_currency)
+                VALUES (:name, :description, :image, :id_family, :id_source, :id_expansion, :id_faction, :droprate, :cost, :is_available, :id_zone, :id_currency)";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
@@ -85,6 +87,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':droprate' => $droprate,
             ':cost' => $cost,
             ':is_available' => $is_available,
+            ':id_zone' => $id_zone,
+            ':id_currency' => $id_currency,
         ]);
 
         header('Location: ../admin_pet_gestion.php?success=pet_added');

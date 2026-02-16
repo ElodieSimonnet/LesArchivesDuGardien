@@ -16,6 +16,7 @@
     <script src="assets/js/pet-card-clic.js" defer></script>
     <script src="assets/js/filter-menu-mobile.js" defer></script>
     <script src="assets/js/pet-collection-filter-toggle.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Liste des mascottes</title>
 </head>
@@ -169,32 +170,11 @@
                 ?>
             </div>
 
-            <div class="w-full flex justify-center mt-12 mb-8">
-                <nav class="flex items-center gap-2 md:gap-3" aria-label="Pagination">
-                    <a href="#" class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-black border-2 border-primary-orange rounded-xl text-primary-white font-black text-lg md:text-xl shadow-[0_0_15px_rgba(249,115,22,0.4)]">
-                        1
-                    </a>
-
-                    <a href="#" class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-black border-2 border-primary-orange/40 rounded-xl text-primary-white font-black text-lg md:text-xl hover:border-primary-orange transition-all">
-                        2
-                    </a>
-
-                    <div class="flex items-end gap-1 px-1 h-10 md:h-12 pb-2">
-                        <span class="w-2 h-2 bg-primary-orange/40 rounded-full"></span>
-                        <span class="w-2 h-2 bg-primary-orange/40 rounded-full"></span>
-                        <span class="w-2 h-2 bg-primary-orange/40 rounded-full"></span>
-                    </div>
-
-                    <a href="#" class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-black border-2 border-primary-orange/40 rounded-xl text-primary-white font-black text-lg md:text-xl hover:border-primary-orange transition-all">
-                        15
-                    </a>
-
-                    <a href="#" class="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-black border-2 border-primary-orange/40 rounded-xl text-primary-white hover:border-primary-orange transition-all group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 group-hover:scale-110 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="4">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                        </svg>
-                    </a>
-                </nav>
+            <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
+                <p id="load-more-count" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-black border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
+                <button id="load-more-btn" class="w-full max-w-sm text-center bg-primary-black border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+                    Charger plus
+                </button>
             </div>
 
         </div>
@@ -202,6 +182,6 @@
 
     <?php include 'components/footer.php'; ?>
     <?php include 'components/modals.php'; ?>
-    <?php include 'components/filters-menu-mobile.php'; ?>
+    <?php include 'components/filters-menu-mobile-pets.php'; ?>
 </body>
 </html>

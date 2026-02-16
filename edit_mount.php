@@ -26,6 +26,8 @@ $all_sources = $db->query("SELECT * FROM adg_sources ORDER BY source ASC")->fetc
 $all_expansions = $db->query("SELECT * FROM adg_expansions ORDER BY expansion ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_factions = $db->query("SELECT * FROM adg_factions ORDER BY faction ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_difficulties = $db->query("SELECT * FROM adg_difficulties ORDER BY difficulty ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_zones = $db->query("SELECT * FROM adg_zones ORDER BY zone ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_targets = $db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -142,8 +144,32 @@ $all_difficulties = $db->query("SELECT * FROM adg_difficulties ORDER BY difficul
 
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop (%)</label>
-                        <input type="number" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($mount['droprate']); ?>"
+                        <input type="number" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($mount['droprate'] ?? ''); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</label>
+                        <select name="id_zone" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                            <option value="">Aucune</option>
+                            <?php foreach ($all_zones as $zone) : ?>
+                                <option value="<?php echo $zone['id_zone']; ?>" <?php echo ($zone['id_zone'] == $mount['id_zone']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($zone['zone']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Cible</label>
+                        <select name="id_target" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                            <option value="">Aucune</option>
+                            <?php foreach ($all_targets as $target) : ?>
+                                <option value="<?php echo $target['id']; ?>" <?php echo ($target['id'] == $mount['id_target']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($target['target']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                 </div>

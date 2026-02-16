@@ -33,8 +33,11 @@
             
                     <header class="flex px-4 py-2">
                         <img src="<?= htmlspecialchars($mountTypeLink, ENT_QUOTES, 'UTF-8') ?>" alt="icône <?= htmlspecialchars($mount['type'], ENT_QUOTES, 'UTF-8') ?>" class="w-20 h-auto pt-1">
-                        <i class="ph-bold ph-heart text-7xl text-red-500 pr-2 pt-2 ml-auto"></i>
-                        <i class="ph-fill ph-heart-straight absolute hidden"></i> 
+                        <button class="wishlist-btn group ml-auto pr-2 pt-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                            </svg>
+                        </button>
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
@@ -62,14 +65,14 @@
                         <span class="text-left <?= $color ?> text-3xl w-1/5 h-auto">★</span>
                     </footer>
                 </article>
-                <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto mt-4
-                              lg:w-full lg:mx-0">
-                    <h3 class="text-2xl font-semibold text-center text-primary-orange pt-2
+                <aside class="bg-primary-brown rounded-xl py-6 border-2 border-primary-orange w-4/5 mx-auto mt-4
+                              lg:w-full lg:mx-0 flex flex-col">
+                    <h3 class="text-2xl font-semibold text-center text-primary-orange
                                lg:text-3xl">Informations</h3>
-                    <hr class="my-6 bg-primary-orange h-0.5 border-none w-full mx-auto">
+                    <hr class="mt-6 mb-10 bg-primary-orange h-0.5 border-none w-full mx-auto">
                  
-                    <dl class="space-y-4
-                               lg:px-12 flex-grow lg:space-y-8">
+                    <dl class="space-y-6
+                               lg:px-12 lg:space-y-10">
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>
@@ -80,7 +83,7 @@
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8')."%"?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['droprate'] !== null ? htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
@@ -94,22 +97,17 @@
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['zone'] ? htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                             <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
                                        lg:hidden">
                         </div>
-                        <div class="flex flex-col lg:flex-row items-center lg:items-start mb-4">
+                        <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Cible :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-xl text-primary-white text-center"><?= $mount['target'] ? htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
             
-                <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto">
-                <footer class="flex justify-center items-center h-16
-                               lg:h-20">
-                    <i class="ph ph-user text-primary-orange text-5xl"></i>
-                </footer>
             </aside>
         </div>
     </main>

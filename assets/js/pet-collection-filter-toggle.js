@@ -9,6 +9,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const statusLabel = document.getElementById('current-status-label');
     const dropdowns = document.querySelectorAll('.dropdown-container');
     const searchInput = document.getElementById('search-input');
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const loadMoreCount = document.getElementById('load-more-count');
+
+    // --- PAGINATION "CHARGER PLUS" ---
+    const ITEMS_PER_PAGE = 12;
+    let currentLimit = ITEMS_PER_PAGE;
 
     // --- 1. GESTION DES MENUS DÉROULANTS (Desktop) ---
     dropdowns.forEach(container => {
@@ -68,6 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
+        let matchCount = 0;
         petItems.forEach(item => {
             const card = item.querySelector('.pet-card');
             if (!card) return;
@@ -87,10 +94,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardName = (card.querySelector('h2')?.textContent || '').trim().toLowerCase();
             const matchSearch = !searchTerm || cardName.startsWith(searchTerm);
 
-            item.style.display = (matchStatus && matchCategories && matchSearch) ? 'flex' : 'none';
+            const matchAll = matchStatus && matchCategories && matchSearch;
+            if (matchAll) {
+                matchCount++;
+                item.style.display = matchCount <= currentLimit ? 'flex' : 'none';
+            } else {
+                item.style.display = 'none';
+            }
         });
 
+        const shownCount = Math.min(matchCount, currentLimit);
+        if (loadMoreCount) {
+            loadMoreCount.textContent = `Vous avez vu ${shownCount} mascottes sur ${matchCount}`;
+            loadMoreCount.style.display = matchCount > 0 ? '' : 'none';
+        }
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = matchCount > currentLimit ? '' : 'none';
+        }
+
         updateBadges(activeFilters, statusValue);
+    }
+
+    function resetAndApply() {
+        currentLimit = ITEMS_PER_PAGE;
+        applyAllFilters();
     }
 
     // --- 3. GESTION DES BADGES DYNAMIQUES ---
@@ -107,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             createBadge(container, 'Statut', statusText, () => {
                 const allRadios = document.querySelectorAll('input[value="all"]');
                 allRadios.forEach(r => r.checked = true);
-                applyAllFilters();
+                resetAndApply();
             });
         }
 
@@ -117,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 createBadge(container, category, value, () => {
                     const targetCheckboxes = document.querySelectorAll(`.filter-checkbox[data-filter="${category}"][value="${value}"]`);
                     targetCheckboxes.forEach(cb => cb.checked = false);
-                    applyAllFilters();
+                    resetAndApply();
                 });
             });
         }
@@ -146,20 +173,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- 4. ÉCOUTEURS ---
-    checkboxes.forEach(box => box.addEventListener('change', applyAllFilters));
-    statusRadios.forEach(radio => radio.addEventListener('change', applyAllFilters));
+    checkboxes.forEach(box => box.addEventListener('change', resetAndApply));
+    statusRadios.forEach(radio => radio.addEventListener('change', resetAndApply));
 
     if (clearAllBtn) {
         clearAllBtn.addEventListener('click', () => {
             checkboxes.forEach(chk => chk.checked = false);
             const allRadios = document.querySelectorAll('input[value="all"]');
             allRadios.forEach(r => r.checked = true);
-            applyAllFilters();
+            resetAndApply();
         });
     }
 
     if (searchInput) {
-        searchInput.addEventListener('input', applyAllFilters);
+        searchInput.addEventListener('input', resetAndApply);
+    }
+
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', () => {
+            currentLimit += ITEMS_PER_PAGE;
+            applyAllFilters();
+        });
     }
 
     // --- 5. ACCORDÉONS MOBILE ---
