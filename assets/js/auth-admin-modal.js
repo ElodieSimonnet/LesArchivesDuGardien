@@ -20,20 +20,19 @@ if (loginForm) {
         const formData = new FormData(this);
 
         // On envoie vers le script PHP de connexion
-        fetch('components/utils/admin_login.php', { 
-            method: 'POST', 
-            body: formData 
+        fetch('components/utils/admin_login.php', {
+            method: 'POST',
+            body: formData
         })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            if (data.trim() === "success") {
-                // Succès : on recharge pour que le PHP détecte la session Admin
-                // et redirige l'utilisateur vers le dashboard
-                window.location.href = 'admin_user_gestion.php'; 
+            if (data.status === "success") {
+                // Succès : on redirige vers le dashboard admin
+                window.location.href = 'admin_user_gestion.php';
             } else {
-                // Erreur : on affiche le message rouge dans la modale
+                // Erreur ou blocage : on affiche le message dans la modale
                 if (errorDiv) {
-                    errorDiv.innerText = data;
+                    errorDiv.innerText = data.message;
                     errorDiv.classList.remove('hidden');
                 }
             }

@@ -90,11 +90,12 @@ if (loginForm) {
         const formData = new FormData(this);
 
         fetch('components/utils/auth_login.php', { method: 'POST', body: formData })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            if (data.trim() === "success") {
+            if (data.status === "success") {
                 window.location.reload(); // On recharge pour passer en mode "connecté"
             } else {
+                errorDiv.innerText = data.message;
                 errorDiv.classList.remove('hidden');
             }
         });
