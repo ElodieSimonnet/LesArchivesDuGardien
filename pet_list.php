@@ -16,6 +16,7 @@
     <script src="assets/js/pet-card-clic.js" defer></script>
     <script src="assets/js/filter-menu-mobile.js" defer></script>
     <script src="assets/js/pet-collection-filter-toggle.js" defer></script>
+    <script src="assets/js/toggle-collection.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Mascottes | Les Archives du Gardien</title>
@@ -117,8 +118,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-w-full">
                 <?php
                     foreach ($pets as $pet) {
-                        $is_owned = ($pet['id'] % 2 == 0);
-                        $statusValue = $is_owned ? '1' : '0';
+                        $statusValue = $pet['is_owned'] ? '1' : '0';
 
                         $eName = htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8');
                         $eFamily = htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8');
@@ -143,22 +143,22 @@
                         $familyIcon = $familyIcons[$pet['family']] ?? 'critter';
 
                         echo('
-                        <div class="pet-item flex justify-center">
+                        <div class="pet-item relative flex flex-col">
+                            <button class="wishlist-btn group absolute top-4 right-4 z-10 '.($pet['is_wishlisted'] ? 'is-favorite' : '').'"'.(isset($_SESSION['user_id']) ? ' data-type="pet" data-id="'.$pet['id'].'" data-csrf="'.$_SESSION['csrf_token'].'"' : '').' aria-label="Ajouter '.$eName.' aux favoris">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </button>
                             <article data-owned="'.$statusValue.'"
                                     data-family="'.$eFamily.'"
                                     data-source="'.$eSource.'"
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
                                     data-url="pet_detail.php?id='.$pet['id'].'"
-                                    class="pet-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col transition-all duration-300 group shadow-2xl cursor-pointer">
+                                    class="pet-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col transition-all duration-300 group shadow-2xl cursor-pointer '.($pet['is_owned'] ? '' : 'sepia hover:sepia-0').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
                                     <span class="absolute top-4 left-4"><img src="assets/images/pets/'.$familyIcon.'.png" alt="Icône '.$eFamily.'" class="w-12 h-12" loading="lazy"></span>
-                                    <button class="wishlist-btn group absolute top-4 right-4" aria-label="Ajouter '.$eName.' aux favoris">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
-                                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                        </svg>
-                                    </button>
                                     <img src="'.$eImage.'" alt="'.$eName.'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105" loading="lazy">
                                     <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$eName.'</h2>
                                 </div>
@@ -166,7 +166,15 @@
                                 <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
                                     <span class="text-primary-orange text-sm font-bold uppercase tracking-[0.2em]">'.$eFamily.'</span>
                                 </div>
-                            </article>
+                            </article>'
+                            . (isset($_SESSION['user_id']) ? '
+                            <button class="collection-toggle-btn w-full mt-2 py-2 flex items-center justify-center gap-2 rounded-xl border-2 font-bold uppercase text-xs tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown '.($pet['is_owned'] ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black').'"
+                                    data-type="pet" data-id="'.$pet['id'].'" data-csrf="'.$_SESSION['csrf_token'].'">
+                                <svg class="w-4 h-4 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="'.($pet['is_owned'] ? 'M5 13l4 4L19 7' : 'M12 4v16m8-8H4').'" />
+                                </svg>
+                                <span class="collection-label">'.($pet['is_owned'] ? 'Obtenue' : 'Ajouter').'</span>
+                            </button>' : '').'
                         </div>');
                     }
                 ?>
