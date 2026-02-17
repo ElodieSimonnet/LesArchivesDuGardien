@@ -24,6 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Validation de la robustesse du mot de passe
+    if (strlen($password) < 12 || !preg_match('/[A-Z]/', $password) || !preg_match('/[a-z]/', $password) || !preg_match('/[0-9]/', $password) || !preg_match('/[^A-Za-z0-9]/', $password)) {
+        header('Location: ../add_user.php?error=weak_password');
+        exit;
+    }
+
     // Validation que le rôle existe en BDD
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_roles WHERE id = :id");
     $stmt->execute([':id' => $id_role]);

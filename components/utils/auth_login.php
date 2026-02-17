@@ -41,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $reset = $db->prepare("UPDATE adg_users SET failed_attempts = 0, locked_until = NULL WHERE id = ?");
         $reset->execute([$user['id']]);
 
+        session_regenerate_id(true);
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
         echo json_encode(['status' => 'success']);

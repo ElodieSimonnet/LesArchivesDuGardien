@@ -45,6 +45,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                                 'invalid_role' => 'Le rôle sélectionné est invalide.',
                                 'invalid_status' => 'Le statut sélectionné est invalide.',
                                 'duplicate' => 'Ce nom d\'utilisateur ou cet email existe déjà.',
+                                'weak_password' => 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.',
                                 'sql' => 'Une erreur est survenue lors de la création.',
                             ];
                             $code = $_GET['error'];
