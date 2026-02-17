@@ -57,11 +57,39 @@ if (registerForm) {
         const errorDiv = document.querySelector('#registerError');
         const formData = new FormData(this);
 
-        // Validation locale (ton code)
+        // Validation locale
         if (password.value !== confirm.value) {
             errorDiv.innerText = "Les mots de passe ne correspondent pas.";
             errorDiv.classList.remove('hidden');
             confirm.classList.add('border-red-500');
+            return;
+        }
+
+        // Validation robustesse du mot de passe
+        const pwd = password.value;
+        if (pwd.length < 12) {
+            errorDiv.innerText = "Le mot de passe doit contenir au moins 12 caractères.";
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        if (!/[A-Z]/.test(pwd)) {
+            errorDiv.innerText = "Le mot de passe doit contenir au moins une majuscule.";
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        if (!/[a-z]/.test(pwd)) {
+            errorDiv.innerText = "Le mot de passe doit contenir au moins une minuscule.";
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        if (!/[0-9]/.test(pwd)) {
+            errorDiv.innerText = "Le mot de passe doit contenir au moins un chiffre.";
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        if (!/[^A-Za-z0-9]/.test(pwd)) {
+            errorDiv.innerText = "Le mot de passe doit contenir au moins un caractère spécial.";
+            errorDiv.classList.remove('hidden');
             return;
         }
 

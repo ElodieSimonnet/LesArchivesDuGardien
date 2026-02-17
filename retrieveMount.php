@@ -10,8 +10,9 @@ $sql = "SELECT
             adg_sources.source, 
             adg_difficulties.difficulty,
             adg_mount_types.type,
-            adg_targets.target,      
-            adg_zones.zone
+            adg_targets.target,
+            adg_zones.zone,
+            adg_currencies.name AS currency_name
         FROM adg_mounts
         INNER JOIN adg_expansions   ON adg_mounts.id_expansion  = adg_expansions.id
         INNER JOIN adg_factions     ON adg_mounts.id_faction    = adg_factions.id
@@ -20,6 +21,7 @@ $sql = "SELECT
         INNER JOIN adg_mount_types  ON adg_mounts.id_type       = adg_mount_types.id
         LEFT JOIN adg_zones         ON adg_mounts.id_zone       = adg_zones.id_zone
         LEFT JOIN adg_targets       ON adg_mounts.id_target     = adg_targets.id
+        LEFT JOIN adg_currencies    ON adg_mounts.id_currency  = adg_currencies.id
         WHERE adg_mounts.id = :id";
 
 $query = $db->prepare($sql);

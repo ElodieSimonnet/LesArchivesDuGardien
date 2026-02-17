@@ -18,7 +18,8 @@ $query = "SELECT
             adg_difficulties.difficulty,
             adg_mount_types.type,
             adg_zones.zone,
-            adg_targets.target
+            adg_targets.target,
+            adg_currencies.name AS currency_name
         FROM adg_mounts
         INNER JOIN adg_expansions   ON adg_mounts.id_expansion  = adg_expansions.id
         INNER JOIN adg_factions     ON adg_mounts.id_faction    = adg_factions.id
@@ -27,6 +28,7 @@ $query = "SELECT
         INNER JOIN adg_mount_types  ON adg_mounts.id_type       = adg_mount_types.id
         LEFT JOIN adg_zones         ON adg_mounts.id_zone       = adg_zones.id_zone
         LEFT JOIN adg_targets       ON adg_mounts.id_target     = adg_targets.id
+        LEFT JOIN adg_currencies    ON adg_mounts.id_currency  = adg_currencies.id
         WHERE adg_mounts.id = :id";
 
 $stmt = $db->prepare($query);
@@ -70,7 +72,8 @@ $difficultyColor = match(strtolower($mount['difficulty'])) {
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
                 <h2 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
-                    <?php echo htmlspecialchars($mount['name']); ?>
+                    <span class="text-primary-white">#<?php echo $mount['id']; ?></span>
+                    <span class="ml-3"><?php echo htmlspecialchars($mount['name']); ?></span>
                 </h2>
                 <a href="edit_mount.php?id=<?php echo $mount['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
                     <i class="ph ph-pencil-simple text-lg"></i> Modifier
@@ -134,7 +137,18 @@ $difficultyColor = match(strtolower($mount['difficulty'])) {
                     <div class="flex flex-col gap-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop</span>
                         <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?php echo htmlspecialchars($mount['droprate']); ?>%
+                            <?php echo $mount['droprate'] !== null ? htmlspecialchars($mount['droprate']) . '%' : '---'; ?>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Prix</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                            <?php if (!empty($mount['cost']) && !empty($mount['currency_name'])): ?>
+                                <?php echo htmlspecialchars($mount['cost']) . ' ' . htmlspecialchars($mount['currency_name']); ?>
+                            <?php else: ?>
+                                ---
+                            <?php endif; ?>
                         </span>
                     </div>
 

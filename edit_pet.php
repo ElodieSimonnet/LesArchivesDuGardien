@@ -27,6 +27,7 @@ $all_expansions = $db->query("SELECT * FROM adg_expansions ORDER BY expansion AS
 $all_factions = $db->query("SELECT * FROM adg_factions ORDER BY faction ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_zones = $db->query("SELECT * FROM adg_zones ORDER BY zone ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -132,7 +133,7 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
 
                     <div class="flex flex-col gap-2">
                         <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop (%)</label>
-                        <input type="number" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($pet['droprate']); ?>"
+                        <input type="number" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($pet['droprate'] ?? ''); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
@@ -166,12 +167,23 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
-                    <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Disponible</label>
-                        <select name="is_available" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
-                            <option value="1" <?php echo $pet['is_available'] ? 'selected' : ''; ?>>Oui</option>
-                            <option value="0" <?php echo !$pet['is_available'] ? 'selected' : ''; ?>>Non</option>
-                        </select>
+                    <div class="md:col-span-2 mt-4">
+                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Sorts</label>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+                            <?php for ($i = 1; $i <= 6; $i++): ?>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-xs text-amber-400/60 uppercase tracking-wider">Sort <?php echo $i; ?></span>
+                                <select name="spell_<?php echo $i; ?>" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                                    <option value="">Aucun</option>
+                                    <?php foreach ($all_spells as $spell) : ?>
+                                        <option value="<?php echo $spell['id']; ?>" <?php echo ($spell['id'] == ($pet['spell_' . $i] ?? null)) ? 'selected' : ''; ?>>
+                                            <?php echo htmlspecialchars($spell['name']); ?>
+                                        </option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <?php endfor; ?>
+                        </div>
                     </div>
 
                 </div>

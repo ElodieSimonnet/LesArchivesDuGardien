@@ -67,6 +67,7 @@
                 <label class="block text-primary-white text-lg mb-1">Mot de passe</label>
                 <input type="password" name="password" id="password" placeholder="••••••••" required
                     class="w-full bg-row-dark border border-amber-600/70 text-white p-2 rounded focus:outline-none focus:border-yellow-500 transition-colors">
+                <p class="text-xs text-gray-400 mt-1">Min. 12 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.</p>
             </div>
 
             <div>

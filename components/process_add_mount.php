@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id_faction = (int) $_POST['id_faction'];
     $id_difficulty = (int) $_POST['id_difficulty'];
     $droprate = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+    $cost = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
+    $id_currency = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
     $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
     $id_target = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
 
@@ -79,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO adg_mounts (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate, id_zone, id_target)
-                VALUES (:name, :description, :image, :id_type, :id_source, :id_expansion, :id_faction, :id_difficulty, :droprate, :id_zone, :id_target)";
+        $sql = "INSERT INTO adg_mounts (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate, cost, id_currency, id_zone, id_target)
+                VALUES (:name, :description, :image, :id_type, :id_source, :id_expansion, :id_faction, :id_difficulty, :droprate, :cost, :id_currency, :id_zone, :id_target)";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
@@ -93,6 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id_faction' => $id_faction,
             ':id_difficulty' => $id_difficulty,
             ':droprate' => $droprate,
+            ':cost' => $cost,
+            ':id_currency' => $id_currency,
             ':id_zone' => $id_zone,
             ':id_target' => $id_target,
         ]);

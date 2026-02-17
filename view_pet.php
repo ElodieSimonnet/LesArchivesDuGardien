@@ -35,6 +35,19 @@ if (!$pet) {
     header('Location: admin_pet_gestion.php');
     exit;
 }
+
+// Récupérer les sorts de la mascotte
+$petSpells = [];
+for ($i = 1; $i <= 6; $i++) {
+    $spellId = $pet['spell_' . $i];
+    if (!empty($spellId)) {
+        $spellQuery = $db->prepare("SELECT * FROM adg_pet_spells WHERE id = :id");
+        $spellQuery->execute(['id' => $spellId]);
+        $petSpells[$i] = $spellQuery->fetch(PDO::FETCH_ASSOC);
+    } else {
+        $petSpells[$i] = null;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -52,17 +65,18 @@ if (!$pet) {
     <main class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
-            <a href="admin_pet_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
+            <a href="admin_pet_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
                 <i class="ph ph-arrow-left"></i> Retour à la gestion
             </a>
         </div>
 
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
-                    <?php echo htmlspecialchars($pet['name']); ?>
+                <h2 class="text-2xl lg:text-3xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
+                    <span class="text-primary-white">#<?php echo $pet['id']; ?></span>
+                    <span class="ml-3"><?php echo htmlspecialchars($pet['name']); ?></span>
                 </h2>
-                <a href="edit_pet.php?id=<?php echo $pet['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
+                <a href="edit_pet.php?id=<?php echo $pet['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
                     <i class="ph ph-pencil-simple text-lg"></i> Modifier
                 </a>
             </div>
@@ -77,8 +91,8 @@ if (!$pet) {
 
                 <?php if (!empty($pet['description'])): ?>
                 <div class="mb-8">
-                    <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Description</span>
-                    <p class="mt-2 bg-black/60 border border-amber-900 rounded p-4 text-primary-white leading-relaxed">
+                    <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Description</span>
+                    <p class="mt-2 bg-black/60 border border-amber-900 rounded p-4 text-primary-white lg:text-lg leading-relaxed">
                         <?php echo htmlspecialchars($pet['description']); ?>
                     </p>
                 </div>
@@ -87,43 +101,43 @@ if (!$pet) {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Famille</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Famille</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo htmlspecialchars($pet['family']); ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Source</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Source</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo htmlspecialchars($pet['source']); ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Extension</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Extension</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo htmlspecialchars($pet['expansion']); ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Faction</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Faction</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo htmlspecialchars($pet['faction']); ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Taux de drop</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo $pet['droprate'] !== null ? htmlspecialchars($pet['droprate']) . '%' : '---'; ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Prix</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Prix</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php if (!empty($pet['cost']) && !empty($pet['currency_name'])): ?>
                                 <?php echo htmlspecialchars($pet['cost']) . ' ' . htmlspecialchars($pet['currency_name']); ?>
                             <?php else: ?>
@@ -133,20 +147,35 @@ if (!$pet) {
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Disponible</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 <?php echo $pet['is_available'] ? 'text-green-500' : 'text-red-500'; ?> font-bold">
-                            <?php echo $pet['is_available'] ? 'Oui' : 'Non'; ?>
-                        </span>
-                    </div>
-
-                    <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                        <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Zone</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
                             <?php echo !empty($pet['zone']) ? htmlspecialchars($pet['zone']) : '---'; ?>
                         </span>
                     </div>
 
                 </div>
+
+                <div class="mt-8">
+                    <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Sorts</span>
+                    <div class="grid grid-cols-3 md:grid-cols-6 justify-items-center gap-4 mt-3">
+                        <?php for ($i = 1; $i <= 6; $i++):
+                            $spell = $petSpells[$i] ?? null;
+                        ?>
+                        <div class="flex flex-col items-center gap-2">
+                            <?php if ($spell): ?>
+                                <img src="<?php echo htmlspecialchars($spell['icon']); ?>" alt="<?php echo htmlspecialchars($spell['name']); ?>" class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-amber-900 object-cover">
+                                <span class="text-xs lg:text-sm text-primary-white text-center"><?php echo htmlspecialchars($spell['name']); ?></span>
+                            <?php else: ?>
+                                <div class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-amber-900/40 bg-black/40 flex items-center justify-center">
+                                    <span class="text-amber-900/40 text-2xl">—</span>
+                                </div>
+                                <span class="text-xs lg:text-sm text-amber-900/40 text-center">Vide</span>
+                            <?php endif; ?>
+                        </div>
+                        <?php endfor; ?>
+                    </div>
+                </div>
+
             </div>
         </div>
     </main>
