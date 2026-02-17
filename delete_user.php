@@ -28,6 +28,13 @@ if ($user_id === (int) $_SESSION['user_id']) {
 }
 
 try {
+    // Suppression des données liées
+    $db->prepare("DELETE FROM adg_user_mounts WHERE id_user = ?")->execute([$user_id]);
+    $db->prepare("DELETE FROM adg_user_pets WHERE id_user = ?")->execute([$user_id]);
+    $db->prepare("DELETE FROM adg_wishlist_mounts WHERE id_user = ?")->execute([$user_id]);
+    $db->prepare("DELETE FROM adg_wishlist_pets WHERE id_user = ?")->execute([$user_id]);
+    $db->prepare("UPDATE adg_news SET id_user = NULL WHERE id_user = ?")->execute([$user_id]);
+
     $stmt = $db->prepare("DELETE FROM adg_users WHERE id = :id");
     $stmt->execute([':id' => $user_id]);
     header('Location: admin_user_gestion.php?success=user_deleted');

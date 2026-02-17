@@ -13,6 +13,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
     $userId = $_SESSION['user_id'];
 
     try {
+        // On supprime d'abord les données liées à l'utilisateur
+        $db->prepare("DELETE FROM adg_user_mounts WHERE id_user = ?")->execute([$userId]);
+        $db->prepare("DELETE FROM adg_user_pets WHERE id_user = ?")->execute([$userId]);
+        $db->prepare("DELETE FROM adg_wishlist_mounts WHERE id_user = ?")->execute([$userId]);
+        $db->prepare("DELETE FROM adg_wishlist_pets WHERE id_user = ?")->execute([$userId]);
+        // On conserve les news mais on retire l'auteur
+        $db->prepare("UPDATE adg_news SET id_user = NULL WHERE id_user = ?")->execute([$userId]);
+
         // On supprime l'utilisateur de la table adg_users
         $stmt = $db->prepare("DELETE FROM adg_users WHERE id = ?");
         $stmt->execute([$userId]);

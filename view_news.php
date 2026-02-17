@@ -90,7 +90,7 @@ if (!$article) {
                     <div class="flex flex-col gap-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Auteur</span>
                         <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?php echo htmlspecialchars($article['author'] ?? 'Inconnu'); ?>
+                            <?php echo htmlspecialchars($article['author'] ?? 'Ancien membre'); ?>
                         </span>
                     </div>
 

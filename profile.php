@@ -84,47 +84,138 @@ if (!isset($_SESSION['user_id'])) {
                         <h2 class="text-primary-orange text-2xl font-bold uppercase text-center tracking-[0.2em]">Paramètres</h2>
                         <div class="h-[1px] bg-primary-orange w-full mt-4"></div>
                     </div>
-    
+
                     <div class="p-6 md:p-8 flex flex-col gap-8">
-            
-                        <div class="flex flex-col md:flex-row md:items-center gap-4">
-                            <label for="email" class="text-primary-orange text-sm font-bold w-32 shrink-0">Email :</label>
-                            <div class="flex flex-1 gap-3">
-                                <input type="email" id="email" value="<?php echo htmlspecialchars($user['email']); ?>" 
-                                class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
-                                <button title="Modifier l'email" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
-                                    <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                    </svg>
-                                </button>
+
+                        <?php if (isset($_GET['success'])): ?>
+                            <div id="profile-message" class="p-4 bg-green-500/10 border border-green-500 text-green-400 rounded-lg text-sm font-bold uppercase text-center">
+                                <?php
+                                    $successMessages = [
+                                        'email_updated' => 'Email mis à jour avec succès.',
+                                        'username_updated' => 'Nom d\'utilisateur mis à jour avec succès.',
+                                        'password_updated' => 'Mot de passe mis à jour avec succès.',
+                                    ];
+                                    echo htmlspecialchars($successMessages[$_GET['success']] ?? 'Modification effectuée.');
+                                ?>
                             </div>
-                        </div>
+                        <?php endif; ?>
 
-                    <div class="flex flex-col md:flex-row md:items-center gap-4">
-                        <label for="name" class="text-primary-orange text-sm font-bold w-32 shrink-0">Nom d'utilisateur :</label>
-                        <div class="flex flex-1 gap-3">
-                            <input type="text" id="name" value="<?php echo htmlspecialchars($user['username']); ?>" 
-                            class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
-                            <button title="Modifier le nom" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
-                                <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                        <?php if (isset($_GET['error'])): ?>
+                            <div id="profile-message" class="p-4 bg-red-500/10 border border-red-500 text-red-400 rounded-lg text-sm font-bold uppercase text-center">
+                                <?php
+                                    $errorMessages = [
+                                        'csrf' => 'Erreur de sécurité : requête non autorisée.',
+                                        'wrong_password' => 'Mot de passe actuel incorrect.',
+                                        'invalid_email' => 'L\'adresse email n\'est pas valide.',
+                                        'duplicate_email' => 'Cette adresse email est déjà utilisée.',
+                                        'invalid_username' => 'Le nom d\'utilisateur doit contenir entre 2 et 30 caractères.',
+                                        'duplicate_username' => 'Ce nom d\'utilisateur est déjà pris.',
+                                        'password_mismatch' => 'Les mots de passe ne correspondent pas.',
+                                        'weak_password' => 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.',
+                                    ];
+                                    echo htmlspecialchars($errorMessages[$_GET['error']] ?? 'Une erreur est survenue.');
+                                ?>
+                            </div>
+                        <?php endif; ?>
 
-                    <div class="flex flex-col md:flex-row md:items-center gap-4">
-                        <label for="password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Mot de passe :</label>
-                        <div class="flex flex-1 gap-3">
-                            <input type="password" id="password" value="********" 
-                            class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
-                            <button title="Modifier le mot de passe" class="border border-primary-orange rounded-lg p-3 hover:bg-primary-orange transition-all group">
-                                <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
+                        <!-- FORMULAIRE EMAIL -->
+                        <form action="components/utils/update_profile.php" method="POST">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="type" value="email">
+                            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                <label for="email" class="text-primary-orange text-sm font-bold w-32 shrink-0">Email :</label>
+                                <div class="flex flex-1 gap-3">
+                                    <input type="email" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" readonly
+                                    class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                    <button type="button" onclick="toggleEdit('email')" id="btn-edit-email" title="Modifier l'email" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
+                                        <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="edit-email" class="hidden mt-4 flex flex-col gap-4">
+                                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                    <label for="email-password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Mot de passe :</label>
+                                    <input type="password" id="email-password" name="current_password" placeholder="Confirmez votre mot de passe" required
+                                    class="flex-1 bg-black/40 border border-amber-900 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                </div>
+                                <div class="flex gap-3 justify-end">
+                                    <button type="button" onclick="cancelEdit('email', '<?php echo htmlspecialchars($user['email'], ENT_QUOTES); ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- FORMULAIRE USERNAME -->
+                        <form action="components/utils/update_profile.php" method="POST">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="type" value="username">
+                            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                <label for="name" class="text-primary-orange text-sm font-bold w-32 shrink-0">Nom d'utilisateur :</label>
+                                <div class="flex flex-1 gap-3">
+                                    <input type="text" id="name" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" readonly
+                                    class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                    <button type="button" onclick="toggleEdit('username')" id="btn-edit-username" title="Modifier le nom" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
+                                        <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="edit-username" class="hidden mt-4 flex flex-col gap-4">
+                                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                    <label for="username-password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Mot de passe :</label>
+                                    <input type="password" id="username-password" name="current_password" placeholder="Confirmez votre mot de passe" required
+                                    class="flex-1 bg-black/40 border border-amber-900 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                </div>
+                                <div class="flex gap-3 justify-end">
+                                    <button type="button" onclick="cancelEdit('username', '<?php echo htmlspecialchars($user['username'], ENT_QUOTES); ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!-- FORMULAIRE MOT DE PASSE -->
+                        <form action="components/utils/update_profile.php" method="POST">
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="type" value="password">
+                            <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                <label class="text-primary-orange text-sm font-bold w-32 shrink-0">Mot de passe :</label>
+                                <div class="flex flex-1 gap-3">
+                                    <input type="password" value="********" readonly disabled
+                                    class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none">
+                                    <button type="button" onclick="toggleEdit('password')" id="btn-edit-password" title="Modifier le mot de passe" class="border border-primary-orange rounded-lg p-3 hover:bg-primary-orange transition-all group">
+                                        <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="edit-password" class="hidden mt-4 flex flex-col gap-4">
+                                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                    <label for="current-password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Actuel :</label>
+                                    <input type="password" id="current-password" name="current_password" placeholder="Mot de passe actuel" required
+                                    class="flex-1 bg-black/40 border border-amber-900 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                </div>
+                                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                    <label for="new-password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Nouveau :</label>
+                                    <input type="password" id="new-password" name="new_password" placeholder="Nouveau mot de passe" required
+                                    class="flex-1 bg-black/40 border border-amber-900 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                </div>
+                                <div class="flex flex-col md:flex-row md:items-center gap-4">
+                                    <label for="confirm-password" class="text-primary-orange text-sm font-bold w-32 shrink-0">Confirmer :</label>
+                                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirmez le nouveau mot de passe" required
+                                    class="flex-1 bg-black/40 border border-amber-900 rounded-lg px-4 py-3 text-sm text-gray-300 font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                </div>
+                                <p class="text-xs text-gray-400">Min. 12 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.</p>
+                                <div class="flex gap-3 justify-end">
+                                    <button type="button" onclick="cancelEdit('password')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                </div>
+                            </div>
+                        </form>
+
                         <form action="delete_account.php" method="POST" onsubmit="return confirm('Êtes-vous certain de vouloir supprimer votre compte ? Toutes vos collections seront perdues.');">
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <button type="submit" name="confirm_delete" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm tracking-widest transition-all active:scale-[0.98]">
@@ -176,6 +267,65 @@ if (!isset($_SESSION['user_id'])) {
 
     <?php include 'components/footer.php'; ?>
     <?php include 'components/modals.php'; ?>
+
+    <script>
+        // Disparition automatique des messages de succès/erreur
+        document.addEventListener('DOMContentLoaded', function() {
+            const msg = document.getElementById('profile-message');
+            if (msg) {
+                setTimeout(() => {
+                    msg.style.transition = 'opacity 0.5s';
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500);
+                }, 3000);
+                // Nettoyage de l'URL
+                setTimeout(() => {
+                    const url = new URL(window.location);
+                    url.searchParams.delete('success');
+                    url.searchParams.delete('error');
+                    window.history.replaceState({}, '', url);
+                }, 3500);
+            }
+        });
+
+        function toggleEdit(field) {
+            const editBlock = document.getElementById('edit-' + field);
+            const editBtn = document.getElementById('btn-edit-' + field);
+            editBlock.classList.remove('hidden');
+            editBtn.classList.add('hidden');
+
+            if (field === 'email') {
+                const input = document.getElementById('email');
+                input.removeAttribute('readonly');
+                input.focus();
+            } else if (field === 'username') {
+                const input = document.getElementById('name');
+                input.removeAttribute('readonly');
+                input.focus();
+            }
+        }
+
+        function cancelEdit(field, originalValue) {
+            const editBlock = document.getElementById('edit-' + field);
+            const editBtn = document.getElementById('btn-edit-' + field);
+            editBlock.classList.add('hidden');
+            editBtn.classList.remove('hidden');
+
+            if (field === 'email') {
+                const input = document.getElementById('email');
+                input.setAttribute('readonly', true);
+                if (originalValue) input.value = originalValue;
+            } else if (field === 'username') {
+                const input = document.getElementById('name');
+                input.setAttribute('readonly', true);
+                if (originalValue) input.value = originalValue;
+            } else if (field === 'password') {
+                document.getElementById('current-password').value = '';
+                document.getElementById('new-password').value = '';
+                document.getElementById('confirm-password').value = '';
+            }
+        }
+    </script>
 
 </body>
 </html>
