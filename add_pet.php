@@ -39,25 +39,10 @@ $all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetc
                 Nouvelle mascotte
             </h2>
 
-            <?php if (isset($_GET['error'])): ?>
-                <div id="error-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">
-                        <?php
-                            $errorMessages = [
-                                'csrf' => 'Erreur de sécurité : requête non autorisée.',
-                                'fields' => 'Le nom de la mascotte est obligatoire.',
-                                'invalid_family' => 'La famille sélectionnée est invalide.',
-                                'invalid_source' => 'La source sélectionnée est invalide.',
-                                'invalid_expansion' => 'L\'extension sélectionnée est invalide.',
-                                'invalid_faction' => 'La faction sélectionnée est invalide.',
-                                'duplicate' => 'Une mascotte avec ce nom existe déjà.',
-                                'sql' => 'Une erreur est survenue lors de la création.',
-                            ];
-                            $code = $_GET['error'];
-                            echo htmlspecialchars($errorMessages[$code] ?? 'Une erreur est survenue.');
-                        ?>
-                    </span>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 

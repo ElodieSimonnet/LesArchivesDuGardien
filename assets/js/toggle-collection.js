@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (sibling && sibling.tagName === 'ARTICLE') card = sibling;
                 }
 
+                const lockBadge = card ? card.querySelector('.lock-badge') : null;
+
                 if (data.status === 'added') {
                     this.classList.add('is-owned', 'bg-primary-orange', 'text-primary-black');
                     this.classList.remove('text-primary-orange', 'hover:bg-primary-orange', 'hover:text-primary-black');
@@ -39,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.dataset.owned = '1';
                         card.classList.remove('sepia', 'hover:sepia-0');
                     }
+                    if (lockBadge) lockBadge.classList.add('hidden');
                 } else if (data.status === 'removed') {
                     this.classList.remove('is-owned', 'bg-primary-orange', 'text-primary-black');
                     this.classList.add('text-primary-orange', 'hover:bg-primary-orange', 'hover:text-primary-black');
@@ -48,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.dataset.owned = '0';
                         card.classList.add('sepia', 'hover:sepia-0');
                     }
+                    if (lockBadge) lockBadge.classList.remove('hidden');
                 }
             });
         });

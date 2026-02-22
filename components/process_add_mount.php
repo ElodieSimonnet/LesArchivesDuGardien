@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../add_mount.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -28,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation : nom non vide
     if (empty($name)) {
-        header('Location: ../add_mount.php?error=fields');
+        set_flash('error', 'Le nom de la monture est obligatoire.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -36,7 +38,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_mount_types WHERE id = :id");
     $stmt->execute([':id' => $id_type]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_mount.php?error=invalid_type');
+        set_flash('error', 'Le type sélectionné est invalide.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -44,7 +47,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_sources WHERE id = :id");
     $stmt->execute([':id' => $id_source]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_mount.php?error=invalid_source');
+        set_flash('error', 'La source sélectionnée est invalide.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -52,7 +56,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_expansions WHERE id = :id");
     $stmt->execute([':id' => $id_expansion]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_mount.php?error=invalid_expansion');
+        set_flash('error', 'L\'extension sélectionnée est invalide.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -60,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_factions WHERE id = :id");
     $stmt->execute([':id' => $id_faction]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_mount.php?error=invalid_faction');
+        set_flash('error', 'La faction sélectionnée est invalide.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -68,7 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_difficulties WHERE id = :id");
     $stmt->execute([':id' => $id_difficulty]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_mount.php?error=invalid_difficulty');
+        set_flash('error', 'La difficulté sélectionnée est invalide.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -76,7 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_mounts WHERE name = :name");
     $stmt->execute([':name' => $name]);
     if ($stmt->fetchColumn() > 0) {
-        header('Location: ../add_mount.php?error=duplicate');
+        set_flash('error', 'Une monture avec ce nom existe déjà.');
+        header('Location: ../add_mount.php');
         exit;
     }
 
@@ -101,11 +109,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id_target' => $id_target,
         ]);
 
-        header('Location: ../admin_mount_gestion.php?success=mount_added');
+        set_flash('success', 'Monture créée avec succès !');
+        header('Location: ../admin_mount_gestion.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../add_mount.php?error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la création.');
+        header('Location: ../add_mount.php');
         exit;
     }
 } else {

@@ -1,12 +1,13 @@
 <?php
-require_once 'components/utils/db_connection.php'; 
+require_once 'components/utils/db_connection.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && isset($_SESSION['user_id'])) {
-    
+
     // VÉRIFICATION DU JETON CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         // Si le jeton est mauvais, on bloque tout
-        header("Location: profile.php?error=security_breach");
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header("Location: profile.php");
         exit();
     }
 
@@ -28,13 +29,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         // On nettoie la session et on déconnecte
         session_unset(); // On vide les variables de session d'abord
         session_destroy();
-        
+
+        // Le flash doit être posé dans une nouvelle session
+        session_start();
+        set_flash('success', 'Votre compte a été supprimé avec succès.');
+
         // Retour à l'accueil
-        header("Location: index.php?status=account_deleted");
+        header("Location: index.php");
         exit();
 
     } catch (PDOException $e) {
-        header("Location: profile.php?error=delete_failed");
+        set_flash('error', 'La suppression du compte a échoué. Veuillez réessayer.');
+        header("Location: profile.php");
         exit();
     }
 } else {

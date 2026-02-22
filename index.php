@@ -16,6 +16,13 @@
     
     <?php include 'components/header.php'; ?>
 
+    <?php $flash = get_flash(); if ($flash): ?>
+        <div id="flash-message" role="alert" aria-live="polite" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg border text-sm font-bold uppercase text-center shadow-lg
+            <?= $flash['type'] === 'success' ? 'bg-green-500/20 border-green-500 text-green-400' : 'bg-red-500/20 border-red-500 text-red-400' ?>">
+            <?= htmlspecialchars($flash['message']) ?>
+        </div>
+    <?php endif; ?>
+
     <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow px-16 lg:bg-[url(../images/lava_cave.jpg)]">
     
     <div class="mx-auto max-w-xl md:bg-primary-brown md:rounded-lg md:border-2 md:border-primary-orange md:p-6 md:max-w-4xl lg:max-w-5xl">
@@ -53,5 +60,17 @@
     <?php include 'components/footer.php'; ?>
     <?php include 'components/modals.php'; ?>
     <script src="assets/js/modal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const msg = document.getElementById('flash-message');
+            if (msg) {
+                setTimeout(() => {
+                    msg.style.transition = 'opacity 0.5s';
+                    msg.style.opacity = '0';
+                    setTimeout(() => msg.remove(), 500);
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 </html>

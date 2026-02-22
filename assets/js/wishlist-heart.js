@@ -28,8 +28,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (data.status === 'added') {
                     this.classList.add('is-favorite');
+                    this.setAttribute('aria-pressed', 'true');
+                    this.setAttribute('aria-label', this.getAttribute('aria-label').replace('Ajouter', 'Retirer').replace('aux favoris', 'des favoris'));
                 } else if (data.status === 'removed') {
                     this.classList.remove('is-favorite');
+                    this.setAttribute('aria-pressed', 'false');
+                    this.setAttribute('aria-label', this.getAttribute('aria-label').replace('Retirer', 'Ajouter').replace('des favoris', 'aux favoris'));
                 }
             });
         });

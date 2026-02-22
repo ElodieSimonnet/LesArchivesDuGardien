@@ -30,12 +30,12 @@
                         </button>
                     </form>
                 <?php else: ?>
-                    <a href="#" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Connexion</a>
-                    <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Inscription</a>
+                    <button type="button" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Connexion</button>
+                    <button type="button" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Inscription</button>
                 <?php endif; ?>
             </div>
 
-            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu">
+            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
                 <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
@@ -105,8 +105,8 @@
                 </div>
             <?php else: ?>
                 <div class="flex flex-col gap-4">
-                    <a href="#" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</a>
-                    <a href="#" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</a>
+                    <button type="button" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</button>
+                    <button type="button" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</button>
                 </div>
             <?php endif; ?>
         </div>

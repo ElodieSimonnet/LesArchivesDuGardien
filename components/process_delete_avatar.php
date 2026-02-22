@@ -10,14 +10,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Vérification du jeton CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    header('Location: ../admin_user_gestion.php?error=csrf');
+    set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+    header('Location: ../admin_user_gestion.php');
     exit;
 }
 
 $user_id = (int) ($_POST['user_id'] ?? 0);
 
 if ($user_id <= 0) {
-    header('Location: ../admin_user_gestion.php?error=invalid_id');
+    set_flash('error', 'Identifiant invalide.');
+    header('Location: ../admin_user_gestion.php');
     exit;
 }
 
@@ -36,10 +38,12 @@ try {
     $stmt = $db->prepare("UPDATE adg_users SET avatar = NULL WHERE id = :id");
     $stmt->execute([':id' => $user_id]);
 
-    header('Location: ../edit_user.php?id=' . $user_id . '&success=avatar_deleted');
+    set_flash('success', 'Avatar supprimé avec succès !');
+    header('Location: ../edit_user.php?id=' . $user_id);
     exit;
 
 } catch (PDOException $e) {
-    header('Location: ../edit_user.php?id=' . $user_id . '&error=sql');
+    set_flash('error', 'Une erreur est survenue lors de la suppression de l\'avatar.');
+    header('Location: ../edit_user.php?id=' . $user_id);
     exit;
 }

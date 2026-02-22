@@ -28,33 +28,12 @@ restrictToAdmin();
 
         <section class="max-w-full mx-auto w-full px-4">
 
-            <?php if (isset($_GET['success']) && $_GET['success'] === '1'): ?>
-    <div id="success-message-edit" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-        <i class="ph ph-check-circle text-2xl"></i>
-        <span class="text-sm font-bold uppercase">Mascotte mise à jour avec succès !</span>
-    </div>
-<?php endif; ?>
-
-<?php if (isset($_GET['success']) && $_GET['success'] === 'pet_deleted'): ?>
-    <div id="success-message-user" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-        <i class="ph ph-check-circle text-2xl"></i>
-        <span class="text-sm font-bold uppercase">Mascotte supprimée avec succès !</span>
-    </div>
-<?php endif; ?>
-
-<?php if (isset($_GET['success']) && $_GET['success'] === 'pet_added'): ?>
-    <div id="success-message-user-added" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-        <i class="ph ph-check-circle text-2xl"></i>
-        <span class="text-sm font-bold uppercase">Mascotte créée avec succès !</span>
-    </div>
-<?php endif; ?>
-
-<?php if (isset($_GET['error'])): ?>
-    <div id="error-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
-        <i class="ph ph-warning-circle text-2xl"></i>
-        <span class="text-sm font-bold uppercase">Une erreur est survenue.</span>
-    </div>
-<?php endif; ?>
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
+                </div>
+            <?php endif; ?>
 
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 mb-6 bg-[#1a0f0a] p-3 border-t border-b border-primary-orange">
                 <div class="xl:col-span-6 relative">

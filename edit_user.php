@@ -53,17 +53,10 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                 Modifier le profil
             </h2>
 
-            <?php if (isset($_GET['success']) && $_GET['success'] === 'avatar_deleted'): ?>
-                <div class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-                    <i class="ph ph-check-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Avatar supprimé avec succès !</span>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['error'])): ?>
-                <div class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
-                    <i class="ph ph-warning-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Une erreur est survenue.</span>
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 

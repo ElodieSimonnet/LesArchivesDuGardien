@@ -77,11 +77,16 @@ if (isset($_SESSION['user_id'])) {
                         if (strtolower($mount['difficulty']) == 'difficile') $color = "text-red-500";
                         if (strtolower($mount['difficulty']) == 'moyen') $color = "text-orange-500";
                     ?>
-                    <footer class="flex justify-center items-center h-16
+                    <footer class="relative flex justify-center items-center h-16
                                    lg:h-20">
                         <span class="<?= $color ?> text-right text-3xl w-1/5 h-auto leading-none">★</span>
                         <span class="text-center text-xl <?= $color ?> font-bold uppercase w-3/5 h-auto"><?= htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8') ?></span>
                         <span class="text-left <?= $color ?> text-3xl w-1/5 h-auto">★</span>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                        <span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray<?= $isOwnedMount ? ' hidden' : '' ?>" aria-hidden="true">
+                            <i class="ph ph-lock-simple text-base"></i>
+                        </span>
+                        <?php endif; ?>
                     </footer>
 
                 </article>

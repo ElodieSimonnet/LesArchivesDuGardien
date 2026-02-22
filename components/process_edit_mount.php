@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../admin_mount_gestion.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -29,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation minimale
     if (empty($name)) {
-        header('Location: ../admin_mount_gestion.php?error=fields');
+        set_flash('error', 'Le nom de la monture est obligatoire.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -37,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_mount_types WHERE id = :id");
     $stmt->execute([':id' => $id_type]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_mount_gestion.php?error=invalid_type');
+        set_flash('error', 'Le type sélectionné est invalide.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -45,7 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_sources WHERE id = :id");
     $stmt->execute([':id' => $id_source]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_mount_gestion.php?error=invalid_source');
+        set_flash('error', 'La source sélectionnée est invalide.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -53,7 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_expansions WHERE id = :id");
     $stmt->execute([':id' => $id_expansion]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_mount_gestion.php?error=invalid_expansion');
+        set_flash('error', 'L\'extension sélectionnée est invalide.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -61,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_factions WHERE id = :id");
     $stmt->execute([':id' => $id_faction]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_mount_gestion.php?error=invalid_faction');
+        set_flash('error', 'La faction sélectionnée est invalide.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -69,7 +75,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_difficulties WHERE id = :id");
     $stmt->execute([':id' => $id_difficulty]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_mount_gestion.php?error=invalid_difficulty');
+        set_flash('error', 'La difficulté sélectionnée est invalide.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 
@@ -108,11 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $mount_id
         ]);
 
-        header('Location: ../admin_mount_gestion.php?success=1');
+        set_flash('success', 'Monture mise à jour avec succès !');
+        header('Location: ../admin_mount_gestion.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../admin_mount_gestion.php?error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la modification.');
+        header('Location: ../admin_mount_gestion.php');
         exit;
     }
 } else {

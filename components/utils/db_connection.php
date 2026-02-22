@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/flash.php';
 
 // CONFIGURATION SÉCURITÉ SESSIONS
 if (session_status() === PHP_SESSION_NONE) {

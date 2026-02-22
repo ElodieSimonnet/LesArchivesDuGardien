@@ -34,24 +34,10 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                 Nouvel utilisateur
             </h2>
 
-            <?php if (isset($_GET['error'])): ?>
-                <div id="error-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">
-                        <?php
-                            $errorMessages = [
-                                'csrf' => 'Erreur de sécurité : requête non autorisée.',
-                                'fields' => 'Tous les champs sont obligatoires.',
-                                'invalid_role' => 'Le rôle sélectionné est invalide.',
-                                'invalid_status' => 'Le statut sélectionné est invalide.',
-                                'duplicate' => 'Ce nom d\'utilisateur ou cet email existe déjà.',
-                                'weak_password' => 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.',
-                                'sql' => 'Une erreur est survenue lors de la création.',
-                            ];
-                            $code = $_GET['error'];
-                            echo htmlspecialchars($errorMessages[$code] ?? 'Une erreur est survenue.');
-                        ?>
-                    </span>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 

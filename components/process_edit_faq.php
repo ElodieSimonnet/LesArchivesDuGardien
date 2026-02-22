@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../admin_faq_gestion.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../admin_faq_gestion.php');
         exit;
     }
 
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation
     if (empty($question) || empty($answer) || $id_category <= 0) {
-        header('Location: ../edit_faq.php?id=' . $faq_id . '&error=fields');
+        set_flash('error', 'La question, la réponse et la catégorie sont obligatoires.');
+        header('Location: ../edit_faq.php?id=' . $faq_id);
         exit;
     }
 
@@ -41,11 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $faq_id,
         ]);
 
-        header('Location: ../admin_faq_gestion.php?success=1');
+        set_flash('success', 'Question mise à jour avec succès !');
+        header('Location: ../admin_faq_gestion.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../edit_faq.php?id=' . $faq_id . '&error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la modification.');
+        header('Location: ../edit_faq.php?id=' . $faq_id);
         exit;
     }
 } else {

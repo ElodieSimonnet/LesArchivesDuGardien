@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 // Vérification CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-    header('Location: ../../profile.php?error=csrf');
+    set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+    header('Location: ../../profile.php');
     exit();
 }
 
@@ -33,7 +34,8 @@ if (!$user) {
 
 // Vérification du mot de passe actuel (obligatoire pour toute modification)
 if (!password_verify($currentPassword, $user['password'])) {
-    header('Location: ../../profile.php?error=wrong_password');
+    set_flash('error', 'Mot de passe actuel incorrect.');
+    header('Location: ../../profile.php');
     exit();
 }
 
@@ -42,7 +44,8 @@ if ($type === 'email') {
     $newEmail = trim($_POST['email'] ?? '');
 
     if (!filter_var($newEmail, FILTER_VALIDATE_EMAIL)) {
-        header('Location: ../../profile.php?error=invalid_email');
+        set_flash('error', 'L\'adresse email n\'est pas valide.');
+        header('Location: ../../profile.php');
         exit();
     }
 
@@ -50,14 +53,16 @@ if ($type === 'email') {
     $check = $db->prepare("SELECT id FROM adg_users WHERE email = ? AND id != ?");
     $check->execute([$newEmail, $_SESSION['user_id']]);
     if ($check->fetch()) {
-        header('Location: ../../profile.php?error=duplicate_email');
+        set_flash('error', 'Cette adresse email est déjà utilisée.');
+        header('Location: ../../profile.php');
         exit();
     }
 
     $update = $db->prepare("UPDATE adg_users SET email = ? WHERE id = ?");
     $update->execute([$newEmail, $_SESSION['user_id']]);
 
-    header('Location: ../../profile.php?success=email_updated');
+    set_flash('success', 'Email mis à jour avec succès.');
+    header('Location: ../../profile.php');
     exit();
 }
 
@@ -66,7 +71,8 @@ if ($type === 'username') {
     $newUsername = trim($_POST['username'] ?? '');
 
     if (empty($newUsername) || strlen($newUsername) < 2 || strlen($newUsername) > 30) {
-        header('Location: ../../profile.php?error=invalid_username');
+        set_flash('error', 'Le nom d\'utilisateur doit contenir entre 2 et 30 caractères.');
+        header('Location: ../../profile.php');
         exit();
     }
 
@@ -74,7 +80,8 @@ if ($type === 'username') {
     $check = $db->prepare("SELECT id FROM adg_users WHERE username = ? AND id != ?");
     $check->execute([$newUsername, $_SESSION['user_id']]);
     if ($check->fetch()) {
-        header('Location: ../../profile.php?error=duplicate_username');
+        set_flash('error', 'Ce nom d\'utilisateur est déjà pris.');
+        header('Location: ../../profile.php');
         exit();
     }
 
@@ -84,7 +91,8 @@ if ($type === 'username') {
     // Mettre à jour la session
     $_SESSION['username'] = $newUsername;
 
-    header('Location: ../../profile.php?success=username_updated');
+    set_flash('success', 'Nom d\'utilisateur mis à jour avec succès.');
+    header('Location: ../../profile.php');
     exit();
 }
 
@@ -95,29 +103,35 @@ if ($type === 'password') {
 
     // Vérification de la confirmation
     if ($newPassword !== $confirmPassword) {
-        header('Location: ../../profile.php?error=password_mismatch');
+        set_flash('error', 'Les mots de passe ne correspondent pas.');
+        header('Location: ../../profile.php');
         exit();
     }
 
     // Validation de la robustesse
     if (strlen($newPassword) < 12) {
-        header('Location: ../../profile.php?error=weak_password');
+        set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
+        header('Location: ../../profile.php');
         exit();
     }
     if (!preg_match('/[A-Z]/', $newPassword)) {
-        header('Location: ../../profile.php?error=weak_password');
+        set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
+        header('Location: ../../profile.php');
         exit();
     }
     if (!preg_match('/[a-z]/', $newPassword)) {
-        header('Location: ../../profile.php?error=weak_password');
+        set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
+        header('Location: ../../profile.php');
         exit();
     }
     if (!preg_match('/[0-9]/', $newPassword)) {
-        header('Location: ../../profile.php?error=weak_password');
+        set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
+        header('Location: ../../profile.php');
         exit();
     }
     if (!preg_match('/[^A-Za-z0-9]/', $newPassword)) {
-        header('Location: ../../profile.php?error=weak_password');
+        set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
+        header('Location: ../../profile.php');
         exit();
     }
 
@@ -125,7 +139,8 @@ if ($type === 'password') {
     $update = $db->prepare("UPDATE adg_users SET password = ? WHERE id = ?");
     $update->execute([$hashedPassword, $_SESSION['user_id']]);
 
-    header('Location: ../../profile.php?success=password_updated');
+    set_flash('success', 'Mot de passe mis à jour avec succès.');
+    header('Location: ../../profile.php');
     exit();
 }
 

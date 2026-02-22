@@ -1,57 +1,101 @@
- // Fonction pour ouvrir/fermer les modales
- function toggleModal(modalId) {
-     const modal = document.getElementById(modalId);
-     if (modal) { // Vérifie que l'élément existe bien avant d'agir (évite les erreurs si l'ID est mal orthographié)
-         modal.classList.toggle('hidden'); // Ajoute la classe hidden (cache l'élément) si elle n'est pas là, ou la retire (affiche l'élément) si elle y est déjà
-     }
- }
+// ============================================================
+// GESTION DES MODALES ACCESSIBLES
+// ============================================================
 
-// // GESTION DE L'INSCRIPTION
-// const registerForm = document.querySelector('#registerForm'); // récupère le formulaire d'inscription dans le html
+let _modalLastFocus = null;
 
-// if (registerForm) { // vérifie qu'il est présent sur la page actuelle
-//     registerForm.addEventListener('submit', function(e) { // demande au navigateur d'écouter le moment où l'utilisateur valide le formulaire et va créer une fonction qui reçoit l'événement e
-//         // Sélection des champs via querySelector
-//         const password = this.querySelector('input[name="password"]'); // this = le formulaire
-//         const confirm = this.querySelector('#confirm_password');
-//         const errorDiv = document.querySelector('#registerError');
-//         const submitBtn = this.querySelector('button[type="submit"]');
+// Récupère tous les éléments focusables visibles dans un conteneur
+function _getFocusable(container) {
+    return Array.from(container.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )).filter(el => el.offsetParent !== null);
+}
 
-//         // Réinitialisation de l'affichage
-//         errorDiv.classList.add('hidden'); // cache le message d'erreur d'une précédente tentative ratée
-//         confirm.classList.remove('border-red-500'); // retire la couleur rouge d'erreur
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    _modalLastFocus = document.activeElement;
+    modal.classList.remove('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    // Déplace le focus vers le premier élément focusable de la modale
+    const focusable = _getFocusable(modal);
+    if (focusable.length) focusable[0].focus();
+}
 
-//         // Vérification de la correspondance des mots de passe
-//         if (password.value !== confirm.value) { // si les textes saisis sont différents
-//             e.preventDefault(); // Bloque l'envoi des données au serveur php car erreur
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.setAttribute('aria-hidden', 'true');
+    // Rend le focus à l'élément qui avait le focus avant l'ouverture
+    if (_modalLastFocus) {
+        _modalLastFocus.focus();
+        _modalLastFocus = null;
+    }
+}
 
-//             // Affichage de l'erreur
-//             errorDiv.innerText = "Les mots de passe ne correspondent pas."; // remplit la div avec le message d'erreur
-//             errorDiv.classList.remove('hidden'); // affiche la div
-            
-//             // Feedback visuel
-//             confirm.classList.add('border-red-500'); // la bordure passe rouge
-//             confirm.focus(); // place le curseur dans le champ pour que l'utilisateur corrige
-//             return; // arrête lexécution de la fonction
-//         }
-//     });
-// }
+function toggleModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    if (modal.classList.contains('hidden')) {
+        openModal(modalId);
+    } else {
+        closeModal(modalId);
+    }
+}
 
-// // GESTION DE LA CONNEXION
-// const loginForm = document.querySelector('#loginForm');
+// Piège de focus (Tab / Shift+Tab) + fermeture à l'Échap
+document.addEventListener('keydown', function(e) {
+    const openModalId = ['loginModal', 'registerModal'].find(id => {
+        const el = document.getElementById(id);
+        return el && !el.classList.contains('hidden');
+    });
+    if (!openModalId) return;
 
-// if (loginForm) { // vérifie si la variable loginForm contient bien quelque chose, si l'élément a été trouvé dans la page
-//     loginForm.addEventListener('submit', function(e) {
-//        document.querySelector('#loginError').classList.add('hidden'); // cache l'erreur précédente s'il y en a une quand on valide 
-//     });
-// }
+    const modal = document.getElementById(openModalId);
 
+    if (e.key === 'Escape') {
+        closeModal(openModalId);
+        return;
+    }
+
+    if (e.key === 'Tab') {
+        const focusable = _getFocusable(modal);
+        if (!focusable.length) { e.preventDefault(); return; }
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            }
+        } else {
+            if (document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    }
+});
+
+// Clic sur le fond (backdrop) pour fermer
+document.addEventListener('click', function(e) {
+    ['loginModal', 'registerModal'].forEach(modalId => {
+        const modal = document.getElementById(modalId);
+        if (modal && !modal.classList.contains('hidden') && e.target === modal) {
+            closeModal(modalId);
+        }
+    });
+});
+
+// ============================================================
 // GESTION DE L'INSCRIPTION
+// ============================================================
 const registerForm = document.querySelector('#registerForm');
 if (registerForm) {
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const password = this.querySelector('input[name="password"]');
         const confirm = this.querySelector('#confirm_password');
         const errorDiv = document.querySelector('#registerError');
@@ -107,7 +151,9 @@ if (registerForm) {
     });
 }
 
+// ============================================================
 // GESTION DE LA CONNEXION
+// ============================================================
 const loginForm = document.querySelector('#loginForm');
 if (loginForm) {
     loginForm.addEventListener('submit', function(e) {

@@ -56,10 +56,10 @@ $all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetc
                 Modifier la mascotte
             </h2>
 
-            <?php if (isset($_GET['error'])): ?>
-                <div class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Une erreur est survenue.</span>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 

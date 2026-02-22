@@ -5,7 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 
     // Sécurité CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header("Location: ../../profile.php?error=security");
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header("Location: ../../profile.php");
         exit();
     }
 
@@ -13,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 
         // Limite de taille : 2 Mo maximum
         if ($_FILES['avatar']['size'] > 2 * 1024 * 1024) {
-            header("Location: ../../profile.php?error=file_too_large");
+            set_flash('error', 'Le fichier est trop volumineux (2 Mo maximum).');
+            header("Location: ../../profile.php");
             exit();
         }
 
@@ -30,17 +32,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $mimeType = $finfo->file($tmpFile);
             if (!in_array($mimeType, $allowedMimes)) {
-                header("Location: ../../profile.php?error=invalid_format");
+                set_flash('error', 'Format de fichier invalide. Formats acceptés : JPG, PNG, WEBP.');
+                header("Location: ../../profile.php");
                 exit();
             }
 
             // Vérification que c'est une vraie image
             if (getimagesize($tmpFile) === false) {
-                header("Location: ../../profile.php?error=invalid_format");
+                set_flash('error', 'Format de fichier invalide. Formats acceptés : JPG, PNG, WEBP.');
+                header("Location: ../../profile.php");
                 exit();
             }
 
-            // Génére un nom de fichier unique (ex: avatar_1_65afb2.png)
+            // Génère un nom de fichier unique (ex: avatar_1_65afb2.png)
             $newFileName = "avatar_" . $_SESSION['user_id'] . "_" . substr(md5(uniqid()), 0, 6) . "." . $extension;
 
             // Chemin physique pour déplacer le fichier
@@ -49,21 +53,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 
             // Déplacement du fichier du dossier temporaire vers le dossier final
             if (move_uploaded_file($tmpFile, $destination)) {
-                
+
                 // Mise à jour de la base de données
                 // On stocke le chemin relatif pour l'affichage HTML
                 $dbPath = "assets/avatars/" . $newFileName;
                 $stmt = $db->prepare("UPDATE adg_users SET avatar = ? WHERE id = ?");
                 $stmt->execute([$dbPath, $_SESSION['user_id']]);
 
-                header("Location: ../../profile.php?success=avatar_updated");
+                set_flash('success', 'Avatar mis à jour avec succès.');
+                header("Location: ../../profile.php");
                 exit();
             } else {
-                header("Location: ../../profile.php?error=upload_failed");
+                set_flash('error', 'L\'upload a échoué. Veuillez réessayer.');
+                header("Location: ../../profile.php");
                 exit();
             }
         } else {
-            header("Location: ../../profile.php?error=invalid_format");
+            set_flash('error', 'Format de fichier invalide. Formats acceptés : JPG, PNG, WEBP.');
+            header("Location: ../../profile.php");
             exit();
         }
     }

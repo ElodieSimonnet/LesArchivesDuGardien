@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../admin_news_gestion.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../admin_news_gestion.php');
         exit;
     }
 
@@ -21,7 +22,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation : titre et auteur non vides
     if (empty($title) || $id_user <= 0) {
-        header('Location: ../edit_news.php?id=' . $news_id . '&error=fields');
+        set_flash('error', 'Le titre et l\'auteur sont obligatoires.');
+        header('Location: ../edit_news.php?id=' . $news_id);
         exit;
     }
 
@@ -29,7 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_users WHERE id = :id");
     $stmt->execute([':id' => $id_user]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../edit_news.php?id=' . $news_id . '&error=invalid_user');
+        set_flash('error', 'L\'auteur sélectionné est invalide.');
+        header('Location: ../edit_news.php?id=' . $news_id);
         exit;
     }
 
@@ -37,7 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_news WHERE title = :title AND id != :id");
     $stmt->execute([':title' => $title, ':id' => $news_id]);
     if ($stmt->fetchColumn() > 0) {
-        header('Location: ../edit_news.php?id=' . $news_id . '&error=duplicate');
+        set_flash('error', 'Un article avec ce titre existe déjà.');
+        header('Location: ../edit_news.php?id=' . $news_id);
         exit;
     }
 
@@ -60,11 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $news_id,
         ]);
 
-        header('Location: ../admin_news_gestion.php?success=1');
+        set_flash('success', 'Article mis à jour avec succès !');
+        header('Location: ../admin_news_gestion.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../edit_news.php?id=' . $news_id . '&error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la modification.');
+        header('Location: ../edit_news.php?id=' . $news_id);
         exit;
     }
 } else {

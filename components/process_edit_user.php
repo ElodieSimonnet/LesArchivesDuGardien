@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../admin_user_gestion.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../admin_user_gestion.php');
         exit;
     }
 
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation minimale
     if (empty($username) || empty($email)) {
-        header('Location: ../admin_user_gestion.php?error=fields');
+        set_flash('error', 'Le nom d\'utilisateur et l\'email sont obligatoires.');
+        header('Location: ../admin_user_gestion.php');
         exit;
     }
 
@@ -28,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_roles WHERE id = :id");
     $stmt->execute([':id' => $id_role]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_user_gestion.php?error=invalid_role');
+        set_flash('error', 'Le rôle sélectionné est invalide.');
+        header('Location: ../admin_user_gestion.php');
         exit;
     }
 
@@ -36,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_users_status WHERE id = :id");
     $stmt->execute([':id' => $id_status]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../admin_user_gestion.php?error=invalid_status');
+        set_flash('error', 'Le statut sélectionné est invalide.');
+        header('Location: ../admin_user_gestion.php');
         exit;
     }
 
@@ -58,13 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id' => $user_id
         ]);
 
-        // Redirection avec succès
-        header('Location: ../admin_user_gestion.php?success=1');
+        set_flash('success', 'Utilisateur mis à jour avec succès !');
+        header('Location: ../admin_user_gestion.php');
         exit;
 
     } catch (PDOException $e) {
         // En cas d'erreur (ex: email déjà pris)
-        header('Location: ../admin_user_gestion.php?error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la modification.');
+        header('Location: ../admin_user_gestion.php');
         exit;
     }
 } else {

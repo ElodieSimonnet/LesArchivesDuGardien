@@ -65,8 +65,13 @@ if (isset($_SESSION['user_id'])) {
                         <h2 class="text-base font-black uppercase text-center mt-4 mb-6 tracking-widest text-white"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
-                    <div class="bg-black border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl">
+                    <div class="bg-black border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
                         <span class="text-primary-orange text-base font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></span>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                        <span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray<?= $isOwnedPet ? ' hidden' : '' ?>" aria-hidden="true">
+                            <i class="ph ph-lock-simple text-base"></i>
+                        </span>
+                        <?php endif; ?>
                     </div>
 
                 </article>

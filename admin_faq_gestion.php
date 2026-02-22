@@ -27,31 +27,10 @@ restrictToAdmin();
 
         <section class="max-w-full mx-auto w-full px-4">
 
-            <?php if (isset($_GET['success']) && $_GET['success'] === '1'): ?>
-                <div id="success-message-edit" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-                    <i class="ph ph-check-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Question mise &agrave; jour avec succ&egrave;s !</span>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['success']) && $_GET['success'] === 'faq_deleted'): ?>
-                <div id="success-message-user" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-                    <i class="ph ph-check-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Question supprim&eacute;e avec succ&egrave;s !</span>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['success']) && $_GET['success'] === 'faq_added'): ?>
-                <div id="success-message-user-added" class="mb-6 p-4 bg-green-500/10 border border-green-500 text-green-500 rounded-lg flex items-center gap-3 animate-pulse">
-                    <i class="ph ph-check-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Question cr&eacute;&eacute;e avec succ&egrave;s !</span>
-                </div>
-            <?php endif; ?>
-
-            <?php if (isset($_GET['error'])): ?>
-                <div id="error-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
-                    <i class="ph ph-warning-circle text-2xl"></i>
-                    <span class="text-sm font-bold uppercase">Une erreur est survenue.</span>
+            <?php $flash = get_flash(); if ($flash): ?>
+                <div id="flash-message" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
+                    <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 

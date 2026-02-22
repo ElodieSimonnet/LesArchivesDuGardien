@@ -45,7 +45,7 @@ $difficultyColor = match(strtolower($mount['difficulty'])) {
     'moyen' => 'text-orange-500',
     'difficile' => 'text-red-500',
     'argent réel' => 'text-cyan-400',
-    default => 'text-gray-400',
+    default => 'text-a11y-gray',
 };
 ?>
 

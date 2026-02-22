@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Vérification du jeton CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        header('Location: ../add_news.php?error=csrf');
+        set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+        header('Location: ../add_news.php');
         exit;
     }
 
@@ -20,7 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validation : titre et auteur non vides
     if (empty($title) || $id_user <= 0) {
-        header('Location: ../add_news.php?error=fields');
+        set_flash('error', 'Le titre et l\'auteur sont obligatoires.');
+        header('Location: ../add_news.php');
         exit;
     }
 
@@ -28,7 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_users WHERE id = :id");
     $stmt->execute([':id' => $id_user]);
     if ($stmt->fetchColumn() == 0) {
-        header('Location: ../add_news.php?error=invalid_user');
+        set_flash('error', 'L\'auteur sélectionné est invalide.');
+        header('Location: ../add_news.php');
         exit;
     }
 
@@ -36,7 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = $db->prepare("SELECT COUNT(*) FROM adg_news WHERE title = :title");
     $stmt->execute([':title' => $title]);
     if ($stmt->fetchColumn() > 0) {
-        header('Location: ../add_news.php?error=duplicate');
+        set_flash('error', 'Un article avec ce titre existe déjà.');
+        header('Location: ../add_news.php');
         exit;
     }
 
@@ -53,11 +57,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':id_user' => $id_user,
         ]);
 
-        header('Location: ../admin_news_gestion.php?success=news_added');
+        set_flash('success', 'Article créé avec succès !');
+        header('Location: ../admin_news_gestion.php');
         exit;
 
     } catch (PDOException $e) {
-        header('Location: ../add_news.php?error=sql');
+        set_flash('error', 'Une erreur est survenue lors de la création.');
+        header('Location: ../add_news.php');
         exit;
     }
 } else {

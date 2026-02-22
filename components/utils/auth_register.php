@@ -58,7 +58,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $_SESSION['user_id'] = $newUserId;
         $_SESSION['username'] = $username;
 
-        echo json_encode(['status' => 'success', 'redirect' => 'profile.php?success=registered']);
+        set_flash('success', 'Bienvenue aux Archives du Gardien ! Votre compte a bien été créé.');
+        echo json_encode(['status' => 'success', 'redirect' => 'profile.php']);
     } catch (PDOException $e) {
         // En cas de doublon (pseudo ou email déjà pris)
         echo json_encode(['status' => 'error', 'message' => 'Cet aventurier (ou cet email) existe déjà.']);

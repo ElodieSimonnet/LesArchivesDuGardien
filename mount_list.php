@@ -71,7 +71,7 @@
             <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group">
+                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span id="current-status-label" class="truncate">Statut : Toutes</span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
                     </button>
@@ -101,7 +101,7 @@
                 ];
                 foreach ($filterGroups as $group): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group">
+                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span class="truncate"><?= $group['label'] ?></span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
                     </button>
@@ -126,7 +126,7 @@
                             case 'facile':      $difficultyColor = 'text-green-500'; $hoverColor = 'hover:border-green-500'; break;
                             case 'moyen':       $difficultyColor = 'text-orange-500'; $hoverColor = 'hover:border-orange-500'; break;
                             case 'difficile':    $difficultyColor = 'text-red-500'; $hoverColor = 'hover:border-red-500'; break;
-                            default:            $difficultyColor = 'text-gray-400'; $hoverColor = 'hover:border-gray-400'; break;
+                            default:            $difficultyColor = 'text-a11y-gray'; $hoverColor = 'hover:border-gray-400'; break;
                         }
 
                         $statusValue = $mount['is_owned'] ? '1' : '0';
@@ -140,7 +140,7 @@
                         $eDifficulty = htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8');
 
                         $wishlistBtn = isset($_SESSION['user_id'])
-                            ? '<button class="wishlist-btn group absolute top-4 right-4 z-10 ' . ($mount['is_wishlisted'] ? 'is-favorite' : '') . '" data-type="mount" data-id="' . $mount['id'] . '" data-csrf="' . $_SESSION['csrf_token'] . '" aria-label="Ajouter ' . $eName . ' aux favoris"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>'
+                            ? '<button class="wishlist-btn group absolute top-4 right-4 z-10 ' . ($mount['is_wishlisted'] ? 'is-favorite' : '') . '" data-type="mount" data-id="' . $mount['id'] . '" data-csrf="' . $_SESSION['csrf_token'] . '" aria-label="' . ($mount['is_wishlisted'] ? 'Retirer ' . $eName . ' des favoris' : 'Ajouter ' . $eName . ' aux favoris') . '" aria-pressed="' . ($mount['is_wishlisted'] ? 'true' : 'false') . '"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>'
                             : '';
 
                         echo('
@@ -152,6 +152,7 @@
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
                                     data-url="mount_detail.php?id='.$mount['id'].'"
+                                    tabindex="0" role="link" aria-label="Voir la fiche de '.$eName.'"
                                     class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl cursor-pointer '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
@@ -160,15 +161,19 @@
                                     <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$eName.'</h2>
                                 </div>
 
-                                <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2">
+                                <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2 relative">
                                     <span class="'.$difficultyColor.' text-lg">★</span>
                                     <span class="'.$difficultyColor.' text-sm font-bold uppercase tracking-[0.2em]">'.$eDifficulty.'</span>
-                                    <span class="'.$difficultyColor.' text-lg">★</span>
+                                    <span class="'.$difficultyColor.' text-lg">★</span>'
+                                    .(isset($_SESSION['user_id']) ? '<span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray'.($mount['is_owned'] ? ' hidden' : '').'" aria-hidden="true"><i class="ph ph-lock-simple text-base"></i></span>' : '').'
                                 </div>
                             </article>'
                             . (isset($_SESSION['user_id']) ? '
                             <button class="collection-toggle-btn w-full mt-2 py-2 flex items-center justify-center gap-2 rounded-xl border-2 font-bold uppercase text-xs tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown '.($mount['is_owned'] ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black').'"
-                                    data-type="mount" data-id="'.$mount['id'].'" data-csrf="'.$_SESSION['csrf_token'].'">
+                                    data-type="mount" data-id="'.$mount['id'].'" data-csrf="'.$_SESSION['csrf_token'].'"
+                                    aria-label="'.($mount['is_owned'] ? $eName.' - déjà obtenue' : 'Ajouter '.$eName.' à ma collection').'"
+                                    aria-pressed="'.($mount['is_owned'] ? 'true' : 'false').'"
+                                    >
                                 <svg class="w-4 h-4 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="'.($mount['is_owned'] ? 'M5 13l4 4L19 7' : 'M12 4v16m8-8H4').'" />
                                 </svg>
@@ -192,5 +197,21 @@
     <?php include 'components/footer.php'; ?>
     <?php include 'components/modals.php'; ?>
     <?php include 'components/filters-menu-mobile.php'; ?>
+    <script>
+        // Gestion aria-expanded sur les dropdowns de filtres
+        document.querySelectorAll('.dropdown-button').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+            });
+        });
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.dropdown-container')) {
+                document.querySelectorAll('.dropdown-button[aria-expanded="true"]').forEach(btn => {
+                    btn.setAttribute('aria-expanded', 'false');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

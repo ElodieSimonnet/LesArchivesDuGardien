@@ -44,7 +44,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_regenerate_id(true);
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        echo json_encode(['status' => 'success', 'redirect' => 'profile.php?success=logged_in']);
+
+        set_flash('success', 'Bienvenue ! Vous êtes connecté.');
+        echo json_encode(['status' => 'success', 'redirect' => 'profile.php']);
     } else {
         // Échec : on incrémente les tentatives
         $newAttempts = $user['failed_attempts'] + 1;
@@ -64,10 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $update = $db->prepare("UPDATE adg_users SET failed_attempts = ? WHERE id = ?");
             $update->execute([$newAttempts, $user['id']]);
 
-            $restantes = 3 - $newAttempts;
             echo json_encode([
                 'status' => 'error',
-                'message' => "Identifiants incorrects. Il vous reste $restantes tentative(s)."
+                'message' => 'Identifiants incorrects.'
             ]);
         }
     }

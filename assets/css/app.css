@@ -10,7 +10,31 @@
       --color-row-dark: oklch(0.2666 0.003 17.34);
       --color-row-light: oklch(0.3639 0.0155 17.88);
       --color-line-faq: oklch(0.76 0.17 64.32);
+      --color-a11y-gray: #B5B3B7;
+}
 
+@layer utilities {
+  /* Focus visible accessible pour les cartes interactives */
+  .mount-card:focus-visible,
+  .pet-card:focus-visible {
+    outline: 3px solid oklch(0.8274 0.1415 71.71);
+    outline-offset: 3px;
+    border-radius: 0.75rem;
+  }
+
+  /* Couleur de texte accessible (ratio ≥ 4.5:1 sur #272525) */
+  .text-a11y-gray {
+    color: #B5B3B7;
+  }
+}
+
+@layer base {
+  /* Couleur des placeholders accessible */
+  input::placeholder,
+  textarea::placeholder {
+    color: #B5B3B7;
+    opacity: 1;
+  }
 }
 
 @layer base {
@@ -19,5 +43,15 @@
     scrollbar-gutter: stable;
     /* assure une fluidité de scroll sur toute la page */
     scroll-behavior: smooth;
+  }
+
+  /* Supprime le fond jaune autofill du navigateur sur les champs password */
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px oklch(0.2666 0.003 17.34) inset !important;
+    -webkit-text-fill-color: #d1d5db !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
 }
