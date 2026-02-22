@@ -10,7 +10,7 @@
       --color-row-dark: oklch(0.2666 0.003 17.34);
       --color-row-light: oklch(0.3639 0.0155 17.88);
       --color-line-faq: oklch(0.76 0.17 64.32);
-      --color-a11y-gray: #B5B3B7;
+      --color-a11y-gray: oklch(0.7696 0.006 308.37);
 }
 
 @layer utilities {
@@ -22,14 +22,13 @@
     border-radius: 0.75rem;
   }
 
-  /* Couleur de texte accessible (ratio ≥ 4.5:1 sur #272525) */
   .text-a11y-gray {
     color: #B5B3B7;
   }
 }
 
 @layer base {
-  /* Couleur des placeholders accessible */
+  /* Couleur des placeholders */
   input::placeholder,
   textarea::placeholder {
     color: #B5B3B7;
