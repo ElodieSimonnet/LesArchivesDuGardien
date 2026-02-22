@@ -95,14 +95,12 @@ if (registerForm) {
 
         // Envoi au serveur
         fetch('components/utils/auth_register.php', { method: 'POST', body: formData })
-        .then(response => response.text())
+        .then(response => response.json())
         .then(data => {
-            if (data.trim() === "success") {
-                alert("Inscription validée ! Bienvenue aux Archives.");
-                toggleModal('registerModal');
-                toggleModal('loginModal');
+            if (data.status === 'success') {
+                window.location.href = data.redirect;
             } else {
-                errorDiv.innerText = data;
+                errorDiv.innerText = data.message;
                 errorDiv.classList.remove('hidden');
             }
         });
@@ -121,7 +119,7 @@ if (loginForm) {
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {
-                window.location.reload(); // On recharge pour passer en mode "connecté"
+                window.location.href = data.redirect;
             } else {
                 errorDiv.innerText = data.message;
                 errorDiv.classList.remove('hidden');

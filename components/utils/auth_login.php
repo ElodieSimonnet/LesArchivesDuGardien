@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         session_regenerate_id(true);
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
-        echo json_encode(['status' => 'success']);
+        echo json_encode(['status' => 'success', 'redirect' => 'profile.php?success=logged_in']);
     } else {
         // Échec : on incrémente les tentatives
         $newAttempts = $user['failed_attempts'] + 1;

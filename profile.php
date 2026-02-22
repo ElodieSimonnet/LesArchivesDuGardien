@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <?php include 'retrieveUserData.php';?>
-<?php include 'retrieveUserTitle.php';?>
 <?php include 'countUserCollections.php';?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,7 +57,6 @@ if (!isset($_SESSION['user_id'])) {
                     </form>
                     
                     <h1 class="text-primary-orange text-2xl font-bold uppercase tracking-widest"><?php echo htmlspecialchars($user['username']);?></h1>
-                    <p class="text-sm font-medium mt-1 text-primary-white"><?php echo htmlspecialchars($displayTitle); ?></p>
                 </article>
 
                 <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
@@ -91,6 +89,8 @@ if (!isset($_SESSION['user_id'])) {
                             <div id="profile-message" class="p-4 bg-green-500/10 border border-green-500 text-green-400 rounded-lg text-sm font-bold uppercase text-center">
                                 <?php
                                     $successMessages = [
+                                        'registered' => 'Bienvenue aux Archives du Gardien ! Votre compte a bien été créé.',
+                                        'logged_in' => 'Bienvenue ! Vous êtes connecté.',
                                         'email_updated' => 'Email mis à jour avec succès.',
                                         'username_updated' => 'Nom d\'utilisateur mis à jour avec succès.',
                                         'password_updated' => 'Mot de passe mis à jour avec succès.',

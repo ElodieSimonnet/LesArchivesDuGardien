@@ -69,6 +69,7 @@
 </div>
 
             <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]">
+                <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="relative flex-1 dropdown-container">
                     <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group">
                         <span id="current-status-label" class="truncate">Statut : Toutes</span>
@@ -89,6 +90,7 @@
                         </label>
                     </div>
                 </div>
+                <?php endif; ?>
 
                 <?php 
                 $filterGroups = [
@@ -137,20 +139,20 @@
                         $eImage = htmlspecialchars($mount['image'], ENT_QUOTES, 'UTF-8');
                         $eDifficulty = htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8');
 
+                        $wishlistBtn = isset($_SESSION['user_id'])
+                            ? '<button class="wishlist-btn group absolute top-4 right-4 z-10 ' . ($mount['is_wishlisted'] ? 'is-favorite' : '') . '" data-type="mount" data-id="' . $mount['id'] . '" data-csrf="' . $_SESSION['csrf_token'] . '" aria-label="Ajouter ' . $eName . ' aux favoris"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>'
+                            : '';
+
                         echo('
                         <div class="mount-item relative flex flex-col">
-                            <button class="wishlist-btn group absolute top-4 right-4 z-10 '.($mount['is_wishlisted'] ? 'is-favorite' : '').'"'.(isset($_SESSION['user_id']) ? ' data-type="mount" data-id="'.$mount['id'].'" data-csrf="'.$_SESSION['csrf_token'].'"' : '').' aria-label="Ajouter '.$eName.' aux favoris">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
-                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                                </svg>
-                            </button>
+                            '.$wishlistBtn.'
                             <article data-owned="'.$statusValue.'"
                                     data-type="'.$eType.'"
                                     data-source="'.$eSource.'"
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
                                     data-url="mount_detail.php?id='.$mount['id'].'"
-                                    class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl cursor-pointer '.($mount['is_owned'] ? '' : 'sepia hover:sepia-0').'">
+                                    class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl cursor-pointer '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
                                     <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$eType.'.png" alt="Icône '.$eType.'" class="w-12 h-12" loading="lazy"></span>

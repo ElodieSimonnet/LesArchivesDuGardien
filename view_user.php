@@ -10,9 +10,8 @@ if (!$user_id) {
     exit;
 }
 
-$query = "SELECT adg_users.*, adg_titles.title
+$query = "SELECT adg_users.*
           FROM adg_users
-          LEFT JOIN adg_titles ON adg_users.active_title_id = adg_titles.id
           WHERE adg_users.id = :id";
 $stmt = $db->prepare($query);
 $stmt->execute([':id' => $user_id]);
@@ -78,12 +77,6 @@ if (!$user) {
                         </span>
                     </div>
 
-                    <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Titre actif</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?php echo !empty($user['title']) ? htmlspecialchars($user['title']) : 'Sans titre'; ?>
-                        </span>
-                    </div>
 
                 </div>
             </div>
