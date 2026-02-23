@@ -33,7 +33,7 @@ if (!$faq) {
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -43,9 +43,9 @@ if (!$faq) {
 
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
+                <h1 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
                     Voir la question
-                </h2>
+                </h1>
                 <a href="edit_faq.php?id=<?php echo $faq['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
                     <i class="ph ph-pencil-simple text-lg"></i> Modifier
                 </a>

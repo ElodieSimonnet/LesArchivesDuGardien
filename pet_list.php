@@ -151,14 +151,14 @@
                         echo('
                         <div class="pet-item relative flex flex-col">
                             '.$wishlistBtn.'
-                            <article data-owned="'.$statusValue.'"
+                            <a href="pet_detail.php?id='.$pet['id'].'"
+                                    data-owned="'.$statusValue.'"
                                     data-family="'.$eFamily.'"
                                     data-source="'.$eSource.'"
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
-                                    data-url="pet_detail.php?id='.$pet['id'].'"
-                                    tabindex="0" role="link" aria-label="Voir la fiche de '.$eName.'"
-                                    class="pet-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col transition-all duration-300 group shadow-2xl cursor-pointer '.(isset($_SESSION['user_id']) && !$pet['is_owned'] ? 'sepia hover:sepia-0' : '').'">
+                                    aria-label="Voir la fiche de '.$eName.'"
+                                    class="pet-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col transition-all duration-300 group shadow-2xl '.(isset($_SESSION['user_id']) && !$pet['is_owned'] ? 'sepia hover:sepia-0' : '').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
                                     <span class="absolute top-4 left-4"><img src="assets/images/pets/'.$familyIcon.'.png" alt="Icône '.$eFamily.'" class="w-12 h-12" loading="lazy"></span>
@@ -170,7 +170,7 @@
                                     <span class="text-primary-orange text-sm font-bold uppercase tracking-[0.2em]">'.$eFamily.'</span>'
                                     .(isset($_SESSION['user_id']) ? '<span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray'.($pet['is_owned'] ? ' hidden' : '').'" aria-hidden="true"><i class="ph ph-lock-simple text-base"></i></span>' : '').'
                                 </div>
-                            </article>'
+                            </a>'
                             . (isset($_SESSION['user_id']) ? '
                             <button class="collection-toggle-btn w-full mt-2 py-2 flex items-center justify-center gap-2 rounded-xl border-2 font-bold uppercase text-xs tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown '.($pet['is_owned'] ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black').'"
                                     data-type="pet" data-id="'.$pet['id'].'" data-csrf="'.$_SESSION['csrf_token'].'"

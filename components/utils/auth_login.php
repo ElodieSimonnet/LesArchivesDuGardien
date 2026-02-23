@@ -7,6 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     // VÉRIFICATION DU JETON CSRF
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        header('HTTP/1.1 403 Forbidden');
         echo json_encode(['status' => 'error', 'message' => 'Erreur de sécurité : session expirée ou requête invalide.']);
         exit;
     }
@@ -14,14 +15,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $identifier = trim($_POST['username']);
     $password = $_POST['password'];
 
-    // On cherche l'utilisateur par pseudo ou email
-    $stmt = $db->prepare("SELECT * FROM adg_users WHERE username = ? OR email = ?");
+    // On cherche l'utilisateur par pseudo ou email (avec son statut de compte)
+    $stmt = $db->prepare("SELECT adg_users.*, adg_users_status.status
+                          FROM adg_users
+                          INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
+                          WHERE adg_users.username = ? OR adg_users.email = ?");
     $stmt->execute([$identifier, $identifier]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Si l'utilisateur n'existe pas, on renvoie un message générique
     if (!$user) {
         echo json_encode(['status' => 'error', 'message' => 'Identifiants incorrects.']);
+        exit;
+    }
+
+    // VÉRIFICATION DU STATUT DU COMPTE
+    if ($user['status'] !== 'Actif') {
+        echo json_encode(['status' => 'error', 'message' => 'Ce compte est suspendu ou banni.']);
         exit;
     }
 

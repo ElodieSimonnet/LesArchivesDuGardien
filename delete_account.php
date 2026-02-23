@@ -14,6 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
     $userId = $_SESSION['user_id'];
 
     try {
+        // Récupérer le chemin de l'avatar avant suppression
+        $stmt = $db->prepare("SELECT avatar FROM adg_users WHERE id = ?");
+        $stmt->execute([$userId]);
+        $avatar_path = $stmt->fetchColumn();
+
         // On supprime d'abord les données liées à l'utilisateur
         $db->prepare("DELETE FROM adg_user_mounts WHERE id_user = ?")->execute([$userId]);
         $db->prepare("DELETE FROM adg_user_pets WHERE id_user = ?")->execute([$userId]);
@@ -25,6 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         // On supprime l'utilisateur de la table adg_users
         $stmt = $db->prepare("DELETE FROM adg_users WHERE id = ?");
         $stmt->execute([$userId]);
+
+        // Supprimer le fichier avatar du serveur s'il existe
+        if (!empty($avatar_path) && strpos($avatar_path, 'assets/avatars/') === 0) {
+            $filePath = __DIR__ . '/' . $avatar_path;
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
 
         // On nettoie la session et on déconnecte
         session_unset(); // On vide les variables de session d'abord

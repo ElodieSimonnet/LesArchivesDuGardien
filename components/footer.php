@@ -19,13 +19,13 @@
             </span>
             <div class="flex items-center gap-8">
                 <a href="https://www.facebook.com/WorldofWarcraft.fr/?brand_redir=138011799033" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Facebook (s'ouvre dans un nouvel onglet)">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" class="w-6 h-6" alt="logo facebook">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" class="w-6 h-6" alt="">
                 </a>
                 <a href="https://www.twitch.tv/warcraft" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Twitch (s'ouvre dans un nouvel onglet)">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" class="w-6 h-6" alt="logo twitch">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/twitch.svg" class="w-6 h-6" alt="">
                 </a>
                 <a href="https://www.youtube.com/warcraft" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="YouTube (s'ouvre dans un nouvel onglet)">
-                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" class="w-6 h-6" alt="logo youtube">
+                    <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/youtube.svg" class="w-6 h-6" alt="">
                 </a>
             </div>
         </div>

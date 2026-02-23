@@ -28,11 +28,12 @@
     <div class="mx-auto max-w-xl md:bg-primary-brown md:rounded-lg md:border-2 md:border-primary-orange md:p-6 md:max-w-4xl lg:max-w-5xl">
         <header class="text-center">
             <h1 class="text-primary-orange text-3xl p-5 md:text-4xl">Les Archives Du Gardien</h1>
-            <h2 class="text-primary-white text-xl p-5 md:text-2xl">Un lieu sûr pour suivre et conserver vos trésors d'Azeroth</h2>
+            <p class="text-primary-white text-xl p-5 md:text-2xl">Un lieu sûr pour suivre et conserver vos trésors d'Azeroth</p>
         </header>
     </div>
 
     <section class="md:mt-16 md:mb-16">
+        <h2 class="sr-only">Catégories</h2>
         <ul class="grid grid-cols-1 gap-8 py-4 mx-auto md:grid-cols-2 md:max-w-4xl lg:max-w-5xl">
             
             <li class="mx-auto w-full max-w-[16rem] md:max-w-none">

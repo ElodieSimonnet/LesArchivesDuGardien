@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // VÉRIFICATION DU JETON CSRF
     // On vérifie que le badge est valide avant d'autoriser l'inscription
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        header('HTTP/1.1 403 Forbidden');
         echo json_encode(['status' => 'error', 'message' => 'Erreur de sécurité : Requête non autorisée.']);
         exit;
     }

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 let card = this.closest('[data-owned]');
                 if (!card) {
                     const sibling = this.previousElementSibling;
-                    if (sibling && sibling.tagName === 'ARTICLE') card = sibling;
+                    if (sibling && sibling.hasAttribute('data-owned')) card = sibling;
                 }
 
                 const lockBadge = card ? card.querySelector('.lock-badge') : null;

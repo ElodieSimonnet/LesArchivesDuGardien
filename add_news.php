@@ -20,7 +20,7 @@ $users = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_news_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -29,49 +29,49 @@ $users = $stmt_users->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
+            <h1 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
                 Nouvel article
-            </h2>
+            </h1>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 
             <form action="components/process_add_news.php" method="POST" class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Titre</label>
-                        <input type="text" name="title" required
+                        <label for="title" class="text-sm font-black uppercase text-primary-orange tracking-widest">Titre</label>
+                        <input type="text" id="title" name="title" required
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Contenu</label>
-                        <textarea name="content" rows="8" required
+                        <label for="content" class="text-sm font-black uppercase text-primary-orange tracking-widest">Contenu</label>
+                        <textarea id="content" name="content" rows="8" required
                                   class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all resize-vertical"></textarea>
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de l'image</label>
-                        <input type="text" name="image"
+                        <label for="image" class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de l'image</label>
+                        <input type="text" id="image" name="image"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de la source</label>
-                        <input type="text" name="source_news"
+                        <label for="source_news" class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de la source</label>
+                        <input type="text" id="source_news" name="source_news"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Auteur</label>
-                        <select name="id_user" required
+                        <label for="id_user" class="text-sm font-black uppercase text-primary-orange tracking-widest">Auteur</label>
+                        <select id="id_user" name="id_user" required
                                 class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                             <option value="">-- Sélectionner un auteur --</option>
                             <?php foreach ($users as $user): ?>

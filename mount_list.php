@@ -146,14 +146,14 @@
                         echo('
                         <div class="mount-item relative flex flex-col">
                             '.$wishlistBtn.'
-                            <article data-owned="'.$statusValue.'"
+                            <a href="mount_detail.php?id='.$mount['id'].'"
+                                    data-owned="'.$statusValue.'"
                                     data-type="'.$eType.'"
                                     data-source="'.$eSource.'"
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
-                                    data-url="mount_detail.php?id='.$mount['id'].'"
-                                    tabindex="0" role="link" aria-label="Voir la fiche de '.$eName.'"
-                                    class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl cursor-pointer '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
+                                    aria-label="Voir la fiche de '.$eName.'"
+                                    class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
                                     <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$eType.'.png" alt="Icône '.$eType.'" class="w-12 h-12" loading="lazy"></span>
@@ -167,7 +167,7 @@
                                     <span class="'.$difficultyColor.' text-lg">★</span>'
                                     .(isset($_SESSION['user_id']) ? '<span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray'.($mount['is_owned'] ? ' hidden' : '').'" aria-hidden="true"><i class="ph ph-lock-simple text-base"></i></span>' : '').'
                                 </div>
-                            </article>'
+                            </a>'
                             . (isset($_SESSION['user_id']) ? '
                             <button class="collection-toggle-btn w-full mt-2 py-2 flex items-center justify-center gap-2 rounded-xl border-2 font-bold uppercase text-xs tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown '.($mount['is_owned'] ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black').'"
                                     data-type="mount" data-id="'.$mount['id'].'" data-csrf="'.$_SESSION['csrf_token'].'"

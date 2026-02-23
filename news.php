@@ -30,6 +30,7 @@
         <?php else: ?>
 
         <!-- ========== CAROUSEL - 3 dernières news ========== -->
+        <h2 class="sr-only">Actualités récentes</h2>
         <div class="relative flex items-center group">
 
             <button id="btn-prev" class="hidden lg:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">

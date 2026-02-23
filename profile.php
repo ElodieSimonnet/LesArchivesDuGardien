@@ -7,6 +7,14 @@ if (!isset($_SESSION['user_id'])) {
 }
 ?>
 <?php include 'retrieveUserData.php';?>
+<?php
+// Si le compte est suspendu ou banni, on détruit la session et on redirige
+if (!$user || $user['status'] !== 'Actif') {
+    session_destroy();
+    header('Location: index.php');
+    exit();
+}
+?>
 <?php include 'countUserCollections.php';?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -22,7 +30,7 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
                  lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="max-w-6xl mx-auto px-4 flex flex-col gap-6">
             <section class="flex flex-col md:flex-row gap-6">

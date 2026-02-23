@@ -44,6 +44,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Vérification d'unicité du username (hors utilisateur courant)
+    $stmt = $db->prepare("SELECT COUNT(*) FROM adg_users WHERE username = :username AND id != :id");
+    $stmt->execute([':username' => $username, ':id' => $user_id]);
+    if ($stmt->fetchColumn() > 0) {
+        set_flash('error', 'Ce nom d\'utilisateur est déjà utilisé.');
+        header('Location: ../edit_user.php?id=' . $user_id);
+        exit;
+    }
+
+    // Vérification d'unicité de l'email (hors utilisateur courant)
+    $stmt = $db->prepare("SELECT COUNT(*) FROM adg_users WHERE email = :email AND id != :id");
+    $stmt->execute([':email' => $email, ':id' => $user_id]);
+    if ($stmt->fetchColumn() > 0) {
+        set_flash('error', 'Cette adresse email est déjà utilisée.');
+        header('Location: ../edit_user.php?id=' . $user_id);
+        exit;
+    }
+
     try {
         // Préparation de la mise à jour
         $sql = "UPDATE adg_users SET

@@ -1,4 +1,4 @@
-
+﻿
 <?php
 require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
@@ -20,16 +20,16 @@ restrictToAdmin();
 
     <main class="flex-1 min-h-screen overflow-y-auto bg-row-dark text-primary-white font-sans p-4 xl:p-8 xl:ml-64">
 
-        <div class="flex justify-center mb-10 mt-4">
-            <h2 class="px-8 lg:px-16 py-3 border-2 border-primary-orange bg-[#1a0f0a] text-primary-orange font-bold uppercase tracking-[0.2em] shadow-2xl rounded-lg text-center">
-                Gestion des Montures
-            </h2>
-        </div>
-
         <section class="max-w-full mx-auto w-full px-4">
 
+        <div class="flex justify-center mb-10 mt-4">
+            <h1 class="px-8 lg:px-16 py-3 border-2 border-primary-orange bg-[#1a0f0a] text-primary-orange font-bold uppercase tracking-[0.2em] shadow-2xl rounded-lg text-center">
+                Gestion des Montures
+            </h1>
+        </div>
+
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
                     <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
@@ -40,7 +40,7 @@ restrictToAdmin();
                     <span class="absolute left-3 top-2.5 text-primary-orange">
                         <i class="ph ph-magnifying-glass text-xl"></i>
                     </span>
-                    <input type="text" id="search-mount" placeholder="Rechercher une monture" class="w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-primary-orange text-amber-100">
+                    <input type="text" id="search-mount" placeholder="Rechercher une monture" aria-label="Rechercher une monture" class="w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-primary-orange text-amber-100">
                 </div>
 
                 <div class="xl:col-span-3 relative cursor-pointer group" id="open-filters-btn">
@@ -122,16 +122,16 @@ restrictToAdmin();
                             </div>
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-end xl:justify-center items-center gap-3">
-                                <a href="view_mount.php?id=<?php echo $mountRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir">
+                                <a href="view_mount.php?id=<?php echo $mountRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir">
                                     <i class="ph ph-eye text-2xl"></i>
                                 </a>
-                                <a href="edit_mount.php?id=<?php echo $mountRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier">
+                                <a href="edit_mount.php?id=<?php echo $mountRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier">
                                     <i class="ph ph-pencil-simple text-2xl"></i>
                                 </a>
                                 <form action="delete_mount.php" method="POST" onsubmit="return confirm('Supprimer cette monture ?')" class="inline">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="mount_id" value="<?php echo $mountRow['id']; ?>">
-                                    <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer">
+                                    <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer">
                                         <i class="ph ph-trash text-2xl"></i>
                                     </button>
                                 </form>

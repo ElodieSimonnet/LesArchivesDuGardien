@@ -2,71 +2,105 @@
  * Gestion du menu de filtres mobile et synchronisation des radios
  */
 document.addEventListener('DOMContentLoaded', () => {
-    // Éléments du DOM
     const openBtn = document.getElementById('mobile-filter-trigger');
     const overlay = document.getElementById('filter-mobile-overlay');
     const menu = document.getElementById('filter-mobile-menu');
     const closeBtn = document.getElementById('close-filters');
     const applyBtn = document.getElementById('apply-mobile-filters');
 
-    // Radios pour la synchronisation
     const desktopRadios = document.querySelectorAll('.status-radio');
     const mobileRadios = document.querySelectorAll('.status-radio-mobile');
 
     if (!openBtn || !menu || !overlay) return;
 
-    // --- LOGIQUE D'OUVERTURE / FERMETURE ---
+    let _filterLastFocus = null;
 
+    // Éléments focusables dans le panneau
+    function getFocusable() {
+        return Array.from(menu.querySelectorAll(
+            'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )).filter(el => el.offsetParent !== null);
+    }
+
+    // --- OUVERTURE ---
     const openMobileFilters = () => {
+        _filterLastFocus = document.activeElement;
+
         overlay.classList.remove('hidden');
         setTimeout(() => {
             overlay.classList.replace('opacity-0', 'opacity-100');
             menu.classList.remove('translate-x-full');
+            menu.setAttribute('aria-hidden', 'false');
+            openBtn.setAttribute('aria-expanded', 'true');
+            const first = getFocusable()[0];
+            if (first) first.focus();
         }, 10);
         document.body.style.overflow = 'hidden';
     };
 
+    // --- FERMETURE ---
     const closeMobileFilters = () => {
         menu.classList.add('translate-x-full');
+        menu.setAttribute('aria-hidden', 'true');
+        openBtn.setAttribute('aria-expanded', 'false');
         overlay.classList.replace('opacity-100', 'opacity-0');
-        setTimeout(() => {
-            overlay.classList.add('hidden');
-        }, 500);
+        setTimeout(() => overlay.classList.add('hidden'), 500);
         document.body.style.overflow = '';
+        if (_filterLastFocus) _filterLastFocus.focus();
     };
 
-    // --- LOGIQUE DE SYNCHRONISATION DES RADIOS ---
-
-    function syncStatusFilters(value) {
-        // Cocher le bon bouton sur Desktop
-        desktopRadios.forEach(r => r.checked = (r.value === value));
-        // Cocher le bon bouton sur Mobile
-        mobileRadios.forEach(r => r.checked = (r.value === value));
-        
-        // Mettre à jour le texte du bouton dropdown Desktop si présent
-        const label = document.getElementById('current-status-label');
-        if (label) {
-            const textMap = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
-            label.textContent = textMap[value];
+    // --- PIÈGE DE FOCUS + ÉCHAP ---
+    menu.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMobileFilters();
+            return;
         }
+        if (e.key === 'Tab') {
+            const focusable = getFocusable();
+            const first = focusable[0];
+            const last = focusable[focusable.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+                e.preventDefault();
+                last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+                e.preventDefault();
+                first.focus();
+            }
+        }
+    });
 
-        // DÉCLENCHER LE FILTRAGE GLOBAL
-        // Si tu as une fonction globale de filtrage (ex: filterMounts()), appelle-la ici :
-        // if (typeof filterMounts === "function") filterMounts();
-    }
+    // --- ACCORDÉONS ---
+    menu.querySelectorAll('.mobile-accordion-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const content = btn.nextElementSibling;
+            const isOpen = !content.classList.contains('hidden');
+            content.classList.toggle('hidden', isOpen);
+            btn.setAttribute('aria-expanded', isOpen ? 'false' : 'true');
+            const arrow = btn.querySelector('svg');
+            if (arrow) arrow.style.transform = isOpen ? '' : 'rotate(180deg)';
+        });
+    });
 
-    // Écouteurs d'événements
+    // --- ÉCOUTEURS ---
     openBtn.addEventListener('click', openMobileFilters);
     closeBtn?.addEventListener('click', closeMobileFilters);
     overlay.addEventListener('click', closeMobileFilters);
     applyBtn?.addEventListener('click', closeMobileFilters);
 
-    // Synchronisation au changement Mobile
+    // --- SYNCHRONISATION RADIOS ---
+    function syncStatusFilters(value) {
+        desktopRadios.forEach(r => r.checked = (r.value === value));
+        mobileRadios.forEach(r => r.checked = (r.value === value));
+        const label = document.getElementById('current-status-label');
+        if (label) {
+            const textMap = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
+            label.textContent = textMap[value];
+        }
+    }
+
     mobileRadios.forEach(radio => {
         radio.addEventListener('change', (e) => syncStatusFilters(e.target.value));
     });
-
-    // Synchronisation au changement Desktop
     desktopRadios.forEach(radio => {
         radio.addEventListener('change', (e) => syncStatusFilters(e.target.value));
     });

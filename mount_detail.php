@@ -46,7 +46,9 @@ if (isset($_SESSION['user_id'])) {
               <div class="relative flex flex-col">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 <?= $isWishlistedMount ? 'is-favorite' : '' ?>"
-                    data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>">
+                    data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
+                    aria-label="<?= $isWishlistedMount ? 'Retirer ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
+                    aria-pressed="<?= $isWishlistedMount ? 'true' : 'false' ?>">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
@@ -109,7 +111,7 @@ if (isset($_SESSION['user_id'])) {
                               lg:w-full lg:mx-0 flex flex-col">
                     <h3 class="text-2xl font-semibold text-center text-primary-orange
                                lg:text-3xl">Informations</h3>
-                    <hr class="mt-6 mb-10 bg-primary-orange h-0.5 border-none w-full mx-auto">
+                    <div class="mt-6 mb-10 bg-primary-orange h-0.5 w-full" aria-hidden="true"></div>
                  
                     <dl class="space-y-6
                                lg:px-12 lg:space-y-10">
@@ -117,8 +119,7 @@ if (isset($_SESSION['user_id'])) {
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>
                             <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['source'], ENT_QUOTES, 'UTF-8') ?></dd>
-                            <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
-                                       lg:hidden">
+                            <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
@@ -130,29 +131,25 @@ if (isset($_SESSION['user_id'])) {
                                     N/A
                                 <?php endif; ?>
                             </dd>
-                            <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
-                                       lg:hidden">
+                            <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
                             <dd class="text-xl text-primary-white text-center"><?= $mount['droprate'] !== null ? htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
-                            <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
-                                       lg:hidden">
+                            <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Extension :</dt>
                             <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
-                            <hr class="my-6 bg-primary-orange h-0.5 border-none w-2/5 mx-auto
-                                       lg:hidden">
+                            <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
                             <dd class="text-xl text-primary-white text-center"><?= $mount['zone'] ? htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
-                            <hr class="my-6 bg-primary-orange h-0.5 border-none w-4/5 mx-auto
-                                       lg:hidden">
+                            <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-2xl text-primary-orange text-center

@@ -12,9 +12,9 @@
 
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full max-w-lg mx-4">
         
-        <h2 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Connexion Administrateur</h2>
+        <h1 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Connexion Administrateur</h1>
 
-        <div id="loginError" class="hidden bg-red-900/50 border border-red-500 text-red-200 p-3 rounded mb-4 text-sm text-center">
+        <div id="loginError" role="alert" aria-live="polite" class="hidden bg-red-900/50 border border-red-500 text-red-200 p-3 rounded mb-4 text-sm text-center">
             Identifiants incorrects.
         </div>
 
@@ -22,14 +22,16 @@
             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
             
             <div>
-                <label class="block text-primary-white text-lg mb-1">Identifiant</label>
-                <input type="text" name="username" required
+                <label for="username" class="block text-primary-white text-lg mb-1">Identifiant</label>
+                <input type="text" id="username" name="username" required
+                    autocomplete="username" aria-describedby="loginError"
                     class="w-full bg-row-dark border border-amber-600/70 text-white p-2 rounded focus:outline-none focus:border-yellow-500">
             </div>
 
             <div>
-                <label class="block text-primary-white text-lg mb-1">Mot de passe</label>
-                <input type="password" name="password" required
+                <label for="password" class="block text-primary-white text-lg mb-1">Mot de passe</label>
+                <input type="password" id="password" name="password" required
+                    autocomplete="current-password" aria-describedby="loginError"
                     class="w-full bg-row-dark border border-amber-600/70 text-white p-2 rounded focus:outline-none focus:border-yellow-500">
             </div>
 

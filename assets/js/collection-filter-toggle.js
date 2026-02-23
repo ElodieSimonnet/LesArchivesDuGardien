@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentLimit = ITEMS_PER_PAGE;
 
     // --- 1. GESTION DES MENUS DÉROULANTS (Desktop) ---
+    function closeAllDropdowns() {
+        document.querySelectorAll('.dropdown-content').forEach(menu => menu.classList.add('hidden'));
+        document.querySelectorAll('.dropdown-button').forEach(b => b.setAttribute('aria-expanded', 'false'));
+        document.querySelectorAll('.dropdown-button i').forEach(i => i.classList.remove('rotate-180'));
+    }
+
     dropdowns.forEach(container => {
         const btn = container.querySelector('.dropdown-button');
         const content = container.querySelector('.dropdown-content');
@@ -27,25 +33,36 @@ document.addEventListener('DOMContentLoaded', () => {
             dropdowns.forEach(other => {
                 if (other !== container) {
                     other.querySelector('.dropdown-content').classList.add('hidden');
+                    other.querySelector('.dropdown-button').setAttribute('aria-expanded', 'false');
                     const otherIcon = other.querySelector('.dropdown-button i');
                     if (otherIcon) otherIcon.classList.remove('rotate-180');
                 }
             });
 
-            const isOpened = content.classList.toggle('hidden');
+            const isHidden = content.classList.toggle('hidden');
+            btn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
             if (icon) {
-                isOpened ? icon.classList.remove('rotate-180') : icon.classList.add('rotate-180');
+                isHidden ? icon.classList.remove('rotate-180') : icon.classList.add('rotate-180');
             }
         });
 
-        content?.addEventListener('click', (e) => {
-            e.stopPropagation();
+        content?.addEventListener('click', (e) => e.stopPropagation());
+
+        // Fermeture quand le focus quitte le dropdown
+        container.addEventListener('focusout', (e) => {
+            if (!container.contains(e.relatedTarget)) {
+                content.classList.add('hidden');
+                if (btn) btn.setAttribute('aria-expanded', 'false');
+                if (icon) icon.classList.remove('rotate-180');
+            }
         });
     });
 
-    document.addEventListener('click', () => {
-        document.querySelectorAll('.dropdown-content').forEach(menu => menu.classList.add('hidden'));
-        document.querySelectorAll('.dropdown-button i').forEach(i => i.classList.remove('rotate-180'));
+    document.addEventListener('click', closeAllDropdowns);
+
+    // Fermeture au clavier (Échap)
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeAllDropdowns();
     });
 
     // --- 2. SYSTÈME DE FILTRAGE GLOBAL ---

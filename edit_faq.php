@@ -37,7 +37,7 @@ $categories = $stmt_cats->fetchAll(PDO::FETCH_ASSOC);
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -46,39 +46,39 @@ $categories = $stmt_cats->fetchAll(PDO::FETCH_ASSOC);
         </div>
 
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
+            <h1 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
                 Modifier la question
-            </h2>
+            </h1>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 
             <form action="components/process_edit_faq.php" method="POST" class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
-                <input type="hidden" name="faq_id" value="<?php echo $faq['id']; ?>">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <input type="hidden" id="faq_id" name="faq_id" value="<?php echo $faq['id']; ?>">
+                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Question</label>
-                        <input type="text" name="question" required
+                        <label for="question" class="text-sm font-black uppercase text-primary-orange tracking-widest">Question</label>
+                        <input type="text" id="question" name="question" required
                                value="<?php echo htmlspecialchars($faq['question']); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">R&eacute;ponse</label>
-                        <textarea name="answer" rows="6" required
+                        <label for="answer" class="text-sm font-black uppercase text-primary-orange tracking-widest">R&eacute;ponse</label>
+                        <textarea id="answer" name="answer" rows="6" required
                                   class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all resize-vertical"><?php echo htmlspecialchars($faq['answer']); ?></textarea>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Cat&eacute;gorie</label>
-                        <select name="id_category" required
+                        <label for="id_category" class="text-sm font-black uppercase text-primary-orange tracking-widest">Cat&eacute;gorie</label>
+                        <select id="id_category" name="id_category" required
                                 class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                             <option value="">-- Sélectionner une catégorie --</option>
                             <?php foreach ($categories as $cat): ?>
@@ -88,8 +88,8 @@ $categories = $stmt_cats->fetchAll(PDO::FETCH_ASSOC);
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Ordre d'affichage</label>
-                        <input type="number" name="display_order" value="<?php echo (int)$faq['display_order']; ?>" min="0"
+                        <label for="display_order" class="text-sm font-black uppercase text-primary-orange tracking-widest">Ordre d'affichage</label>
+                        <input type="number" id="display_order" name="display_order" value="<?php echo (int)$faq['display_order']; ?>" min="0"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 

@@ -1,10 +1,10 @@
 <div id="filter-mobile-overlay" class="fixed inset-0 bg-primary-black/80 backdrop-blur-sm z-[500] hidden md:hidden transition-opacity duration-300 opacity-0"></div>
 
-<div id="filter-mobile-menu" class="fixed inset-y-0 right-0 z-[501] w-full md:hidden bg-primary-black transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col border-l border-primary-orange shadow-2xl">
+<div id="filter-mobile-menu" role="dialog" aria-modal="true" aria-label="Filtres" aria-hidden="true" class="fixed inset-y-0 right-0 z-[501] w-full md:hidden bg-primary-black transform translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.32,0.72,0,1)] flex flex-col border-l border-primary-orange shadow-2xl">
     
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange bg-primary-black shrink-0">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
-        <button id="close-filters" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
+        <button id="close-filters" aria-label="Fermer les filtres" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
             <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -16,7 +16,7 @@
         <div class="space-y-4">
             <?php if (isset($_SESSION['user_id'])): ?>
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
-                <button class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group">
+                <button class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group" aria-expanded="true">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-eye"></i> État de collection
                     </h3>
@@ -42,7 +42,7 @@
             <?php endif; ?>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
+                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-dragon"></i> Type de monture
                     </h3>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
+                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-map-marked-alt"></i> Source
                     </h3>
@@ -80,7 +80,7 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
+                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-history"></i> Extension
                     </h3>
@@ -99,7 +99,7 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
+                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-flag"></i> Faction
                     </h3>

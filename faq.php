@@ -47,7 +47,7 @@
                                     </svg>
                                 </button>
                             </dt>
-                            <dd id="faq-content-<?= (int)$faq['id'] ?>" role="region" class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-brown">
+                            <dd id="faq-content-<?= (int)$faq['id'] ?>" class="faq-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out bg-primary-brown">
                                 <div class="p-4 text-primary-white leading-relaxed text-sm md:text-base">
                                     R. <?= htmlspecialchars($faq['answer'], ENT_QUOTES, 'UTF-8') ?>
                                 </div>

@@ -44,7 +44,7 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_mount_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -53,44 +53,44 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
         </div>
 
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
+            <h1 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
                 Modifier la monture
-            </h2>
+            </h1>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
 
             <form action="components/process_edit_mount.php" method="POST" class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
-                <input type="hidden" name="mount_id" value="<?php echo $mount['id']; ?>">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <input type="hidden" id="mount_id" name="mount_id" value="<?php echo $mount['id']; ?>">
+                <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom</label>
-                        <input type="text" name="name" value="<?php echo htmlspecialchars($mount['name']); ?>"
+                        <label for="name" class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom</label>
+                        <input type="text" id="name" name="name" value="<?php echo htmlspecialchars($mount['name']); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Description</label>
-                        <textarea name="description" rows="3"
+                        <label for="description" class="text-sm font-black uppercase text-primary-orange tracking-widest">Description</label>
+                        <textarea id="description" name="description" rows="3"
                                   class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all resize-vertical"><?php echo htmlspecialchars($mount['description']); ?></textarea>
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de l'image</label>
-                        <input type="text" name="image" value="<?php echo htmlspecialchars($mount['image']); ?>"
+                        <label for="image" class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de l'image</label>
+                        <input type="text" id="image" name="image" value="<?php echo htmlspecialchars($mount['image']); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Type</label>
-                        <select name="id_type" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_type" class="text-sm font-black uppercase text-primary-orange tracking-widest">Type</label>
+                        <select id="id_type" name="id_type" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_types as $type) : ?>
                                 <option value="<?php echo $type['id']; ?>" <?php echo ($type['id'] == $mount['id_type']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($type['type']); ?>
@@ -100,8 +100,8 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Source</label>
-                        <select name="id_source" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_source" class="text-sm font-black uppercase text-primary-orange tracking-widest">Source</label>
+                        <select id="id_source" name="id_source" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_sources as $source) : ?>
                                 <option value="<?php echo $source['id']; ?>" <?php echo ($source['id'] == $mount['id_source']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($source['source']); ?>
@@ -111,8 +111,8 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Extension</label>
-                        <select name="id_expansion" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_expansion" class="text-sm font-black uppercase text-primary-orange tracking-widest">Extension</label>
+                        <select id="id_expansion" name="id_expansion" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_expansions as $expansion) : ?>
                                 <option value="<?php echo $expansion['id']; ?>" <?php echo ($expansion['id'] == $mount['id_expansion']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($expansion['expansion']); ?>
@@ -122,8 +122,8 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Faction</label>
-                        <select name="id_faction" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_faction" class="text-sm font-black uppercase text-primary-orange tracking-widest">Faction</label>
+                        <select id="id_faction" name="id_faction" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_factions as $faction) : ?>
                                 <option value="<?php echo $faction['id']; ?>" <?php echo ($faction['id'] == $mount['id_faction']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($faction['faction']); ?>
@@ -133,8 +133,8 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Difficulté</label>
-                        <select name="id_difficulty" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_difficulty" class="text-sm font-black uppercase text-primary-orange tracking-widest">Difficulté</label>
+                        <select id="id_difficulty" name="id_difficulty" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_difficulties as $difficulty) : ?>
                                 <option value="<?php echo $difficulty['id']; ?>" <?php echo ($difficulty['id'] == $mount['id_difficulty']) ? 'selected' : ''; ?>>
                                     <?php echo htmlspecialchars($difficulty['difficulty']); ?>
@@ -144,14 +144,14 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop (%)</label>
-                        <input type="number" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($mount['droprate'] ?? ''); ?>"
+                        <label for="droprate" class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop (%)</label>
+                        <input type="number" id="droprate" name="droprate" step="0.01" min="0" max="100" value="<?php echo htmlspecialchars($mount['droprate'] ?? ''); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</label>
-                        <select name="id_zone" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_zone" class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</label>
+                        <select id="id_zone" name="id_zone" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <option value="">Aucune</option>
                             <?php foreach ($all_zones as $zone) : ?>
                                 <option value="<?php echo $zone['id_zone']; ?>" <?php echo ($zone['id_zone'] == $mount['id_zone']) ? 'selected' : ''; ?>>
@@ -162,8 +162,8 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Monnaie</label>
-                        <select name="id_currency" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_currency" class="text-sm font-black uppercase text-primary-orange tracking-widest">Monnaie</label>
+                        <select id="id_currency" name="id_currency" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <option value="">Aucune</option>
                             <?php foreach ($all_currencies as $currency) : ?>
                                 <option value="<?php echo $currency['id']; ?>" <?php echo ($currency['id'] == $mount['id_currency']) ? 'selected' : ''; ?>>
@@ -174,14 +174,14 @@ $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Coût</label>
-                        <input type="number" name="cost" step="1" min="0" value="<?php echo htmlspecialchars($mount['cost'] ?? ''); ?>"
+                        <label for="cost" class="text-sm font-black uppercase text-primary-orange tracking-widest">Coût</label>
+                        <input type="number" id="cost" name="cost" step="1" min="0" value="<?php echo htmlspecialchars($mount['cost'] ?? ''); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label class="text-sm font-black uppercase text-primary-orange tracking-widest">Cible</label>
-                        <select name="id_target" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_target" class="text-sm font-black uppercase text-primary-orange tracking-widest">Cible</label>
+                        <select id="id_target" name="id_target" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <option value="">Aucune</option>
                             <?php foreach ($all_targets as $target) : ?>
                                 <option value="<?php echo $target['id']; ?>" <?php echo ($target['id'] == $mount['id_target']) ? 'selected' : ''; ?>>
