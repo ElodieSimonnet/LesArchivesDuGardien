@@ -12,8 +12,8 @@
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
-                 lg:bg-[url(../images/lava_cave.jpg)]">
+    <main class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed min-h-screen pt-16 pb-16
+                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
         <div class="bg-primary-brown rounded-xl p-2 border-2 border-primary-orange w-4/5 mx-auto
                     lg:w-3/5">
             <h1 class="text-2xl font-semibold text-center text-primary-orange p-4

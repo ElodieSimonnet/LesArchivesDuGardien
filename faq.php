@@ -15,8 +15,8 @@
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center bg-fixed
-                 lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
+    <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed
+                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] text-primary-white font-sans p-4 md:p-10">
         <section class="max-w-4xl mx-auto">
             <header class="border-2 border-primary-orange bg-primary-brown rounded-lg p-4 mb-8 text-center shadow-lg">
                 <h1 class="text-2xl md:text-4xl font-bold uppercase tracking-widest text-primary-orange">
@@ -34,7 +34,7 @@
                         <?= htmlspecialchars($category, ENT_QUOTES, 'UTF-8') ?>
                     </h2>
 
-                    <dl class="space-y-4">
+                    <dl class="space-y-6">
                         <?php foreach ($faqs as $faq): ?>
                         <div class="group border-2 border-primary-orange rounded-lg overflow-hidden shadow-xl transition-all duration-300">
                             <dt>

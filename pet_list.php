@@ -25,7 +25,7 @@
 <body>
     <?php include 'components/header.php'; ?>
 
-   <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center bg-fixed lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
+   <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 md:p-10">
     <div class="max-w-7xl mx-auto">
 
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des mascottes</h1>

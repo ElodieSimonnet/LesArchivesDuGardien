@@ -30,8 +30,8 @@ if (!$user || $user['status'] !== 'Actif') {
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center min-h-screen pt-16 pb-16
-                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center min-h-screen pt-16 pb-16
+                 lg:bg-[url(../images/lava_cave.jpg)]">
         <div class="max-w-6xl mx-auto px-4 flex flex-col gap-6">
             <section class="flex flex-col md:flex-row gap-6">
                 <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">

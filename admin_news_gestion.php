@@ -11,13 +11,14 @@ restrictToAdmin();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/admin-messages.js" defer></script>
+    <script src="assets/js/admin-sidebar.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Gestion des actualités | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen overflow-y-auto bg-row-dark text-primary-white font-sans p-4 xl:p-8 xl:ml-64">
+    <main class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
 
         <section class="max-w-full mx-auto w-full px-4">
 

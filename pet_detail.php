@@ -29,10 +29,10 @@ if (isset($_SESSION['user_id'])) {
 </head>
 <body>
     <?php include 'components/header.php'; ?>
-    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 pb-36
-                 lg:bg-[url(../images/lava_cave.jpg)]">
+    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
+                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
-            <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto
+            <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none
                             lg:w-full mb-8">
                 <h1 class="text-xl font-semibold text-center uppercase text-primary-orange pt-4
                        md:text-3xl"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?>
@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id'])) {
             </section>
 
             <div class="lg:grid lg:grid-cols-2 lg:gap-12">
-              <div class="relative flex flex-col">
+              <div class="relative flex flex-col w-4/5 max-w-md lg:max-w-none mx-auto lg:mx-0 lg:w-full">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 cursor-pointer <?= $isWishlistedPet ? 'is-favorite' : '' ?>"
                     data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
@@ -55,8 +55,9 @@ if (isset($_SESSION['user_id'])) {
                     </svg>
                 </button>
                 <?php endif; ?>
-                <article class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto mt-4
-                                lg:w-full lg:mx-0 flex flex-col flex-grow transition-all duration-300 <?= (isset($_SESSION['user_id']) && !$isOwnedPet) ? 'sepia' : '' ?>">
+                <article class="bg-primary-brown rounded-xl border-2 border-primary-orange w-full mt-4
+                                flex flex-col flex-grow transition-all duration-300 <?= (isset($_SESSION['user_id']) && !$isOwnedPet) ? 'sepia' : '' ?>"
+                                data-owned="<?= $isOwnedPet ? '1' : '0' ?>">
 
                     <header class="flex px-4 py-2">
                         <img src="<?= htmlspecialchars($petFamilyIcon, ENT_QUOTES, 'UTF-8') ?>" alt="icône <?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?>" class="w-20 h-auto pt-1">
@@ -79,7 +80,7 @@ if (isset($_SESSION['user_id'])) {
                 </article>
 
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <button class="collection-toggle-btn w-4/5 mx-auto lg:w-full mt-4 py-3 flex items-center justify-center gap-3 rounded-xl border-2 font-bold uppercase text-sm tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown <?= $isOwnedPet ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black' ?>"
+                <button class="collection-toggle-btn w-full mt-4 py-3 flex items-center justify-center gap-3 rounded-xl border-2 font-bold uppercase text-sm tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown <?= $isOwnedPet ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black' ?>"
                         data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>">
                     <svg class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <?php if ($isOwnedPet): ?>
@@ -92,7 +93,7 @@ if (isset($_SESSION['user_id'])) {
                 </button>
                 <?php endif; ?>
               </div>
-                <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto mt-4
+                <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none mt-4
                               lg:w-full lg:mx-0">
                     <h3 class="text-2xl font-semibold text-center text-primary-orange pt-2
                                lg:text-3xl">Informations</h3>
@@ -151,7 +152,7 @@ if (isset($_SESSION['user_id'])) {
                 </aside>
             </div>
 
-            <section class="mt-8 bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto lg:w-full p-4 lg:p-6 shadow-xl" aria-label="Capacités de la mascotte">
+            <section class="mt-8 bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none lg:w-full p-4 lg:p-6 shadow-xl" aria-label="Capacités de la mascotte">
                 <h3 class="sr-only">Liste des sorts</h3>
                 <ul class="flex flex-wrap justify-around gap-3 md:gap-4 lg:gap-6">
                     <?php for ($i = 1; $i <= 6; $i++):

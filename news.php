@@ -15,9 +15,9 @@
 <body>
     <?php include 'components/header.php'; ?>
 
-    <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center
-                 lg:bg-[url(../images/lava_cave.jpg)] text-primary-white font-sans p-4 md:p-10">
-        <section class="max-w-6xl mx-auto mt-8 lg:mt-16">
+    <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed
+                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] text-primary-white font-sans p-4 md:p-10">
+        <section class="max-w-sm mx-auto md:max-w-4xl mt-8 lg:mt-16">
 
         <div class="border-2 border-primary-orange rounded-xl p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
             <h1 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-2xl">
@@ -33,7 +33,7 @@
         <h2 class="sr-only">Actualités récentes</h2>
         <div class="relative flex items-center group">
 
-            <button id="btn-prev" class="hidden lg:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
+            <button id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -92,7 +92,7 @@
                 <?php endforeach; ?>
             </div>
 
-            <button id="btn-next" class="hidden lg:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
+            <button id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
@@ -117,7 +117,7 @@
                 </h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 <?php foreach ($list_news as $article): ?>
                 <a href="news_detail.php?id=<?= (int)$article['id'] ?>" class="group">
                     <article class="bg-primary-brown border-2 border-primary-orange rounded-xl overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">

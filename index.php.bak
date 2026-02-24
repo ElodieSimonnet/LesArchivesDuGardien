@@ -23,7 +23,7 @@
         </div>
     <?php endif; ?>
 
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center pt-16 flex-grow px-16 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow px-16 lg:bg-[url(../images/lava_cave.jpg)]">
     
     <div class="mx-auto max-w-[16rem] md:max-w-[42rem] bg-primary-brown rounded-lg border-2 border-primary-orange p-2">
         <header class="text-center">

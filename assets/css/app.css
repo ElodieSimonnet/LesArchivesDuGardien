@@ -43,6 +43,14 @@
 }
 
 @layer base {
+  /* Assombrit les images de fond sans affecter le contenu */
+  main {
+    background-color: rgba(0, 0, 0, 0.3);
+    background-blend-mode: darken;
+  }
+}
+
+@layer base {
   html {
     /* Réserve l'espace de la scrollbar pour éviter que tout bouge à gauche */
     scrollbar-gutter: stable;

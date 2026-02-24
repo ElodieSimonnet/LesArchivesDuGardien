@@ -7,7 +7,7 @@
     <title>Page introuvable | Les Archives du Gardien</title>
     <meta name="description" content="La page que vous recherchez n'existe pas ou a été déplacée.">
 </head>
-<body class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] flex items-center justify-center p-4">
+<body class="min-h-screen bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center lg:bg-[url(../images/lava_cave.jpg)] flex items-center justify-center p-4">
 
     <div class="text-center max-w-lg mx-auto bg-black/80 border-2 border-primary-orange rounded-xl p-8 md:p-12 backdrop-blur-sm shadow-2xl">
 
