@@ -25,31 +25,31 @@
 
     <main id="main-content" class="bg-[url(../images/lava_cave_mobile.jpg)] bg-cover bg-center pt-16 flex-grow px-16 lg:bg-[url(../images/lava_cave.jpg)]">
     
-    <div class="mx-auto max-w-xl md:bg-primary-brown md:rounded-lg md:border-2 md:border-primary-orange md:p-6 md:max-w-4xl lg:max-w-5xl">
+    <div class="mx-auto max-w-[16rem] md:max-w-[42rem] bg-primary-brown rounded-lg border-2 border-primary-orange p-2">
         <header class="text-center">
-            <h1 class="text-primary-orange text-3xl p-5 md:text-4xl">Les Archives Du Gardien</h1>
-            <p class="text-primary-white text-xl p-5 md:text-2xl">Un lieu sûr pour suivre et conserver vos trésors d'Azeroth</p>
+            <h1 class="text-primary-orange text-3xl p-5 md:text-3xl">Les Archives Du Gardien</h1>
+            <p class="text-primary-white text-xl p-5 md:text-xl">Un lieu sûr pour suivre et conserver vos trésors d'Azeroth</p>
         </header>
     </div>
 
-    <section class="md:mt-16 md:mb-16">
+    <section class="mt-8 mb-8">
         <h2 class="sr-only">Catégories</h2>
-        <ul class="grid grid-cols-1 gap-8 py-4 mx-auto md:grid-cols-2 md:max-w-4xl lg:max-w-5xl">
-            
-            <li class="mx-auto w-full max-w-[16rem] md:max-w-none">
-                <a href="mount_list.php" class="block bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange transition-transform hover:scale-105">
-                    <figure class="flex flex-col items-center">
-                        <img src="assets/images/home_icons/dragon_icon.png" alt="icône de dragon doré représentant la catégorie monture">
-                        <figcaption class="text-center font-bold text-lg text-primary-orange uppercase">Montures</figcaption>
+        <ul class="grid grid-cols-1 gap-8 py-4 mx-auto max-w-[16rem] md:grid-cols-2 md:max-w-[42rem]">
+
+            <li>
+                <a href="mount_list.php" class="flex flex-col items-center justify-center aspect-square bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange transition-transform hover:scale-105">
+                    <figure class="flex flex-col items-center gap-2">
+                        <img src="assets/images/home_icons/dragon_icon.png" alt="icône de dragon doré représentant la catégorie monture" class="max-w-[6rem] md:max-w-[12rem]">
+                        <figcaption class="text-center font-bold text-xl text-primary-orange uppercase">Montures</figcaption>
                     </figure>
                 </a>
             </li>
 
-            <li class="mx-auto w-full max-w-[16rem] md:max-w-none">
-                <a href="pet_list.php" class="block bg-primary-brown rounded-xl p-4 border-2 border-primary-orange transition-transform hover:scale-105">
-                    <figure class="flex flex-col items-center">
-                        <img src="assets/images/home_icons/cat_icon.png" alt="icône de chat doré représentant la catégorie mascottes">
-                        <figcaption class="text-center font-bold text-lg text-primary-orange uppercase">Mascottes</figcaption>
+            <li>
+                <a href="pet_list.php" class="flex flex-col items-center justify-center aspect-square bg-primary-brown rounded-xl p-4 border-2 border-primary-orange transition-transform hover:scale-105">
+                    <figure class="flex flex-col items-center gap-2">
+                        <img src="assets/images/home_icons/cat_icon.png" alt="icône de chat doré représentant la catégorie mascottes" class="max-w-[6rem] md:max-w-[12rem]">
+                        <figcaption class="text-center font-bold text-xl text-primary-orange uppercase">Mascottes</figcaption>
                     </figure>
                 </a>
             </li>

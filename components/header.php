@@ -1,5 +1,5 @@
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:bg-primary-orange focus:text-primary-black focus:px-4 focus:py-2 focus:font-bold">Aller au contenu principal</a>
-<header class="bg-primary-black border-primary-orange border-b px-8 py-8">
+<header class="bg-primary-black border-primary-orange border-b px-8 py-2">
     <nav class="max-w-full mx-auto flex items-center justify-between" aria-label="Navigation principale">
         
         <div class="flex items-center gap-8">
