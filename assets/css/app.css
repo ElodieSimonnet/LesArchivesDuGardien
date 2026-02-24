@@ -14,6 +14,12 @@
 }
 
 @layer utilities {
+  /* Focus visible accessible global */
+  *:focus-visible {
+    outline: 3px solid oklch(0.8274 0.1415 71.71);
+    outline-offset: 3px;
+  }
+
   /* Focus visible accessible pour les cartes interactives */
   .mount-card:focus-visible,
   .pet-card:focus-visible {
