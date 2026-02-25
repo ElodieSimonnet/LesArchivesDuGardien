@@ -15,7 +15,7 @@
         
         <div class="space-y-4">
             <?php if (isset($_SESSION['user_id'])): ?>
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group" aria-expanded="true">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-eye"></i> État de collection
@@ -41,7 +41,7 @@
             </div>
             <?php endif; ?>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-dragon"></i> Type de monture
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-map-marked-alt"></i> Source
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-history"></i> Extension
@@ -98,7 +98,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-flag"></i> Faction

@@ -15,7 +15,8 @@ $sql = "SELECT
             adg_factions.faction,
             adg_sources.source,
             adg_zones.zone,
-            adg_currencies.name AS currency_name
+            adg_currencies.name AS currency_name,
+            adg_targets.target
         FROM adg_pets
         INNER JOIN adg_pet_families ON adg_pets.id_family    = adg_pet_families.id
         INNER JOIN adg_expansions   ON adg_pets.id_expansion = adg_expansions.id
@@ -23,6 +24,7 @@ $sql = "SELECT
         INNER JOIN adg_sources      ON adg_pets.id_source    = adg_sources.id
         LEFT JOIN adg_zones         ON adg_pets.id_zone      = adg_zones.id_zone
         LEFT JOIN adg_currencies    ON adg_pets.id_currency  = adg_currencies.id
+        LEFT JOIN adg_targets       ON adg_pets.id_target    = adg_targets.id
         WHERE adg_pets.id = :id";
 
 $query = $db->prepare($sql);
@@ -47,7 +49,7 @@ $familyIcons = [
     'Bestiole' => 'critter',
     'Draconien' => 'dragonkin',
 ];
-$petFamilyIcon = "assets/images/pets/" . ($familyIcons[$pet['family']] ?? 'critter') . ".png";
+$petFamilyIcon = "assets/images/pets/" . ($familyIcons[$pet['family']] ?? 'critter') . ".webp";
 
 // Récupérer les sorts de la mascotte
 $petSpells = [];

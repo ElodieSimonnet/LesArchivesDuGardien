@@ -32,16 +32,16 @@ if (!$user || $user['status'] !== 'Actif') {
     <?php include 'components/header.php'; ?>
     <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center min-h-screen pt-16 pb-16
                  md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
-        <div class="max-w-6xl mx-auto px-4 flex flex-col gap-6">
-            <section class="flex flex-col md:flex-row gap-6">
-                <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col gap-6">
+            <section class="grid md:grid-cols-3 gap-6">
+                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
                     <form action="components/utils/upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <label for="profileAvatarInput" class="relative w-32 h-32 mb-4 flex items-center justify-center group cursor-pointer" aria-label="Cliquez pour changer votre avatar">
                             
                             <div class="absolute inset-0 border-4 border-double border-primary-orange rounded-full transition-colors"></div>
                             
-                            <img src="<?php echo !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.png'; ?>" 
+                            <img src="<?php echo !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.webp'; ?>" 
                             alt="Portrait de <?php echo htmlspecialchars($user['username']); ?>" 
                             class="rounded-full w-[110px] h-[110px] object-cover group-hover:opacity-40 transition-opacity">
                             
@@ -67,7 +67,7 @@ if (!$user || $user['status'] !== 'Actif') {
                     <h1 class="text-primary-orange text-2xl font-bold uppercase tracking-widest"><?php echo htmlspecialchars($user['username']);?></h1>
                 </article>
 
-                <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
+                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
                         <img src="assets/images/home_icons/dragon_icon.png" alt="Icone Monture" class="w-[110px] h-[110px] object-contain">
                     </div>
@@ -75,7 +75,7 @@ if (!$user || $user['status'] !== 'Actif') {
                     <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?php echo $countOwnedMounts; ?> / <?php echo $countTotalMounts; ?></p>
                 </article>
 
-                <article class="flex-1 flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
+                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
                         <img src="assets/images/home_icons/cat_icon.png" alt="Icone Mascotte" class="w-[110px] h-[110px] object-contain">
                     </div>
@@ -84,8 +84,8 @@ if (!$user || $user['status'] !== 'Actif') {
                 </article>
             </section>
 
-            <section class="flex flex-col lg:flex-row gap-6">
-                <article class="flex-[1.6] bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden shadow-2xl">
+            <section class="grid md:grid-cols-3 gap-6">
+                <article class="md:col-span-2 bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden shadow-2xl">
                     <div class="pt-6">
                         <h2 class="text-primary-orange text-2xl font-bold uppercase text-center tracking-[0.2em]">Paramètres</h2>
                         <div class="h-[1px] bg-primary-orange w-full mt-4"></div>
@@ -253,7 +253,7 @@ if (!$user || $user['status'] !== 'Actif') {
                     </div>
                 </article>
 
-                <article class="flex-1 bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden flex flex-col shadow-2xl">
+                <article class="bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden flex flex-col shadow-2xl">
                     <div class="pt-6">
                         <div class="flex items-center justify-center gap-3">
                             <img src="assets/images/icon-bnet.png" alt="Battle.net" class="w-8 h-8">
@@ -265,7 +265,7 @@ if (!$user || $user['status'] !== 'Actif') {
                     <div class="p-6 md:p-8 flex flex-col items-center justify-center flex-1 gap-6">
                         <p class="text-lg text-center text-white font-medium">Synchronisez votre compte Battle.net :</p>
                         <div class="w-full max-w-[280px]">
-                            <input type="text" placeholder="Entrez votre BattleTag" 
+                            <input type="text" placeholder="BattleTag" 
                             class="w-full bg-black/40 border border-primary-orange rounded-lg py-3 px-4 text-center text-white placeholder:text-a11y-gray focus:ring-1 focus:ring-primary-orange outline-none font-mono">
                         </div>
                         <button class="w-full max-w-[280px] bg-primary-orange hover:bg-amber-500 text-primary-black font-black py-3 px-10 rounded-lg uppercase text-sm">

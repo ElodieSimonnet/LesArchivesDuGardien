@@ -10,8 +10,10 @@ if (!$user_id) {
     exit;
 }
 
-$query = "SELECT adg_users.*
+$query = "SELECT adg_users.*, adg_roles.role_name, adg_users_status.status
           FROM adg_users
+          INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
+          INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
           WHERE adg_users.id = :id";
 $stmt = $db->prepare($query);
 $stmt->execute([':id' => $user_id]);
@@ -35,7 +37,7 @@ if (!$user) {
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_user_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -56,17 +58,60 @@ if (!$user) {
             <div class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
+                    <div class="flex flex-col gap-2 md:col-span-2 flex items-center">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Avatar</span>
+                        <img src="<?php echo !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.webp'; ?>"
+                             alt="Avatar de <?php echo htmlspecialchars($user['username']); ?>"
+                             class="w-24 h-24 rounded-full object-cover border-2 border-primary-orange mt-2">
+                    </div>
+
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Date d'inscription</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?php echo date('d/m/Y à H:i', strtotime($user['registration_date'])); ?>
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">ID</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white font-mono">
+                            #<?php echo (int) $user['id']; ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Date d'anniversaire</span>
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom d'utilisateur</span>
                         <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?php echo !empty($user['birthday_date']) ? date('d/m/Y', strtotime($user['birthday_date'])) : '---'; ?>
+                            <?php echo htmlspecialchars($user['username']); ?>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Email</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white font-mono">
+                            <?php echo htmlspecialchars($user['email']); ?>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Rôle</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white uppercase">
+                            <?php echo htmlspecialchars($user['role_name']); ?>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Statut</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 uppercase
+                            <?php
+                                echo match($user['status']) {
+                                    'Actif'    => 'text-green-400 font-bold',
+                                    'Suspendu' => 'text-yellow-400 font-bold',
+                                    'Banni'    => 'text-red-500 font-bold',
+                                    default    => 'text-primary-white'
+                                };
+                            ?>">
+                            <?php echo htmlspecialchars($user['status']); ?>
+                        </span>
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Date d'inscription</span>
+                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
+                            <?php echo date('d/m/Y à H:i', strtotime($user['registration_date'])); ?>
                         </span>
                     </div>
 
@@ -76,7 +121,6 @@ if (!$user) {
                             <?php echo (int) $user['failed_attempts']; ?> / 3
                         </span>
                     </div>
-
 
                 </div>
             </div>

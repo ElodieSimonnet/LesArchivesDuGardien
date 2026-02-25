@@ -28,6 +28,7 @@ $all_factions = $db->query("SELECT * FROM adg_factions ORDER BY faction ASC")->f
 $all_zones = $db->query("SELECT * FROM adg_zones ORDER BY zone ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_currencies = $db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
 $all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
+$all_targets = $db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ $all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetc
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_pet_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -165,6 +166,18 @@ $all_spells = $db->query("SELECT * FROM adg_pet_spells ORDER BY name ASC")->fetc
                         <label for="cost" class="text-sm font-black uppercase text-primary-orange tracking-widest">Coût</label>
                         <input type="number" id="cost" name="cost" step="1" min="0" value="<?php echo htmlspecialchars($pet['cost'] ?? ''); ?>"
                                class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                    </div>
+
+                    <div class="flex flex-col gap-2">
+                        <label for="id_target" class="text-sm font-black uppercase text-primary-orange tracking-widest">Cible</label>
+                        <select id="id_target" name="id_target" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                            <option value="">Aucune</option>
+                            <?php foreach ($all_targets as $target) : ?>
+                                <option value="<?php echo $target['id']; ?>" <?php echo ($target['id'] == $pet['id_target']) ? 'selected' : ''; ?>>
+                                    <?php echo htmlspecialchars($target['target']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
 
                     <div class="md:col-span-2 mt-4">

@@ -24,6 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $cost = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
     $id_zone = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
     $id_currency = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
+    $id_target = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
     $spells = [];
     for ($i = 1; $i <= 6; $i++) {
         $spells[$i] = !empty($_POST['spell_' . $i]) ? (int) $_POST['spell_' . $i] : null;
@@ -82,8 +83,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     try {
-        $sql = "INSERT INTO adg_pets (name, description, image, id_family, id_source, id_expansion, id_faction, droprate, cost, id_zone, id_currency, spell_1, spell_2, spell_3, spell_4, spell_5, spell_6)
-                VALUES (:name, :description, :image, :id_family, :id_source, :id_expansion, :id_faction, :droprate, :cost, :id_zone, :id_currency, :spell_1, :spell_2, :spell_3, :spell_4, :spell_5, :spell_6)";
+        $sql = "INSERT INTO adg_pets (name, description, image, id_family, id_source, id_expansion, id_faction, droprate, cost, id_zone, id_currency, id_target, spell_1, spell_2, spell_3, spell_4, spell_5, spell_6)
+                VALUES (:name, :description, :image, :id_family, :id_source, :id_expansion, :id_faction, :droprate, :cost, :id_zone, :id_currency, :id_target, :spell_1, :spell_2, :spell_3, :spell_4, :spell_5, :spell_6)";
 
         $stmt = $db->prepare($sql);
         $stmt->execute([
@@ -98,6 +99,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':cost' => $cost,
             ':id_zone' => $id_zone,
             ':id_currency' => $id_currency,
+            ':id_target' => $id_target,
             ':spell_1' => $spells[1],
             ':spell_2' => $spells[2],
             ':spell_3' => $spells[3],

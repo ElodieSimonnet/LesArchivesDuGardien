@@ -4,7 +4,7 @@
         
         <div class="flex items-center gap-8">
             <a href="index.php" class="flex-shrink-0">
-                <img src="assets/images/home_icons/dragon_logo.png" alt="Les Archives du Gardien - Accueil" class="h-24 w-24 md:h-30 md:w-30">
+                <img src="assets/images/home_icons/dragon_logo.webp" alt="Les Archives du Gardien - Accueil" class="h-24 w-24 md:h-30 md:w-30">
             </a>
 
             <ul class="hidden lg:flex items-center gap-12 text-primary-white font-semibold uppercase text-lg tracking-wider">

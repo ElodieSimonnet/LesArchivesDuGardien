@@ -1,8 +1,8 @@
 <?php
-$sql = "SELECT f.id, f.question, f.answer, f.display_order, f.created_at, c.name AS category_name
-        FROM adg_faq f
-        LEFT JOIN adg_faq_categories c ON f.id_category = c.id
-        ORDER BY f.id ASC";
+$sql = "SELECT adg_faq.id, adg_faq.question, adg_faq.answer, adg_faq.display_order, adg_faq.created_at, adg_faq_categories.name AS category_name
+        FROM adg_faq
+        LEFT JOIN adg_faq_categories ON adg_faq.id_category = adg_faq_categories.id
+        ORDER BY adg_faq.id ASC";
 
 $stmt = $db->prepare($sql);
 $stmt->execute();

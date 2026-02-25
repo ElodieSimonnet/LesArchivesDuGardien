@@ -10,7 +10,7 @@ if (!$news_id) {
     exit;
 }
 
-$query = "SELECT n.*, u.username AS author FROM adg_news n LEFT JOIN adg_users u ON n.id_user = u.id WHERE n.id = :id";
+$query = "SELECT adg_news.*, adg_users.username AS author FROM adg_news LEFT JOIN adg_users ON adg_news.id_user = adg_users.id WHERE adg_news.id = :id";
 $stmt = $db->prepare($query);
 $stmt->execute([':id' => (int)$news_id]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ if (!$article) {
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_news_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">

@@ -48,7 +48,7 @@
 
     <div class="flex flex-1 overflow-hidden">
 
-      <aside id="admin-sidebar" class="flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed top-0 h-full z-[60] -translate-x-full lg:translate-x-0 transition-transform duration-300">
+      <aside id="admin-sidebar" class="flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed top-30 bottom-0 z-[60] -translate-x-full lg:translate-x-0 transition-transform duration-300">
 
 <div class="p-6 flex flex-col items-center">
           <nav class="w-full space-y-8 mt-4">

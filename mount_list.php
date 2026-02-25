@@ -41,7 +41,7 @@
                     <label for="search-input" class="sr-only">Rechercher une monture</label>
                     <input type="text" id="search-input"
                            placeholder="Rechercher une monture par son nom"
-                           class="w-full h-full bg-primary-brown/60 border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
+                           class="w-full h-full bg-primary-brown border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
                 </div>
 
                 <button id="mobile-filter-trigger" aria-label="Ouvrir les filtres" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
@@ -71,11 +71,11 @@
             <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
+                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span id="current-status-label" class="truncate">Statut : Toutes</span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
                     </button>
-                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg">
+                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg">
                         <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
                             <input type="radio" name="filter-status" value="all" checked class="status-radio accent-primary-orange w-4 h-4">
                             <span class="text-sm">Toutes</span>
@@ -101,11 +101,11 @@
                 ];
                 foreach ($filterGroups as $group): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown/60 border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
+                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span class="truncate"><?= $group['label'] ?></span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
                     </button>
-                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-black border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60 custom-scrollbar">
+                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60 custom-scrollbar">
                         <?php foreach ($group['data'] as $item): ?>
                             <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
                                 <input type="checkbox" data-filter="<?= htmlspecialchars($group['key'], ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars($item[$group['key']], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-4 h-4">
@@ -153,15 +153,15 @@
                                     data-expansion="'.$eExpansion.'"
                                     data-faction="'.$eFaction.'"
                                     aria-label="Voir la fiche de '.$eName.'"
-                                    class="mount-card w-full h-full bg-primary-black border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
+                                    class="mount-card w-full h-full bg-[oklch(0.23_0.0316_24.1)] border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col '.$hoverColor.' transition-all duration-300 group shadow-2xl '.(isset($_SESSION['user_id']) && !$mount['is_owned'] ? 'sepia hover:sepia-0' : '').'">
 
                                 <div class="relative p-6 flex-grow flex flex-col items-center">
-                                    <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$eType.'.png" alt="Icône '.$eType.'" class="w-12 h-12" loading="lazy"></span>
+                                    <span class="absolute top-4 left-4"><img src="assets/images/mounts/'.$eType.'.webp" alt="Icône '.$eType.'" class="w-12 h-12" loading="lazy"></span>
                                     <img src="'.$eImage.'" alt="'.$eName.'" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105" loading="lazy">
                                     <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white">'.$eName.'</h2>
                                 </div>
 
-                                <div class="bg-black border-t border-primary-orange py-3 flex items-center justify-center gap-2 relative">
+                                <div class="bg-[oklch(0.23_0.0316_24.1)] border-t border-primary-orange py-3 flex items-center justify-center gap-2 relative">
                                     <span class="'.$difficultyColor.' text-lg">★</span>
                                     <span class="'.$difficultyColor.' text-sm font-bold uppercase tracking-[0.2em]">'.$eDifficulty.'</span>
                                     <span class="'.$difficultyColor.' text-lg">★</span>'
@@ -185,8 +185,8 @@
             </div>
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
-                <p id="load-more-count" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-black border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
-                <button id="load-more-btn" class="w-full max-w-sm text-center bg-primary-black border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+                <p id="load-more-count" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
+                <button id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                     Charger plus
                 </button>
             </div>

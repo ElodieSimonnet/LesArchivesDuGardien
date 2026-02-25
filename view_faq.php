@@ -10,7 +10,7 @@ if (!$faq_id) {
     exit;
 }
 
-$query = "SELECT f.*, c.name AS category_name FROM adg_faq f LEFT JOIN adg_faq_categories c ON f.id_category = c.id WHERE f.id = :id";
+$query = "SELECT adg_faq.*, adg_faq_categories.name AS category_name FROM adg_faq LEFT JOIN adg_faq_categories ON adg_faq.id_category = adg_faq_categories.id WHERE adg_faq.id = :id";
 $stmt = $db->prepare($query);
 $stmt->execute([':id' => (int)$faq_id]);
 $faq = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ if (!$faq) {
 <body class="bg-black text-primary-white">
     <?php include 'components/admin_sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen bg-row-dark p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="admin_faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">

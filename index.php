@@ -39,7 +39,7 @@
             <li>
                 <a href="mount_list.php" class="flex flex-col items-center justify-center aspect-square bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange transition-transform hover:scale-105">
                     <figure class="flex flex-col items-center gap-2">
-                        <img src="assets/images/home_icons/dragon_icon.png" alt="icône de dragon doré représentant la catégorie monture" class="max-w-[6rem] md:max-w-[12rem]">
+                        <img src="assets/images/home_icons/dragon_icon.webp" alt="icône de dragon doré représentant la catégorie monture" class="max-w-[6rem] md:max-w-[12rem]">
                         <figcaption class="text-center font-bold text-xl text-primary-orange uppercase">Montures</figcaption>
                     </figure>
                 </a>
@@ -48,7 +48,7 @@
             <li>
                 <a href="pet_list.php" class="flex flex-col items-center justify-center aspect-square bg-primary-brown rounded-xl p-4 border-2 border-primary-orange transition-transform hover:scale-105">
                     <figure class="flex flex-col items-center gap-2">
-                        <img src="assets/images/home_icons/cat_icon.png" alt="icône de chat doré représentant la catégorie mascottes" class="max-w-[6rem] md:max-w-[12rem]">
+                        <img src="assets/images/home_icons/cat_icon.webp" alt="icône de chat doré représentant la catégorie mascottes" class="max-w-[6rem] md:max-w-[12rem]">
                         <figcaption class="text-center font-bold text-xl text-primary-orange uppercase">Mascottes</figcaption>
                     </figure>
                 </a>

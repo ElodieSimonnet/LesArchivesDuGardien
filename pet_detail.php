@@ -55,7 +55,7 @@ if (isset($_SESSION['user_id'])) {
                     </svg>
                 </button>
                 <?php endif; ?>
-                <article class="bg-primary-brown rounded-xl border-2 border-primary-orange w-full mt-4
+                <article class="bg-[oklch(0.23_0.0316_24.1)] rounded-xl border-2 border-primary-orange w-full mt-4
                                 flex flex-col flex-grow transition-all duration-300 <?= (isset($_SESSION['user_id']) && !$isOwnedPet) ? 'sepia' : '' ?>"
                                 data-owned="<?= $isOwnedPet ? '1' : '0' ?>">
 
@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id'])) {
                         <h2 class="text-base font-black uppercase text-center mt-4 mb-6 tracking-widest text-white"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
-                    <div class="bg-black border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
+                    <div class="bg-[oklch(0.23_0.0316_24.1)] border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
                         <span class="text-primary-orange text-base font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></span>
                         <?php if (isset($_SESSION['user_id'])): ?>
                         <span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray<?= $isOwnedPet ? ' hidden' : '' ?>" aria-hidden="true">
@@ -143,10 +143,16 @@ if (isset($_SESSION['user_id'])) {
                             <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($pet['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
-                        <div class="flex flex-col lg:flex-row items-center lg:items-start mb-8">
+                        <div class="flex flex-col lg:flex-row items-center lg:items-start">
                             <dt class="font-semibold text-xl text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
                             <dd class="text-xl text-primary-white text-center"><?= !empty($pet['zone']) ? htmlspecialchars($pet['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
+                            <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
+                        </div>
+                        <div class="flex flex-col lg:flex-row items-center lg:items-start mb-8">
+                            <dt class="font-semibold text-xl text-primary-orange text-center
+                                       lg:text-left lg:w-2/5">Cible :</dt>
+                            <dd class="text-xl text-primary-white text-center"><?= !empty($pet['target']) ? htmlspecialchars($pet['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
                 </aside>
@@ -162,7 +168,7 @@ if (isset($_SESSION['user_id'])) {
                         $spellDesc = $spell ? htmlspecialchars($spell['description'], ENT_QUOTES, 'UTF-8') : '';
                     ?>
                     <li class="relative group spell-item">
-                        <div class="spell-icon w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 bg-black border-2 border-primary-orange rounded-lg
+                        <div class="spell-icon w-12 h-12 sm:w-12 sm:h-12 md:w-12 md:h-12 lg:w-12 lg:h-12 bg-black border-2 border-primary-orange rounded-lg
                         flex items-center justify-center cursor-pointer hover:scale-110 transition-all duration-300
                         shadow-inner overflow-hidden">
                             <img src="<?= $spellImg ?>" alt="<?= $spellName ?: 'Sort ' . $i ?>" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
@@ -171,7 +177,7 @@ if (isset($_SESSION['user_id'])) {
                         <?php if ($spell): ?>
                         <div class="spell-tooltip absolute top-full left-1/2 -translate-x-1/2 mt-2 w-48 bg-primary-black border border-primary-orange rounded-lg p-3 shadow-2xl
                                     opacity-0 md:group-hover:opacity-100 pointer-events-none transition-opacity duration-300 z-10">
-                            <p class="text-primary-orange font-bold text-sm uppercase text-center tracking-wider"><?= $spellName ?></p>
+                            <p class="text-primary-orange font-bold text-xs uppercase text-center tracking-wider"><?= $spellName ?></p>
                         </div>
                         <?php endif; ?>
                     </li>

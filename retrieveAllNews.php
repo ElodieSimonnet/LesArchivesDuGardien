@@ -1,8 +1,8 @@
 <?php
-$base_sql = "SELECT n.id, n.title, n.content, n.image_url, n.source_news, n.created_at, u.username AS author
-             FROM adg_news n
-             LEFT JOIN adg_users u ON n.id_user = u.id
-             ORDER BY n.created_at DESC";
+$base_sql = "SELECT adg_news.id, adg_news.title, adg_news.content, adg_news.image_url, adg_news.source_news, adg_news.created_at, adg_users.username AS author
+             FROM adg_news
+             LEFT JOIN adg_users ON adg_news.id_user = adg_users.id
+             ORDER BY adg_news.created_at DESC";
 
 // 3 dernières news pour le carousel
 $stmt_carousel = $db->prepare($base_sql . " LIMIT 3");

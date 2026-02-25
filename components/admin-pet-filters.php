@@ -23,7 +23,7 @@
     <div class="flex-1 overflow-y-auto px-6 py-8">
         <form id="filterForm" class="space-y-4">
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button type="button" class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Famille</h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Source</h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -65,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Extension</h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -86,7 +86,7 @@
                 </div>
             </div>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown/10">
+            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Faction</h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">

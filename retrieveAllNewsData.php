@@ -1,5 +1,5 @@
 <?php
-$sql = "SELECT n.*, u.username AS author FROM adg_news n LEFT JOIN adg_users u ON n.id_user = u.id ORDER BY n.id ASC";
+$sql = "SELECT adg_news.*, adg_users.username AS author FROM adg_news LEFT JOIN adg_users ON adg_news.id_user = adg_users.id ORDER BY adg_news.id ASC";
 
 $stmt = $db->prepare($sql);
 $stmt->execute();
