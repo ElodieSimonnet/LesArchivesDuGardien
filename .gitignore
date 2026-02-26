@@ -3,3 +3,4 @@ node_modules/
 .env
 CAHIER_DES_CHARGES.md
 DOSSIER_DE_PROJET.md
+*.bak
