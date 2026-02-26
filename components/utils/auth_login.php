@@ -15,16 +15,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $identifier = trim($_POST['username']);
     $password = $_POST['password'];
 
-    // On cherche l'utilisateur par pseudo ou email (avec son statut de compte)
-    $stmt = $db->prepare("SELECT adg_users.*, adg_users_status.status
+    // On cherche l'utilisateur par pseudo ou email (avec son statut de compte et son rôle)
+    $stmt = $db->prepare("SELECT adg_users.*, adg_users_status.status, adg_roles.role_name
                           FROM adg_users
                           INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
+                          INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
                           WHERE adg_users.username = ? OR adg_users.email = ?");
     $stmt->execute([$identifier, $identifier]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     // Si l'utilisateur n'existe pas, on renvoie un message générique
     if (!$user) {
+        echo json_encode(['status' => 'error', 'message' => 'Identifiants incorrects.']);
+        exit;
+    }
+
+    // BLOCAGE DES COMPTES ADMIN
+    if ($user['role_name'] === 'Administrateur') {
         echo json_encode(['status' => 'error', 'message' => 'Identifiants incorrects.']);
         exit;
     }
