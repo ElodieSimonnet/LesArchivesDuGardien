@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             rows.forEach(row => {
                 const name = row.dataset.name || '';
-                row.style.display = name.startsWith(term) ? '' : 'none';
+                row.style.display = term.length < 2 || name.includes(term) ? '' : 'none';
             });
         });
     }

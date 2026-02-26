@@ -116,10 +116,11 @@ restrictToAdmin();
 
     <script>
     document.getElementById('search-faq').addEventListener('input', function() {
-        const search = this.value.toLowerCase();
+        const searchWords = this.value.toLowerCase().trim().split(/[\s\-'']+/).filter(w => w.length > 0);
         document.querySelectorAll('.faq-row').forEach(row => {
-            const name = row.dataset.name || '';
-            row.style.display = name.includes(search) ? '' : 'none';
+            const nameWords = (row.dataset.name || '').split(/[\s\-''?!.,;:]+/).filter(w => w.length > 0);
+            const match = searchWords.length === 0 || searchWords.every(sw => nameWords.some(nw => nw === sw));
+            row.style.display = match ? '' : 'none';
         });
     });
     </script>

@@ -110,10 +110,10 @@ restrictToAdmin();
 
     <script>
     document.getElementById('search-news').addEventListener('input', function() {
-        const search = this.value.toLowerCase();
+        const search = this.value.toLowerCase().trim();
         document.querySelectorAll('.news-row').forEach(row => {
             const name = row.dataset.name || '';
-            row.style.display = name.includes(search) ? '' : 'none';
+            row.style.display = search.length < 2 || name.includes(search) ? '' : 'none';
         });
     });
     </script>

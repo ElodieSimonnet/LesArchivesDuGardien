@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
             rows.forEach(row => {
                 const username = row.dataset.username || '';
                 const email = row.dataset.email || '';
-                row.style.display = (username.startsWith(term) || email.startsWith(term)) ? '' : 'none';
+                row.style.display = term.length < 2 || username.includes(term) || email.includes(term) ? '' : 'none';
             });
         });
     }
