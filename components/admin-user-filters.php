@@ -5,7 +5,7 @@
 
 <div id="filter-mobile-overlay" class="fixed inset-0 bg-primary-black/80 backdrop-blur-sm z-[500] hidden opacity-0 transition-opacity duration-300"></div>
 
-<div id="filter-mobile-menu" class="fixed z-[501] inset-0 m-auto w-[90%] md:w-[500px] h-fit max-h-[90vh] opacity-0 pointer-events-none transform translate-y-8
+<div id="filter-mobile-menu" class="fixed z-[501] inset-0 m-auto w-[90%] md:w-[500px] h-[85vh] opacity-0 pointer-events-none transform translate-y-8
     transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]
     flex flex-col border-2 border-primary-orange bg-primary-black shadow-2xl rounded-2xl">
 

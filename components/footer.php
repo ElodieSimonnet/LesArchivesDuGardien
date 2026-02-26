@@ -9,7 +9,7 @@
                         <a href="faq.php" class="hover:text-primary-orange uppercase">F.A.Q</a>
                     </li>
                     <li>
-                        <a href="legals.php" class="hover:text-primary-orange uppercase">Mentions Légales</a>
+                        <a href="legals.php" class="hover:text-primary-orange uppercase">Informations Légales</a>
                     </li>
                 </ul>
             </nav>
@@ -29,4 +29,8 @@
                 </a>
             </div>
         </div>
+        </div>
+        <p class="text-center text-xs text-zinc-500 mt-8 max-w-2xl mx-auto">
+            Les Archives du Gardien est un site de fan non officiel, non affilié à Blizzard Entertainment. World of Warcraft®, Warcraft® et Blizzard Entertainment® sont des marques déposées de Blizzard Entertainment, Inc.
+        </p>
     </footer>
