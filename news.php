@@ -50,7 +50,7 @@
                         </div>
                     </figure>
                     <div class="hidden lg:block lg:py-6">
-                        <hr class="border-primary-orange border-t-0 border-l lg:h-full">
+                        <hr class="border-primary-orange border-t-0 border-l lg:h-full" aria-hidden="true">
                     </div>
                     <?php endif; ?>
 
@@ -79,7 +79,7 @@
 
                         <footer class="mt-8 pt-6 border-t border-zinc-800/50 flex flex-col items-center gap-2">
                             <p class="text-primary-orange/90 text-sm lg:text-base italic">
-                                Publié le <?= date('d/m/Y à H:i', strtotime($article['created_at'])) ?> par <span class="font-bold uppercase tracking-wide text-primary-white"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
+                                Publié le <time datetime="<?= date('Y-m-d', strtotime($article['created_at'])) ?>"><?= date('d/m/Y à H:i', strtotime($article['created_at'])) ?></time> par <span class="font-bold uppercase tracking-wide text-primary-white"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
                             </p>
                             <?php if (!empty($article['source_news'])): ?>
                             <a href="<?= htmlspecialchars($article['source_news'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="text-primary-orange text-xs font-bold uppercase tracking-wider hover:underline">
@@ -146,7 +146,7 @@
 
                             <footer class="mt-4 pt-3 border-t border-zinc-800/50 flex justify-between items-center">
                                 <p class="text-primary-orange/70 text-xs italic">
-                                    <?= date('d/m/Y', strtotime($article['created_at'])) ?> — <span class="font-bold uppercase text-primary-white/70"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
+                                    <time datetime="<?= date('Y-m-d', strtotime($article['created_at'])) ?>"><?= date('d/m/Y', strtotime($article['created_at'])) ?></time> — <span class="font-bold uppercase text-primary-white/70"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                                 <?php if (!empty($article['source_news'])): ?>
                                 <span class="text-primary-orange/70 text-xs font-bold uppercase hover:underline">Source</span>

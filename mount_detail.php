@@ -72,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
 
                     
 
-                    <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto">
+                    <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto" aria-hidden="true">
 
 
                     <?php 

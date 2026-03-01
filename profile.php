@@ -32,6 +32,7 @@ if (!$user || $user['status'] !== 'Actif') {
     <?php include 'components/header.php'; ?>
     <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center min-h-screen pt-16 pb-16
                  md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+        <h1 class="sr-only">Mon Profil</h1>
         <div class="max-w-4xl mx-auto px-4 flex flex-col gap-6">
             <section class="grid md:grid-cols-3 gap-6">
                 <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">

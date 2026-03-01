@@ -24,7 +24,7 @@ restrictToAdmin();
 
         <div class="flex justify-center mb-10 mt-4">
             <h1 class="px-8 lg:px-16 py-3 border-2 border-primary-orange bg-[#1a0f0a] text-primary-orange font-bold uppercase tracking-[0.2em] shadow-2xl rounded-lg text-center">
-                Gestion des Actualit&eacute;s
+                Gestion des Actualités
             </h1>
         </div>
 
@@ -82,22 +82,22 @@ restrictToAdmin();
                             <div role="cell" class="xl:col-span-3 xl:p-4 flex justify-between xl:justify-center items-center xl:border-r xl:border-primary-orange border-dashed">
                                 <span class="xl:hidden text-[12px] font-bold text-primary-orange uppercase">Date</span>
                                 <span class="text-sm text-primary-white text-center">
-                                    <?php echo date('d/m/Y H:i', strtotime($newsRow['created_at'])); ?>
+                                    <time datetime="<?php echo date('Y-m-d', strtotime($newsRow['created_at'])); ?>"><?php echo date('d/m/Y H:i', strtotime($newsRow['created_at'])); ?></time>
                                 </span>
                             </div>
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-end xl:justify-center items-center gap-3">
                                 <a href="view_news.php?id=<?php echo $newsRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir">
-                                    <i class="ph ph-eye text-2xl"></i>
+                                    <i class="ph ph-eye text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <a href="edit_news.php?id=<?php echo $newsRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier">
-                                    <i class="ph ph-pencil-simple text-2xl"></i>
+                                    <i class="ph ph-pencil-simple text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <form action="delete_news.php" method="POST" onsubmit="return confirm('Supprimer cet article ?')" class="inline">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="news_id" value="<?php echo $newsRow['id']; ?>">
                                     <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer">
-                                        <i class="ph ph-trash text-2xl"></i>
+                                        <i class="ph ph-trash text-2xl" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>

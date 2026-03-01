@@ -26,12 +26,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const openFilters = () => {
         // 1. On affiche le conteneur
         overlay.classList.remove('hidden');
-        
+
         setTimeout(() => {
             // 2. On anime l'apparition : opaque + remonte à sa place + devient cliquable
             overlay.classList.add('opacity-100');
             menu.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
             menu.classList.add('opacity-100', 'translate-y-0');
+            menu.setAttribute('aria-hidden', 'false');
+            if (closeBtn) closeBtn.focus();
         }, 10);
 
         document.body.style.overflow = 'hidden';
@@ -47,8 +49,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // 2. On cache tout après l'anim
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
+            menu.setAttribute('aria-hidden', 'true');
+            openBtn.focus();
         }, 500);
     };
+
+    // Focus trap
+    menu.addEventListener('keydown', (e) => {
+        if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
+        const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        if (e.shiftKey) {
+            if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+        } else {
+            if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
 
     // Listeners
     openBtn.addEventListener('click', openFilters);

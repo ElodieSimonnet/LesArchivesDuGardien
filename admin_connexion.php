@@ -10,7 +10,8 @@
 </head>
 <body class="bg-[#1a0f0a] flex items-center justify-center min-h-screen">
 
-    <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full max-w-lg mx-4">
+<main class="w-full flex justify-center px-4">
+    <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full max-w-lg">
         
         <h1 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Connexion Administrateur</h1>
 
@@ -41,6 +42,7 @@
             </button>
         </form>
     </div>
+</main>
 
     <script src="assets/js/auth-admin-modal.js"></script>
 </body>

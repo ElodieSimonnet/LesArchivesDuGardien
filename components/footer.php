@@ -1,6 +1,6 @@
 <footer class="bg-primary-black text-primary-white border-t border-primary-orange py-8 px-4">
         <div class="max-w-6xl mx-auto flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-4">
-            <nav>
+            <nav aria-label="Navigation secondaire">
                 <ul class="flex flex-row items-center gap-10 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
                     <li>
                         <a href="news.php" class="hover:text-primary-orange uppercase">Nouveautés</a>

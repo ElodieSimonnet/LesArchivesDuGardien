@@ -46,7 +46,7 @@
 </header>
 
 
-<div id="mobile-menu" class="fixed inset-y-0 right-0 z-[300] w-full bg-primary-black transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden border-l border-primary-orange shadow-2xl flex flex-col">
+<nav id="mobile-menu" aria-label="Navigation mobile" class="fixed inset-y-0 right-0 z-[300] w-full bg-primary-black transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden border-l border-primary-orange shadow-2xl flex flex-col">
     
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Menu</span>
@@ -111,4 +111,4 @@
             <?php endif; ?>
         </div>
     </div>
-</div>
+</nav>

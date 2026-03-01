@@ -54,7 +54,7 @@ restrictToAdmin();
                     <div role="row" class="grid grid-cols-12 py-4 text-[11px] font-black uppercase tracking-widest text-primary-orange">
                         <div role="columnheader" class="col-span-1 text-center">ID</div>
                         <div role="columnheader" class="col-span-4 text-center">Question</div>
-                        <div role="columnheader" class="col-span-2 text-center">Cat&eacute;gorie</div>
+                        <div role="columnheader" class="col-span-2 text-center">Catégorie</div>
                         <div role="columnheader" class="col-span-1 text-center">Ordre</div>
                         <div role="columnheader" class="col-span-2 text-center">Date</div>
                         <div role="columnheader" class="col-span-2 text-center">Actions</div>
@@ -76,7 +76,7 @@ restrictToAdmin();
                             </div>
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-between xl:justify-center items-center xl:border-r xl:border-primary-orange border-dashed">
-                                <span class="xl:hidden text-[12px] font-bold text-primary-orange uppercase">Cat&eacute;gorie</span>
+                                <span class="xl:hidden text-[12px] font-bold text-primary-orange uppercase">Catégorie</span>
                                 <span class="text-sm text-primary-white font-black uppercase"><?php echo htmlspecialchars($faqRow['category_name'] ?? 'Aucune'); ?></span>
                             </div>
 
@@ -88,22 +88,22 @@ restrictToAdmin();
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-between xl:justify-center items-center xl:border-r xl:border-primary-orange border-dashed">
                                 <span class="xl:hidden text-[12px] font-bold text-primary-orange uppercase">Date</span>
                                 <span class="text-sm text-primary-white text-center">
-                                    <?php echo date('d/m/Y H:i', strtotime($faqRow['created_at'])); ?>
+                                    <time datetime="<?php echo date('Y-m-d', strtotime($faqRow['created_at'])); ?>"><?php echo date('d/m/Y H:i', strtotime($faqRow['created_at'])); ?></time>
                                 </span>
                             </div>
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-end xl:justify-center items-center gap-3">
                                 <a href="view_faq.php?id=<?php echo $faqRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir">
-                                    <i class="ph ph-eye text-2xl"></i>
+                                    <i class="ph ph-eye text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <a href="edit_faq.php?id=<?php echo $faqRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier">
-                                    <i class="ph ph-pencil-simple text-2xl"></i>
+                                    <i class="ph ph-pencil-simple text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <form action="delete_faq.php" method="POST" onsubmit="return confirm('Supprimer cette question ?')" class="inline">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="faq_id" value="<?php echo $faqRow['id']; ?>">
                                     <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer">
-                                        <i class="ph ph-trash text-2xl"></i>
+                                        <i class="ph ph-trash text-2xl" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>

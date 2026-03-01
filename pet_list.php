@@ -117,7 +117,7 @@
                 <?php endforeach; ?>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-w-full">
+            <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-w-full">
                 <?php
                     foreach ($pets as $pet) {
                         $statusValue = $pet['is_owned'] ? '1' : '0';
@@ -149,7 +149,7 @@
                             : '';
 
                         echo('
-                        <div class="pet-item relative flex flex-col">
+                        <li class="pet-item relative flex flex-col">
                             '.$wishlistBtn.'
                             <a href="pet_detail.php?id='.$pet['id'].'"
                                     data-owned="'.$statusValue.'"
@@ -182,10 +182,10 @@
                                 </svg>
                                 <span class="collection-label">'.($pet['is_owned'] ? 'Obtenue' : 'Ajouter').'</span>
                             </button>' : '').'
-                        </div>');
+                        </li>');
                     }
                 ?>
-            </div>
+            </ul>
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
                 <p id="load-more-count" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>

@@ -27,17 +27,19 @@
                 <p class="mt-2">La connexion et la navigation sur le Site par l'Utilisateur implique acceptation intégrale et sans réserve des présentes informations légales.</p>
             </div>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">ÉDITION DU SITE</h2>
                 <div class="text-sm text-primary-white p-4 lg:text-base space-y-2">
-                    <p>L'édition et la direction de la publication du Site est assurée par <strong>Elodie Simonnet</strong>, domiciliée au <strong>[ADRESSE]</strong>, dont le numéro de téléphone est le <strong>[TÉLÉPHONE]</strong>, et l'adresse e-mail <strong>[EMAIL]</strong>.</p>
-                    <p>ci-après l'« Éditeur ».</p>
+                    <address class="not-italic">
+                        <p>L'édition et la direction de la publication du Site est assurée par <strong>Elodie Simonnet</strong>, domiciliée au <strong>[ADRESSE]</strong>, dont le numéro de téléphone est le <strong>[TÉLÉPHONE]</strong>, et l'adresse e-mail <strong>[EMAIL]</strong>.</p>
+                        <p>ci-après l'« Éditeur ».</p>
+                    </address>
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">HÉBERGEUR</h2>
@@ -47,7 +49,7 @@
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">ACCÈS AU SITE</h2>
@@ -56,7 +58,7 @@
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">PROPRIÉTÉ INTELLECTUELLE</h2>
@@ -66,7 +68,7 @@
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">COLLECTE DES DONNÉES</h2>
@@ -126,7 +128,7 @@
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article>
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">CONDITIONS GÉNÉRALES D'UTILISATION</h2>
@@ -186,7 +188,7 @@
                 </div>
             </article>
 
-            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto">
+            <hr class="my-6 border-primary-orange border-t-2 w-3/5 mx-auto" aria-hidden="true">
 
             <article class="mb-4">
                 <h2 class="text-xl font-semibold text-center text-primary-orange p-2 lg:text-2xl">AVIS DE NON-AFFILIATION</h2>

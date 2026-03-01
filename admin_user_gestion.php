@@ -44,12 +44,12 @@ restrictToAdmin();
                     <input type="text" id="search-user" placeholder="Rechercher un utilisateur" aria-label="Rechercher un utilisateur" class="w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-primary-orange text-amber-100">
                 </div>
 
-                <div class="xl:col-span-3 relative cursor-pointer group" id="open-filters-btn">
+                <button type="button" id="open-filters-btn" class="xl:col-span-3 relative cursor-pointer group w-full text-left" aria-haspopup="dialog" aria-label="Ouvrir les filtres">
                     <span class="absolute left-3 top-2.5 text-primary-orange group-hover:scale-110 transition-transform pointer-events-none">
-                        <i class="ph ph-sliders text-xl"></i>
+                        <i class="ph ph-sliders text-xl" aria-hidden="true"></i>
                     </span>
-                    <input type="text" readonly placeholder="Filtrer" class="w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm text-amber-100 outline-none cursor-pointer focus:border-primary-orange transition-all pointer-events-none">
-                </div>
+                    <span class="block w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm text-amber-100 outline-none cursor-pointer focus:border-primary-orange transition-all">Filtrer</span>
+                </button>
 
                 <a href="add_user.php" class="xl:col-span-3 bg-amber-500 hover:bg-amber-400 text-black font-black py-2 rounded uppercase text-xs tracking-tighter flex items-center justify-center gap-2 transition-transform active:scale-95 shadow-lg shadow-amber-500/20">
                     <span class="text-lg">+</span> NOUVEL UTILISATEUR
@@ -99,7 +99,9 @@ restrictToAdmin();
                             <div role="cell" class="xl:col-span-1 xl:p-4 flex justify-between xl:justify-center items-center xl:border-r xl:border-primary-orange border-dashed">
                                 <span class="xl:hidden text-[12px] font-bold text-primary-orange uppercase">Connexion</span>
                                 <span class="text-sm text-primary-white text-center">
-                                    <?php echo !empty($userRow['last_login']) ? htmlspecialchars($userRow['last_login']) : '---'; ?>
+                                    <?php if (!empty($userRow['last_login'])): ?>
+                                    <time datetime="<?php echo date('Y-m-d', strtotime($userRow['last_login'])); ?>"><?php echo htmlspecialchars($userRow['last_login']); ?></time>
+                                    <?php else: ?>---<?php endif; ?>
                                 </span>
                             </div>
 
@@ -116,16 +118,16 @@ restrictToAdmin();
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-end xl:justify-center items-center gap-3">
                                 <a href="view_user.php?id=<?php echo $userRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir">
-                                    <i class="ph ph-eye text-2xl"></i>
+                                    <i class="ph ph-eye text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <a href="edit_user.php?id=<?php echo $userRow['id']; ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier">
-                                    <i class="ph ph-pencil-simple text-2xl"></i>
+                                    <i class="ph ph-pencil-simple text-2xl" aria-hidden="true"></i>
                                 </a>
                                 <form action="delete_user.php" method="POST" onsubmit="return confirm('Supprimer cet utilisateur ?')" class="inline">
                                     <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                                     <input type="hidden" name="user_id" value="<?php echo $userRow['id']; ?>">
                                     <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer">
-                                        <i class="ph ph-trash text-2xl"></i>
+                                        <i class="ph ph-trash text-2xl" aria-hidden="true"></i>
                                     </button>
                                 </form>
                             </div>
