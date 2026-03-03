@@ -49,7 +49,7 @@ if (isset($_SESSION['user_id'])) {
                     data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                     aria-label="<?= $isWishlistedPet ? 'Retirer ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
                     aria-pressed="<?= $isWishlistedPet ? 'true' : 'false' ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transition-all duration-300
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-16 w-16 transition-all duration-300
                     text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
@@ -82,7 +82,7 @@ if (isset($_SESSION['user_id'])) {
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <button class="collection-toggle-btn w-full mt-4 py-3 flex items-center justify-center gap-3 rounded-xl border-2 font-bold uppercase text-sm tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown <?= $isOwnedPet ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black' ?>"
                         data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>">
-                    <svg class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                    <svg aria-hidden="true" class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <?php if ($isOwnedPet): ?>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         <?php else: ?>

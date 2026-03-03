@@ -5,7 +5,7 @@
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange bg-primary-black shrink-0">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
         <button id="close-filters" aria-label="Fermer les filtres" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
-            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
@@ -15,10 +15,10 @@
         
         <div class="space-y-4">
             <?php if (isset($_SESSION['user_id'])): ?>
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
+            <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group" aria-expanded="true">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
-                        <i class="fas fa-eye"></i> État de collection
+                        <i class="fas fa-eye" aria-hidden="true"></i> État de collection
                     </h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" style="transform: rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -38,13 +38,13 @@
                         <input type="radio" name="filter-status-mobile" value="0" class="status-radio-mobile accent-primary-orange w-6 h-6">
                     </label>
                 </div>
-            </div>
+            </section>
             <?php endif; ?>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
+            <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
-                        <i class="fas fa-dragon"></i> Type de monture
+                        <i class="fas fa-dragon" aria-hidden="true"></i> Type de monture
                     </h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -58,12 +58,12 @@
                         </label>
                     <?php endforeach; ?>
                 </div>
-            </div>
+            </section>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
+            <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
-                        <i class="fas fa-map-marked-alt"></i> Source
+                        <i class="fas fa-map-marked-alt" aria-hidden="true"></i> Source
                     </h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -77,12 +77,12 @@
                         </label>
                     <?php endforeach; ?>
                 </div>
-            </div>
+            </section>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
+            <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
-                        <i class="fas fa-history"></i> Extension
+                        <i class="fas fa-history" aria-hidden="true"></i> Extension
                     </h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -96,12 +96,12 @@
                         </label>
                     <?php endforeach; ?>
                 </div>
-            </div>
+            </section>
 
-            <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
+            <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
                 <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
                     <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
-                        <i class="fas fa-flag"></i> Faction
+                        <i class="fas fa-flag" aria-hidden="true"></i> Faction
                     </h3>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
@@ -115,7 +115,7 @@
                         </label>
                     <?php endforeach; ?>
                 </div>
-            </div>
+            </section>
 
             <div class="pt-6 pb-12">
                 <button id="apply-mobile-filters" class="w-full py-5 bg-primary-orange text-primary-black font-black uppercase tracking-[0.2em] rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] active:scale-95 transition-all text-lg">

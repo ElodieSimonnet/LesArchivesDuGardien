@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
             }
 
             // Génère un nom de fichier unique (ex: avatar_1_65afb2.png)
-            $newFileName = "avatar_" . $_SESSION['user_id'] . "_" . substr(md5(uniqid()), 0, 6) . "." . $extension;
+            $newFileName = "avatar_" . $_SESSION['user_id'] . "_" . bin2hex(random_bytes(3)) . "." . $extension;
 
             // Chemin physique pour déplacer le fichier
             $uploadDir = "../../assets/avatars/";

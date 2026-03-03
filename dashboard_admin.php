@@ -21,7 +21,7 @@ restrictToAdmin();
     <main class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
         
         <div class="mb-10 text-center">
-            <h2 class="text-2xl font-black text-primary-orange uppercase">Archives Centrales</h2>
+            <h1 class="text-2xl font-black text-primary-orange uppercase">Archives Centrales</h1>
             <p class="text-primary-orange text-xs uppercase tracking-[0.3em]">Résumé de l'activité</p>
         </div>
 
@@ -49,7 +49,7 @@ restrictToAdmin();
 
         <div class="bg-[#1a0f0a] border border-primary-orange rounded-lg">
             <div class="p-4 bg-amber-900/10 border-b border-primary-orange">
-                <h3 class="text-xs font-black text-primary-orange uppercase tracking-[0.2em]">Dernières Entrées</h3>
+                <h2 class="text-xs font-black text-primary-orange uppercase tracking-[0.2em]">Dernières Entrées</h2>
             </div>
             <div class="p-2">
                 <?php foreach($lastUsers as $user): ?>

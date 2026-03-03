@@ -110,7 +110,7 @@
 
         <!-- ========== ARCHIVES - Liste paginée ========== -->
         <?php if (!empty($list_news)): ?>
-        <div class="mt-16">
+        <section class="mt-16">
             <div class="border-2 border-primary-orange rounded-xl p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
                 <h2 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-2xl">
                     Archives
@@ -158,7 +158,7 @@
                 <?php endforeach; ?>
             </div>
 
-        </div>
+        </section>
         <?php endif; ?>
 
     </section>

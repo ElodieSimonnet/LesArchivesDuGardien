@@ -1,3 +1,21 @@
+function showToast(message, type = 'error') {
+    const toast = document.createElement('div');
+    toast.setAttribute('role', 'alert');
+    toast.setAttribute('aria-live', 'assertive');
+    toast.className = `fixed top-20 left-1/2 -translate-x-1/2 z-50 px-6 py-3 rounded-lg border text-sm font-bold uppercase text-center shadow-lg ${
+        type === 'success'
+            ? 'bg-green-500/20 border-green-500 text-green-400'
+            : 'bg-red-500/20 border-red-500 text-red-400'
+    }`;
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => {
+        toast.style.transition = 'opacity 0.5s';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 500);
+    }, 3000);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.collection-toggle-btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
@@ -32,6 +50,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const lockBadge = card ? card.querySelector('.lock-badge') : null;
 
+                if (data.status === 'error') {
+                    showToast(data.message || 'Une erreur est survenue.');
+                    return;
+                }
+
                 if (data.status === 'added') {
                     this.classList.add('is-owned', 'bg-primary-orange', 'text-primary-black');
                     this.classList.remove('text-primary-orange', 'hover:bg-primary-orange', 'hover:text-primary-black');
@@ -53,7 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                     if (lockBadge) lockBadge.classList.remove('hidden');
                 }
-            });
+            })
+            .catch(() => showToast('Une erreur réseau est survenue.'));
         });
     });
 });

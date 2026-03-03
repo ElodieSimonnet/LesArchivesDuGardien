@@ -34,7 +34,7 @@
             
             <div class="w-full flex items-center justify-center gap-2">
                 <div class="relative w-full max-w-3xl h-12"> <span class="absolute inset-y-0 left-3 flex items-center text-primary-orange">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </span>
@@ -45,7 +45,7 @@
                 </div>
 
                 <button id="mobile-filter-trigger" aria-label="Ouvrir les filtres" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-primary-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
                 </button>
@@ -61,7 +61,7 @@
                     Tout effacer
                 </span>
                 <div class="text-primary-orange group-hover:text-white transition-colors">
-                   <i class="ph-x-circle-bold text-lg"></i>
+                   <i class="ph-x-circle-bold text-lg" aria-hidden="true"></i>
                 </div>
             </button>
         </div>
@@ -73,7 +73,7 @@
                 <div class="relative flex-1 dropdown-container">
                     <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span id="current-status-label" class="truncate">Statut : Toutes</span>
-                        <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
+                        <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg">
                         <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
@@ -103,7 +103,7 @@
                 <div class="relative flex-1 dropdown-container">
                     <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
                         <span class="truncate"><?= $group['label'] ?></span>
-                        <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black"></i>
+                        <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black" aria-hidden="true"></i>
                     </button>
                     <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60 custom-scrollbar">
                         <?php foreach ($group['data'] as $item): ?>
@@ -140,7 +140,7 @@
                         $eDifficulty = htmlspecialchars($mount['difficulty'], ENT_QUOTES, 'UTF-8');
 
                         $wishlistBtn = isset($_SESSION['user_id'])
-                            ? '<button class="wishlist-btn group absolute top-4 right-4 z-10 ' . ($mount['is_wishlisted'] ? 'is-favorite' : '') . '" data-type="mount" data-id="' . $mount['id'] . '" data-csrf="' . $_SESSION['csrf_token'] . '" aria-label="' . ($mount['is_wishlisted'] ? 'Retirer ' . $eName . ' des favoris' : 'Ajouter ' . $eName . ' aux favoris') . '" aria-pressed="' . ($mount['is_wishlisted'] ? 'true' : 'false') . '"><svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>'
+                            ? '<button class="wishlist-btn group absolute top-4 right-4 z-10 ' . ($mount['is_wishlisted'] ? 'is-favorite' : '') . '" data-type="mount" data-id="' . $mount['id'] . '" data-csrf="' . $_SESSION['csrf_token'] . '" aria-label="' . ($mount['is_wishlisted'] ? 'Retirer ' . $eName . ' des favoris' : 'Ajouter ' . $eName . ' aux favoris') . '" aria-pressed="' . ($mount['is_wishlisted'] ? 'true' : 'false') . '"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></button>'
                             : '';
 
                         echo('
@@ -174,7 +174,7 @@
                                     aria-label="'.($mount['is_owned'] ? $eName.' - déjà obtenue' : 'Ajouter '.$eName.' à ma collection').'"
                                     aria-pressed="'.($mount['is_owned'] ? 'true' : 'false').'"
                                     >
-                                <svg class="w-4 h-4 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <svg aria-hidden="true" class="w-4 h-4 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="'.($mount['is_owned'] ? 'M5 13l4 4L19 7' : 'M12 4v16m8-8H4').'" />
                                 </svg>
                                 <span class="collection-label">'.($mount['is_owned'] ? 'Obtenue' : 'Ajouter').'</span>

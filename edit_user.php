@@ -4,7 +4,7 @@ require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
 // On récupère l'ID via l'URL
-$user_id = $_GET['id'] ?? null;
+$user_id = (int)($_GET['id'] ?? 0);
 
 if (!$user_id) {
     header('Location: admin_user_gestion.php');
@@ -44,7 +44,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
         
         <div class="mb-8">
             <a href="admin_user_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -55,7 +55,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
 
             <?php $flash = get_flash(); if ($flash): ?>
                 <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
-                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
+                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
@@ -77,7 +77,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                         <select id="id_role" name="id_role" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_roles as $role) : ?>
                                 <option value="<?php echo $role['id']; ?>" <?php echo ($role['id'] == $user['id_role']) ? 'selected' : ''; ?>>
-                                    <?php echo strtoupper($role['role_name']); ?>
+                                    <?php echo htmlspecialchars(strtoupper($role['role_name'])); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -88,7 +88,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                         <select id="id_status" name="id_status" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                             <?php foreach ($all_statuses as $status) : ?>
                                 <option value="<?php echo $status['id']; ?>" <?php echo ($status['id'] == $user['id_status']) ? 'selected' : ''; ?>>
-                                    <?php echo strtoupper($status['status']); ?>
+                                    <?php echo htmlspecialchars(strtoupper($status['status'])); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -119,7 +119,7 @@ $all_statuses = $db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETC
                             <input type="hidden" id="csrf_token" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <input type="hidden" id="user_id" name="user_id" value="<?php echo $user['id']; ?>">
                             <button type="submit" class="px-10 py-3 border border-red-500 text-red-500 font-black uppercase text-xs rounded hover:bg-red-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer">
-                                <i class="ph ph-trash text-lg"></i> Supprimer l'avatar
+                                <i class="ph ph-trash text-lg" aria-hidden="true"></i> Supprimer l'avatar
                             </button>
                         </form>
                     <?php else : ?>

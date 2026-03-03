@@ -3,9 +3,9 @@ require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
-$news_id = $_GET['id'] ?? null;
+$news_id = (int)($_GET['id'] ?? 0);
 
-if ($news_id === null) {
+if (!$news_id) {
     header('Location: admin_news_gestion.php');
     exit;
 }
@@ -41,7 +41,7 @@ if (!$article) {
 
         <div class="mb-8">
             <a href="admin_news_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -52,7 +52,7 @@ if (!$article) {
 
             <?php $flash = get_flash(); if ($flash): ?>
                 <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
-                    <i class="ph ph-warning-circle text-2xl"></i>
+                    <i class="ph ph-warning-circle text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>

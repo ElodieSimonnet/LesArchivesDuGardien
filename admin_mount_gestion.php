@@ -31,7 +31,7 @@ restrictToAdmin();
 
             <?php $flash = get_flash(); if ($flash): ?>
                 <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
-                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl"></i>
+                    <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
             <?php endif; ?>
@@ -39,7 +39,7 @@ restrictToAdmin();
             <div class="grid grid-cols-1 xl:grid-cols-12 gap-4 mb-6 bg-[#1a0f0a] p-3 border-t border-b border-primary-orange">
                 <div class="xl:col-span-6 relative">
                     <span class="absolute left-3 top-2.5 text-primary-orange">
-                        <i class="ph ph-magnifying-glass text-xl"></i>
+                        <i class="ph ph-magnifying-glass text-xl" aria-hidden="true"></i>
                     </span>
                     <input type="text" id="search-mount" placeholder="Rechercher une monture" aria-label="Rechercher une monture" class="w-full bg-black/40 border border-amber-900/70 rounded-md py-2 pl-10 pr-4 text-sm focus:outline-none focus:border-primary-orange text-amber-100">
                 </div>

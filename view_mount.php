@@ -3,9 +3,9 @@ require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
-$mount_id = $_GET['id'] ?? null;
+$mount_id = (int)($_GET['id'] ?? 0);
 
-if ($mount_id === null) {
+if (!$mount_id) {
     header('Location: admin_mount_gestion.php');
     exit;
 }
@@ -65,7 +65,7 @@ $difficultyColor = match(strtolower($mount['difficulty'])) {
 
         <div class="mb-8">
             <a href="admin_mount_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -76,7 +76,7 @@ $difficultyColor = match(strtolower($mount['difficulty'])) {
                     <span class="ml-3"><?php echo htmlspecialchars($mount['name']); ?></span>
                 </h1>
                 <a href="edit_mount.php?id=<?php echo $mount['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
-                    <i class="ph ph-pencil-simple text-lg"></i> Modifier
+                    <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>
 

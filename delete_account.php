@@ -32,9 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         $stmt->execute([$userId]);
 
         // Supprimer le fichier avatar du serveur s'il existe
-        if (!empty($avatar_path) && strpos($avatar_path, 'assets/avatars/') === 0) {
-            $filePath = __DIR__ . '/' . $avatar_path;
-            if (file_exists($filePath)) {
+        if (!empty($avatar_path)) {
+            $filePath = realpath(__DIR__ . '/' . $avatar_path);
+            $avatarDir = realpath(__DIR__ . '/assets/avatars/');
+            if ($filePath && $avatarDir && strpos($filePath, $avatarDir) === 0 && file_exists($filePath)) {
                 unlink($filePath);
             }
         }

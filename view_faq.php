@@ -3,7 +3,7 @@ require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
-$faq_id = $_GET['id'] ?? null;
+$faq_id = (int)($_GET['id'] ?? 0);
 
 if (!$faq_id) {
     header('Location: admin_faq_gestion.php');
@@ -37,7 +37,7 @@ if (!$faq) {
 
         <div class="mb-8">
             <a href="admin_faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -46,8 +46,8 @@ if (!$faq) {
                 <h1 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
                     Voir la question
                 </h1>
-                <a href="edit_faq.php?id=<?php echo $faq['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
-                    <i class="ph ph-pencil-simple text-lg"></i> Modifier
+                <a href="edit_faq.php?id=<?php echo (int)$faq['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
+                    <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>
 

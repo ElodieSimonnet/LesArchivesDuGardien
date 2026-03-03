@@ -30,7 +30,7 @@ try {
     $avatar_path = $stmt->fetchColumn();
 
     // Supprimer le fichier du serveur s'il existe
-    if (!empty($avatar_path) && file_exists('../' . $avatar_path)) {
+    if (!empty($avatar_path) && strpos($avatar_path, '..') === false && file_exists('../' . $avatar_path)) {
         unlink('../' . $avatar_path);
     }
 

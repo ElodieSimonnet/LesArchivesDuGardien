@@ -13,6 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
+    // Vérification du consentement RGPD
+    if (empty($_POST['consent'])) {
+        echo json_encode(['status' => 'error', 'message' => 'Vous devez accepter la politique de confidentialité pour créer un compte.']);
+        exit;
+    }
+
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
     $password = $_POST['password'];

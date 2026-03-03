@@ -36,7 +36,7 @@
             </div>
 
             <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-                <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
@@ -51,7 +51,7 @@
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Menu</span>
         <button id="close-menu" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer le menu">
-            <svg class="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
         </button>
@@ -62,7 +62,7 @@
             <li>
                 <a href="mount_list.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
                     <div class="flex items-center gap-4">
-                        <i class="fas fa-dragon text-primary-orange text-xl"></i>
+                        <i class="fas fa-dragon text-primary-orange text-xl" aria-hidden="true"></i>
                         <span class="text-xl">Montures</span>
                     </div>
                 </a>
@@ -70,20 +70,20 @@
             <li>
                 <a href="pet_list.php" class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
                     <div class="flex items-center gap-4">
-                        <i class="fas fa-paw text-primary-orange text-xl"></i>
+                        <i class="fas fa-paw text-primary-orange text-xl" aria-hidden="true"></i>
                         <span class="text-xl">Mascottes</span>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="news.php" class="flex items-center gap-4 p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
-                    <i class="fas fa-bullhorn text-primary-orange text-xl"></i>
+                    <i class="fas fa-bullhorn text-primary-orange text-xl" aria-hidden="true"></i>
                     <span class="text-xl">Nouveautés</span>
                 </a>
             </li>
             <li>
                 <a href="faq.php" class="flex items-center gap-4 p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg">
-                    <i class="fas fa-question-circle text-primary-orange text-xl"></i>
+                    <i class="fas fa-question-circle text-primary-orange text-xl" aria-hidden="true"></i>
                     <span class="text-xl">F.A.Q</span>
                 </a>
             </li>
@@ -93,7 +93,7 @@
             <?php if (isset($_SESSION['username'])): ?>
                 <div class="flex flex-col gap-4">
                     <a href="profile.php" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg flex items-center justify-center gap-3">
-                        <i class="fas fa-user-circle"></i>
+                        <i class="fas fa-user-circle" aria-hidden="true"></i>
                         Mon Profil
                     </a>
                     <form action="logout.php" method="POST" class="w-full">

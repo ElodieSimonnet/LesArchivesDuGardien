@@ -3,9 +3,9 @@ require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
-$pet_id = $_GET['id'] ?? null;
+$pet_id = (int)($_GET['id'] ?? 0);
 
-if ($pet_id === null) {
+if (!$pet_id) {
     header('Location: admin_pet_gestion.php');
     exit;
 }
@@ -66,7 +66,7 @@ for ($i = 1; $i <= 6; $i++) {
 
         <div class="mb-8">
             <a href="admin_pet_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -77,7 +77,7 @@ for ($i = 1; $i <= 6; $i++) {
                     <span class="ml-3"><?php echo htmlspecialchars($pet['name']); ?></span>
                 </h1>
                 <a href="edit_pet.php?id=<?php echo $pet['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
-                    <i class="ph ph-pencil-simple text-lg"></i> Modifier
+                    <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>
 

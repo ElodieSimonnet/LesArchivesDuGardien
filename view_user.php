@@ -3,7 +3,7 @@ require_once 'components/utils/db_connection.php';
 require_once 'components/utils/is_admin.php';
 restrictToAdmin();
 
-$user_id = $_GET['id'] ?? null;
+$user_id = (int)($_GET['id'] ?? 0);
 
 if (!$user_id) {
     header('Location: admin_user_gestion.php');
@@ -41,7 +41,7 @@ if (!$user) {
 
         <div class="mb-8">
             <a href="admin_user_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
-                <i class="ph ph-arrow-left"></i> Retour à la gestion
+                <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
 
@@ -51,14 +51,14 @@ if (!$user) {
                     Profil utilisateur
                 </h1>
                 <a href="edit_user.php?id=<?php echo $user['id']; ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
-                    <i class="ph ph-pencil-simple text-lg"></i> Modifier
+                    <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>
 
             <div class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                    <div class="flex flex-col gap-2 md:col-span-2 flex items-center">
+                    <div class="flex flex-col items-center gap-2 md:col-span-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Avatar</span>
                         <img src="<?php echo !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.webp'; ?>"
                              alt="Avatar de <?php echo htmlspecialchars($user['username']); ?>"

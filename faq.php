@@ -29,7 +29,7 @@
             <?php else: ?>
                 <?php foreach ($faq_by_category as $category => $faqs): ?>
 
-                <div class="mb-10 border-2 border-primary-orange rounded-xl bg-black/40 backdrop-blur-sm p-4 md:p-6 shadow-2xl">
+                <section class="mb-10 border-2 border-primary-orange rounded-xl bg-black/40 backdrop-blur-sm p-4 md:p-6 shadow-2xl">
                     <h2 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-xl mb-6">
                         <?= htmlspecialchars($category, ENT_QUOTES, 'UTF-8') ?>
                     </h2>
@@ -55,7 +55,7 @@
                         </div>
                         <?php endforeach; ?>
                     </dl>
-                </div>
+                </section>
 
                 <?php endforeach; ?>
             <?php endif; ?>

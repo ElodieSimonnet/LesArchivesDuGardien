@@ -167,7 +167,7 @@ $all_targets = $db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetc
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
                             <?php for ($i = 1; $i <= 6; $i++): ?>
                             <div class="flex flex-col gap-1">
-                                <span class="text-xs text-amber-400/60 uppercase tracking-wider">Sort <?php echo $i; ?></span>
+                                <label for="spell_<?php echo $i; ?>" class="text-xs text-amber-400/60 uppercase tracking-wider">Sort <?php echo $i; ?></label>
                                 <select id="spell_<?php echo $i; ?>" name="spell_<?php echo $i; ?>" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
                                     <option value="">Aucun</option>
                                     <?php foreach ($all_spells as $spell) : ?>
