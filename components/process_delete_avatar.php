@@ -1,17 +1,18 @@
 <?php
-require_once 'utils/db_connection.php';
-require_once 'utils/is_admin.php';
+require_once __DIR__ . '/../models/Database.php';
+require_once __DIR__ . '/utils/is_admin.php';
+$db = Database::getConnection();
 restrictToAdmin();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: ../admin_user_gestion.php');
+    header('Location: ../admin/user_gestion.php');
     exit;
 }
 
 // Vérification du jeton CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-    header('Location: ../admin_user_gestion.php');
+    header('Location: ../admin/user_gestion.php');
     exit;
 }
 
@@ -19,7 +20,7 @@ $user_id = (int) ($_POST['user_id'] ?? 0);
 
 if ($user_id <= 0) {
     set_flash('error', 'Identifiant invalide.');
-    header('Location: ../admin_user_gestion.php');
+    header('Location: ../admin/user_gestion.php');
     exit;
 }
 

@@ -1,5 +1,6 @@
 <?php
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../models/Database.php';
+$db = Database::getConnection();
 
 // Vérification de la connexion
 if (!isset($_SESSION['user_id'])) {

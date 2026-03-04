@@ -127,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const query = params.toString();
-            window.location.href = 'admin_mount_gestion.php' + (query ? '?' + query : '');
+            window.location.href = 'mount_gestion.php' + (query ? '?' + query : '');
         });
     }
 });

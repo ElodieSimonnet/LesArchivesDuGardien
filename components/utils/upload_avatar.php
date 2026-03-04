@@ -1,5 +1,6 @@
 <?php
-require_once 'db_connection.php';
+require_once __DIR__ . '/../../models/Database.php';
+$db = Database::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SESSION['user_id'])) {
 

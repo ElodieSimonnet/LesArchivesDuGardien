@@ -20,7 +20,7 @@ if (loginForm) {
         const formData = new FormData(this);
 
         // On envoie vers le script PHP de connexion
-        fetch('components/utils/admin_login.php', {
+        fetch('../components/utils/admin_login.php', {
             method: 'POST',
             body: formData
         })
@@ -28,7 +28,7 @@ if (loginForm) {
         .then(data => {
             if (data.status === "success") {
                 // Succès : on redirige vers le dashboard admin
-                window.location.href = 'admin_user_gestion.php';
+                window.location.href = 'user_gestion.php';
             } else {
                 // Erreur ou blocage : on affiche le message dans la modale
                 if (errorDiv) {

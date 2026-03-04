@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const query = params.toString();
-            window.location.href = 'admin_user_gestion.php' + (query ? '?' + query : '');
+            window.location.href = 'user_gestion.php' + (query ? '?' + query : '');
         });
     }
 });

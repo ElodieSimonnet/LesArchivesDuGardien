@@ -1,5 +1,6 @@
 <?php
-require_once 'db_connection.php'; // Gère la session et le token
+require_once __DIR__ . '/../../models/Database.php';
+$db = Database::getConnection();
 
 header('Content-Type: application/json');
 

@@ -1,0 +1,421 @@
+<?php
+
+/**
+ * ============================================================
+ * CONTRÔLEUR : MountController
+ * ============================================================
+ * Rôle : Gérer toute la logique liée aux montures.
+ *
+ * Ce fichier ne contient PAS de requêtes SQL (c'est le rôle
+ * du MountModel) et PAS de HTML (c'est le rôle des vues).
+ *
+ * Il fait le lien entre les deux :
+ *   1. Demande les données au modèle
+ *   2. Valide et traite les formulaires
+ *   3. Passe les données à la vue
+ * ============================================================
+ */
+
+class MountController
+{
+    private MountModel $model;
+
+    public function __construct()
+    {
+        $this->model = new MountModel();
+    }
+
+    // ========================================================
+    // PAGES PUBLIQUES
+    // ========================================================
+
+    /**
+     * Affiche la liste de toutes les montures.
+     * Appelle mount_list.php (root) → ici → views/mount_list.php
+     */
+    public function list(): void
+    {
+        $userId     = $_SESSION['user_id'] ?? 0;
+        $mounts     = $this->model->getAll($userId);
+        $expansions = $this->model->getExpansions();
+        $factions   = $this->model->getFactions();
+        $sources    = $this->model->getSources();
+        $types      = $this->model->getTypes();
+
+        require __DIR__ . '/../views/mount_list.php';
+    }
+
+    /**
+     * Affiche le détail d'une monture.
+     * Appelle mount_detail.php (root) → ici → views/mount_detail.php
+     */
+    public function detail(): void
+    {
+        $id    = (int) ($_GET['id'] ?? 0);
+        $userId = $_SESSION['user_id'] ?? 0;
+        $mount = $this->model->getById($id, $userId);
+
+        if (!$mount) {
+            header('Location: mount_list.php');
+            exit;
+        }
+
+        // Chemin de l'icône du type de monture
+        $mountTypeLink = 'assets/images/mounts/' . $mount['type'] . '.png';
+
+        // is_owned et is_wishlisted sont déjà dans $mount (retournés par getById)
+        $isOwnedMount     = (bool) ($mount['is_owned'] ?? false);
+        $isWishlistedMount = (bool) ($mount['is_wishlisted'] ?? false);
+
+        require __DIR__ . '/../views/mount_detail.php';
+    }
+
+    // ========================================================
+    // PAGES ADMIN - Affichage
+    // ========================================================
+
+    /**
+     * Affiche la liste admin des montures.
+     * Appelle admin_mount_gestion.php → ici → views/admin/mount_gestion.php
+     */
+    public function adminList(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        $filters    = $_GET;
+        $all_mounts = $this->model->getAllForAdmin($filters);
+
+        // Listes pour les filtres de la sidebar admin
+        $all_types       = $this->model->getTypes();
+        $all_sources     = $this->model->getSources();
+        $all_expansions  = $this->model->getExpansions();
+        $all_factions    = $this->model->getFactions();
+        $all_difficulties = $this->model->getDifficulties();
+
+        require __DIR__ . '/../views/admin/mount_gestion.php';
+    }
+
+    /**
+     * Affiche le formulaire d'ajout d'une monture.
+     * Appelle add_mount.php (root) → ici → views/admin/add_mount.php
+     */
+    public function showAddForm(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        $all_types       = $this->model->getTypes();
+        $all_sources     = $this->model->getSources();
+        $all_expansions  = $this->model->getExpansions();
+        $all_factions    = $this->model->getFactions();
+        $all_difficulties = $this->model->getDifficulties();
+        $all_zones       = $this->model->getZones();
+        $all_targets     = $this->model->getTargets();
+        $all_currencies  = $this->model->getCurrencies();
+
+        require __DIR__ . '/../views/admin/add_mount.php';
+    }
+
+    /**
+     * Affiche le formulaire de modification d'une monture.
+     * Appelle edit_mount.php (root) → ici → views/admin/edit_mount.php
+     */
+    public function showEditForm(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        $mount_id = (int) ($_GET['id'] ?? 0);
+        if (!$mount_id) {
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        $mount = $this->model->getRawById($mount_id);
+        if (!$mount) {
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        $all_types       = $this->model->getTypes();
+        $all_sources     = $this->model->getSources();
+        $all_expansions  = $this->model->getExpansions();
+        $all_factions    = $this->model->getFactions();
+        $all_difficulties = $this->model->getDifficulties();
+        $all_zones       = $this->model->getZones();
+        $all_targets     = $this->model->getTargets();
+        $all_currencies  = $this->model->getCurrencies();
+
+        require __DIR__ . '/../views/admin/edit_mount.php';
+    }
+
+    /**
+     * Affiche le détail d'une monture côté admin (lecture seule).
+     * Appelle view_mount.php (root) → ici → views/admin/view_mount.php
+     */
+    public function adminView(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        $mount_id = (int) ($_GET['id'] ?? 0);
+        if (!$mount_id) {
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        $mount = $this->model->getById($mount_id);
+        if (!$mount) {
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        $difficultyColor = match(strtolower($mount['difficulty'])) {
+            'facile'      => 'text-green-500',
+            'moyen'       => 'text-orange-500',
+            'difficile'   => 'text-red-500',
+            'argent réel' => 'text-cyan-400',
+            default       => 'text-a11y-gray',
+        };
+
+        require __DIR__ . '/../views/admin/view_mount.php';
+    }
+
+    // ========================================================
+    // PAGES ADMIN - Traitement des formulaires
+    // ========================================================
+
+    /**
+     * Traite le formulaire d'ajout d'une monture (POST).
+     * Redirige vers admin_mount_gestion.php en cas de succès.
+     */
+    public function create(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        // Vérification du jeton CSRF
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+            header('Location: add_mount.php');
+            exit;
+        }
+
+        // Nettoyage des données reçues
+        $name         = trim($_POST['name'] ?? '');
+        $description  = trim($_POST['description'] ?? '');
+        $image        = trim($_POST['image'] ?? '');
+        $id_type      = (int) ($_POST['id_type'] ?? 0);
+        $id_source    = (int) ($_POST['id_source'] ?? 0);
+        $id_expansion = (int) ($_POST['id_expansion'] ?? 0);
+        $id_faction   = (int) ($_POST['id_faction'] ?? 0);
+        $id_difficulty = (int) ($_POST['id_difficulty'] ?? 0);
+        $droprate     = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+        $cost         = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
+        $id_currency  = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
+        $id_zone      = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+        $id_target    = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
+
+        // Validation : nom obligatoire
+        if (empty($name)) {
+            set_flash('error', 'Le nom de la monture est obligatoire.');
+            header('Location: add_mount.php');
+            exit;
+        }
+
+        // Validation des clés étrangères
+        if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
+            set_flash('error', 'Le type sélectionné est invalide.');
+            header('Location: add_mount.php');
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_sources', $id_source)) {
+            set_flash('error', 'La source sélectionnée est invalide.');
+            header('Location: add_mount.php');
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_expansions', $id_expansion)) {
+            set_flash('error', "L'extension sélectionnée est invalide.");
+            header('Location: add_mount.php');
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_factions', $id_faction)) {
+            set_flash('error', 'La faction sélectionnée est invalide.');
+            header('Location: add_mount.php');
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_difficulties', $id_difficulty)) {
+            set_flash('error', 'La difficulté sélectionnée est invalide.');
+            header('Location: add_mount.php');
+            exit;
+        }
+
+        // Validation : nom unique
+        if ($this->model->nameExists($name)) {
+            set_flash('error', 'Une monture avec ce nom existe déjà.');
+            header('Location: add_mount.php');
+            exit;
+        }
+
+        // Création en base de données
+        try {
+            $this->model->create([
+                ':name'         => $name,
+                ':description'  => $description,
+                ':image'        => $image,
+                ':id_type'      => $id_type,
+                ':id_source'    => $id_source,
+                ':id_expansion' => $id_expansion,
+                ':id_faction'   => $id_faction,
+                ':id_difficulty' => $id_difficulty,
+                ':droprate'     => $droprate,
+                ':cost'         => $cost,
+                ':id_currency'  => $id_currency,
+                ':id_zone'      => $id_zone,
+                ':id_target'    => $id_target,
+            ]);
+            set_flash('success', 'Monture créée avec succès !');
+            header('Location: mount_gestion.php');
+            exit;
+        } catch (PDOException $e) {
+            set_flash('error', 'Une erreur est survenue lors de la création.');
+            header('Location: add_mount.php');
+            exit;
+        }
+    }
+
+    /**
+     * Traite le formulaire de modification d'une monture (POST).
+     * Redirige vers admin_mount_gestion.php en cas de succès.
+     */
+    public function update(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        // Vérification du jeton CSRF
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        // Nettoyage des données
+        $mount_id     = (int) ($_POST['mount_id'] ?? 0);
+        $name         = trim($_POST['name'] ?? '');
+        $description  = trim($_POST['description'] ?? '');
+        $image        = trim($_POST['image'] ?? '');
+        $id_type      = (int) ($_POST['id_type'] ?? 0);
+        $id_source    = (int) ($_POST['id_source'] ?? 0);
+        $id_expansion = (int) ($_POST['id_expansion'] ?? 0);
+        $id_faction   = (int) ($_POST['id_faction'] ?? 0);
+        $id_difficulty = (int) ($_POST['id_difficulty'] ?? 0);
+        $droprate     = (isset($_POST['droprate']) && $_POST['droprate'] !== '') ? (float) $_POST['droprate'] : null;
+        $cost         = (isset($_POST['cost']) && $_POST['cost'] !== '') ? (int) $_POST['cost'] : null;
+        $id_currency  = !empty($_POST['id_currency']) ? (int) $_POST['id_currency'] : null;
+        $id_zone      = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
+        $id_target    = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
+
+        // Validation : nom obligatoire
+        if (empty($name)) {
+            set_flash('error', 'Le nom de la monture est obligatoire.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+
+        // Validation des clés étrangères
+        if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
+            set_flash('error', 'Le type sélectionné est invalide.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_sources', $id_source)) {
+            set_flash('error', 'La source sélectionnée est invalide.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_expansions', $id_expansion)) {
+            set_flash('error', "L'extension sélectionnée est invalide.");
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_factions', $id_faction)) {
+            set_flash('error', 'La faction sélectionnée est invalide.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+        if (!$this->model->idExistsInTable('adg_difficulties', $id_difficulty)) {
+            set_flash('error', 'La difficulté sélectionnée est invalide.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+
+        // Modification en base de données
+        try {
+            $this->model->update([
+                ':id'           => $mount_id,
+                ':name'         => $name,
+                ':description'  => $description,
+                ':image'        => $image,
+                ':id_type'      => $id_type,
+                ':id_source'    => $id_source,
+                ':id_expansion' => $id_expansion,
+                ':id_faction'   => $id_faction,
+                ':id_difficulty' => $id_difficulty,
+                ':droprate'     => $droprate,
+                ':cost'         => $cost,
+                ':id_currency'  => $id_currency,
+                ':id_zone'      => $id_zone,
+                ':id_target'    => $id_target,
+            ]);
+            set_flash('success', 'Monture modifiée avec succès !');
+            header('Location: mount_gestion.php');
+            exit;
+        } catch (PDOException $e) {
+            set_flash('error', 'Une erreur est survenue lors de la modification.');
+            header("Location: edit_mount.php?id={$mount_id}");
+            exit;
+        }
+    }
+
+    /**
+     * Traite la suppression d'une monture (POST).
+     * Redirige vers admin_mount_gestion.php.
+     */
+    public function delete(): void
+    {
+        require_once __DIR__ . '/../components/utils/is_admin.php';
+        restrictToAdmin();
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        // Vérification du jeton CSRF
+        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+            set_flash('error', 'Erreur de sécurité : requête non autorisée.');
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        $mount_id = (int) ($_POST['mount_id'] ?? -1);
+        if ($mount_id < 0) {
+            set_flash('error', 'Identifiant invalide.');
+            header('Location: mount_gestion.php');
+            exit;
+        }
+
+        try {
+            $this->model->delete($mount_id);
+            set_flash('success', 'Monture supprimée avec succès !');
+            header('Location: mount_gestion.php');
+            exit;
+        } catch (PDOException $e) {
+            set_flash('error', 'Une erreur est survenue lors de la suppression.');
+            header('Location: mount_gestion.php');
+            exit;
+        }
+    }
+}
