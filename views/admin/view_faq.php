@@ -13,7 +13,7 @@
     <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
-            <a href="faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
+            <a href="faq_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
                 <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
@@ -62,14 +62,14 @@
                     <div class="flex flex-col gap-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Date de création</span>
                         <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?= date('d/m/Y à H:i', strtotime($faq['created_at'])) ?>
+                            <time datetime="<?= date('Y-m-d\TH:i', strtotime($faq['created_at'])) ?>"><?= date('d/m/Y à H:i', strtotime($faq['created_at'])) ?></time>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm font-black uppercase text-primary-orange tracking-widest">Dernière modification</span>
                         <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white">
-                            <?= date('d/m/Y à H:i', strtotime($faq['updated_at'])) ?>
+                            <time datetime="<?= date('Y-m-d\TH:i', strtotime($faq['updated_at'])) ?>"><?= date('d/m/Y à H:i', strtotime($faq['updated_at'])) ?></time>
                         </span>
                     </div>
 

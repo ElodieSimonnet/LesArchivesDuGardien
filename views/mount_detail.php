@@ -35,7 +35,7 @@
                     data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                     aria-label="<?= $isWishlistedMount ? 'Retirer ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
                     aria-pressed="<?= $isWishlistedMount ? 'true' : 'false' ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-16 w-16 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                         <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
                 </button>
@@ -49,10 +49,10 @@
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
-                        <img src="<?= htmlspecialchars($mount['image'], ENT_QUOTES, 'UTF-8') ?>" alt="Image de <?= htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-3/5 h-auto">
-                        <h2 class="text-base text-primary-white text-center pb-4 uppercase mt-0 mb-0 md:text-2xl">
-                            <?= htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') ?>
-                        </h2>
+                        <figure class="w-3/5 m-0">
+                            <img src="<?= htmlspecialchars($mount['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-full h-auto">
+                        </figure>
+                        <h2 class="sr-only"><?= htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
                     <hr class="bg-primary-orange h-0.5 border-none w-full mx-auto" aria-hidden="true">
@@ -77,8 +77,10 @@
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <button class="collection-toggle-btn w-full mt-4 py-3 flex items-center justify-center gap-3 rounded-xl border-2 font-bold uppercase text-sm tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown <?= $isOwnedMount ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black' ?>"
-                        data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>">
-                    <svg class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
+                        aria-label="<?= $isOwnedMount ? htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' - déjà obtenue' : 'Ajouter ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' à ma collection' ?>"
+                        aria-pressed="<?= $isOwnedMount ? 'true' : 'false' ?>">
+                    <svg aria-hidden="true" class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <?php if ($isOwnedMount): ?>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
                         <?php else: ?>
@@ -90,9 +92,9 @@
                 <?php endif; ?>
               </div>
 
-                <aside class="bg-primary-brown rounded-xl py-6 border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none mt-4
+                <section class="bg-primary-brown rounded-xl py-6 border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none mt-4
                               lg:w-full lg:mx-0 flex flex-col">
-                    <h3 class="text-2xl font-semibold text-center text-primary-orange lg:text-3xl">Informations</h3>
+                    <h2 class="text-2xl font-semibold text-center text-primary-orange lg:text-3xl">Informations</h2>
                     <div class="mt-6 mb-6 bg-primary-orange h-0.5 w-full" aria-hidden="true"></div>
 
                     <dl class="space-y-6 lg:px-12 lg:space-y-10">
@@ -142,7 +144,7 @@
                             <dd class="text-xl text-primary-white text-center"><?= $mount['target'] ? htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
-                </aside>
+                </section>
             </div>
         </div>
     </main>

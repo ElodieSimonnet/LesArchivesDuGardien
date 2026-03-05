@@ -28,7 +28,7 @@ if (loginForm) {
         .then(data => {
             if (data.status === "success") {
                 // Succès : on redirige vers le dashboard admin
-                window.location.href = 'user_gestion.php';
+                window.location.href = 'user_management.php';
             } else {
                 // Erreur ou blocage : on affiche le message dans la modale
                 if (errorDiv) {

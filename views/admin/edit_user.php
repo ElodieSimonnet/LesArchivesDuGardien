@@ -14,7 +14,7 @@
     <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
-            <a href="user_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
+            <a href="user_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
                 <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
@@ -25,7 +25,7 @@
             </h1>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
                     <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="mt-12 flex justify-center gap-4">
-                    <a href="user_gestion.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <a href="user_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
                         Annuler
                     </a>
                     <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg hover:bg-primary-orange hover:text-primary-black transition-all">
@@ -78,15 +78,15 @@
             </form>
 
             <!-- Section Avatar -->
-            <div class="mt-6 bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
-                <label class="text-sm font-black uppercase text-primary-orange tracking-widest mb-4 block">Avatar actuel</label>
+            <section class="mt-6 bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
+                <h2 id="avatar-heading" class="text-sm font-black uppercase text-primary-orange tracking-widest mb-4">Avatar actuel</h2>
                 <div class="flex items-center justify-between">
                     <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.png' ?>"
                          alt="Avatar de <?= htmlspecialchars($user['username']) ?>"
                          class="w-28 h-28 rounded-full object-cover border-2 border-primary-orange">
 
                     <?php if (!empty($user['avatar'])) : ?>
-                        <form action="../components/process_delete_avatar.php" method="POST" onsubmit="return confirm('Supprimer l\'avatar de cet utilisateur ?')">
+                        <form id="deleteAvatarForm" action="../components/utils/process_delete_avatar.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                             <button type="submit" class="px-10 py-3 border border-red-500 text-red-500 font-black uppercase text-xs rounded hover:bg-red-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer">
@@ -97,9 +97,14 @@
                         <span class="text-amber-700 text-xs uppercase italic">Avatar par défaut</span>
                     <?php endif; ?>
                 </div>
-            </div>
+            </section>
         </div>
     </main>
 
+    <script>
+    document.getElementById('deleteAvatarForm')?.addEventListener('submit', (e) => {
+        if (!confirm('Supprimer l\'avatar de cet utilisateur ?')) e.preventDefault();
+    });
+    </script>
 </body>
 </html>

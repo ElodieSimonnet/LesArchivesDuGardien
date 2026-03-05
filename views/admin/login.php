@@ -8,14 +8,12 @@
 </head>
 <body class="bg-[#1a0f0a] flex items-center justify-center min-h-screen">
 
-<main class="w-full flex justify-center px-4">
+<main id="main-content" class="w-full flex justify-center px-4">
     <div class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full max-w-lg">
 
         <h1 class="text-2xl font-bold text-primary-orange mb-6 text-center uppercase tracking-widest">Connexion Administrateur</h1>
 
-        <div id="loginError" role="alert" aria-live="polite" class="hidden bg-red-900/50 border border-red-500 text-red-200 p-3 rounded mb-4 text-sm text-center">
-            Identifiants incorrects.
-        </div>
+        <div id="loginError" role="alert" class="hidden bg-red-900/50 border border-red-500 text-red-200 p-3 rounded mb-4 text-sm text-center"></div>
 
         <form id="loginForm" class="space-y-4">
             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">

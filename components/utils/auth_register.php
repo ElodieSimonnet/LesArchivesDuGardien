@@ -25,6 +25,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
+    // Validation du format de l'email
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['status' => 'error', 'message' => 'Adresse e-mail invalide.']);
+        exit;
+    }
+
     // Vérification de la confirmation du mot de passe
     if ($password !== $confirmPassword) {
         echo json_encode(['status' => 'error', 'message' => 'Les mots de passe ne correspondent pas.']);

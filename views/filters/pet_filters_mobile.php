@@ -4,7 +4,7 @@
 
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange bg-primary-black shrink-0">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
-        <button id="close-filters" aria-label="Fermer les filtres" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
+        <button id="close-filters" type="button" aria-label="Fermer les filtres" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
             <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -16,15 +16,15 @@
         <div class="space-y-4">
             <?php if (isset($_SESSION['user_id'])): ?>
             <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group" aria-expanded="true">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
+                <button type="button" class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group" aria-expanded="true" aria-controls="filter-status-content">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-eye" aria-hidden="true"></i> État de collection
-                    </h3>
-                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" style="transform: rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    </span>
+                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" aria-hidden="true" style="transform: rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content px-6 pb-6 space-y-3">
+                <div id="filter-status-content" class="mobile-accordion-content px-6 pb-6 space-y-3">
                     <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                         Toutes
                         <input type="radio" name="filter-status-mobile" value="all" checked class="status-radio-mobile accent-primary-orange w-6 h-6">
@@ -42,15 +42,15 @@
             <?php endif; ?>
 
             <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false" aria-controls="filter-family-content">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-paw" aria-hidden="true"></i> Famille de mascotte
-                    </h3>
-                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    </span>
+                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="filter-family-content" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($families as $family): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                             <?= htmlspecialchars($family['family'], ENT_QUOTES, 'UTF-8') ?>
@@ -61,15 +61,15 @@
             </section>
 
             <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false" aria-controls="filter-source-content">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-map-marked-alt" aria-hidden="true"></i> Source
-                    </h3>
-                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    </span>
+                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="filter-source-content" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($sources as $source): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                             <?= htmlspecialchars($source['source'], ENT_QUOTES, 'UTF-8') ?>
@@ -80,15 +80,15 @@
             </section>
 
             <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false" aria-controls="filter-expansion-content">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-history" aria-hidden="true"></i> Extension
-                    </h3>
-                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    </span>
+                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="filter-expansion-content" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($expansions as $expansion): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                             <?= htmlspecialchars($expansion['expansion'], ENT_QUOTES, 'UTF-8') ?>
@@ -99,15 +99,15 @@
             </section>
 
             <section class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group" aria-expanded="false" aria-controls="filter-faction-content">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">
                         <i class="fas fa-flag" aria-hidden="true"></i> Faction
-                    </h3>
-                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    </span>
+                    <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="filter-faction-content" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <?php foreach ($factions as $faction): ?>
                         <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                             <?= htmlspecialchars($faction['faction'], ENT_QUOTES, 'UTF-8') ?>
@@ -118,7 +118,7 @@
             </section>
 
             <div class="pt-6 pb-12">
-                <button id="apply-mobile-filters" class="w-full py-5 bg-primary-orange text-primary-black font-black uppercase tracking-[0.2em] rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] active:scale-95 transition-all text-lg">
+                <button id="apply-mobile-filters" type="button" class="w-full py-5 bg-primary-orange text-primary-black font-black uppercase tracking-[0.2em] rounded-xl shadow-[0_0_20px_rgba(249,115,22,0.3)] active:scale-95 transition-all text-lg">
                     Appliquer
                 </button>
             </div>

@@ -13,7 +13,7 @@
 
     <div class="flex justify-between items-center px-8 h-24 border-b border-primary-orange bg-primary-black shrink-0 lg:rounded-t-2xl">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
-        <button id="close-filters" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer les filtres">
+        <button type="button" id="close-filters" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer les filtres">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -24,13 +24,13 @@
         <form id="filterForm" class="space-y-4">
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button type="button" class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Famille</h3>
+                <button type="button" class="mobile-accordion-header active w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset" aria-expanded="true" aria-controls="admin-pet-filters-family">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Famille</span>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content px-6 pb-6 space-y-3">
+                <div id="admin-pet-filters-family" class="mobile-accordion-content px-6 pb-6 space-y-3">
                     <label class="flex items-center justify-between p-4 bg-primary-orange/20 border-l-4 border-primary-orange rounded-r-lg cursor-pointer transition-all text-sm font-bold uppercase text-primary-orange">
                         Tout sélectionner
                         <input type="checkbox" class="select-all accent-primary-orange w-6 h-6">
@@ -45,13 +45,13 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Source</h3>
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset" aria-expanded="false" aria-controls="admin-pet-filters-source">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Source</span>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="admin-pet-filters-source" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <label class="flex items-center justify-between p-4 bg-primary-orange/20 border-l-4 border-primary-orange rounded-r-lg cursor-pointer transition-all text-sm font-bold uppercase text-primary-orange">
                         Tout sélectionner
                         <input type="checkbox" class="select-all accent-primary-orange w-6 h-6">
@@ -66,13 +66,13 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Extension</h3>
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset" aria-expanded="false" aria-controls="admin-pet-filters-extension">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Extension</span>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="admin-pet-filters-extension" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <label class="flex items-center justify-between p-4 bg-primary-orange/20 border-l-4 border-primary-orange rounded-r-lg cursor-pointer transition-all text-sm font-bold uppercase text-primary-orange">
                         Tout sélectionner
                         <input type="checkbox" class="select-all accent-primary-orange w-6 h-6">
@@ -87,13 +87,13 @@
             </div>
 
             <div class="filter-section border border-primary-orange rounded-xl overflow-hidden bg-primary-brown">
-                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset">
-                    <h3 class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Faction</h3>
+                <button type="button" class="mobile-accordion-header w-full px-6 py-5 flex justify-between items-center group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-orange focus-visible:ring-inset" aria-expanded="false" aria-controls="admin-pet-filters-faction">
+                    <span class="text-primary-orange uppercase font-bold tracking-widest text-base flex items-center gap-3">Faction</span>
                     <svg class="w-6 h-6 text-primary-orange transition-transform duration-300 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
                     </svg>
                 </button>
-                <div class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
+                <div id="admin-pet-filters-faction" class="mobile-accordion-content hidden px-6 pb-6 space-y-3">
                     <label class="flex items-center justify-between p-4 bg-primary-orange/20 border-l-4 border-primary-orange rounded-r-lg cursor-pointer transition-all text-sm font-bold uppercase text-primary-orange">
                         Tout sélectionner
                         <input type="checkbox" class="select-all accent-primary-orange w-6 h-6">

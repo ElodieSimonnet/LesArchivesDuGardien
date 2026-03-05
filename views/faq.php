@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F.A.Q | Les Archives du Gardien</title>
+    <meta name="description" content="Foire aux questions sur Les Archives du Gardien : fonctionnement du site, collections, filtres et synchronisation.">
+    <link href="assets/css/output.css" rel="stylesheet">
     <script src="https://unpkg.com/phosphor-icons"></script>
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/faq-accordion.js" defer></script>
-    <link href="assets/css/output.css" rel="stylesheet">
-    <title>F.A.Q | Les Archives du Gardien</title>
-    <meta name="description" content="Foire aux questions sur Les Archives du Gardien : fonctionnement du site, collections, filtres et synchronisation.">
 </head>
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>

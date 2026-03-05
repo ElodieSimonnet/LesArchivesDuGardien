@@ -49,8 +49,10 @@
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
-                        <img src="<?= htmlspecialchars($pet['image'], ENT_QUOTES, 'UTF-8') ?>" alt="Image de <?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-3/5 h-auto">
-                        <h2 class="text-base font-black uppercase text-center mt-4 mb-6 tracking-widest text-white"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
+                        <figure class="w-3/5 m-0">
+                            <img src="<?= htmlspecialchars($pet['image'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?>" class="w-full h-auto">
+                        </figure>
+                        <h2 class="sr-only"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
                     <div class="bg-[oklch(0.23_0.0316_24.1)] border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
@@ -66,7 +68,9 @@
 
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <button class="collection-toggle-btn w-full mt-4 py-3 flex items-center justify-center gap-3 rounded-xl border-2 font-bold uppercase text-sm tracking-widest transition-all duration-300 cursor-pointer bg-primary-brown <?= $isOwnedPet ? 'is-owned border-primary-orange bg-primary-orange text-primary-black' : 'border-primary-orange text-primary-orange hover:bg-primary-orange hover:text-primary-black' ?>"
-                        data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>">
+                        data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
+                        aria-label="<?= $isOwnedPet ? htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' - déjà obtenue' : 'Ajouter ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' à ma collection' ?>"
+                        aria-pressed="<?= $isOwnedPet ? 'true' : 'false' ?>">
                     <svg aria-hidden="true" class="w-5 h-5 collection-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
                         <?php if ($isOwnedPet): ?>
                             <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
@@ -78,10 +82,10 @@
                 </button>
                 <?php endif; ?>
               </div>
-                <aside class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none mt-4
+                <section class="bg-primary-brown rounded-xl pt-2 border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none mt-4
                               lg:w-full lg:mx-0">
-                    <h3 class="text-2xl font-semibold text-center text-primary-orange pt-2
-                               lg:text-3xl">Informations</h3>
+                    <h2 class="text-2xl font-semibold text-center text-primary-orange pt-2
+                               lg:text-3xl">Informations</h2>
                     <div class="my-6 bg-primary-orange h-0.5 w-full" aria-hidden="true"></div>
 
                     <dl class="space-y-4
@@ -140,11 +144,11 @@
                             <dd class="text-xl text-primary-white text-center"><?= !empty($pet['target']) ? htmlspecialchars($pet['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
-                </aside>
+                </section>
             </div>
 
-            <section class="mt-8 bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none lg:w-full p-4 lg:p-6 shadow-xl" aria-label="Capacités de la mascotte">
-                <h3 class="sr-only">Liste des sorts</h3>
+            <section class="mt-8 bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none lg:w-full p-4 lg:p-6 shadow-xl" aria-labelledby="sorts-heading">
+                <h2 id="sorts-heading" class="sr-only">Capacités de la mascotte</h2>
                 <ul class="flex flex-wrap justify-around gap-3 md:gap-4 lg:gap-6">
                     <?php for ($i = 1; $i <= 6; $i++):
                         $spell = $petSpells[$i] ?? null;

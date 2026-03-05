@@ -12,9 +12,9 @@
 <body class="bg-black">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
+    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
 
-        <section class="max-w-full mx-auto w-full px-4">
+        <div class="max-w-full mx-auto w-full px-4">
 
             <div class="flex justify-center mb-10 mt-4">
                 <h1 class="px-8 lg:px-16 py-3 border-2 border-primary-orange bg-[#1a0f0a] text-primary-orange font-bold uppercase tracking-[0.2em] shadow-2xl rounded-lg text-center">
@@ -23,7 +23,7 @@
             </div>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" class="mb-6 p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-500 animate-pulse' : 'bg-red-500/10 border-red-500 text-red-500' ?> border rounded-lg flex items-center gap-3">
                     <i class="ph <?= $flash['type'] === 'success' ? 'ph-check-circle' : 'ph-warning-circle' ?> text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
@@ -49,7 +49,7 @@
                 </a>
             </div>
 
-            <div role="table" class="w-full border border-primary-orange rounded-lg bg-[#1a0f0a] overflow-hidden">
+            <div role="table" aria-label="Liste des montures" class="w-full border border-primary-orange rounded-lg bg-[#1a0f0a] overflow-hidden">
 
                 <div role="rowgroup" class="hidden xl:block border-b border-primary-orange bg-[#1a0f0a]">
                     <div role="row" class="grid grid-cols-12 py-4 text-[11px] font-black uppercase tracking-widest text-primary-orange">
@@ -109,16 +109,16 @@
                             </div>
 
                             <div role="cell" class="xl:col-span-2 xl:p-4 flex justify-end xl:justify-center items-center gap-3">
-                                <a href="view_mount.php?id=<?= $mountRow['id'] ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir">
+                                <a href="view_mount.php?id=<?= $mountRow['id'] ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Voir" aria-label="Voir <?= htmlspecialchars($mountRow['name']) ?>">
                                     <i class="ph ph-eye text-2xl" aria-hidden="true"></i>
                                 </a>
-                                <a href="edit_mount.php?id=<?= $mountRow['id'] ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier">
+                                <a href="edit_mount.php?id=<?= $mountRow['id'] ?>" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-primary-orange hover:text-black transition-all" title="Modifier" aria-label="Modifier <?= htmlspecialchars($mountRow['name']) ?>">
                                     <i class="ph ph-pencil-simple text-2xl" aria-hidden="true"></i>
                                 </a>
-                                <form action="delete_mount.php" method="POST" onsubmit="return confirm('Supprimer cette monture ?')" class="inline">
+                                <form action="delete_mount.php" method="POST" class="delete-form inline">
                                     <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                                     <input type="hidden" name="mount_id" value="<?= $mountRow['id'] ?>">
-                                    <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer">
+                                    <button type="submit" class="p-2 border border-primary-orange rounded text-primary-orange hover:bg-red-600 transition-all hover:border-none hover:text-black cursor-pointer" title="Supprimer" aria-label="Supprimer <?= htmlspecialchars($mountRow['name']) ?>">
                                         <i class="ph ph-trash text-2xl" aria-hidden="true"></i>
                                     </button>
                                 </form>
@@ -127,11 +127,18 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-        </section>
+        </div>
     </main>
 
     <?php require __DIR__ . '/mount_filters.php'; ?>
     <script src="../assets/js/admin-mount-filters.js"></script>
+    <script>
+    document.querySelectorAll('.delete-form').forEach(form => {
+        form.addEventListener('submit', (e) => {
+            if (!confirm('Supprimer cette monture ?')) e.preventDefault();
+        });
+    });
+    </script>
 
 </body>
 </html>

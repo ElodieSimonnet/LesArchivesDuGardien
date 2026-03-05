@@ -94,7 +94,7 @@ class PetController
         $all_pet_expansions = $this->model->getExpansions();
         $all_pet_factions  = $this->model->getFactions();
 
-        require __DIR__ . '/../views/admin/pet_gestion.php';
+        require __DIR__ . '/../views/admin/pet_management.php';
     }
 
     /**
@@ -127,13 +127,13 @@ class PetController
 
         $pet_id = (int) ($_GET['id'] ?? 0);
         if (!$pet_id) {
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
         $pet = $this->model->getRawById($pet_id);
         if (!$pet) {
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
@@ -159,13 +159,13 @@ class PetController
 
         $pet_id = (int) ($_GET['id'] ?? 0);
         if (!$pet_id) {
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
         $pet = $this->model->getById($pet_id);
         if (!$pet) {
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
@@ -264,7 +264,7 @@ class PetController
                 ':spell_6'     => $spells[6],
             ]);
             set_flash('success', 'Mascotte créée avec succès !');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la création.');
@@ -283,7 +283,7 @@ class PetController
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
@@ -355,7 +355,7 @@ class PetController
                 ':spell_6'     => $spells[6],
             ]);
             set_flash('success', 'Mascotte mise à jour avec succès !');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la modification.');
@@ -373,31 +373,31 @@ class PetController
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
         $pet_id = (int) ($_POST['pet_id'] ?? -1);
         if ($pet_id < 0) {
             set_flash('error', 'Identifiant invalide.');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
 
         try {
             $this->model->delete($pet_id);
             set_flash('success', 'Mascotte supprimée avec succès !');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la suppression.');
-            header('Location: pet_gestion.php');
+            header('Location: pet_management.php');
             exit;
         }
     }

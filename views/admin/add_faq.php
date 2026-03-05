@@ -14,7 +14,7 @@
     <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
-            <a href="faq_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
+            <a href="faq_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
                 <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
@@ -25,7 +25,7 @@
             </h1>
 
             <?php $flash = get_flash(); if ($flash): ?>
-                <div id="flash-message" role="alert" aria-live="polite" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
+                <div id="flash-message" role="alert" class="mb-6 p-4 bg-red-500/10 border border-red-500 text-red-500 rounded-lg flex items-center gap-3">
                     <i class="ph ph-warning-circle text-2xl" aria-hidden="true"></i>
                     <span class="text-sm font-bold uppercase"><?= htmlspecialchars($flash['message']) ?></span>
                 </div>
@@ -68,7 +68,7 @@
                 </div>
 
                 <div class="mt-12 flex justify-center gap-4">
-                    <a href="faq_gestion.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <a href="faq_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
                         Annuler
                     </a>
                     <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg hover:bg-primary-orange hover:text-primary-black transition-all">

@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/models/Database.php';
+require_once __DIR__ . '/../../models/Database.php';
 $db = Database::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && isset($_SESSION['user_id'])) {
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         // Si le jeton est mauvais, on bloque tout
         set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-        header("Location: profile.php");
+        header("Location: ../../profile.php");
         exit();
     }
 
@@ -34,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
 
         // Supprimer le fichier avatar du serveur s'il existe
         if (!empty($avatar_path)) {
-            $filePath = realpath(__DIR__ . '/' . $avatar_path);
-            $avatarDir = realpath(__DIR__ . '/assets/avatars/');
+            $filePath = realpath(__DIR__ . '/../../' . $avatar_path);
+            $avatarDir = realpath(__DIR__ . '/../../assets/avatars/');
             if ($filePath && $avatarDir && strpos($filePath, $avatarDir) === 0 && file_exists($filePath)) {
                 unlink($filePath);
             }
@@ -50,15 +50,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
         set_flash('success', 'Votre compte a été supprimé avec succès.');
 
         // Retour à l'accueil
-        header("Location: index.php");
+        header("Location: ../../index.php");
         exit();
 
     } catch (PDOException $e) {
         set_flash('error', 'La suppression du compte a échoué. Veuillez réessayer.');
-        header("Location: profile.php");
+        header("Location: ../../profile.php");
         exit();
     }
 } else {
-    header("Location: profile.php");
+    header("Location: ../../profile.php");
     exit();
 }

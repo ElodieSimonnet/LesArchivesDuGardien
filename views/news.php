@@ -15,7 +15,7 @@
 
     <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed
                  md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] text-primary-white font-sans p-4 md:p-10">
-        <section class="max-w-sm mx-auto md:max-w-4xl mt-8 lg:mt-16">
+        <div class="max-w-sm mx-auto md:max-w-4xl mt-8 lg:mt-16">
 
         <div class="border-2 border-primary-orange rounded-xl p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
             <h1 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-2xl">
@@ -31,13 +31,13 @@
         <h2 class="sr-only">Actualités récentes</h2>
         <div class="relative flex items-center group">
 
-            <button id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button type="button" id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
             </button>
 
-            <div id="news-carousel" class="w-full" role="region" aria-live="polite">
+            <div id="news-carousel" class="w-full" role="region" aria-label="Actualités récentes" aria-live="polite">
                 <?php foreach ($carousel_news as $index => $article): ?>
                 <article class="news-slide bg-primary-brown border-2 border-primary-orange rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row w-full backdrop-blur-md lg:h-[500px] <?= $index === 0 ? '' : 'hidden' ?>">
 
@@ -77,7 +77,7 @@
 
                         <footer class="mt-8 pt-6 border-t border-zinc-800/50 flex flex-col items-center gap-2">
                             <p class="text-primary-orange/90 text-sm lg:text-base italic">
-                                Publié le <time datetime="<?= date('Y-m-d', strtotime($article['created_at'])) ?>"><?= date('d/m/Y à H:i', strtotime($article['created_at'])) ?></time> par <span class="font-bold uppercase tracking-wide text-primary-white"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
+                                Publié le <time datetime="<?= date('Y-m-d\TH:i', strtotime($article['created_at'])) ?>"><?= date('d/m/Y à H:i', strtotime($article['created_at'])) ?></time> par <span class="font-bold uppercase tracking-wide text-primary-white"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
                             </p>
                             <?php if (!empty($article['source_news'])): ?>
                             <a href="<?= htmlspecialchars($article['source_news'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="text-primary-orange text-xs font-bold uppercase tracking-wider hover:underline">
@@ -90,8 +90,8 @@
                 <?php endforeach; ?>
             </div>
 
-            <button id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button type="button" id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
+                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
             </button>
@@ -117,13 +117,13 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 <?php foreach ($list_news as $article): ?>
-                <a href="news_detail.php?id=<?= (int)$article['id'] ?>" class="group">
+                <a href="news_detail.php?id=<?= (int)$article['id'] ?>" aria-label="Lire l'article : <?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" class="group">
                     <article class="bg-primary-brown border-2 border-primary-orange rounded-xl overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">
 
                         <?php if (!empty($article['image_url'])): ?>
-                        <div class="overflow-hidden h-48 w-full relative">
+                        <figure class="overflow-hidden h-48 w-full relative m-0">
                             <img src="<?= htmlspecialchars($article['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                        </div>
+                        </figure>
                         <?php endif; ?>
 
                         <div class="p-5 flex flex-col flex-grow">
@@ -159,7 +159,7 @@
         </section>
         <?php endif; ?>
 
-    </section>
+    </div>
 </main>
 
     <?php require __DIR__ . '/layout/footer.php'; ?>
@@ -204,7 +204,10 @@
 
             for (let i = 0; i < total; i++) {
                 const btn = document.createElement('button');
+                btn.type = 'button';
                 btn.textContent = i + 1;
+                btn.setAttribute('aria-label', 'Voir l\'actualité ' + (i + 1));
+                btn.setAttribute('aria-pressed', i === current ? 'true' : 'false');
                 btn.className = 'flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-brown border-2 rounded-xl text-primary-white font-black text-lg md:text-xl ' +
                     (i === current ? 'border-primary-orange' : 'border-primary-orange/40');
                 btn.addEventListener('click', () => showSlide(i));

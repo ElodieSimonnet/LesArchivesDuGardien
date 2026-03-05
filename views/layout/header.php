@@ -50,7 +50,7 @@
 
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Menu</span>
-        <button id="close-menu" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer le menu">
+        <button id="close-menu" type="button" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer le menu">
             <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>

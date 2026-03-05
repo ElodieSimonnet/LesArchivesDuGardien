@@ -45,7 +45,7 @@ class FaqController
 
         $all_faq = $this->model->getAll();
 
-        require __DIR__ . '/../views/admin/faq_gestion.php';
+        require __DIR__ . '/../views/admin/faq_management.php';
     }
 
     /**
@@ -71,13 +71,13 @@ class FaqController
 
         $faq_id = (int) ($_GET['id'] ?? 0);
         if (!$faq_id) {
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
         $faq = $this->model->getRawById($faq_id);
         if (!$faq) {
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
@@ -96,13 +96,13 @@ class FaqController
 
         $faq_id = (int) ($_GET['id'] ?? 0);
         if (!$faq_id) {
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
         $faq = $this->model->getById($faq_id);
         if (!$faq) {
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
@@ -146,7 +146,7 @@ class FaqController
                 ':display_order' => $display_order,
             ]);
             set_flash('success', 'Question créée avec succès !');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la création.');
@@ -165,7 +165,7 @@ class FaqController
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
@@ -190,7 +190,7 @@ class FaqController
                 ':display_order' => $display_order,
             ]);
             set_flash('success', 'Question mise à jour avec succès !');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la modification.');
@@ -208,31 +208,31 @@ class FaqController
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
         $faq_id = (int) ($_POST['faq_id'] ?? -1);
         if ($faq_id < 0) {
             set_flash('error', 'Identifiant invalide.');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
 
         try {
             $this->model->delete($faq_id);
             set_flash('success', 'Question supprimée avec succès !');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la suppression.');
-            header('Location: faq_gestion.php');
+            header('Location: faq_management.php');
             exit;
         }
     }

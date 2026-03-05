@@ -13,7 +13,7 @@
     <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
-            <a href="mount_gestion.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
+            <a href="mount_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
                 <i class="ph ph-arrow-left" aria-hidden="true"></i> Retour à la gestion
             </a>
         </div>
@@ -21,10 +21,10 @@
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
                 <h1 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
-                    <span class="text-primary-white">#<?= $mount['id'] ?></span>
+                    <span class="text-primary-white">#<?= (int)$mount['id'] ?></span>
                     <span class="ml-3"><?= htmlspecialchars($mount['name']) ?></span>
                 </h1>
-                <a href="edit_mount.php?id=<?= $mount['id'] ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
+                <a href="edit_mount.php?id=<?= (int)$mount['id'] ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
                     <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>

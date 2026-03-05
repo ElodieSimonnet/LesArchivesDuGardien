@@ -1,9 +1,10 @@
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
+<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:bg-primary-orange focus:text-primary-black focus:px-4 focus:py-2 focus:font-bold">Aller au contenu principal</a>
 <div class="min-h-screen flex flex-col">
 
     <header class="sticky top-0 z-50 flex justify-between items-center p-4 bg-[#1a0f0a] border-b border-primary-orange/70 w-full h-30 shrink-0">
         <div class="flex items-center gap-3">
-            <button id="admin-burger" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-primary-orange cursor-pointer" aria-label="Ouvrir le menu de navigation">
+            <button type="button" id="admin-burger" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-primary-orange cursor-pointer" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="admin-sidebar">
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
@@ -13,11 +14,11 @@
                 <span>Les Archives Du Gardien</span>
                 <?php
                     $sidebarLabel = match($currentPage) {
-                        'mount_gestion.php' => 'MONTURES',
-                        'user_gestion.php'  => 'UTILISATEURS',
-                        'pet_gestion.php'   => 'MASCOTTES',
-                        'news_gestion.php'  => 'ACTUALITÉS',
-                        'faq_gestion.php'   => 'F.A.Q',
+                        'mount_management.php' => 'MONTURES',
+                        'user_management.php'  => 'UTILISATEURS',
+                        'pet_management.php'   => 'MASCOTTES',
+                        'news_management.php'  => 'ACTUALITÉS',
+                        'faq_management.php'   => 'F.A.Q',
                         'dashboard.php'     => 'TABLEAU DE BORD',
                         default                   => 'ADMINISTRATION',
                     };
@@ -36,9 +37,12 @@
 
             <div class="h-8 w-px bg-primary-orange/30"></div>
 
-            <a href="logout.php" class="flex items-center justify-center text-primary-orange hover:text-red-500 transition-all group" aria-label="Se déconnecter">
-                <i class="ph ph-sign-out text-3xl xl:text-4xl group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
-            </a>
+            <form action="logout.php" method="POST">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <button type="submit" class="flex items-center justify-center text-primary-orange hover:text-red-500 transition-all group" aria-label="Se déconnecter">
+                    <i class="ph ph-sign-out text-3xl xl:text-4xl group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
+                </button>
+            </form>
         </div>
     </header>
 
@@ -53,20 +57,20 @@
             <a href="dashboard.php" <?php echo ($currentPage === 'dashboard.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'dashboard.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
               <span class="w-5 h-5 <?php echo ($currentPage === 'dashboard.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Tableau de bord
             </a>
-            <a href="user_gestion.php" <?php echo ($currentPage === 'user_gestion.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'user_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 <?php echo ($currentPage === 'user_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Utilisateurs
+            <a href="user_management.php" <?php echo ($currentPage === 'user_management.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'user_management.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'user_management.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Utilisateurs
             </a>
-            <a href="mount_gestion.php" <?php echo ($currentPage === 'mount_gestion.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'mount_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 <?php echo ($currentPage === 'mount_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Montures
+            <a href="mount_management.php" <?php echo ($currentPage === 'mount_management.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'mount_management.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'mount_management.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Montures
             </a>
-            <a href="pet_gestion.php" <?php echo ($currentPage === 'pet_gestion.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'pet_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 <?php echo ($currentPage === 'pet_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Mascottes
+            <a href="pet_management.php" <?php echo ($currentPage === 'pet_management.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'pet_management.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'pet_management.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Mascottes
             </a>
-            <a href="news_gestion.php" <?php echo ($currentPage === 'news_gestion.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'news_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 <?php echo ($currentPage === 'news_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Nouveautés
+            <a href="news_management.php" <?php echo ($currentPage === 'news_management.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'news_management.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'news_management.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> Nouveautés
             </a>
-            <a href="faq_gestion.php" <?php echo ($currentPage === 'faq_gestion.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'faq_gestion.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
-              <span class="w-5 h-5 <?php echo ($currentPage === 'faq_gestion.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> F.A.Q
+            <a href="faq_management.php" <?php echo ($currentPage === 'faq_management.php') ? 'aria-current="page"' : ''; ?> class="flex items-center gap-3 p-3 <?php echo ($currentPage === 'faq_management.php') ? 'bg-amber-900/20 text-primary-orange border-l-4 border-primary-orange' : 'text-amber-600/60 hover:text-primary-orange transition-all'; ?> uppercase text-xs font-bold tracking-widest">
+              <span class="w-5 h-5 <?php echo ($currentPage === 'faq_management.php') ? 'bg-primary-orange' : 'bg-amber-900/20'; ?> rounded-sm"></span> F.A.Q
             </a>
           </nav>
         </div>

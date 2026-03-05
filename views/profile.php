@@ -16,8 +16,8 @@
                  md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
         <h1 class="sr-only">Mon Profil</h1>
         <div class="max-w-4xl mx-auto px-4 flex flex-col gap-6">
-            <section class="grid md:grid-cols-3 gap-6">
-                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
+            <section class="grid md:grid-cols-3 gap-6" aria-label="Informations du profil">
+                <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
                     <form action="components/utils/upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
                         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <label for="profileAvatarInput" class="relative w-32 h-32 mb-4 flex items-center justify-center group cursor-pointer" aria-label="Changer votre avatar">
@@ -43,32 +43,32 @@
                                 </svg>
                             </div>
 
-                            <input type="file" id="profileAvatarInput" name="avatar" class="hidden" accept="image/*" onchange="document.getElementById('profileAvatarForm').submit()">
+                            <input type="file" id="profileAvatarInput" name="avatar" class="hidden" accept="image/*" aria-label="Changer votre avatar" onchange="document.getElementById('profileAvatarForm').submit()">
                         </label>
                     </form>
 
                     <h2 class="text-primary-orange text-2xl font-bold uppercase tracking-widest"><?= htmlspecialchars($user['username']) ?></h2>
-                </article>
+                </div>
 
-                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
+                <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
                         <img src="assets/images/home_icons/dragon_icon.png" alt="Icone Monture" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Montures obtenues</h2>
                     <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?= $countOwnedMounts ?> / <?= $countTotalMounts ?></p>
-                </article>
+                </div>
 
-                <article class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
+                <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
                         <img src="assets/images/home_icons/cat_icon.png" alt="Icone Mascotte" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Mascottes obtenues</h2>
                     <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?= $countOwnedPets ?> / <?= $countTotalPets ?></p>
-                </article>
+                </div>
             </section>
 
-            <section class="grid md:grid-cols-3 gap-6">
-                <article class="md:col-span-2 bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden shadow-2xl">
+            <div class="grid md:grid-cols-3 gap-6">
+                <section class="md:col-span-2 bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden shadow-2xl">
                     <div class="pt-6">
                         <h2 class="text-primary-orange text-2xl font-bold uppercase text-center tracking-[0.2em]">Paramètres</h2>
                         <div class="h-[1px] bg-primary-orange w-full mt-4"></div>
@@ -77,7 +77,7 @@
                     <div class="p-6 md:p-8 flex flex-col gap-8">
 
                         <?php $flash = get_flash(); if ($flash): ?>
-                            <div id="flash-message" role="alert" aria-live="polite" class="p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-400' : 'bg-red-500/10 border-red-500 text-red-400' ?> border rounded-lg text-sm font-bold uppercase text-center">
+                            <div id="flash-message" role="alert" class="p-4 <?= $flash['type'] === 'success' ? 'bg-green-500/10 border-green-500 text-green-400' : 'bg-red-500/10 border-red-500 text-red-400' ?> border rounded-lg text-sm font-bold uppercase text-center">
                                 <?= htmlspecialchars($flash['message']) ?>
                             </div>
                         <?php endif; ?>
@@ -161,9 +161,9 @@
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="password">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
-                                <label class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Mot de passe :</label>
+                                <label for="password-display" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Mot de passe :</label>
                                 <div class="flex flex-1 gap-3">
-                                    <input type="password" value="********" readonly disabled
+                                    <input type="password" id="password-display" value="********" readonly disabled
                                     class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none">
                                     <button type="button" onclick="toggleEdit('password')" id="btn-edit-password" aria-label="Modifier le mot de passe" class="border border-primary-orange rounded-lg p-3 hover:bg-primary-orange transition-all group">
                                         <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,7 +226,7 @@
                             </div>
                         </form>
 
-                        <form id="deleteAccountForm" action="delete_account.php" method="POST">
+                        <form id="deleteAccountForm" action="components/utils/delete_account.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="confirm_delete" value="1">
                             <button type="button" id="openDeleteModal" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm lg:text-base tracking-widest transition-all active:scale-[0.98]">
@@ -234,9 +234,9 @@
                             </button>
                         </form>
                     </div>
-                </article>
+                </section>
 
-                <article class="bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden flex flex-col shadow-2xl">
+                <section class="bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden flex flex-col shadow-2xl">
                     <div class="pt-6">
                         <div class="flex items-center justify-center gap-3">
                             <img src="assets/images/icon-bnet.png" alt="Battle.net" class="w-8 h-8">
@@ -255,9 +255,9 @@
                         Synchroniser
                         </button>
                     </div>
-                </article>
+                </section>
 
-            </section>
+            </div>
         </div>
     </main>
 

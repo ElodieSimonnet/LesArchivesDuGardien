@@ -46,7 +46,7 @@ class NewsController
 
         $all_news = $this->model->getAll();
 
-        require __DIR__ . '/../views/admin/news_gestion.php';
+        require __DIR__ . '/../views/admin/news_management.php';
     }
 
     /**
@@ -72,13 +72,13 @@ class NewsController
 
         $news_id = (int) ($_GET['id'] ?? 0);
         if (!$news_id) {
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
         $article = $this->model->getRawById($news_id);
         if (!$article) {
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
@@ -97,13 +97,13 @@ class NewsController
 
         $news_id = (int) ($_GET['id'] ?? 0);
         if (!$news_id) {
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
         $article = $this->model->getById($news_id);
         if (!$article) {
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
@@ -161,7 +161,7 @@ class NewsController
                 ':id_user'    => $id_user,
             ]);
             set_flash('success', 'Article créé avec succès !');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la création.');
@@ -180,7 +180,7 @@ class NewsController
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
@@ -219,7 +219,7 @@ class NewsController
                 ':id_user'    => $id_user,
             ]);
             set_flash('success', 'Article mis à jour avec succès !');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la modification.');
@@ -237,31 +237,31 @@ class NewsController
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
         $news_id = (int) ($_POST['news_id'] ?? -1);
         if ($news_id < 0) {
             set_flash('error', 'Identifiant invalide.');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
 
         try {
             $this->model->delete($news_id);
             set_flash('success', 'Article supprimé avec succès !');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la suppression.');
-            header('Location: news_gestion.php');
+            header('Location: news_management.php');
             exit;
         }
     }

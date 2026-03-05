@@ -84,9 +84,9 @@ class UserController
     /**
      * Affiche la page de connexion admin.
      */
-    public function adminConnexion(): void
+    public function adminLogin(): void
     {
-        require __DIR__ . '/../views/admin/connexion.php';
+        require __DIR__ . '/../views/admin/login.php';
     }
 
     /**
@@ -125,7 +125,7 @@ class UserController
 
         $all_users = $this->model->getAll($filters);
 
-        require __DIR__ . '/../views/admin/user_gestion.php';
+        require __DIR__ . '/../views/admin/user_management.php';
     }
 
     /**
@@ -138,13 +138,13 @@ class UserController
 
         $user_id = (int) ($_GET['id'] ?? 0);
         if (!$user_id) {
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
         $user = $this->model->getByIdWithDetails($user_id);
         if (!$user) {
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
@@ -175,13 +175,13 @@ class UserController
 
         $user_id = (int) ($_GET['id'] ?? 0);
         if (!$user_id) {
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
         $user = $this->model->getRawById($user_id);
         if (!$user) {
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
@@ -255,7 +255,7 @@ class UserController
                 ':id_status' => $id_status,
             ]);
             set_flash('success', 'Utilisateur créé avec succès !');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la création.');
@@ -274,7 +274,7 @@ class UserController
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
@@ -323,7 +323,7 @@ class UserController
                 ':id'        => $user_id,
             ]);
             set_flash('success', 'Utilisateur mis à jour avec succès !');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la modification.');
@@ -341,13 +341,13 @@ class UserController
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
@@ -355,24 +355,24 @@ class UserController
 
         if ($user_id <= 0) {
             set_flash('error', 'Identifiant invalide.');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
         if ($user_id === (int) $_SESSION['user_id']) {
             set_flash('error', 'Vous ne pouvez pas supprimer votre propre compte.');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
 
         try {
             $this->model->delete($user_id);
             set_flash('success', 'Utilisateur supprimé avec succès !');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la suppression.');
-            header('Location: user_gestion.php');
+            header('Location: user_management.php');
             exit;
         }
     }

@@ -31,6 +31,6 @@
         </div>
         </div>
         <p class="text-center text-xs text-zinc-500 mt-8 max-w-2xl mx-auto">
-            Les Archives du Gardien est un site de fan non officiel, non affilié à Blizzard Entertainment. World of Warcraft®, Warcraft® et Blizzard Entertainment® sont des marques déposées de Blizzard Entertainment, Inc.
+            <small>Les Archives du Gardien est un site de fan non officiel, non affilié à Blizzard Entertainment. World of Warcraft®, Warcraft® et Blizzard Entertainment® sont des marques déposées de Blizzard Entertainment, Inc.</small>
         </p>
     </footer>

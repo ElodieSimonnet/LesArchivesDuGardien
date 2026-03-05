@@ -7,7 +7,7 @@
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
-    <script src="assets/js/card-clic.js" defer></script>
+    <script src="assets/js/card-click.js" defer></script>
     <script src="assets/js/filter-menu-mobile.js" defer></script>
     <script src="assets/js/collection-filter-toggle.js" defer></script>
     <script src="assets/js/toggle-collection.js" defer></script>
@@ -24,7 +24,7 @@
 
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des montures</h1>
 
-        <div class="flex flex-col items-center mb-8 w-full gap-4">
+        <search aria-label="Filtrer les montures" class="flex flex-col items-center w-full gap-4">
 
             <div class="w-full flex items-center justify-center gap-2">
                 <div class="relative w-full max-w-3xl h-12">
@@ -39,7 +39,7 @@
                            class="w-full h-full bg-primary-brown border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
                 </div>
 
-                <button id="mobile-filter-trigger" aria-label="Ouvrir les filtres" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
+                <button type="button" id="mobile-filter-trigger" aria-label="Ouvrir les filtres" class="md:hidden flex items-center justify-center h-12 px-3 bg-primary-brown/80 border border-primary-orange rounded-md transition-transform active:scale-95 shrink-0">
                     <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-6 w-6 text-primary-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
                     </svg>
@@ -51,7 +51,7 @@
                     <div class="col-span-full flex flex-wrap items-center gap-3">
                         <span class="text-xs uppercase text-primary-orange/60 font-bold tracking-widest">Filtres actifs :</span>
                         <div id="badges-dynamic-container" class="flex flex-wrap gap-2"></div>
-                        <button id="clear-all-filters" class="flex items-center gap-2 bg-primary-orange/10 border border-primary-orange/40 px-3 py-1 rounded-full group hover:border-primary-orange transition-all">
+                        <button type="button" id="clear-all-filters" class="flex items-center gap-2 bg-primary-orange/10 border border-primary-orange/40 px-3 py-1 rounded-full group hover:border-primary-orange transition-all">
                             <span class="text-[10px] md:text-xs text-primary-white uppercase font-bold tracking-tight">Tout effacer</span>
                             <div class="text-primary-orange group-hover:text-white transition-colors">
                                <i class="ph-x-circle-bold text-lg" aria-hidden="true"></i>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]">
+            <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]" role="group" aria-label="Filtres">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="relative flex-1 dropdown-container">
                     <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
@@ -110,6 +110,9 @@
                 <?php endforeach; ?>
             </div>
 
+        </search>
+        <section class="w-full">
+            <h2 class="sr-only">Résultats</h2>
             <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 min-w-full">
                 <?php foreach ($mounts as $mount):
                     $difficultyColor = ''; $hoverColor = '';
@@ -185,13 +188,13 @@
             </ul>
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
-                <p id="load-more-count" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
-                <button id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+                <p id="load-more-count" aria-live="polite" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
+                <button type="button" id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                     Charger plus
                 </button>
             </div>
 
-        </div>
+        </section>
     </main>
 
     <?php require __DIR__ . '/layout/footer.php'; ?>

@@ -76,7 +76,7 @@ class MountController
 
     /**
      * Affiche la liste admin des montures.
-     * Appelle admin_mount_gestion.php → ici → views/admin/mount_gestion.php
+     * Appelle admin_mount_management.php → ici → views/admin/mount_management.php
      */
     public function adminList(): void
     {
@@ -93,7 +93,7 @@ class MountController
         $all_factions    = $this->model->getFactions();
         $all_difficulties = $this->model->getDifficulties();
 
-        require __DIR__ . '/../views/admin/mount_gestion.php';
+        require __DIR__ . '/../views/admin/mount_management.php';
     }
 
     /**
@@ -128,13 +128,13 @@ class MountController
 
         $mount_id = (int) ($_GET['id'] ?? 0);
         if (!$mount_id) {
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
         $mount = $this->model->getRawById($mount_id);
         if (!$mount) {
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
@@ -161,13 +161,13 @@ class MountController
 
         $mount_id = (int) ($_GET['id'] ?? 0);
         if (!$mount_id) {
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
         $mount = $this->model->getById($mount_id);
         if (!$mount) {
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
@@ -188,7 +188,7 @@ class MountController
 
     /**
      * Traite le formulaire d'ajout d'une monture (POST).
-     * Redirige vers admin_mount_gestion.php en cas de succès.
+     * Redirige vers admin_mount_management.php en cas de succès.
      */
     public function create(): void
     {
@@ -276,7 +276,7 @@ class MountController
                 ':id_target'    => $id_target,
             ]);
             set_flash('success', 'Monture créée avec succès !');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la création.');
@@ -287,7 +287,7 @@ class MountController
 
     /**
      * Traite le formulaire de modification d'une monture (POST).
-     * Redirige vers admin_mount_gestion.php en cas de succès.
+     * Redirige vers admin_mount_management.php en cas de succès.
      */
     public function update(): void
     {
@@ -297,7 +297,7 @@ class MountController
         // Vérification du jeton CSRF
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
@@ -370,7 +370,7 @@ class MountController
                 ':id_target'    => $id_target,
             ]);
             set_flash('success', 'Monture modifiée avec succès !');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la modification.');
@@ -381,7 +381,7 @@ class MountController
 
     /**
      * Traite la suppression d'une monture (POST).
-     * Redirige vers admin_mount_gestion.php.
+     * Redirige vers admin_mount_management.php.
      */
     public function delete(): void
     {
@@ -389,32 +389,32 @@ class MountController
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
         // Vérification du jeton CSRF
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
         $mount_id = (int) ($_POST['mount_id'] ?? -1);
         if ($mount_id < 0) {
             set_flash('error', 'Identifiant invalide.');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
 
         try {
             $this->model->delete($mount_id);
             set_flash('success', 'Monture supprimée avec succès !');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         } catch (PDOException $e) {
             set_flash('error', 'Une erreur est survenue lors de la suppression.');
-            header('Location: mount_gestion.php');
+            header('Location: mount_management.php');
             exit;
         }
     }
