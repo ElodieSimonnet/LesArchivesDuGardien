@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- SÉLECTEURS ---
+    
     const activeFiltersContent = document.getElementById('active-filters-content');
     const checkboxes = document.querySelectorAll('.filter-checkbox');
     const statusRadios = document.querySelectorAll('.status-radio, .status-radio-mobile');
@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const loadMoreBtn = document.getElementById('load-more-btn');
     const loadMoreCount = document.getElementById('load-more-count');
 
-    // --- PAGINATION "CHARGER PLUS" ---
+    
     const ITEMS_PER_PAGE = 12;
     let currentLimit = ITEMS_PER_PAGE;
 
-    // --- 1. GESTION DES MENUS DÉROULANTS (Desktop) ---
+    
     function closeAllDropdowns() {
         document.querySelectorAll('.dropdown-content').forEach(menu => menu.classList.add('hidden'));
         document.querySelectorAll('.dropdown-button').forEach(b => b.setAttribute('aria-expanded', 'false'));
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         content?.addEventListener('click', (e) => e.stopPropagation());
 
-        // Fermeture quand le focus quitte le dropdown
+        
         container.addEventListener('focusout', (e) => {
             if (!container.contains(e.relatedTarget)) {
                 content.classList.add('hidden');
@@ -60,12 +60,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.addEventListener('click', closeAllDropdowns);
 
-    // Fermeture au clavier (Échap)
+    
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') closeAllDropdowns();
     });
 
-    // --- 2. SYSTÈME DE FILTRAGE GLOBAL ---
+    
     function applyAllFilters() {
         const activeFilters = {};
 
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
         applyAllFilters();
     }
 
-    // --- 3. GESTION DES BADGES DYNAMIQUES ---
+    
     function updateBadges(activeFilters, statusValue) {
         const container = document.getElementById('badges-dynamic-container');
         if (!container || !activeFiltersContent) return;
@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(badge);
     }
 
-    // --- 4. ÉCOUTEURS ---
+    
     checkboxes.forEach(box => box.addEventListener('change', resetAndApply));
     statusRadios.forEach(radio => radio.addEventListener('change', resetAndApply));
 
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 5. ACCORDÉONS MOBILE ---
+    
     document.querySelectorAll('.mobile-accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
@@ -232,6 +232,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Lancement initial
+    
     applyAllFilters();
 });

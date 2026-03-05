@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * MODÈLE : PetModel
- * ============================================================
- * Rôle : Toutes les requêtes SQL liées aux mascottes.
- * ============================================================
- */
-
 class PetModel
 {
     private PDO $db;
@@ -17,15 +9,7 @@ class PetModel
         $this->db = Database::getConnection();
     }
 
-    // ========================================================
-    // LECTURE - Pages publiques
-    // ========================================================
-
-    /**
-     * Récupère toutes les mascottes avec le statut "possédée"
-     * et "en wishlist" pour l'utilisateur connecté.
-     */
-    public function getAll(int $userId = 0): array
+public function getAll(int $userId = 0): array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -49,11 +33,7 @@ class PetModel
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère une seule mascotte par son ID, avec toutes ses informations.
-     * Utilisé par pet_detail.php.
-     */
-    public function getById(int $id, int $userId = 0): ?array
+public function getById(int $id, int $userId = 0): ?array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -84,11 +64,7 @@ class PetModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère les sorts (spell_1 à spell_6) d'une mascotte.
-     * Retourne un tableau indexé de 1 à 6, null si pas de sort.
-     */
-    public function getSpellsForPet(array $pet): array
+public function getSpellsForPet(array $pet): array
     {
         $petSpells = [];
         for ($i = 1; $i <= 6; $i++) {
@@ -104,11 +80,7 @@ class PetModel
         return $petSpells;
     }
 
-    // ========================================================
-    // LECTURE - Listes pour les filtres et menus déroulants
-    // ========================================================
-
-    public function getFamilies(): array
+public function getFamilies(): array
     {
         return $this->db->query("SELECT * FROM adg_pet_families ORDER BY family ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -148,15 +120,7 @@ class PetModel
         return $this->db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ========================================================
-    // LECTURE - Admin
-    // ========================================================
-
-    /**
-     * Récupère toutes les mascottes pour l'interface admin,
-     * avec support des filtres GET optionnels.
-     */
-    public function getAllForAdmin(array $filters = []): array
+public function getAllForAdmin(array $filters = []): array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -190,10 +154,7 @@ class PetModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère une mascotte brute par ID (pour le formulaire d'édition admin).
-     */
-    public function getRawById(int $id): ?array
+public function getRawById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM adg_pets WHERE id = :id");
         $stmt->execute([':id' => $id]);
@@ -201,11 +162,7 @@ class PetModel
         return $result ?: null;
     }
 
-    // ========================================================
-    // ÉCRITURE - Créer / Modifier / Supprimer
-    // ========================================================
-
-    public function create(array $data): bool
+public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_pets
                     (name, description, image, id_family, id_source, id_expansion, id_faction,
@@ -253,11 +210,7 @@ class PetModel
         return $stmt->execute([':id' => $id]);
     }
 
-    // ========================================================
-    // VALIDATION
-    // ========================================================
-
-    public function nameExists(string $name, int $excludeId = 0): bool
+public function nameExists(string $name, int $excludeId = 0): bool
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_pets WHERE name = :name AND id != :id");
         $stmt->execute([':name' => $name, ':id' => $excludeId]);
@@ -271,11 +224,7 @@ class PetModel
         return $stmt->fetchColumn() > 0;
     }
 
-    // ========================================================
-    // MÉTHODE PRIVÉE - Aide pour les filtres admin
-    // ========================================================
-
-    private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void
+private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void
     {
         $values = isset($filters[$key]) ? (array) $filters[$key] : [];
         $values = array_filter($values, fn($v) => $v !== '' && $v !== 'all');

@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * CONTRÔLEUR : FaqController
- * ============================================================
- * Rôle : Gérer toute la logique liée à la FAQ.
- * ============================================================
- */
-
 class FaqController
 {
     private FaqModel $model;
@@ -17,28 +9,14 @@ class FaqController
         $this->model = new FaqModel();
     }
 
-    // ========================================================
-    // PAGES PUBLIQUES
-    // ========================================================
-
-    /**
-     * Affiche la page publique de la FAQ.
-     */
-    public function list(): void
+public function list(): void
     {
         $faq_by_category = $this->model->getAllGroupedByCategory();
 
         require __DIR__ . '/../views/faq.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Affichage
-    // ========================================================
-
-    /**
-     * Affiche la liste admin des questions FAQ.
-     */
-    public function adminList(): void
+public function adminList(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -48,10 +26,7 @@ class FaqController
         require __DIR__ . '/../views/admin/faq_management.php';
     }
 
-    /**
-     * Affiche le formulaire d'ajout d'une question.
-     */
-    public function showAddForm(): void
+public function showAddForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -61,10 +36,7 @@ class FaqController
         require __DIR__ . '/../views/admin/add_faq.php';
     }
 
-    /**
-     * Affiche le formulaire de modification d'une question.
-     */
-    public function showEditForm(): void
+public function showEditForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -86,10 +58,7 @@ class FaqController
         require __DIR__ . '/../views/admin/edit_faq.php';
     }
 
-    /**
-     * Affiche le détail d'une question côté admin (lecture seule).
-     */
-    public function adminView(): void
+public function adminView(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -109,14 +78,7 @@ class FaqController
         require __DIR__ . '/../views/admin/view_faq.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Traitement des formulaires
-    // ========================================================
-
-    /**
-     * Traite le formulaire d'ajout d'une question (POST).
-     */
-    public function create(): void
+public function create(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -155,10 +117,7 @@ class FaqController
         }
     }
 
-    /**
-     * Traite le formulaire de modification d'une question (POST).
-     */
-    public function update(): void
+public function update(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -199,10 +158,7 @@ class FaqController
         }
     }
 
-    /**
-     * Traite la suppression d'une question (POST).
-     */
-    public function delete(): void
+public function delete(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();

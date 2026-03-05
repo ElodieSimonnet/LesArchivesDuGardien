@@ -2,7 +2,7 @@
 require_once __DIR__ . '/../../models/Database.php';
 $db = Database::getConnection();
 
-// Vérification de la connexion
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: ../../index.php');
     exit();
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit();
 }
 
-// Vérification CSRF
+
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     set_flash('error', 'Erreur de sécurité : requête non autorisée.');
     header('Location: ../../profile.php');
@@ -23,7 +23,7 @@ if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_tok
 $type = $_POST['type'] ?? '';
 $currentPassword = $_POST['current_password'] ?? '';
 
-// Récupérer l'utilisateur en BDD
+
 $stmt = $db->prepare("SELECT * FROM adg_users WHERE id = ?");
 $stmt->execute([$_SESSION['user_id']]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -33,14 +33,14 @@ if (!$user) {
     exit();
 }
 
-// Vérification du mot de passe actuel (obligatoire pour toute modification)
+
 if (!password_verify($currentPassword, $user['password'])) {
     set_flash('error', 'Mot de passe actuel incorrect.');
     header('Location: ../../profile.php');
     exit();
 }
 
-// MODIFICATION DE L'EMAIL
+
 if ($type === 'email') {
     $newEmail = trim($_POST['email'] ?? '');
 
@@ -50,7 +50,7 @@ if ($type === 'email') {
         exit();
     }
 
-    // Vérifier que l'email n'est pas déjà pris par un autre utilisateur
+    
     $check = $db->prepare("SELECT id FROM adg_users WHERE email = ? AND id != ?");
     $check->execute([$newEmail, $_SESSION['user_id']]);
     if ($check->fetch()) {
@@ -67,7 +67,7 @@ if ($type === 'email') {
     exit();
 }
 
-// MODIFICATION DU NOM D'UTILISATEUR
+
 if ($type === 'username') {
     $newUsername = trim($_POST['username'] ?? '');
 
@@ -77,7 +77,7 @@ if ($type === 'username') {
         exit();
     }
 
-    // Vérifier que le pseudo n'est pas déjà pris
+    
     $check = $db->prepare("SELECT id FROM adg_users WHERE username = ? AND id != ?");
     $check->execute([$newUsername, $_SESSION['user_id']]);
     if ($check->fetch()) {
@@ -89,7 +89,7 @@ if ($type === 'username') {
     $update = $db->prepare("UPDATE adg_users SET username = ? WHERE id = ?");
     $update->execute([$newUsername, $_SESSION['user_id']]);
 
-    // Mettre à jour la session
+    
     $_SESSION['username'] = $newUsername;
 
     set_flash('success', 'Nom d\'utilisateur mis à jour avec succès.');
@@ -97,19 +97,19 @@ if ($type === 'username') {
     exit();
 }
 
-// MODIFICATION DU MOT DE PASSE
+
 if ($type === 'password') {
     $newPassword = $_POST['new_password'] ?? '';
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
-    // Vérification de la confirmation
+    
     if ($newPassword !== $confirmPassword) {
         set_flash('error', 'Les mots de passe ne correspondent pas.');
         header('Location: ../../profile.php');
         exit();
     }
 
-    // Validation de la robustesse
+    
     if (strlen($newPassword) < 12) {
         set_flash('error', 'Le mot de passe doit contenir au moins 12 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.');
         header('Location: ../../profile.php');
@@ -145,6 +145,6 @@ if ($type === 'password') {
     exit();
 }
 
-// Type inconnu
+
 header('Location: ../../profile.php');
 exit();

@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-filters');
     const filterForm = document.getElementById('filterForm');
 
-    // Recherche en temps réel
-    const searchInput = document.getElementById('search-pet');
+const searchInput = document.getElementById('search-pet');
     if (searchInput) {
         const rows = document.querySelectorAll('.pet-row');
 
@@ -46,8 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     };
 
-    // Focus trap
-    menu.addEventListener('keydown', (e) => {
+menu.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
         const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
         const first = focusable[0];
@@ -67,8 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-    // Gestion des "Tout sélectionner"
-    document.querySelectorAll('.select-all').forEach(selectAll => {
+document.querySelectorAll('.select-all').forEach(selectAll => {
         const section = selectAll.closest('.mobile-accordion-content');
         const checkboxes = section.querySelectorAll('.filter-checkbox');
 

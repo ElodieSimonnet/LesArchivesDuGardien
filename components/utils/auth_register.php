@@ -6,15 +6,14 @@ header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // VÉRIFICATION DU JETON CSRF
-    // On vérifie que le badge est valide avant d'autoriser l'inscription
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         header('HTTP/1.1 403 Forbidden');
         echo json_encode(['status' => 'error', 'message' => 'Erreur de sécurité : Requête non autorisée.']);
         exit;
     }
 
-    // Vérification du consentement RGPD
+    
     if (empty($_POST['consent'])) {
         echo json_encode(['status' => 'error', 'message' => 'Vous devez accepter la politique de confidentialité pour créer un compte.']);
         exit;
@@ -25,19 +24,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST['password'];
     $confirmPassword = $_POST['confirm_password'] ?? '';
 
-    // Validation du format de l'email
+    
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(['status' => 'error', 'message' => 'Adresse e-mail invalide.']);
         exit;
     }
 
-    // Vérification de la confirmation du mot de passe
+    
     if ($password !== $confirmPassword) {
         echo json_encode(['status' => 'error', 'message' => 'Les mots de passe ne correspondent pas.']);
         exit;
     }
 
-    // Validation de la robustesse du mot de passe
+    
     if (strlen($password) < 12) {
         echo json_encode(['status' => 'error', 'message' => 'Le mot de passe doit contenir au moins 12 caractères.']);
         exit;
@@ -59,14 +58,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // Hachage du mot de passe
+    
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     try {
         $stmt = $db->prepare("INSERT INTO adg_users (username, email, password) VALUES (?, ?, ?)");
         $stmt->execute([$username, $email, $hashedPassword]);
 
-        // Connexion automatique après inscription
+        
         $newUserId = $db->lastInsertId();
         session_regenerate_id(true);
         $_SESSION['user_id'] = $newUserId;
@@ -75,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         set_flash('success', 'Bienvenue aux Archives du Gardien ! Votre compte a bien été créé.');
         echo json_encode(['status' => 'success', 'redirect' => 'profile.php']);
     } catch (PDOException $e) {
-        // En cas de doublon (pseudo ou email déjà pris)
+        
         echo json_encode(['status' => 'error', 'message' => 'Cet aventurier (ou cet email) existe déjà.']);
     }
 }

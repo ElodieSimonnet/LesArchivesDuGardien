@@ -1,19 +1,10 @@
 <?php
 
-/**
- * ============================================================
- * CONTRÔLEUR : PetController
- * ============================================================
- * Rôle : Gérer toute la logique liée aux mascottes.
- * ============================================================
- */
-
 class PetController
 {
     private PetModel $model;
 
-    // Mapping famille → nom du fichier icône
-    private array $familyIcons = [
+private array $familyIcons = [
         'Élémentaire' => 'elem',
         'Aquatique'   => 'aquatic',
         'Humanoïde'   => 'humanoid',
@@ -31,14 +22,7 @@ class PetController
         $this->model = new PetModel();
     }
 
-    // ========================================================
-    // PAGES PUBLIQUES
-    // ========================================================
-
-    /**
-     * Affiche la liste de toutes les mascottes.
-     */
-    public function list(): void
+public function list(): void
     {
         $userId    = $_SESSION['user_id'] ?? 0;
         $pets      = $this->model->getAll($userId);
@@ -50,10 +34,7 @@ class PetController
         require __DIR__ . '/../views/pet_list.php';
     }
 
-    /**
-     * Affiche le détail d'une mascotte.
-     */
-    public function detail(): void
+public function detail(): void
     {
         $id     = (int) ($_GET['id'] ?? 0);
         $userId = $_SESSION['user_id'] ?? 0;
@@ -72,14 +53,7 @@ class PetController
         require __DIR__ . '/../views/pet_detail.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Affichage
-    // ========================================================
-
-    /**
-     * Affiche la liste admin des mascottes.
-     */
-    public function adminList(): void
+public function adminList(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -87,9 +61,7 @@ class PetController
         $filters  = $_GET;
         $all_pets = $this->model->getAllForAdmin($filters);
 
-        // Listes pour les filtres de la sidebar admin
-        // Nommées différemment pour éviter les conflits avec add/edit forms
-        $all_families      = $this->model->getFamilies();
+$all_families      = $this->model->getFamilies();
         $all_pet_sources   = $this->model->getSources();
         $all_pet_expansions = $this->model->getExpansions();
         $all_pet_factions  = $this->model->getFactions();
@@ -97,10 +69,7 @@ class PetController
         require __DIR__ . '/../views/admin/pet_management.php';
     }
 
-    /**
-     * Affiche le formulaire d'ajout d'une mascotte.
-     */
-    public function showAddForm(): void
+public function showAddForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -117,10 +86,7 @@ class PetController
         require __DIR__ . '/../views/admin/add_pet.php';
     }
 
-    /**
-     * Affiche le formulaire de modification d'une mascotte.
-     */
-    public function showEditForm(): void
+public function showEditForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -149,10 +115,7 @@ class PetController
         require __DIR__ . '/../views/admin/edit_pet.php';
     }
 
-    /**
-     * Affiche le détail d'une mascotte côté admin (lecture seule).
-     */
-    public function adminView(): void
+public function adminView(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -174,14 +137,7 @@ class PetController
         require __DIR__ . '/../views/admin/view_pet.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Traitement des formulaires
-    // ========================================================
-
-    /**
-     * Traite le formulaire d'ajout d'une mascotte (POST).
-     */
-    public function create(): void
+public function create(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -273,10 +229,7 @@ class PetController
         }
     }
 
-    /**
-     * Traite le formulaire de modification d'une mascotte (POST).
-     */
-    public function update(): void
+public function update(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -364,10 +317,7 @@ class PetController
         }
     }
 
-    /**
-     * Traite la suppression d'une mascotte (POST).
-     */
-    public function delete(): void
+public function delete(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();

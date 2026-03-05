@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const icon = this.querySelector('.collection-icon');
                 const path = icon ? icon.querySelector('path') : null;
 
-                // Mettre à jour la carte (parente dans les listes, ou frère article dans les détails)
+                
                 let card = this.closest('[data-owned]');
                 if (!card) {
                     const sibling = this.previousElementSibling;

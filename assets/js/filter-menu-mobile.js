@@ -1,6 +1,3 @@
-/**
- * Gestion du menu de filtres mobile et synchronisation des radios
- */
 document.addEventListener('DOMContentLoaded', () => {
     const openBtn = document.getElementById('mobile-filter-trigger');
     const overlay = document.getElementById('filter-mobile-overlay');
@@ -15,14 +12,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let _filterLastFocus = null;
 
-    // Éléments focusables dans le panneau
+    
     function getFocusable() {
         return Array.from(menu.querySelectorAll(
             'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
         )).filter(el => el.offsetParent !== null);
     }
 
-    // --- OUVERTURE ---
+    
     const openMobileFilters = () => {
         _filterLastFocus = document.activeElement;
 
@@ -38,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.style.overflow = 'hidden';
     };
 
-    // --- FERMETURE ---
+    
     const closeMobileFilters = () => {
         menu.classList.add('translate-x-full');
         menu.setAttribute('aria-hidden', 'true');
@@ -49,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (_filterLastFocus) _filterLastFocus.focus();
     };
 
-    // --- PIÈGE DE FOCUS + ÉCHAP ---
+    
     menu.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeMobileFilters();
@@ -69,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- ACCORDÉONS ---
+    
     menu.querySelectorAll('.mobile-accordion-header').forEach(btn => {
         btn.addEventListener('click', () => {
             const content = btn.nextElementSibling;
@@ -81,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- ÉCOUTEURS ---
+    
     openBtn.addEventListener('click', openMobileFilters);
     closeBtn?.addEventListener('click', closeMobileFilters);
     overlay.addEventListener('click', closeMobileFilters);
     applyBtn?.addEventListener('click', closeMobileFilters);
 
-    // --- SYNCHRONISATION RADIOS ---
+    
     function syncStatusFilters(value) {
         desktopRadios.forEach(r => r.checked = (r.value === value));
         mobileRadios.forEach(r => r.checked = (r.value === value));

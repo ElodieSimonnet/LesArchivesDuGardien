@@ -1,21 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * CONTRÔLEUR : MountController
- * ============================================================
- * Rôle : Gérer toute la logique liée aux montures.
- *
- * Ce fichier ne contient PAS de requêtes SQL (c'est le rôle
- * du MountModel) et PAS de HTML (c'est le rôle des vues).
- *
- * Il fait le lien entre les deux :
- *   1. Demande les données au modèle
- *   2. Valide et traite les formulaires
- *   3. Passe les données à la vue
- * ============================================================
- */
-
 class MountController
 {
     private MountModel $model;
@@ -25,15 +9,7 @@ class MountController
         $this->model = new MountModel();
     }
 
-    // ========================================================
-    // PAGES PUBLIQUES
-    // ========================================================
-
-    /**
-     * Affiche la liste de toutes les montures.
-     * Appelle mount_list.php (root) → ici → views/mount_list.php
-     */
-    public function list(): void
+public function list(): void
     {
         $userId     = $_SESSION['user_id'] ?? 0;
         $mounts     = $this->model->getAll($userId);
@@ -45,11 +21,7 @@ class MountController
         require __DIR__ . '/../views/mount_list.php';
     }
 
-    /**
-     * Affiche le détail d'une monture.
-     * Appelle mount_detail.php (root) → ici → views/mount_detail.php
-     */
-    public function detail(): void
+public function detail(): void
     {
         $id    = (int) ($_GET['id'] ?? 0);
         $userId = $_SESSION['user_id'] ?? 0;
@@ -60,25 +32,15 @@ class MountController
             exit;
         }
 
-        // Chemin de l'icône du type de monture
-        $mountTypeLink = 'assets/images/mounts/' . $mount['type'] . '.png';
+$mountTypeLink = 'assets/images/mounts/' . $mount['type'] . '.png';
 
-        // is_owned et is_wishlisted sont déjà dans $mount (retournés par getById)
-        $isOwnedMount     = (bool) ($mount['is_owned'] ?? false);
+$isOwnedMount     = (bool) ($mount['is_owned'] ?? false);
         $isWishlistedMount = (bool) ($mount['is_wishlisted'] ?? false);
 
         require __DIR__ . '/../views/mount_detail.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Affichage
-    // ========================================================
-
-    /**
-     * Affiche la liste admin des montures.
-     * Appelle admin_mount_management.php → ici → views/admin/mount_management.php
-     */
-    public function adminList(): void
+public function adminList(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -86,8 +48,7 @@ class MountController
         $filters    = $_GET;
         $all_mounts = $this->model->getAllForAdmin($filters);
 
-        // Listes pour les filtres de la sidebar admin
-        $all_types       = $this->model->getTypes();
+$all_types       = $this->model->getTypes();
         $all_sources     = $this->model->getSources();
         $all_expansions  = $this->model->getExpansions();
         $all_factions    = $this->model->getFactions();
@@ -96,11 +57,7 @@ class MountController
         require __DIR__ . '/../views/admin/mount_management.php';
     }
 
-    /**
-     * Affiche le formulaire d'ajout d'une monture.
-     * Appelle add_mount.php (root) → ici → views/admin/add_mount.php
-     */
-    public function showAddForm(): void
+public function showAddForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -117,11 +74,7 @@ class MountController
         require __DIR__ . '/../views/admin/add_mount.php';
     }
 
-    /**
-     * Affiche le formulaire de modification d'une monture.
-     * Appelle edit_mount.php (root) → ici → views/admin/edit_mount.php
-     */
-    public function showEditForm(): void
+public function showEditForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -150,11 +103,7 @@ class MountController
         require __DIR__ . '/../views/admin/edit_mount.php';
     }
 
-    /**
-     * Affiche le détail d'une monture côté admin (lecture seule).
-     * Appelle view_mount.php (root) → ici → views/admin/view_mount.php
-     */
-    public function adminView(): void
+public function adminView(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -182,28 +131,18 @@ class MountController
         require __DIR__ . '/../views/admin/view_mount.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Traitement des formulaires
-    // ========================================================
-
-    /**
-     * Traite le formulaire d'ajout d'une monture (POST).
-     * Redirige vers admin_mount_management.php en cas de succès.
-     */
-    public function create(): void
+public function create(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
 
-        // Vérification du jeton CSRF
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
             header('Location: add_mount.php');
             exit;
         }
 
-        // Nettoyage des données reçues
-        $name         = trim($_POST['name'] ?? '');
+$name         = trim($_POST['name'] ?? '');
         $description  = trim($_POST['description'] ?? '');
         $image        = trim($_POST['image'] ?? '');
         $id_type      = (int) ($_POST['id_type'] ?? 0);
@@ -217,15 +156,13 @@ class MountController
         $id_zone      = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
         $id_target    = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
 
-        // Validation : nom obligatoire
-        if (empty($name)) {
+if (empty($name)) {
             set_flash('error', 'Le nom de la monture est obligatoire.');
             header('Location: add_mount.php');
             exit;
         }
 
-        // Validation des clés étrangères
-        if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
+if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
             set_flash('error', 'Le type sélectionné est invalide.');
             header('Location: add_mount.php');
             exit;
@@ -251,15 +188,13 @@ class MountController
             exit;
         }
 
-        // Validation : nom unique
-        if ($this->model->nameExists($name)) {
+if ($this->model->nameExists($name)) {
             set_flash('error', 'Une monture avec ce nom existe déjà.');
             header('Location: add_mount.php');
             exit;
         }
 
-        // Création en base de données
-        try {
+try {
             $this->model->create([
                 ':name'         => $name,
                 ':description'  => $description,
@@ -285,24 +220,18 @@ class MountController
         }
     }
 
-    /**
-     * Traite le formulaire de modification d'une monture (POST).
-     * Redirige vers admin_mount_management.php en cas de succès.
-     */
-    public function update(): void
+public function update(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
 
-        // Vérification du jeton CSRF
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
             header('Location: mount_management.php');
             exit;
         }
 
-        // Nettoyage des données
-        $mount_id     = (int) ($_POST['mount_id'] ?? 0);
+$mount_id     = (int) ($_POST['mount_id'] ?? 0);
         $name         = trim($_POST['name'] ?? '');
         $description  = trim($_POST['description'] ?? '');
         $image        = trim($_POST['image'] ?? '');
@@ -317,15 +246,13 @@ class MountController
         $id_zone      = !empty($_POST['id_zone']) ? (int) $_POST['id_zone'] : null;
         $id_target    = !empty($_POST['id_target']) ? (int) $_POST['id_target'] : null;
 
-        // Validation : nom obligatoire
-        if (empty($name)) {
+if (empty($name)) {
             set_flash('error', 'Le nom de la monture est obligatoire.');
             header("Location: edit_mount.php?id={$mount_id}");
             exit;
         }
 
-        // Validation des clés étrangères
-        if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
+if (!$this->model->idExistsInTable('adg_mount_types', $id_type)) {
             set_flash('error', 'Le type sélectionné est invalide.');
             header("Location: edit_mount.php?id={$mount_id}");
             exit;
@@ -351,8 +278,7 @@ class MountController
             exit;
         }
 
-        // Modification en base de données
-        try {
+try {
             $this->model->update([
                 ':id'           => $mount_id,
                 ':name'         => $name,
@@ -379,11 +305,7 @@ class MountController
         }
     }
 
-    /**
-     * Traite la suppression d'une monture (POST).
-     * Redirige vers admin_mount_management.php.
-     */
-    public function delete(): void
+public function delete(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -393,8 +315,7 @@ class MountController
             exit;
         }
 
-        // Vérification du jeton CSRF
-        if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
             set_flash('error', 'Erreur de sécurité : requête non autorisée.');
             header('Location: mount_management.php');
             exit;

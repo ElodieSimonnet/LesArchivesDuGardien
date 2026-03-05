@@ -1,4 +1,3 @@
-// Disparition automatique du message flash admin
 document.addEventListener('DOMContentLoaded', function() {
     const flashMessage = document.getElementById('flash-message');
 

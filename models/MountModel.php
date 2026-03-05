@@ -1,36 +1,16 @@
 <?php
 
-/**
- * ============================================================
- * MODÈLE : MountModel
- * ============================================================
- * Rôle : Toutes les requêtes SQL liées aux montures.
- *
- * Ce fichier ne contient QUE des interactions avec la BDD.
- * Aucun HTML, aucune logique de validation ici.
- * ============================================================
- */
-
 class MountModel
 {
     private PDO $db;
 
     public function __construct()
     {
-        // On récupère la connexion PDO depuis la classe Database
+        
         $this->db = Database::getConnection();
     }
 
-    // ========================================================
-    // LECTURE - Pages publiques
-    // ========================================================
-
-    /**
-     * Récupère toutes les montures avec le statut "possédée"
-     * et "en wishlist" pour l'utilisateur connecté.
-     * Utilisé par la page mount_list.php.
-     */
-    public function getAll(int $userId = 0): array
+public function getAll(int $userId = 0): array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -56,11 +36,7 @@ class MountModel
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère une seule monture par son ID, avec toutes ses informations.
-     * Utilisé par la page mount_detail.php.
-     */
-    public function getById(int $id, int $userId = 0): ?array
+public function getById(int $id, int $userId = 0): ?array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -93,11 +69,7 @@ class MountModel
         return $result ?: null;
     }
 
-    // ========================================================
-    // LECTURE - Listes pour les filtres et menus déroulants
-    // ========================================================
-
-    public function getExpansions(): array
+public function getExpansions(): array
     {
         return $this->db->query("SELECT * FROM adg_expansions ORDER BY expansion ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -137,15 +109,7 @@ class MountModel
         return $this->db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ========================================================
-    // LECTURE - Admin
-    // ========================================================
-
-    /**
-     * Récupère toutes les montures pour l'interface admin,
-     * avec support des filtres GET optionnels.
-     */
-    public function getAllForAdmin(array $filters = []): array
+public function getAllForAdmin(array $filters = []): array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -182,10 +146,7 @@ class MountModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère une monture brute par ID (pour le formulaire d'édition admin).
-     */
-    public function getRawById(int $id): ?array
+public function getRawById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM adg_mounts WHERE id = :id");
         $stmt->execute([':id' => $id]);
@@ -193,14 +154,7 @@ class MountModel
         return $result ?: null;
     }
 
-    // ========================================================
-    // ÉCRITURE - Créer / Modifier / Supprimer
-    // ========================================================
-
-    /**
-     * Crée une nouvelle monture en base de données.
-     */
-    public function create(array $data): bool
+public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_mounts
                     (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate, cost, id_currency, id_zone, id_target)
@@ -211,10 +165,7 @@ class MountModel
         return $stmt->execute($data);
     }
 
-    /**
-     * Modifie une monture existante.
-     */
-    public function update(array $data): bool
+public function update(array $data): bool
     {
         $sql = "UPDATE adg_mounts SET
                     name         = :name,
@@ -236,49 +187,27 @@ class MountModel
         return $stmt->execute($data);
     }
 
-    /**
-     * Supprime une monture par son ID.
-     */
-    public function delete(int $id): bool
+public function delete(int $id): bool
     {
         $stmt = $this->db->prepare("DELETE FROM adg_mounts WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
 
-    // ========================================================
-    // VALIDATION
-    // ========================================================
-
-    /**
-     * Vérifie si un nom de monture existe déjà (pour éviter les doublons).
-     * Si $excludeId est fourni, on ignore cette monture (utile pour l'édition).
-     */
-    public function nameExists(string $name, int $excludeId = 0): bool
+public function nameExists(string $name, int $excludeId = 0): bool
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_mounts WHERE name = :name AND id != :id");
         $stmt->execute([':name' => $name, ':id' => $excludeId]);
         return $stmt->fetchColumn() > 0;
     }
 
-    /**
-     * Vérifie si un ID existe dans une table donnée.
-     * Utilisé pour valider les clés étrangères (type, source, etc.).
-     */
-    public function idExistsInTable(string $table, int $id): bool
+public function idExistsInTable(string $table, int $id): bool
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM $table WHERE id = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetchColumn() > 0;
     }
 
-    // ========================================================
-    // MÉTHODE PRIVÉE - Aide pour les filtres admin
-    // ========================================================
-
-    /**
-     * Ajoute une condition de filtre multi-valeurs à la requête SQL.
-     */
-    private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void
+private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void
     {
         $values = isset($filters[$key]) ? (array) $filters[$key] : [];
         $values = array_filter($values, fn($v) => $v !== '' && $v !== 'all');

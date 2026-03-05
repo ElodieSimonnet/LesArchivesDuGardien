@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * MODÈLE : FaqModel
- * ============================================================
- * Rôle : Toutes les requêtes SQL liées à la FAQ.
- * ============================================================
- */
-
 class FaqModel
 {
     private PDO $db;
@@ -17,15 +9,7 @@ class FaqModel
         $this->db = Database::getConnection();
     }
 
-    // ========================================================
-    // LECTURE - Pages publiques
-    // ========================================================
-
-    /**
-     * Récupère toutes les questions groupées par catégorie.
-     * Utilisé par la page FAQ publique.
-     */
-    public function getAllGroupedByCategory(): array
+public function getAllGroupedByCategory(): array
     {
         $sql = "SELECT adg_faq.id, adg_faq.question, adg_faq.answer, adg_faq.display_order, adg_faq_categories.name AS category_name
                 FROM adg_faq
@@ -44,14 +28,7 @@ class FaqModel
         return $faq_by_category;
     }
 
-    // ========================================================
-    // LECTURE - Admin
-    // ========================================================
-
-    /**
-     * Récupère toutes les questions pour l'interface admin.
-     */
-    public function getAll(): array
+public function getAll(): array
     {
         $sql = "SELECT adg_faq.id, adg_faq.question, adg_faq.answer, adg_faq.display_order, adg_faq.created_at, adg_faq_categories.name AS category_name
                 FROM adg_faq
@@ -63,10 +40,7 @@ class FaqModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère une question par son ID (avec catégorie).
-     */
-    public function getById(int $id): ?array
+public function getById(int $id): ?array
     {
         $sql = "SELECT adg_faq.*, adg_faq_categories.name AS category_name
                 FROM adg_faq
@@ -79,10 +53,7 @@ class FaqModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère une question brute par ID (pour le formulaire d'édition).
-     */
-    public function getRawById(int $id): ?array
+public function getRawById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM adg_faq WHERE id = :id");
         $stmt->execute([':id' => $id]);
@@ -90,20 +61,13 @@ class FaqModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère les catégories FAQ pour le select.
-     */
-    public function getCategories(): array
+public function getCategories(): array
     {
         $stmt = $this->db->query("SELECT id, name FROM adg_faq_categories ORDER BY id ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ========================================================
-    // ÉCRITURE - Créer / Modifier / Supprimer
-    // ========================================================
-
-    public function create(array $data): bool
+public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_faq (question, answer, id_category, display_order)
                 VALUES (:question, :answer, :id_category, :display_order)";

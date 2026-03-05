@@ -9,7 +9,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Vérification du jeton CSRF
 if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
     set_flash('error', 'Erreur de sécurité : requête non autorisée.');
     header('Location: ../../admin/user_management.php');
@@ -25,13 +24,12 @@ if ($user_id <= 0) {
 }
 
 try {
-    // Récupérer le chemin de l'avatar actuel
+    
     $stmt = $db->prepare("SELECT avatar FROM adg_users WHERE id = :id");
     $stmt->execute([':id' => $user_id]);
     $avatar_path = $stmt->fetchColumn();
 
-    // Supprimer le fichier du serveur s'il existe
-    if (!empty($avatar_path)) {
+if (!empty($avatar_path)) {
         $filePath  = realpath(__DIR__ . '/../../' . $avatar_path);
         $avatarDir = realpath(__DIR__ . '/../../assets/avatars/');
         if ($filePath && $avatarDir && strpos($filePath, $avatarDir) === 0 && file_exists($filePath)) {
@@ -39,8 +37,7 @@ try {
         }
     }
 
-    // Remettre le champ avatar à NULL en BDD
-    $stmt = $db->prepare("UPDATE adg_users SET avatar = NULL WHERE id = :id");
+$stmt = $db->prepare("UPDATE adg_users SET avatar = NULL WHERE id = :id");
     $stmt->execute([':id' => $user_id]);
 
     set_flash('success', 'Avatar supprimé avec succès !');

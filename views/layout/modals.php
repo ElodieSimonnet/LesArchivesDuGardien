@@ -40,7 +40,6 @@
     </p>
 </dialog>
 
-
 <dialog id="registerModal" aria-labelledby="registerModalTitle"
     class="bg-primary-brown border-2 border-primary-orange p-8 rounded-lg shadow-2xl w-full max-w-lg m-auto relative overflow-y-auto max-h-[90vh] backdrop:bg-black/80">
 

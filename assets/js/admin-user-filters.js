@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-filters');
     const filterForm = document.getElementById('filterForm');
 
-    // Recherche en temps réel
-    const searchInput = document.getElementById('search-user');
+const searchInput = document.getElementById('search-user');
     if (searchInput) {
         const rows = document.querySelectorAll('.user-row');
 
@@ -24,11 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!overlay || !menu || !openBtn) return;
 
     const openFilters = () => {
-        // 1. On affiche le conteneur
+        
         overlay.classList.remove('hidden');
 
         setTimeout(() => {
-            // 2. On anime l'apparition : opaque + remonte à sa place + devient cliquable
+            
             overlay.classList.add('opacity-100');
             menu.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
             menu.classList.add('opacity-100', 'translate-y-0');
@@ -40,13 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const closeFilters = () => {
-        // 1. On anime la disparition
+        
         overlay.classList.remove('opacity-100');
         menu.classList.remove('opacity-100', 'translate-y-0');
         menu.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
 
         setTimeout(() => {
-            // 2. On cache tout après l'anim
+            
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
             menu.setAttribute('aria-hidden', 'true');
@@ -54,8 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     };
 
-    // Focus trap
-    menu.addEventListener('keydown', (e) => {
+menu.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
         const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
         const first = focusable[0];
@@ -67,18 +65,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Listeners
-    openBtn.addEventListener('click', openFilters);
+openBtn.addEventListener('click', openFilters);
     if (closeBtn) closeBtn.addEventListener('click', closeFilters);
     overlay.addEventListener('click', closeFilters);
 
-    // Echap
-    document.addEventListener('keydown', (e) => {
+document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-    // Accordéons (inchangé)
-    document.querySelectorAll('.mobile-accordion-header').forEach(header => {
+document.querySelectorAll('.mobile-accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
             const svg = header.querySelector('svg');
@@ -93,8 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Submit : redirige avec les filtres en paramètres GET
-    if (filterForm) {
+if (filterForm) {
         filterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(filterForm);

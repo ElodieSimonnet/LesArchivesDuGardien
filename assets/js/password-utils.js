@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Afficher / masquer le mot de passe ---
+    
     document.querySelectorAll('.toggle-password').forEach(btn => {
         btn.addEventListener('click', () => {
             const input = btn.previousElementSibling;
@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Indicateur de force du mot de passe ---
+    
     document.querySelectorAll('.password-strength-input').forEach(input => {
         const container = document.getElementById(input.dataset.strength);
         if (!container) return;

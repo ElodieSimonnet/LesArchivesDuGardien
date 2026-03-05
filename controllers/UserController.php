@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * CONTRÔLEUR : UserController
- * ============================================================
- * Rôle : Gérer toute la logique liée aux utilisateurs.
- * ============================================================
- */
-
 class UserController
 {
     private UserModel $model;
@@ -17,14 +9,7 @@ class UserController
         $this->model = new UserModel();
     }
 
-    // ========================================================
-    // PAGES PUBLIQUES
-    // ========================================================
-
-    /**
-     * Affiche la page de profil de l'utilisateur connecté.
-     */
-    public function profile(): void
+public function profile(): void
     {
         if (!isset($_SESSION['user_id'])) {
             header('Location: index.php');
@@ -45,10 +30,7 @@ class UserController
         require __DIR__ . '/../views/profile.php';
     }
 
-    /**
-     * Déconnecte l'utilisateur (POST seulement, avec CSRF).
-     */
-    public function logout(): void
+public function logout(): void
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -77,22 +59,12 @@ class UserController
         exit;
     }
 
-    // ========================================================
-    // PAGES ADMIN - Connexion & Dashboard
-    // ========================================================
-
-    /**
-     * Affiche la page de connexion admin.
-     */
-    public function adminLogin(): void
+public function adminLogin(): void
     {
         require __DIR__ . '/../views/admin/login.php';
     }
 
-    /**
-     * Affiche le dashboard admin.
-     */
-    public function dashboard(): void
+public function dashboard(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -100,20 +72,12 @@ class UserController
         $stats = $this->model->getDashboardStats();
         extract($stats);
 
-        // Pour la liste des utilisateurs (affichée aussi sur le dashboard)
-        $all_users = $this->model->getAll();
+$all_users = $this->model->getAll();
 
         require __DIR__ . '/../views/admin/dashboard.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Gestion des utilisateurs
-    // ========================================================
-
-    /**
-     * Affiche la liste admin des utilisateurs (avec filtres GET).
-     */
-    public function adminList(): void
+public function adminList(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -128,10 +92,7 @@ class UserController
         require __DIR__ . '/../views/admin/user_management.php';
     }
 
-    /**
-     * Affiche le détail d'un utilisateur côté admin (lecture seule).
-     */
-    public function adminView(): void
+public function adminView(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -151,10 +112,7 @@ class UserController
         require __DIR__ . '/../views/admin/view_user.php';
     }
 
-    /**
-     * Affiche le formulaire d'ajout d'un utilisateur.
-     */
-    public function showAddForm(): void
+public function showAddForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -165,10 +123,7 @@ class UserController
         require __DIR__ . '/../views/admin/add_user.php';
     }
 
-    /**
-     * Affiche le formulaire de modification d'un utilisateur.
-     */
-    public function showEditForm(): void
+public function showEditForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -191,14 +146,7 @@ class UserController
         require __DIR__ . '/../views/admin/edit_user.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Traitement des formulaires
-    // ========================================================
-
-    /**
-     * Traite le formulaire d'ajout d'un utilisateur (POST).
-     */
-    public function create(): void
+public function create(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -264,10 +212,7 @@ class UserController
         }
     }
 
-    /**
-     * Traite le formulaire de modification d'un utilisateur (POST).
-     */
-    public function update(): void
+public function update(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -332,10 +277,7 @@ class UserController
         }
     }
 
-    /**
-     * Traite la suppression d'un utilisateur (POST).
-     */
-    public function delete(): void
+public function delete(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();

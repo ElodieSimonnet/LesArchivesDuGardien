@@ -82,8 +82,7 @@
                             </div>
                         <?php endif; ?>
 
-                        <!-- FORMULAIRE EMAIL -->
-                        <form action="components/utils/update_profile.php" method="POST">
+<form action="components/utils/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="email">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -119,8 +118,7 @@
                             </div>
                         </form>
 
-                        <!-- FORMULAIRE USERNAME -->
-                        <form action="components/utils/update_profile.php" method="POST">
+<form action="components/utils/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="username">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -156,8 +154,7 @@
                             </div>
                         </form>
 
-                        <!-- FORMULAIRE MOT DE PASSE -->
-                        <form action="components/utils/update_profile.php" method="POST">
+<form action="components/utils/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="password">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -261,8 +258,7 @@
         </div>
     </main>
 
-    <!-- Modale de confirmation de suppression de compte -->
-    <div id="confirmDeleteModal" class="fixed inset-0 flex items-center justify-center bg-black/80 p-8 z-[400] hidden" aria-hidden="true">
+<div id="confirmDeleteModal" class="fixed inset-0 flex items-center justify-center bg-black/80 p-8 z-[400] hidden" aria-hidden="true">
         <div role="dialog" aria-modal="true" aria-labelledby="confirmDeleteTitle" aria-describedby="confirmDeleteDesc"
              class="bg-primary-brown border-2 border-red-600 p-8 rounded-lg shadow-2xl w-full mx-auto max-w-md relative">
             <h2 id="confirmDeleteTitle" class="text-2xl font-bold text-red-500 mb-4 text-center uppercase tracking-widest">Supprimer le compte</h2>

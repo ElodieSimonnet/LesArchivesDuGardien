@@ -4,9 +4,8 @@ $db = Database::getConnection();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && isset($_SESSION['user_id'])) {
 
-    // VÉRIFICATION DU JETON CSRF
-    if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
-        // Si le jeton est mauvais, on bloque tout
+if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        
         set_flash('error', 'Erreur de sécurité : requête non autorisée.');
         header("Location: ../../profile.php");
         exit();
@@ -15,25 +14,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
     $userId = $_SESSION['user_id'];
 
     try {
-        // Récupérer le chemin de l'avatar avant suppression
+        
         $stmt = $db->prepare("SELECT avatar FROM adg_users WHERE id = ?");
         $stmt->execute([$userId]);
         $avatar_path = $stmt->fetchColumn();
 
-        // On supprime d'abord les données liées à l'utilisateur
-        $db->prepare("DELETE FROM adg_user_mounts WHERE id_user = ?")->execute([$userId]);
+$db->prepare("DELETE FROM adg_user_mounts WHERE id_user = ?")->execute([$userId]);
         $db->prepare("DELETE FROM adg_user_pets WHERE id_user = ?")->execute([$userId]);
         $db->prepare("DELETE FROM adg_wishlist_mounts WHERE id_user = ?")->execute([$userId]);
         $db->prepare("DELETE FROM adg_wishlist_pets WHERE id_user = ?")->execute([$userId]);
-        // On conserve les news mais on retire l'auteur
+        
         $db->prepare("UPDATE adg_news SET id_user = NULL WHERE id_user = ?")->execute([$userId]);
 
-        // On supprime l'utilisateur de la table adg_users
-        $stmt = $db->prepare("DELETE FROM adg_users WHERE id = ?");
+$stmt = $db->prepare("DELETE FROM adg_users WHERE id = ?");
         $stmt->execute([$userId]);
 
-        // Supprimer le fichier avatar du serveur s'il existe
-        if (!empty($avatar_path)) {
+if (!empty($avatar_path)) {
             $filePath = realpath(__DIR__ . '/../../' . $avatar_path);
             $avatarDir = realpath(__DIR__ . '/../../assets/avatars/');
             if ($filePath && $avatarDir && strpos($filePath, $avatarDir) === 0 && file_exists($filePath)) {
@@ -41,16 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_delete']) && 
             }
         }
 
-        // On nettoie la session et on déconnecte
-        session_unset(); // On vide les variables de session d'abord
+session_unset(); 
         session_destroy();
 
-        // Le flash doit être posé dans une nouvelle session
-        session_start();
+session_start();
         set_flash('success', 'Votre compte a été supprimé avec succès.');
 
-        // Retour à l'accueil
-        header("Location: ../../index.php");
+header("Location: ../../index.php");
         exit();
 
     } catch (PDOException $e) {

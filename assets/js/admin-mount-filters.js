@@ -5,8 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-filters');
     const filterForm = document.getElementById('filterForm');
 
-    // Recherche en temps réel
-    const searchInput = document.getElementById('search-mount');
+const searchInput = document.getElementById('search-mount');
     if (searchInput) {
         const rows = document.querySelectorAll('.mount-row');
 
@@ -49,8 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 500);
     };
 
-    // Focus trap
-    menu.addEventListener('keydown', (e) => {
+menu.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
         const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
         const first = focusable[0];
@@ -70,25 +68,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-    // Gestion des "Tout sélectionner"
-    document.querySelectorAll('.select-all').forEach(selectAll => {
+document.querySelectorAll('.select-all').forEach(selectAll => {
         const section = selectAll.closest('.mobile-accordion-content');
         const checkboxes = section.querySelectorAll('.filter-checkbox');
 
-        // Cocher/décocher toutes les checkboxes de la section
-        selectAll.addEventListener('change', () => {
+selectAll.addEventListener('change', () => {
             checkboxes.forEach(cb => cb.checked = selectAll.checked);
         });
 
-        // Mettre à jour "Tout sélectionner" quand on coche/décoche individuellement
-        checkboxes.forEach(cb => {
+checkboxes.forEach(cb => {
             cb.addEventListener('change', () => {
                 selectAll.checked = [...checkboxes].every(c => c.checked);
             });
         });
 
-        // État initial au chargement
-        selectAll.checked = checkboxes.length > 0 && [...checkboxes].every(c => c.checked);
+selectAll.checked = checkboxes.length > 0 && [...checkboxes].every(c => c.checked);
     });
 
     document.querySelectorAll('.mobile-accordion-header').forEach(header => {
@@ -112,15 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(filterForm);
             const params = new URLSearchParams();
 
-            // Regrouper les checkboxes par nom (type[], source[], etc.)
-            const grouped = {};
+const grouped = {};
             for (const [key, value] of formData.entries()) {
                 if (!grouped[key]) grouped[key] = [];
                 grouped[key].push(value);
             }
 
-            // Construire les paramètres URL : type[]=Val1&type[]=Val2
-            for (const [key, values] of Object.entries(grouped)) {
+for (const [key, values] of Object.entries(grouped)) {
                 for (const value of values) {
                     params.append(key, value);
                 }

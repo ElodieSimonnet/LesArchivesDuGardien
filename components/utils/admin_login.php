@@ -6,7 +6,7 @@ header('Content-Type: application/json');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    // VÉRIFICATION DU JETON CSRF
+    
     if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
         header('HTTP/1.1 403 Forbidden');
         echo json_encode(['status' => 'error', 'message' => 'Erreur : Requête invalide.']);
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $identifier = trim($_POST['username']);
     $password = $_POST['password'];
 
-    // PRÉPARATION DE LA REQUÊTE
+    
     $sql = "SELECT adg_users.*, adg_roles.role_name
             FROM adg_users
             INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
@@ -26,13 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->execute([$identifier, $identifier]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Si l'utilisateur n'existe pas, on renvoie un message générique
+    
     if (!$user) {
         echo json_encode(['status' => 'error', 'message' => 'Identifiants invalides.']);
         exit;
     }
 
-    // VÉRIFICATION DU BLOCAGE TEMPORAIRE
+    
     if (!empty($user['locked_until']) && strtotime($user['locked_until']) > time()) {
         $minutesRestantes = ceil((strtotime($user['locked_until']) - time()) / 60);
         echo json_encode([
@@ -42,24 +42,24 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         exit;
     }
 
-    // VÉRIFICATION DU MOT DE PASSE ET CRÉATION DE SESSION
+    
     if (password_verify($password, $user['password'])) {
-        // Succès : on réinitialise les tentatives
+        
         $reset = $db->prepare("UPDATE adg_users SET failed_attempts = 0, locked_until = NULL WHERE id = ?");
         $reset->execute([$user['id']]);
 
-        // Protection contre la fixation de session
+        
         session_regenerate_id(true);
 
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['username'] = $user['username'];
 
-        // On récupère "Administrateur" ou "Utilisateur" depuis la table adg_roles
+        
         $_SESSION['role'] = $user['role_name'];
 
         echo json_encode(['status' => 'success']);
     } else {
-        // Échec : on incrémente les tentatives
+        
         $newAttempts = $user['failed_attempts'] + 1;
 
         if ($newAttempts >= 3) {

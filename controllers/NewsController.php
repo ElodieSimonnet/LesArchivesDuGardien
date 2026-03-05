@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * CONTRÔLEUR : NewsController
- * ============================================================
- * Rôle : Gérer toute la logique liée aux actualités.
- * ============================================================
- */
-
 class NewsController
 {
     private NewsModel $model;
@@ -17,14 +9,7 @@ class NewsController
         $this->model = new NewsModel();
     }
 
-    // ========================================================
-    // PAGES PUBLIQUES
-    // ========================================================
-
-    /**
-     * Affiche la page publique des actualités.
-     */
-    public function list(): void
+public function list(): void
     {
         $carousel_news = $this->model->getCarouselNews();
         $list_news     = $this->model->getListNews();
@@ -32,14 +17,7 @@ class NewsController
         require __DIR__ . '/../views/news.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Affichage
-    // ========================================================
-
-    /**
-     * Affiche la liste admin des actualités.
-     */
-    public function adminList(): void
+public function adminList(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -49,10 +27,7 @@ class NewsController
         require __DIR__ . '/../views/admin/news_management.php';
     }
 
-    /**
-     * Affiche le formulaire d'ajout d'un article.
-     */
-    public function showAddForm(): void
+public function showAddForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -62,10 +37,7 @@ class NewsController
         require __DIR__ . '/../views/admin/add_news.php';
     }
 
-    /**
-     * Affiche le formulaire de modification d'un article.
-     */
-    public function showEditForm(): void
+public function showEditForm(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -87,10 +59,7 @@ class NewsController
         require __DIR__ . '/../views/admin/edit_news.php';
     }
 
-    /**
-     * Affiche le détail d'un article côté admin (lecture seule).
-     */
-    public function adminView(): void
+public function adminView(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -110,14 +79,7 @@ class NewsController
         require __DIR__ . '/../views/admin/view_news.php';
     }
 
-    // ========================================================
-    // PAGES ADMIN - Traitement des formulaires
-    // ========================================================
-
-    /**
-     * Traite le formulaire d'ajout d'un article (POST).
-     */
-    public function create(): void
+public function create(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -170,10 +132,7 @@ class NewsController
         }
     }
 
-    /**
-     * Traite le formulaire de modification d'un article (POST).
-     */
-    public function update(): void
+public function update(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();
@@ -228,10 +187,7 @@ class NewsController
         }
     }
 
-    /**
-     * Traite la suppression d'un article (POST).
-     */
-    public function delete(): void
+public function delete(): void
     {
         require_once __DIR__ . '/../components/utils/is_admin.php';
         restrictToAdmin();

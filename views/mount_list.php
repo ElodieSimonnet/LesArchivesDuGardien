@@ -7,7 +7,6 @@
     <script src="assets/js/modal.js" defer></script>
     <script src="assets/js/burger-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
-    <script src="assets/js/card-click.js" defer></script>
     <script src="assets/js/filter-menu-mobile.js" defer></script>
     <script src="assets/js/collection-filter-toggle.js" defer></script>
     <script src="assets/js/toggle-collection.js" defer></script>

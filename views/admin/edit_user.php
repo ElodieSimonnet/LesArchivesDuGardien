@@ -77,8 +77,7 @@
                 </div>
             </form>
 
-            <!-- Section Avatar -->
-            <section class="mt-6 bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
+<section class="mt-6 bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
                 <h2 id="avatar-heading" class="text-sm font-black uppercase text-primary-orange tracking-widest mb-4">Avatar actuel</h2>
                 <div class="flex items-center justify-between">
                     <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.png' ?>"

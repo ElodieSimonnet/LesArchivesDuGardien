@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * MODÈLE : UserModel
- * ============================================================
- * Rôle : Toutes les requêtes SQL liées aux utilisateurs.
- * ============================================================
- */
-
 class UserModel
 {
     private PDO $db;
@@ -17,14 +9,7 @@ class UserModel
         $this->db = Database::getConnection();
     }
 
-    // ========================================================
-    // LECTURE - Profil utilisateur
-    // ========================================================
-
-    /**
-     * Récupère un utilisateur avec son statut (pour la page profil).
-     */
-    public function getById(int $id): ?array
+public function getById(int $id): ?array
     {
         $stmt = $this->db->prepare(
             "SELECT adg_users.*, adg_users_status.status
@@ -37,10 +22,7 @@ class UserModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère les compteurs de collection d'un utilisateur.
-     */
-    public function getCollectionCounts(int $userId): array
+public function getCollectionCounts(int $userId): array
     {
         $stmtOwnedMounts = $this->db->prepare("SELECT COUNT(*) FROM adg_user_mounts WHERE id_user = ?");
         $stmtOwnedMounts->execute([$userId]);
@@ -60,14 +42,7 @@ class UserModel
         ];
     }
 
-    // ========================================================
-    // LECTURE - Admin
-    // ========================================================
-
-    /**
-     * Récupère tous les utilisateurs avec filtres optionnels.
-     */
-    public function getAll(array $filters = []): array
+public function getAll(array $filters = []): array
     {
         $sql = "SELECT adg_users.*, adg_roles.role_name, adg_users_status.status
                 FROM adg_users
@@ -98,10 +73,7 @@ class UserModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère un utilisateur avec rôle et statut (pour la vue admin).
-     */
-    public function getByIdWithDetails(int $id): ?array
+public function getByIdWithDetails(int $id): ?array
     {
         $stmt = $this->db->prepare(
             "SELECT adg_users.*, adg_roles.role_name, adg_users_status.status
@@ -115,10 +87,7 @@ class UserModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère un utilisateur brut par ID (pour le formulaire d'édition).
-     */
-    public function getRawById(int $id): ?array
+public function getRawById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM adg_users WHERE id = :id");
         $stmt->execute([':id' => $id]);
@@ -126,10 +95,7 @@ class UserModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère les statistiques pour le dashboard admin.
-     */
-    public function getDashboardStats(): array
+public function getDashboardStats(): array
     {
         $stmtTotal = $this->db->query("SELECT COUNT(*) FROM adg_users");
         $totalUsers = $stmtTotal->fetchColumn();
@@ -167,27 +133,17 @@ class UserModel
         return compact('totalUsers', 'activeUsers', 'suspendedUsers', 'bannedUsers', 'lastUsers');
     }
 
-    /**
-     * Récupère tous les rôles disponibles.
-     */
-    public function getAllRoles(): array
+public function getAllRoles(): array
     {
         return $this->db->query("SELECT * FROM adg_roles")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère tous les statuts disponibles.
-     */
-    public function getAllStatuses(): array
+public function getAllStatuses(): array
     {
         return $this->db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ========================================================
-    // ÉCRITURE - Créer / Modifier / Supprimer
-    // ========================================================
-
-    public function create(array $data): bool
+public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_users (username, email, password, id_role, id_status)
                 VALUES (:username, :email, :password, :id_role, :id_status)";
@@ -219,11 +175,7 @@ class UserModel
         return $stmt->execute([':id' => $id]);
     }
 
-    // ========================================================
-    // VALIDATION
-    // ========================================================
-
-    public function usernameExists(string $username, int $excludeId = 0): bool
+public function usernameExists(string $username, int $excludeId = 0): bool
     {
         $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE username = :username AND id != :id");
         $stmt->execute([':username' => $username, ':id' => $excludeId]);

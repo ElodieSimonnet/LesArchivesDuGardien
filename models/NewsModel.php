@@ -1,13 +1,5 @@
 <?php
 
-/**
- * ============================================================
- * MODÈLE : NewsModel
- * ============================================================
- * Rôle : Toutes les requêtes SQL liées aux actualités.
- * ============================================================
- */
-
 class NewsModel
 {
     private PDO $db;
@@ -17,13 +9,6 @@ class NewsModel
         $this->db = Database::getConnection();
     }
 
-    // ========================================================
-    // LECTURE - Pages publiques
-    // ========================================================
-
-    /**
-     * Récupère les 3 dernières news pour le carousel.
-     */
     public function getCarouselNews(): array
     {
         $sql = "SELECT adg_news.id, adg_news.title, adg_news.content, adg_news.image_url, adg_news.source_news, adg_news.created_at, adg_users.username AS author
@@ -37,9 +22,6 @@ class NewsModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère les news plus anciennes pour la section archives.
-     */
     public function getListNews(): array
     {
         $sql = "SELECT adg_news.id, adg_news.title, adg_news.content, adg_news.image_url, adg_news.source_news, adg_news.created_at, adg_users.username AS author
@@ -53,13 +35,6 @@ class NewsModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // ========================================================
-    // LECTURE - Admin
-    // ========================================================
-
-    /**
-     * Récupère tous les articles pour l'interface admin.
-     */
     public function getAll(): array
     {
         $sql = "SELECT adg_news.*, adg_users.username AS author
@@ -72,9 +47,6 @@ class NewsModel
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    /**
-     * Récupère un article par son ID (avec auteur).
-     */
     public function getById(int $id): ?array
     {
         $sql = "SELECT adg_news.*, adg_users.username AS author
@@ -88,9 +60,6 @@ class NewsModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère un article brut par ID (pour le formulaire d'édition).
-     */
     public function getRawById(int $id): ?array
     {
         $stmt = $this->db->prepare("SELECT * FROM adg_news WHERE id = :id");
@@ -99,18 +68,11 @@ class NewsModel
         return $result ?: null;
     }
 
-    /**
-     * Récupère la liste des utilisateurs admin pour le select auteur.
-     */
     public function getAdminUsers(): array
     {
         $stmt = $this->db->query("SELECT id, username FROM adg_users WHERE id_role = 2 ORDER BY username ASC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
-    // ========================================================
-    // ÉCRITURE - Créer / Modifier / Supprimer
-    // ========================================================
 
     public function create(array $data): bool
     {
@@ -140,10 +102,6 @@ class NewsModel
         $stmt = $this->db->prepare("DELETE FROM adg_news WHERE id = :id");
         return $stmt->execute([':id' => $id]);
     }
-
-    // ========================================================
-    // VALIDATION
-    // ========================================================
 
     public function titleExists(string $title, int $excludeId = 0): bool
     {

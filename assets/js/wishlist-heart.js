@@ -1,4 +1,3 @@
-// WISHLIST, FONCTIONNEMENT DES COEURS
 function showToast(message, type = 'error') {
     const toast = document.createElement('div');
     toast.setAttribute('role', 'alert');
@@ -27,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const itemId = this.dataset.id;
             const csrfToken = this.dataset.csrf;
 
-            // Si pas connecté (pas de data-type), toggle visuel uniquement
+            
             if (!type) {
                 this.classList.toggle('is-favorite');
                 return;
