@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="../assets/js/admin-messages.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
     <link href="../assets/css/output.css" rel="stylesheet">
     <title>Modifier la monture | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="mount_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -31,33 +30,33 @@
                 </div>
             <?php endif; ?>
 
-            <form action="edit_mount.php" method="POST" class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
+            <form action="edit_mount.php" method="POST" class="bg-admin-dark border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
                 <input type="hidden" name="mount_id" value="<?= $mount['id'] ?>">
                 <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label for="name" class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom</label>
+                        <label for="name" class="label-orange">Nom</label>
                         <input type="text" id="name" name="name" value="<?= htmlspecialchars($mount['name']) ?>"
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                               class="form-input">
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label for="description" class="text-sm font-black uppercase text-primary-orange tracking-widest">Description</label>
+                        <label for="description" class="label-orange">Description</label>
                         <textarea id="description" name="description" rows="3"
-                                  class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all resize-vertical"><?= htmlspecialchars($mount['description']) ?></textarea>
+                                  class="form-input resize-vertical"><?= htmlspecialchars($mount['description']) ?></textarea>
                     </div>
 
                     <div class="flex flex-col gap-2 md:col-span-2">
-                        <label for="image" class="text-sm font-black uppercase text-primary-orange tracking-widest">URL de l'image</label>
-                        <input type="url" id="image" name="image" value="<?= htmlspecialchars($mount['image']) ?>"
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                        <label for="image" class="label-orange">URL de l'image</label>
+                        <input type="text" id="image" name="image" value="<?= htmlspecialchars($mount['image']) ?>"
+                               class="form-input">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_type" class="text-sm font-black uppercase text-primary-orange tracking-widest">Type</label>
-                        <select id="id_type" name="id_type" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_type" class="label-orange">Type</label>
+                        <select id="id_type" name="id_type" class="form-select">
                             <?php foreach ($all_types as $type): ?>
                                 <option value="<?= $type['id'] ?>" <?= ($type['id'] == $mount['id_type']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($type['type']) ?>
@@ -67,8 +66,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_source" class="text-sm font-black uppercase text-primary-orange tracking-widest">Source</label>
-                        <select id="id_source" name="id_source" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_source" class="label-orange">Source</label>
+                        <select id="id_source" name="id_source" class="form-select">
                             <?php foreach ($all_sources as $source): ?>
                                 <option value="<?= $source['id'] ?>" <?= ($source['id'] == $mount['id_source']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($source['source']) ?>
@@ -78,8 +77,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_expansion" class="text-sm font-black uppercase text-primary-orange tracking-widest">Extension</label>
-                        <select id="id_expansion" name="id_expansion" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_expansion" class="label-orange">Extension</label>
+                        <select id="id_expansion" name="id_expansion" class="form-select">
                             <?php foreach ($all_expansions as $expansion): ?>
                                 <option value="<?= $expansion['id'] ?>" <?= ($expansion['id'] == $mount['id_expansion']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($expansion['expansion']) ?>
@@ -89,8 +88,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_faction" class="text-sm font-black uppercase text-primary-orange tracking-widest">Faction</label>
-                        <select id="id_faction" name="id_faction" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_faction" class="label-orange">Faction</label>
+                        <select id="id_faction" name="id_faction" class="form-select">
                             <?php foreach ($all_factions as $faction): ?>
                                 <option value="<?= $faction['id'] ?>" <?= ($faction['id'] == $mount['id_faction']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($faction['faction']) ?>
@@ -100,8 +99,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_difficulty" class="text-sm font-black uppercase text-primary-orange tracking-widest">Difficulté</label>
-                        <select id="id_difficulty" name="id_difficulty" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_difficulty" class="label-orange">Difficulté</label>
+                        <select id="id_difficulty" name="id_difficulty" class="form-select">
                             <?php foreach ($all_difficulties as $difficulty): ?>
                                 <option value="<?= $difficulty['id'] ?>" <?= ($difficulty['id'] == $mount['id_difficulty']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($difficulty['difficulty']) ?>
@@ -111,14 +110,14 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="droprate" class="text-sm font-black uppercase text-primary-orange tracking-widest">Taux de drop (%)</label>
+                        <label for="droprate" class="label-orange">Taux de drop (%)</label>
                         <input type="number" id="droprate" name="droprate" step="0.01" min="0" max="100" value="<?= htmlspecialchars($mount['droprate'] ?? '') ?>"
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                               class="form-input">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_zone" class="text-sm font-black uppercase text-primary-orange tracking-widest">Zone</label>
-                        <select id="id_zone" name="id_zone" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_zone" class="label-orange">Zone</label>
+                        <select id="id_zone" name="id_zone" class="form-select">
                             <option value="">Aucune</option>
                             <?php foreach ($all_zones as $zone): ?>
                                 <option value="<?= $zone['id_zone'] ?>" <?= ($zone['id_zone'] == $mount['id_zone']) ? 'selected' : '' ?>>
@@ -129,8 +128,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_currency" class="text-sm font-black uppercase text-primary-orange tracking-widest">Monnaie</label>
-                        <select id="id_currency" name="id_currency" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_currency" class="label-orange">Monnaie</label>
+                        <select id="id_currency" name="id_currency" class="form-select">
                             <option value="">Aucune</option>
                             <?php foreach ($all_currencies as $currency): ?>
                                 <option value="<?= $currency['id'] ?>" <?= ($currency['id'] == $mount['id_currency']) ? 'selected' : '' ?>>
@@ -141,14 +140,14 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="cost" class="text-sm font-black uppercase text-primary-orange tracking-widest">Coût</label>
+                        <label for="cost" class="label-orange">Coût</label>
                         <input type="number" id="cost" name="cost" step="1" min="0" value="<?= htmlspecialchars($mount['cost'] ?? '') ?>"
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                               class="form-input">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_target" class="text-sm font-black uppercase text-primary-orange tracking-widest">Cible</label>
-                        <select id="id_target" name="id_target" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_target" class="label-orange">Cible</label>
+                        <select id="id_target" name="id_target" class="form-select">
                             <option value="">Aucune</option>
                             <?php foreach ($all_targets as $target): ?>
                                 <option value="<?= $target['id'] ?>" <?= ($target['id'] == $mount['id_target']) ? 'selected' : '' ?>>
@@ -161,10 +160,10 @@
                 </div>
 
                 <div class="mt-12 flex justify-center gap-4">
-                    <a href="mount_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <a href="mount_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded btn-orange-hover">
                         Annuler
                     </a>
-                    <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg btn-orange-hover">
                         Confirmer les modifications
                     </button>
                 </div>

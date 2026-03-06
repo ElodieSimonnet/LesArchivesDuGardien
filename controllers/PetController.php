@@ -22,7 +22,7 @@ private array $familyIcons = [
         $this->model = new PetModel();
     }
 
-public function list(): void
+    public function list(): void
     {
         $userId    = $_SESSION['user_id'] ?? 0;
         $pets      = $this->model->getAll($userId);
@@ -34,7 +34,7 @@ public function list(): void
         require __DIR__ . '/../views/pet_list.php';
     }
 
-public function detail(): void
+    public function detail(): void
     {
         $id     = (int) ($_GET['id'] ?? 0);
         $userId = $_SESSION['user_id'] ?? 0;
@@ -53,9 +53,9 @@ public function detail(): void
         require __DIR__ . '/../views/pet_detail.php';
     }
 
-public function adminList(): void
+    public function adminList(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $filters  = $_GET;
@@ -69,9 +69,9 @@ $all_families      = $this->model->getFamilies();
         require __DIR__ . '/../views/admin/pet_management.php';
     }
 
-public function showAddForm(): void
+    public function showAddForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $all_families  = $this->model->getFamilies();
@@ -86,9 +86,9 @@ public function showAddForm(): void
         require __DIR__ . '/../views/admin/add_pet.php';
     }
 
-public function showEditForm(): void
+    public function showEditForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $pet_id = (int) ($_GET['id'] ?? 0);
@@ -115,9 +115,9 @@ public function showEditForm(): void
         require __DIR__ . '/../views/admin/edit_pet.php';
     }
 
-public function adminView(): void
+    public function adminView(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $pet_id = (int) ($_GET['id'] ?? 0);
@@ -137,9 +137,9 @@ public function adminView(): void
         require __DIR__ . '/../views/admin/view_pet.php';
     }
 
-public function create(): void
+    public function create(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -229,9 +229,9 @@ public function create(): void
         }
     }
 
-public function update(): void
+    public function update(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -317,9 +317,9 @@ public function update(): void
         }
     }
 
-public function delete(): void
+    public function delete(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
-    <script src="assets/js/filter-menu-mobile.js" defer></script>
-    <script src="assets/js/collection-filter-toggle.js" defer></script>
+    <script src="assets/js/filters-mobile-panel.js" defer></script>
+    <script src="assets/js/mount-collection-filters.js" defer></script>
     <script src="assets/js/toggle-collection.js" defer></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="assets/css/output.css" rel="stylesheet">
@@ -80,6 +80,10 @@
                             <input type="radio" name="filter-status" value="0" class="status-radio accent-primary-orange w-4 h-4">
                             <span class="text-sm">Manquantes</span>
                         </label>
+                        <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
+                            <input type="radio" name="filter-status" value="wishlist" class="status-radio accent-primary-orange w-4 h-4">
+                            <span class="text-sm">En wishlist</span>
+                        </label>
                     </div>
                 </div>
                 <?php endif; ?>
@@ -97,7 +101,7 @@
                         <span class="truncate"><?= $group['label'] ?></span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black" aria-hidden="true"></i>
                     </button>
-                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60 custom-scrollbar">
+                    <div class="dropdown-content hidden absolute top-full left-0 w-full bg-primary-brown border border-primary-orange mt-1 z-[100] p-2 shadow-2xl rounded-lg overflow-y-auto max-h-60">
                         <?php foreach ($group['data'] as $item): ?>
                             <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
                                 <input type="checkbox" data-filter="<?= htmlspecialchars($group['key'], ENT_QUOTES, 'UTF-8') ?>" value="<?= htmlspecialchars($item[$group['key']], ENT_QUOTES, 'UTF-8') ?>" class="filter-checkbox accent-primary-orange w-4 h-4">
@@ -134,7 +138,7 @@
                 ?>
                 <li class="mount-item relative flex flex-col">
                     <?php if (isset($_SESSION['user_id'])): ?>
-                    <button class="wishlist-btn group absolute top-4 right-4 z-10 <?= $mount['is_wishlisted'] ? 'is-favorite' : '' ?>"
+                    <button class="wishlist-btn group absolute top-4 right-4 z-10 <?= $mount['is_wishlisted'] ? 'is-favorite' : '' ?> <?= $mount['is_owned'] ? 'hidden' : '' ?>"
                             data-type="mount" data-id="<?= $mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                             aria-label="<?= $mount['is_wishlisted'] ? 'Retirer ' . $eName . ' des favoris' : 'Ajouter ' . $eName . ' aux favoris' ?>"
                             aria-pressed="<?= $mount['is_wishlisted'] ? 'true' : 'false' ?>">
@@ -146,12 +150,13 @@
 
                     <a href="mount_detail.php?id=<?= $mount['id'] ?>"
                        data-owned="<?= $statusValue ?>"
+                       data-wishlisted="<?= $mount['is_wishlisted'] ? '1' : '0' ?>"
                        data-type="<?= $eType ?>"
                        data-source="<?= $eSource ?>"
                        data-expansion="<?= $eExpansion ?>"
                        data-faction="<?= $eFaction ?>"
                        aria-label="Voir la fiche de <?= $eName ?>"
-                       class="mount-card w-full h-full bg-[oklch(0.23_0.0316_24.1)] border-2 border-primary-orange rounded-xl overflow-hidden flex flex-col <?= $hoverColor ?> transition-all duration-300 group shadow-2xl <?= (isset($_SESSION['user_id']) && !$mount['is_owned']) ? 'sepia hover:sepia-0' : '' ?>">
+                       class="mount-card w-full h-full bg-card-brown card-bordered overflow-hidden flex flex-col <?= $hoverColor ?> transition-all duration-300 group shadow-2xl <?= (isset($_SESSION['user_id']) && !$mount['is_owned']) ? 'sepia hover:sepia-0' : '' ?>">
 
                         <div class="relative p-6 flex-grow flex flex-col items-center">
                             <span class="absolute top-4 left-4"><img src="assets/images/mounts/<?= $eType ?>.webp" alt="Icône <?= $eType ?>" class="w-12 h-12" loading="lazy"></span>
@@ -159,7 +164,7 @@
                             <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white"><?= $eName ?></h2>
                         </div>
 
-                        <div class="bg-[oklch(0.23_0.0316_24.1)] border-t border-primary-orange py-3 flex items-center justify-center gap-2 relative">
+                        <div class="bg-card-brown border-t border-primary-orange py-3 flex items-center justify-center gap-2 relative">
                             <span class="<?= $difficultyColor ?> text-lg">★</span>
                             <span class="<?= $difficultyColor ?> text-sm font-bold uppercase tracking-[0.2em]"><?= $eDifficulty ?></span>
                             <span class="<?= $difficultyColor ?> text-lg">★</span>
@@ -188,7 +193,7 @@
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
                 <p id="load-more-count" aria-live="polite" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
-                <button type="button" id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest hover:bg-primary-orange hover:text-primary-black transition-all duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
+                <button type="button" id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest btn-orange-hover duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                     Charger plus
                 </button>
             </div>
@@ -199,20 +204,5 @@
     <?php require __DIR__ . '/layout/footer.php'; ?>
     <?php require __DIR__ . '/layout/modals.php'; ?>
     <?php require __DIR__ . '/filters/mount_filters_mobile.php'; ?>
-    <script>
-        document.querySelectorAll('.dropdown-button').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-            });
-        });
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.dropdown-container')) {
-                document.querySelectorAll('.dropdown-button[aria-expanded="true"]').forEach(btn => {
-                    btn.setAttribute('aria-expanded', 'false');
-                });
-            }
-        });
-    </script>
 </body>
 </html>

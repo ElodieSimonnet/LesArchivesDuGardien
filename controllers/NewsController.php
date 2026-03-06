@@ -9,7 +9,7 @@ class NewsController
         $this->model = new NewsModel();
     }
 
-public function list(): void
+    public function list(): void
     {
         $carousel_news = $this->model->getCarouselNews();
         $list_news     = $this->model->getListNews();
@@ -17,9 +17,9 @@ public function list(): void
         require __DIR__ . '/../views/news.php';
     }
 
-public function adminList(): void
+    public function adminList(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $all_news = $this->model->getAll();
@@ -27,9 +27,9 @@ public function adminList(): void
         require __DIR__ . '/../views/admin/news_management.php';
     }
 
-public function showAddForm(): void
+    public function showAddForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $users = $this->model->getAdminUsers();
@@ -37,9 +37,9 @@ public function showAddForm(): void
         require __DIR__ . '/../views/admin/add_news.php';
     }
 
-public function showEditForm(): void
+    public function showEditForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $news_id = (int) ($_GET['id'] ?? 0);
@@ -59,9 +59,9 @@ public function showEditForm(): void
         require __DIR__ . '/../views/admin/edit_news.php';
     }
 
-public function adminView(): void
+    public function adminView(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $news_id = (int) ($_GET['id'] ?? 0);
@@ -79,9 +79,9 @@ public function adminView(): void
         require __DIR__ . '/../views/admin/view_news.php';
     }
 
-public function create(): void
+    public function create(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -132,9 +132,9 @@ public function create(): void
         }
     }
 
-public function update(): void
+    public function update(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -187,9 +187,9 @@ public function update(): void
         }
     }
 
-public function delete(): void
+    public function delete(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

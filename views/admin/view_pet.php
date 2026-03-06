@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
     <link href="../assets/css/output.css" rel="stylesheet">
     <title>Détail mascotte | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="pet_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs lg:text-sm font-bold tracking-widest">
@@ -24,23 +24,23 @@
                     <span class="text-primary-white">#<?= (int)$pet['id'] ?></span>
                     <span class="ml-3"><?= htmlspecialchars($pet['name']) ?></span>
                 </h1>
-                <a href="edit_pet.php?id=<?= (int)$pet['id'] ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all flex items-center gap-2">
+                <a href="edit_pet.php?id=<?= (int)$pet['id'] ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs lg:text-sm rounded btn-orange-hover flex items-center gap-2">
                     <i class="ph ph-pencil-simple text-lg" aria-hidden="true"></i> Modifier
                 </a>
             </div>
 
-            <div class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
+            <div class="bg-admin-dark border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
 
                 <?php if (!empty($pet['image'])): ?>
                 <div class="flex justify-center mb-8">
-                    <img src="<?= htmlspecialchars($pet['image']) ?>" alt="<?= htmlspecialchars($pet['name']) ?>" class="h-48 object-contain">
+                    <img src="../<?= htmlspecialchars($pet['image']) ?>" alt="<?= htmlspecialchars($pet['name']) ?>" class="h-48 object-contain">
                 </div>
                 <?php endif; ?>
 
                 <?php if (!empty($pet['description'])): ?>
                 <div class="mb-8">
                     <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Description</span>
-                    <p class="mt-2 bg-black/60 border border-amber-900 rounded p-4 text-primary-white lg:text-lg leading-relaxed">
+                    <p class="mt-2 bg-black/60 border border-primary-orange rounded p-4 text-primary-white lg:text-lg leading-relaxed">
                         <?= htmlspecialchars($pet['description']) ?>
                     </p>
                 </div>
@@ -50,42 +50,42 @@
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Famille</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= htmlspecialchars($pet['family']) ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Source</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= htmlspecialchars($pet['source']) ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Extension</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= htmlspecialchars($pet['expansion']) ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Faction</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= htmlspecialchars($pet['faction']) ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Taux de drop</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= $pet['droprate'] !== null ? htmlspecialchars($pet['droprate']) . '%' : '---' ?>
                         </span>
                     </div>
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Prix</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?php if (!empty($pet['cost']) && !empty($pet['currency_name'])): ?>
                                 <?= htmlspecialchars($pet['cost']) ?> <?= htmlspecialchars($pet['currency_name']) ?>
                             <?php else: ?>
@@ -96,7 +96,7 @@
 
                     <div class="flex flex-col gap-2">
                         <span class="text-sm lg:text-base font-black uppercase text-primary-orange tracking-widest">Zone</span>
-                        <span class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white lg:text-lg">
+                        <span class="form-field lg:text-lg">
                             <?= !empty($pet['zone']) ? htmlspecialchars($pet['zone']) : '---' ?>
                         </span>
                     </div>
@@ -111,13 +111,13 @@
                         ?>
                         <div class="flex flex-col items-center gap-2">
                             <?php if ($spell): ?>
-                                <img src="<?= htmlspecialchars($spell['icon']) ?>" alt="<?= htmlspecialchars($spell['name']) ?>" class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-amber-900 object-cover">
+                                <img src="../<?= htmlspecialchars($spell['icon']) ?>" alt="<?= htmlspecialchars($spell['name']) ?>" class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-primary-orange object-cover">
                                 <span class="text-xs lg:text-sm text-primary-white text-center"><?= htmlspecialchars($spell['name']) ?></span>
                             <?php else: ?>
-                                <div class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-amber-900/40 bg-black/40 flex items-center justify-center">
-                                    <span class="text-amber-900/40 text-2xl">—</span>
+                                <div class="w-16 h-16 lg:w-20 lg:h-20 rounded border border-primary-orange/40 bg-black/40 flex items-center justify-center">
+                                    <span class="text-primary-orange/40 text-2xl">—</span>
                                 </div>
-                                <span class="text-xs lg:text-sm text-amber-900/40 text-center">Vide</span>
+                                <span class="text-xs lg:text-sm text-primary-orange/40 text-center">Vide</span>
                             <?php endif; ?>
                         </div>
                         <?php endfor; ?>

@@ -17,9 +17,9 @@ class NewsModel
                 ORDER BY adg_news.created_at DESC
                 LIMIT 3";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getListNews(): array
@@ -28,11 +28,11 @@ class NewsModel
                 FROM adg_news
                 LEFT JOIN adg_users ON adg_news.id_user = adg_users.id
                 ORDER BY adg_news.created_at DESC
-                LIMIT 3 OFFSET 3";
+                LIMIT 1000 OFFSET 3";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getAll(): array
@@ -42,9 +42,9 @@ class NewsModel
                 LEFT JOIN adg_users ON adg_news.id_user = adg_users.id
                 ORDER BY adg_news.id ASC";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute();
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function getById(int $id): ?array
@@ -54,24 +54,24 @@ class NewsModel
                 LEFT JOIN adg_users ON adg_news.id_user = adg_users.id
                 WHERE adg_news.id = :id";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
     public function getRawById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM adg_news WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare("SELECT * FROM adg_news WHERE id = :id");
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
     public function getAdminUsers(): array
     {
-        $stmt = $this->db->query("SELECT id, username FROM adg_users WHERE id_role = 2 ORDER BY username ASC");
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->query("SELECT id, username FROM adg_users WHERE id_role = 2 ORDER BY username ASC");
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function create(array $data): bool
@@ -79,8 +79,8 @@ class NewsModel
         $sql = "INSERT INTO adg_news (title, content, image_url, source_news, id_user)
                 VALUES (:title, :content, :image_url, :source_news, :id_user)";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function update(array $data): bool
@@ -93,27 +93,27 @@ class NewsModel
                     id_user     = :id_user
                 WHERE id = :id";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function delete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM adg_news WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+        $query = $this->db->prepare("DELETE FROM adg_news WHERE id = :id");
+        return $query->execute([':id' => $id]);
     }
 
     public function titleExists(string $title, int $excludeId = 0): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_news WHERE title = :title AND id != :id");
-        $stmt->execute([':title' => $title, ':id' => $excludeId]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_news WHERE title = :title AND id != :id");
+        $query->execute([':title' => $title, ':id' => $excludeId]);
+        return $query->fetchColumn() > 0;
     }
 
     public function userExists(int $id): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE id = :id");
+        $query->execute([':id' => $id]);
+        return $query->fetchColumn() > 0;
     }
 }

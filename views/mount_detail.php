@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
     <script src="assets/js/toggle-collection.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
@@ -31,7 +31,7 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-12">
               <div class="relative flex flex-col w-4/5 max-w-md lg:max-w-none mx-auto lg:mx-0 lg:w-full">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 <?= $isWishlistedMount ? 'is-favorite' : '' ?>"
+                <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 <?= $isWishlistedMount ? 'is-favorite' : '' ?> <?= $isOwnedMount ? 'hidden' : '' ?>"
                     data-type="mount" data-id="<?= (int)$mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                     aria-label="<?= $isWishlistedMount ? 'Retirer ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($mount['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
                     aria-pressed="<?= $isWishlistedMount ? 'true' : 'false' ?>">
@@ -40,7 +40,7 @@
                     </svg>
                 </button>
                 <?php endif; ?>
-                <article class="bg-[oklch(0.23_0.0316_24.1)] rounded-xl border-2 border-primary-orange w-full mt-4
+                <article class="bg-card-brown rounded-xl border-2 border-primary-orange w-full mt-4
                                 flex flex-col flex-grow transition-all duration-300 <?= (isset($_SESSION['user_id']) && !$isOwnedMount) ? 'sepia' : '' ?>"
                                 data-owned="<?= $isOwnedMount ? '1' : '0' ?>">
 

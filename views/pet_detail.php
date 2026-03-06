@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <script src="assets/js/wishlist-heart.js" defer></script>
     <script src="assets/js/toggle-collection.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
@@ -30,7 +30,7 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-12">
               <div class="relative flex flex-col w-4/5 max-w-md lg:max-w-none mx-auto lg:mx-0 lg:w-full">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 cursor-pointer <?= $isWishlistedPet ? 'is-favorite' : '' ?>"
+                <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 cursor-pointer <?= $isWishlistedPet ? 'is-favorite' : '' ?> <?= $isOwnedPet ? 'hidden' : '' ?>"
                     data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                     aria-label="<?= $isWishlistedPet ? 'Retirer ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
                     aria-pressed="<?= $isWishlistedPet ? 'true' : 'false' ?>">
@@ -40,7 +40,7 @@
                     </svg>
                 </button>
                 <?php endif; ?>
-                <article class="bg-[oklch(0.23_0.0316_24.1)] rounded-xl border-2 border-primary-orange w-full mt-4
+                <article class="bg-card-brown rounded-xl border-2 border-primary-orange w-full mt-4
                                 flex flex-col flex-grow transition-all duration-300 <?= (isset($_SESSION['user_id']) && !$isOwnedPet) ? 'sepia' : '' ?>"
                                 data-owned="<?= $isOwnedPet ? '1' : '0' ?>">
 
@@ -55,7 +55,7 @@
                         <h2 class="sr-only"><?= htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') ?></h2>
                     </div>
 
-                    <div class="bg-[oklch(0.23_0.0316_24.1)] border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
+                    <div class="bg-card-brown border-t border-primary-orange py-5 flex items-center justify-center gap-2 rounded-b-xl relative">
                         <span class="text-primary-orange text-base font-bold uppercase tracking-[0.2em]"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></span>
                         <?php if (isset($_SESSION['user_id'])): ?>
                         <span class="lock-badge absolute right-3 inset-y-0 flex items-center text-a11y-gray<?= $isOwnedPet ? ' hidden' : '' ?>" aria-hidden="true">
@@ -178,39 +178,7 @@
     <?php require __DIR__ . '/layout/footer.php'; ?>
     <?php require __DIR__ . '/layout/modals.php'; ?>
 
-    <script>
-    document.querySelectorAll('.spell-item').forEach(item => {
-        item.addEventListener('click', (e) => {
-            const tooltip = item.querySelector('.spell-tooltip');
-            if (!tooltip) return;
-
-            document.querySelectorAll('.spell-tooltip.active').forEach(t => {
-                if (t !== tooltip) {
-                    t.classList.remove('active', 'opacity-100');
-                    t.classList.add('opacity-0', 'pointer-events-none');
-                }
-            });
-
-            const isActive = tooltip.classList.contains('active');
-            if (isActive) {
-                tooltip.classList.remove('active', 'opacity-100');
-                tooltip.classList.add('opacity-0', 'pointer-events-none');
-            } else {
-                tooltip.classList.add('active', 'opacity-100');
-                tooltip.classList.remove('opacity-0', 'pointer-events-none');
-            }
-        });
-    });
-
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.spell-item')) {
-            document.querySelectorAll('.spell-tooltip.active').forEach(t => {
-                t.classList.remove('active', 'opacity-100');
-                t.classList.add('opacity-0', 'pointer-events-none');
-            });
-        }
-    });
-    </script>
+    <script src="assets/js/pet-spells.js" defer></script>
 
 </body>
 </html>

@@ -6,9 +6,9 @@
     <title>F.A.Q | Les Archives du Gardien</title>
     <meta name="description" content="Foire aux questions sur Les Archives du Gardien : fonctionnement du site, collections, filtres et synchronisation.">
     <link href="assets/css/output.css" rel="stylesheet">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <script src="assets/js/faq-accordion.js" defer></script>
 </head>
 <body>
@@ -27,7 +27,7 @@
             <?php else: ?>
                 <?php foreach ($faq_by_category as $category => $faqs): ?>
 
-                <section class="mb-10 border-2 border-primary-orange rounded-xl bg-black/40 backdrop-blur-sm p-4 md:p-6 shadow-2xl">
+                <section class="mb-10 card-bordered bg-black/40 backdrop-blur-sm p-4 md:p-6 shadow-2xl">
                     <h2 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-xl mb-6">
                         <?= htmlspecialchars($category, ENT_QUOTES, 'UTF-8') ?>
                     </h2>

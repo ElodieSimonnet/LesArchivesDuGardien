@@ -15,7 +15,7 @@
 
         <div class="flex items-center gap-4">
 
-            <div class="hidden lg:flex gap-8 items-center">
+            <div class="hidden lg:flex gap-3 items-center">
                 <?php if (isset($_SESSION['username'])): ?>
                     <span class="text-primary-white text-xl font-bold">
                         Bienvenue,
@@ -23,9 +23,14 @@
                             <?php echo htmlspecialchars($_SESSION['username']); ?>
                         </a>
                     </span>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrateur'): ?>
+                    <a href="admin/dashboard.php" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg btn-orange-hover flex items-center gap-2">
+                        <i class="ph ph-shield-check" aria-hidden="true"></i> Admin
+                    </a>
+                    <?php endif; ?>
                     <form action="logout.php" method="POST" class="inline">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                        <button type="submit" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-amber-500 transition-all shadow-md">
+                        <button type="submit" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-amber-500 transition-all shadow-md border-2 border-transparent">
                             Déconnexion
                         </button>
                     </form>
@@ -49,7 +54,7 @@
 
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Menu</span>
-        <button id="close-menu" type="button" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer le menu">
+        <button id="close-menu" type="button" class="text-primary-orange p-2 card-bordered btn-orange-hover" aria-label="Fermer le menu">
             <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -95,6 +100,11 @@
                         <i class="fas fa-user-circle" aria-hidden="true"></i>
                         Mon Profil
                     </a>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Administrateur'): ?>
+                    <a href="admin/dashboard.php" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg flex items-center justify-center gap-2">
+                        <i class="ph ph-shield-check" aria-hidden="true"></i> Panel Admin
+                    </a>
+                    <?php endif; ?>
                     <form action="logout.php" method="POST" class="w-full">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         <button type="submit" class="w-full bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg">

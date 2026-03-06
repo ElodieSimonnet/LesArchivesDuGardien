@@ -14,7 +14,7 @@ if (loginForm) {
         const errorDiv = document.querySelector('#loginError');
         const formData = new FormData(this);
 
-fetch('../components/utils/admin_login.php', {
+fetch('../actions/admin_login.php', {
             method: 'POST',
             body: formData
         })

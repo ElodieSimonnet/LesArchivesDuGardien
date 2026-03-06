@@ -10,7 +10,7 @@ class MountModel
         $this->db = Database::getConnection();
     }
 
-public function getAll(int $userId = 0): array
+    public function getAll(int $userId = 0): array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -36,7 +36,7 @@ public function getAll(int $userId = 0): array
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getById(int $id, int $userId = 0): ?array
+    public function getById(int $id, int $userId = 0): ?array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -69,7 +69,7 @@ public function getById(int $id, int $userId = 0): ?array
         return $result ?: null;
     }
 
-public function getExpansions(): array
+    public function getExpansions(): array
     {
         return $this->db->query("SELECT * FROM adg_expansions ORDER BY expansion ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -109,7 +109,7 @@ public function getExpansions(): array
         return $this->db->query("SELECT * FROM adg_currencies ORDER BY name ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getAllForAdmin(array $filters = []): array
+    public function getAllForAdmin(array $filters = []): array
     {
         $sql = "SELECT
                     adg_mounts.*,
@@ -141,31 +141,31 @@ public function getAllForAdmin(array $filters = []): array
 
         $sql .= " ORDER BY adg_mounts.id ASC";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute($params);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getRawById(int $id): ?array
+    public function getRawById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM adg_mounts WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare("SELECT * FROM adg_mounts WHERE id = :id");
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
-public function create(array $data): bool
+    public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_mounts
                     (name, description, image, id_type, id_source, id_expansion, id_faction, id_difficulty, droprate, cost, id_currency, id_zone, id_target)
                 VALUES
                     (:name, :description, :image, :id_type, :id_source, :id_expansion, :id_faction, :id_difficulty, :droprate, :cost, :id_currency, :id_zone, :id_target)";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
-public function update(array $data): bool
+    public function update(array $data): bool
     {
         $sql = "UPDATE adg_mounts SET
                     name         = :name,
@@ -183,28 +183,28 @@ public function update(array $data): bool
                     id_target    = :id_target
                 WHERE id = :id";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
-public function delete(int $id): bool
+    public function delete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM adg_mounts WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+        $query = $this->db->prepare("DELETE FROM adg_mounts WHERE id = :id");
+        return $query->execute([':id' => $id]);
     }
 
-public function nameExists(string $name, int $excludeId = 0): bool
+    public function nameExists(string $name, int $excludeId = 0): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_mounts WHERE name = :name AND id != :id");
-        $stmt->execute([':name' => $name, ':id' => $excludeId]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_mounts WHERE name = :name AND id != :id");
+        $query->execute([':name' => $name, ':id' => $excludeId]);
+        return $query->fetchColumn() > 0;
     }
 
-public function idExistsInTable(string $table, int $id): bool
+    public function idExistsInTable(string $table, int $id): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM $table WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM $table WHERE id = :id");
+        $query->execute([':id' => $id]);
+        return $query->fetchColumn() > 0;
     }
 
 private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void

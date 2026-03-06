@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Nouveautés | Les Archives du Gardien</title>
     <meta name="description" content="Retrouvez les dernières actualités et nouveautés de World of Warcraft : mises à jour, événements et guides.">
@@ -17,7 +17,7 @@
                  md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] text-primary-white font-sans p-4 md:p-10">
         <div class="max-w-sm mx-auto md:max-w-4xl mt-8 lg:mt-16">
 
-        <div class="border-2 border-primary-orange rounded-xl p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
+        <div class="card-bordered p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
             <h1 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-2xl">
                 Dernières Nouvelles World of Warcraft
             </h1>
@@ -30,7 +30,7 @@
 <h2 class="sr-only">Actualités récentes</h2>
         <div class="relative flex items-center group">
 
-            <button type="button" id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
+            <button type="button" id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -38,7 +38,7 @@
 
             <div id="news-carousel" class="w-full" role="region" aria-label="Actualités récentes" aria-live="polite">
                 <?php foreach ($carousel_news as $index => $article): ?>
-                <article class="news-slide bg-primary-brown border-2 border-primary-orange rounded-xl overflow-hidden shadow-2xl flex flex-col lg:flex-row w-full backdrop-blur-md lg:h-[500px] <?= $index === 0 ? '' : 'hidden' ?>">
+                <article class="news-slide bg-primary-brown card-bordered overflow-hidden shadow-2xl flex flex-col lg:flex-row w-full backdrop-blur-md lg:h-[500px] <?= $index === 0 ? '' : 'hidden' ?>">
 
                     <?php if (!empty($article['image_url'])): ?>
                     <figure class="w-full lg:w-1/2 p-4 lg:p-6 flex-shrink-0">
@@ -83,13 +83,16 @@
                                 Source de l'article &rarr;
                             </a>
                             <?php endif; ?>
+                            <a href="news_detail.php?id=<?= (int)$article['id'] ?>" class="text-primary-orange text-xs font-bold uppercase tracking-wider hover:underline">
+                                Lire la suite &rarr;
+                            </a>
                         </footer>
                     </div>
                 </article>
                 <?php endforeach; ?>
             </div>
 
-            <button type="button" id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange hover:bg-primary-orange hover:text-primary-black transition-all shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
+            <button type="button" id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
@@ -106,7 +109,7 @@
 
 <?php if (!empty($list_news)): ?>
         <section class="mt-16">
-            <div class="border-2 border-primary-orange rounded-xl p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
+            <div class="card-bordered p-3 mb-8 lg:mb-12 bg-black/40 backdrop-blur-sm">
                 <h2 class="text-center uppercase tracking-[0.2em] font-bold text-primary-orange text-base md:text-2xl">
                     Archives
                 </h2>
@@ -115,7 +118,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 <?php foreach ($list_news as $article): ?>
                 <a href="news_detail.php?id=<?= (int)$article['id'] ?>" aria-label="Lire l'article : <?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" class="group">
-                    <article class="bg-primary-brown border-2 border-primary-orange rounded-xl overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">
+                    <article class="bg-primary-brown card-bordered overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">
 
                         <?php if (!empty($article['image_url'])): ?>
                         <figure class="overflow-hidden h-48 w-full relative m-0">
@@ -162,62 +165,7 @@
     <?php require __DIR__ . '/layout/footer.php'; ?>
     <?php require __DIR__ . '/layout/modals.php'; ?>
 
-    <script>
-    (function() {
-        const slides = document.querySelectorAll('.news-slide');
-        if (slides.length === 0) return;
-
-        let current = 0;
-        const total = slides.length;
-        const btnPrev = document.getElementById('btn-prev');
-        const btnNext = document.getElementById('btn-next');
-        const pageNumbers = document.getElementById('page-numbers');
-        const pagination = document.getElementById('news-pagination');
-
-        if (total <= 1) {
-            if (pagination) pagination.style.display = 'none';
-            if (btnPrev) btnPrev.style.display = 'none';
-            if (btnNext) btnNext.style.display = 'none';
-        }
-
-        function showSlide(index) {
-            slides.forEach(s => s.classList.add('hidden'));
-            slides[index].classList.remove('hidden');
-            current = index;
-            renderPageNumbers();
-        }
-
-        function prev() {
-            showSlide(current > 0 ? current - 1 : total - 1);
-        }
-
-        function next() {
-            showSlide(current < total - 1 ? current + 1 : 0);
-        }
-
-        function renderPageNumbers() {
-            if (!pageNumbers) return;
-            pageNumbers.innerHTML = '';
-
-            for (let i = 0; i < total; i++) {
-                const btn = document.createElement('button');
-                btn.type = 'button';
-                btn.textContent = i + 1;
-                btn.setAttribute('aria-label', 'Voir l\'actualité ' + (i + 1));
-                btn.setAttribute('aria-pressed', i === current ? 'true' : 'false');
-                btn.className = 'flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-brown border-2 rounded-xl text-primary-white font-black text-lg md:text-xl ' +
-                    (i === current ? 'border-primary-orange' : 'border-primary-orange/40');
-                btn.addEventListener('click', () => showSlide(i));
-                pageNumbers.appendChild(btn);
-            }
-        }
-
-        if (btnPrev) btnPrev.addEventListener('click', prev);
-        if (btnNext) btnNext.addEventListener('click', next);
-
-        renderPageNumbers();
-    })();
-    </script>
+    <script src="assets/js/news-slider.js" defer></script>
 
 </body>
 </html>

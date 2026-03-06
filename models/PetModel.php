@@ -9,7 +9,7 @@ class PetModel
         $this->db = Database::getConnection();
     }
 
-public function getAll(int $userId = 0): array
+    public function getAll(int $userId = 0): array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -33,7 +33,7 @@ public function getAll(int $userId = 0): array
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getById(int $id, int $userId = 0): ?array
+    public function getById(int $id, int $userId = 0): ?array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -64,15 +64,15 @@ public function getById(int $id, int $userId = 0): ?array
         return $result ?: null;
     }
 
-public function getSpellsForPet(array $pet): array
+    public function getSpellsForPet(array $pet): array
     {
         $petSpells = [];
         for ($i = 1; $i <= 6; $i++) {
             $spellId = $pet['spell_' . $i] ?? null;
             if (!empty($spellId)) {
-                $stmt = $this->db->prepare("SELECT * FROM adg_pet_spells WHERE id = :id");
-                $stmt->execute([':id' => $spellId]);
-                $petSpells[$i] = $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+                $query = $this->db->prepare("SELECT * FROM adg_pet_spells WHERE id = :id");
+                $query->execute([':id' => $spellId]);
+                $petSpells[$i] = $query->fetch(PDO::FETCH_ASSOC) ?: null;
             } else {
                 $petSpells[$i] = null;
             }
@@ -80,7 +80,7 @@ public function getSpellsForPet(array $pet): array
         return $petSpells;
     }
 
-public function getFamilies(): array
+    public function getFamilies(): array
     {
         return $this->db->query("SELECT * FROM adg_pet_families ORDER BY family ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -120,7 +120,7 @@ public function getFamilies(): array
         return $this->db->query("SELECT * FROM adg_targets ORDER BY target ASC")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getAllForAdmin(array $filters = []): array
+    public function getAllForAdmin(array $filters = []): array
     {
         $sql = "SELECT
                     adg_pets.*,
@@ -149,20 +149,20 @@ public function getAllForAdmin(array $filters = []): array
 
         $sql .= " ORDER BY adg_pets.id ASC";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute($params);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getRawById(int $id): ?array
+    public function getRawById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM adg_pets WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare("SELECT * FROM adg_pets WHERE id = :id");
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
-public function create(array $data): bool
+    public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_pets
                     (name, description, image, id_family, id_source, id_expansion, id_faction,
@@ -173,8 +173,8 @@ public function create(array $data): bool
                      :droprate, :cost, :id_zone, :id_currency, :id_target,
                      :spell_1, :spell_2, :spell_3, :spell_4, :spell_5, :spell_6)";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function update(array $data): bool
@@ -200,28 +200,28 @@ public function create(array $data): bool
                     spell_6      = :spell_6
                 WHERE id = :id";
 
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function delete(int $id): bool
     {
-        $stmt = $this->db->prepare("DELETE FROM adg_pets WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+        $query = $this->db->prepare("DELETE FROM adg_pets WHERE id = :id");
+        return $query->execute([':id' => $id]);
     }
 
-public function nameExists(string $name, int $excludeId = 0): bool
+    public function nameExists(string $name, int $excludeId = 0): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_pets WHERE name = :name AND id != :id");
-        $stmt->execute([':name' => $name, ':id' => $excludeId]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_pets WHERE name = :name AND id != :id");
+        $query->execute([':name' => $name, ':id' => $excludeId]);
+        return $query->fetchColumn() > 0;
     }
 
     public function idExistsInTable(string $table, int $id): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM $table WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM $table WHERE id = :id");
+        $query->execute([':id' => $id]);
+        return $query->fetchColumn() > 0;
     }
 
 private function addMultiFilter(string $column, string $key, array $filters, array &$conditions, array &$params, int &$paramIndex): void

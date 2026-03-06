@@ -112,7 +112,7 @@ if (registerForm) {
         }
 
         
-        fetch('components/utils/auth_register.php', { method: 'POST', body: formData })
+        fetch('actions/auth_register.php', { method: 'POST', body: formData })
         .then(response => response.json())
         .then(data => {
             if (data.status === 'success') {
@@ -133,7 +133,7 @@ if (loginForm) {
         const errorDiv = document.querySelector('#loginError');
         const formData = new FormData(this);
 
-        fetch('components/utils/auth_login.php', { method: 'POST', body: formData })
+        fetch('actions/auth_login.php', { method: 'POST', body: formData })
         .then(response => response.json())
         .then(data => {
             if (data.status === "success") {

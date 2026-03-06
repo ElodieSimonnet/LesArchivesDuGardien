@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="../assets/js/admin-messages.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
     <link href="../assets/css/output.css" rel="stylesheet">
     <title>Modifier l'utilisateur | Admin - Les Archives du Gardien</title>
 </head>
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 min-h-screen overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
 
         <div class="mb-8">
             <a href="user_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -31,21 +30,21 @@
                 </div>
             <?php endif; ?>
 
-            <form action="edit_user.php" method="POST" class="bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
+            <form action="edit_user.php" method="POST" class="bg-admin-dark border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl">
                 <input type="hidden" id="user_id" name="user_id" value="<?= $user['id'] ?>">
                 <input type="hidden" id="csrf_token" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
                     <div class="flex flex-col gap-2 md:col-span-2 md:max-w-md md:mx-auto md:w-full">
-                        <label for="username" class="text-sm font-black uppercase text-primary-orange tracking-widest">Nom d'utilisateur</label>
+                        <label for="username" class="label-orange">Nom d'utilisateur</label>
                         <input type="text" id="username" name="username" value="<?= htmlspecialchars($user['username']) ?>"
-                               class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all">
+                               class="form-input">
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_role" class="text-sm font-black uppercase text-primary-orange tracking-widest">Rôle</label>
-                        <select id="id_role" name="id_role" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_role" class="label-orange">Rôle</label>
+                        <select id="id_role" name="id_role" class="form-select">
                             <?php foreach ($all_roles as $role) : ?>
                                 <option value="<?= $role['id'] ?>" <?= ($role['id'] == $user['id_role']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars(strtoupper($role['role_name'])) ?>
@@ -55,8 +54,8 @@
                     </div>
 
                     <div class="flex flex-col gap-2">
-                        <label for="id_status" class="text-sm font-black uppercase text-primary-orange tracking-widest">Statut du compte</label>
-                        <select id="id_status" name="id_status" class="bg-black/60 border border-amber-900 rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer">
+                        <label for="id_status" class="label-orange">Statut du compte</label>
+                        <select id="id_status" name="id_status" class="form-select">
                             <?php foreach ($all_statuses as $status) : ?>
                                 <option value="<?= $status['id'] ?>" <?= ($status['id'] == $user['id_status']) ? 'selected' : '' ?>>
                                     <?= htmlspecialchars(strtoupper($status['status'])) ?>
@@ -68,24 +67,24 @@
                 </div>
 
                 <div class="mt-12 flex justify-center gap-4">
-                    <a href="user_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <a href="user_management.php" class="px-6 py-3 border border-primary-orange text-primary-orange font-bold uppercase text-xs rounded btn-orange-hover">
                         Annuler
                     </a>
-                    <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg hover:bg-primary-orange hover:text-primary-black transition-all">
+                    <button type="submit" class="px-10 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded shadow-lg btn-orange-hover">
                         Confirmer les modifications
                     </button>
                 </div>
             </form>
 
-<section class="mt-6 bg-[#1a0f0a] border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
-                <h2 id="avatar-heading" class="text-sm font-black uppercase text-primary-orange tracking-widest mb-4">Avatar actuel</h2>
+<section class="mt-6 bg-admin-dark border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
+                <h2 id="avatar-heading" class="label-orange mb-4">Avatar actuel</h2>
                 <div class="flex items-center justify-between">
-                    <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.png' ?>"
+                    <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.webp' ?>"
                          alt="Avatar de <?= htmlspecialchars($user['username']) ?>"
                          class="w-28 h-28 rounded-full object-cover border-2 border-primary-orange">
 
                     <?php if (!empty($user['avatar'])) : ?>
-                        <form id="deleteAvatarForm" action="../components/utils/process_delete_avatar.php" method="POST">
+                        <form id="deleteAvatarForm" action="../actions/delete_avatar.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="user_id" value="<?= $user['id'] ?>">
                             <button type="submit" class="px-10 py-3 border border-red-500 text-red-500 font-black uppercase text-xs rounded hover:bg-red-500 hover:text-black transition-all flex items-center gap-2 cursor-pointer">
@@ -100,10 +99,6 @@
         </div>
     </main>
 
-    <script>
-    document.getElementById('deleteAvatarForm')?.addEventListener('submit', (e) => {
-        if (!confirm('Supprimer l\'avatar de cet utilisateur ?')) e.preventDefault();
-    });
-    </script>
+    <script src="../assets/js/admin-edit-user.js" defer></script>
 </body>
 </html>

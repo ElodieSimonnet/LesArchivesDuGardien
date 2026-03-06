@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeFiltersContent = document.getElementById('active-filters-content');
     const checkboxes = document.querySelectorAll('.filter-checkbox');
     const statusRadios = document.querySelectorAll('.status-radio, .status-radio-mobile');
-    const mountItems = document.querySelectorAll('.mount-item');
+    const petItems = document.querySelectorAll('.pet-item');
     const clearAllBtn = document.getElementById('clear-all-filters');
     const statusLabel = document.getElementById('current-status-label');
     const dropdowns = document.querySelectorAll('.dropdown-container');
@@ -85,19 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (statusLabel) {
-            const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes' };
-            statusLabel.innerText = labels[statusValue];
+            const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes', 'wishlist': 'Statut : Wishlist' };
+            statusLabel.innerText = labels[statusValue] ?? 'Statut : Toutes';
         }
 
         const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
 
         let matchCount = 0;
-        mountItems.forEach(item => {
-            const card = item.querySelector('.mount-card');
+        petItems.forEach(item => {
+            const card = item.querySelector('.pet-card');
             if (!card) return;
 
             const cardOwned = card.dataset.owned;
-            const matchStatus = (statusValue === 'all') || (cardOwned === statusValue);
+            const matchStatus = statusValue === 'all' ||
+                (statusValue === 'wishlist' ? card.dataset.wishlisted === '1' : cardOwned === statusValue);
 
             let matchCategories = true;
             for (const category in activeFilters) {
@@ -122,7 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const shownCount = Math.min(matchCount, currentLimit);
         if (loadMoreCount) {
-            loadMoreCount.textContent = `Vous avez vu ${shownCount} montures sur ${matchCount}`;
+            loadMoreCount.textContent = `Vous avez vu ${shownCount} mascottes sur ${matchCount}`;
             loadMoreCount.style.display = matchCount > 0 ? '' : 'none';
         }
         if (loadMoreBtn) {
@@ -147,7 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statusValue !== 'all') {
             hasFilters = true;
-            const statusText = statusValue === '1' ? 'Acquises' : 'Manquantes';
+            const statusText = statusValue === '1' ? 'Acquises' : statusValue === 'wishlist' ? 'Wishlist' : 'Manquantes';
             createBadge(container, 'Statut', statusText, () => {
                 const allRadios = document.querySelectorAll('input[value="all"]');
                 allRadios.forEach(r => r.checked = true);

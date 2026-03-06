@@ -9,40 +9,40 @@ class UserModel
         $this->db = Database::getConnection();
     }
 
-public function getById(int $id): ?array
+    public function getById(int $id): ?array
     {
-        $stmt = $this->db->prepare(
+        $query = $this->db->prepare(
             "SELECT adg_users.*, adg_users_status.status
              FROM adg_users
              INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
              WHERE adg_users.id = ?"
         );
-        $stmt->execute([$id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query->execute([$id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
-public function getCollectionCounts(int $userId): array
+    public function getCollectionCounts(int $userId): array
     {
-        $stmtOwnedMounts = $this->db->prepare("SELECT COUNT(*) FROM adg_user_mounts WHERE id_user = ?");
-        $stmtOwnedMounts->execute([$userId]);
+        $queryOwnedMounts = $this->db->prepare("SELECT COUNT(*) FROM adg_user_mounts WHERE id_user = ?");
+        $queryOwnedMounts->execute([$userId]);
 
-        $stmtTotalMounts = $this->db->query("SELECT COUNT(*) FROM adg_mounts");
+        $queryTotalMounts = $this->db->query("SELECT COUNT(*) FROM adg_mounts");
 
-        $stmtOwnedPets = $this->db->prepare("SELECT COUNT(*) FROM adg_user_pets WHERE id_user = ?");
-        $stmtOwnedPets->execute([$userId]);
+        $queryOwnedPets = $this->db->prepare("SELECT COUNT(*) FROM adg_user_pets WHERE id_user = ?");
+        $queryOwnedPets->execute([$userId]);
 
-        $stmtTotalPets = $this->db->query("SELECT COUNT(*) FROM adg_pets");
+        $queryTotalPets = $this->db->query("SELECT COUNT(*) FROM adg_pets");
 
         return [
-            'countOwnedMounts' => $stmtOwnedMounts->fetchColumn(),
-            'countTotalMounts' => $stmtTotalMounts->fetchColumn(),
-            'countOwnedPets'   => $stmtOwnedPets->fetchColumn(),
-            'countTotalPets'   => $stmtTotalPets->fetchColumn(),
+            'countOwnedMounts' => $queryOwnedMounts->fetchColumn(),
+            'countTotalMounts' => $queryTotalMounts->fetchColumn(),
+            'countOwnedPets'   => $queryOwnedPets->fetchColumn(),
+            'countTotalPets'   => $queryTotalPets->fetchColumn(),
         ];
     }
 
-public function getAll(array $filters = []): array
+    public function getAll(array $filters = []): array
     {
         $sql = "SELECT adg_users.*, adg_roles.role_name, adg_users_status.status
                 FROM adg_users
@@ -68,87 +68,87 @@ public function getAll(array $filters = []): array
 
         $sql .= " ORDER BY adg_users.id ASC";
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare($sql);
+        $query->execute($params);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getByIdWithDetails(int $id): ?array
+    public function getByIdWithDetails(int $id): ?array
     {
-        $stmt = $this->db->prepare(
+        $query = $this->db->prepare(
             "SELECT adg_users.*, adg_roles.role_name, adg_users_status.status
              FROM adg_users
              INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
              INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
              WHERE adg_users.id = :id"
         );
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
-public function getRawById(int $id): ?array
+    public function getRawById(int $id): ?array
     {
-        $stmt = $this->db->prepare("SELECT * FROM adg_users WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $query = $this->db->prepare("SELECT * FROM adg_users WHERE id = :id");
+        $query->execute([':id' => $id]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result ?: null;
     }
 
-public function getDashboardStats(): array
+    public function getDashboardStats(): array
     {
-        $stmtTotal = $this->db->query("SELECT COUNT(*) FROM adg_users");
-        $totalUsers = $stmtTotal->fetchColumn();
+        $queryTotal = $this->db->query("SELECT COUNT(*) FROM adg_users");
+        $totalUsers = $queryTotal->fetchColumn();
 
-        $stmtActive = $this->db->prepare(
+        $queryActive = $this->db->prepare(
             "SELECT COUNT(*) FROM adg_users
              INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
              WHERE adg_users_status.status = :status"
         );
-        $stmtActive->execute([':status' => 'Actif']);
-        $activeUsers = $stmtActive->fetchColumn();
+        $queryActive->execute([':status' => 'Actif']);
+        $activeUsers = $queryActive->fetchColumn();
 
-        $stmtSuspended = $this->db->prepare(
+        $querySuspended = $this->db->prepare(
             "SELECT COUNT(*) FROM adg_users
              INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
              WHERE adg_users_status.status = :status"
         );
-        $stmtSuspended->execute([':status' => 'Suspendu']);
-        $suspendedUsers = $stmtSuspended->fetchColumn();
+        $querySuspended->execute([':status' => 'Suspendu']);
+        $suspendedUsers = $querySuspended->fetchColumn();
 
-        $stmtBanned = $this->db->prepare(
+        $queryBanned = $this->db->prepare(
             "SELECT COUNT(*) FROM adg_users
              INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
              WHERE adg_users_status.status = :status"
         );
-        $stmtBanned->execute([':status' => 'Banni']);
-        $bannedUsers = $stmtBanned->fetchColumn();
+        $queryBanned->execute([':status' => 'Banni']);
+        $bannedUsers = $queryBanned->fetchColumn();
 
-        $stmtLast = $this->db->prepare(
+        $queryLast = $this->db->prepare(
             "SELECT username, email FROM adg_users ORDER BY id DESC LIMIT 5"
         );
-        $stmtLast->execute();
-        $lastUsers = $stmtLast->fetchAll(PDO::FETCH_ASSOC);
+        $queryLast->execute();
+        $lastUsers = $queryLast->fetchAll(PDO::FETCH_ASSOC);
 
         return compact('totalUsers', 'activeUsers', 'suspendedUsers', 'bannedUsers', 'lastUsers');
     }
 
-public function getAllRoles(): array
+    public function getAllRoles(): array
     {
         return $this->db->query("SELECT * FROM adg_roles")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function getAllStatuses(): array
+    public function getAllStatuses(): array
     {
         return $this->db->query("SELECT * FROM adg_users_status")->fetchAll(PDO::FETCH_ASSOC);
     }
 
-public function create(array $data): bool
+    public function create(array $data): bool
     {
         $sql = "INSERT INTO adg_users (username, email, password, id_role, id_status)
                 VALUES (:username, :email, :password, :id_role, :id_status)";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function update(array $data): bool
@@ -159,8 +159,8 @@ public function create(array $data): bool
                     id_role   = :id_role,
                     id_status = :id_status
                 WHERE id = :id";
-        $stmt = $this->db->prepare($sql);
-        return $stmt->execute($data);
+        $query = $this->db->prepare($sql);
+        return $query->execute($data);
     }
 
     public function delete(int $id): bool
@@ -171,35 +171,152 @@ public function create(array $data): bool
         $this->db->prepare("DELETE FROM adg_wishlist_pets WHERE id_user = ?")->execute([$id]);
         $this->db->prepare("UPDATE adg_news SET id_user = NULL WHERE id_user = ?")->execute([$id]);
 
-        $stmt = $this->db->prepare("DELETE FROM adg_users WHERE id = :id");
-        return $stmt->execute([':id' => $id]);
+        $query = $this->db->prepare("DELETE FROM adg_users WHERE id = :id");
+        return $query->execute([':id' => $id]);
     }
 
-public function usernameExists(string $username, int $excludeId = 0): bool
+    public function usernameExists(string $username, int $excludeId = 0): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE username = :username AND id != :id");
-        $stmt->execute([':username' => $username, ':id' => $excludeId]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE username = :username AND id != :id");
+        $query->execute([':username' => $username, ':id' => $excludeId]);
+        return $query->fetchColumn() > 0;
     }
 
     public function emailExists(string $email, int $excludeId = 0): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE email = :email AND id != :id");
-        $stmt->execute([':email' => $email, ':id' => $excludeId]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_users WHERE email = :email AND id != :id");
+        $query->execute([':email' => $email, ':id' => $excludeId]);
+        return $query->fetchColumn() > 0;
     }
 
     public function roleExists(int $id): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_roles WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_roles WHERE id = :id");
+        $query->execute([':id' => $id]);
+        return $query->fetchColumn() > 0;
     }
 
     public function statusExists(int $id): bool
     {
-        $stmt = $this->db->prepare("SELECT COUNT(*) FROM adg_users_status WHERE id = :id");
-        $stmt->execute([':id' => $id]);
-        return $stmt->fetchColumn() > 0;
+        $query = $this->db->prepare("SELECT COUNT(*) FROM adg_users_status WHERE id = :id");
+        $query->execute([':id' => $id]);
+        return $query->fetchColumn() > 0;
+    }
+
+    public function findByIdentifier(string $identifier): ?array
+    {
+        $query = $this->db->prepare(
+            "SELECT adg_users.*, adg_users_status.status, adg_roles.role_name
+             FROM adg_users
+             INNER JOIN adg_users_status ON adg_users.id_status = adg_users_status.id
+             INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
+             WHERE adg_users.username = ? OR adg_users.email = ?"
+        );
+        $query->execute([$identifier, $identifier]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
+
+    public function findAdminByIdentifier(string $identifier): ?array
+    {
+        $query = $this->db->prepare(
+            "SELECT adg_users.*, adg_roles.role_name
+             FROM adg_users
+             INNER JOIN adg_roles ON adg_users.id_role = adg_roles.id
+             WHERE adg_users.username = ? OR adg_users.email = ?"
+        );
+        $query->execute([$identifier, $identifier]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
+
+    public function resetFailedAttempts(int $id): void
+    {
+        $this->db->prepare("UPDATE adg_users SET failed_attempts = 0, locked_until = NULL WHERE id = ?")
+            ->execute([$id]);
+    }
+
+    public function updateFailedAttempts(int $id, int $attempts, ?string $lockedUntil = null): void
+    {
+        if ($lockedUntil !== null) {
+            $this->db->prepare("UPDATE adg_users SET failed_attempts = ?, locked_until = ? WHERE id = ?")
+                ->execute([$attempts, $lockedUntil, $id]);
+        } else {
+            $this->db->prepare("UPDATE adg_users SET failed_attempts = ? WHERE id = ?")
+                ->execute([$attempts, $id]);
+        }
+    }
+
+    public function register(string $username, string $email, string $hashedPassword): int
+    {
+        $this->db->prepare("INSERT INTO adg_users (username, email, password) VALUES (?, ?, ?)")
+            ->execute([$username, $email, $hashedPassword]);
+        return (int) $this->db->lastInsertId();
+    }
+
+    public function updateEmail(int $id, string $email): void
+    {
+        $this->db->prepare("UPDATE adg_users SET email = ? WHERE id = ?")
+            ->execute([$email, $id]);
+    }
+
+    public function updateUsername(int $id, string $username): void
+    {
+        $this->db->prepare("UPDATE adg_users SET username = ? WHERE id = ?")
+            ->execute([$username, $id]);
+    }
+
+    public function updatePassword(int $id, string $hashedPassword): void
+    {
+        $this->db->prepare("UPDATE adg_users SET password = ? WHERE id = ?")
+            ->execute([$hashedPassword, $id]);
+    }
+
+    public function updateAvatar(int $id, ?string $path): void
+    {
+        $this->db->prepare("UPDATE adg_users SET avatar = ? WHERE id = ?")
+            ->execute([$path, $id]);
+    }
+
+    public function getAvatar(int $id): ?string
+    {
+        $query = $this->db->prepare("SELECT avatar FROM adg_users WHERE id = ?");
+        $query->execute([$id]);
+        $result = $query->fetchColumn();
+        return $result ?: null;
+    }
+
+    public function toggleCollection(int $userId, string $type, int $itemId): string
+    {
+        $table  = $type === 'mount' ? 'adg_user_mounts' : 'adg_user_pets';
+        $column = $type === 'mount' ? 'id_mount' : 'id_pet';
+
+        $check = $this->db->prepare("SELECT id FROM $table WHERE id_user = ? AND $column = ?");
+        $check->execute([$userId, $itemId]);
+
+        if ($check->fetch()) {
+            $this->db->prepare("DELETE FROM $table WHERE id_user = ? AND $column = ?")->execute([$userId, $itemId]);
+            return 'removed';
+        }
+
+        $this->db->prepare("INSERT INTO $table (id_user, $column) VALUES (?, ?)")->execute([$userId, $itemId]);
+        return 'added';
+    }
+
+    public function toggleWishlist(int $userId, string $type, int $itemId): string
+    {
+        $table  = $type === 'mount' ? 'adg_wishlist_mounts' : 'adg_wishlist_pets';
+        $column = $type === 'mount' ? 'id_mount' : 'id_pet';
+
+        $check = $this->db->prepare("SELECT id FROM $table WHERE id_user = ? AND $column = ?");
+        $check->execute([$userId, $itemId]);
+
+        if ($check->fetch()) {
+            $this->db->prepare("DELETE FROM $table WHERE id_user = ? AND $column = ?")->execute([$userId, $itemId]);
+            return 'removed';
+        }
+
+        $this->db->prepare("INSERT INTO $table (id_user, $column, added_at) VALUES (?, ?, NOW())")->execute([$userId, $itemId]);
+        return 'added';
     }
 }

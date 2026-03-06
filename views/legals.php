@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Informations légales | Les Archives du Gardien</title>
     <meta name="description" content="Informations légales du site Les Archives du Gardien : mentions légales, politique de confidentialité, conditions générales d'utilisation et avis de non-affiliation.">

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/../components/utils/flash.php';
+require_once __DIR__ . '/../helpers/flash.php';
 
 class Database
 {

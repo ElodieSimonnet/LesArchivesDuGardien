@@ -5,16 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-filters');
     const filterForm = document.getElementById('filterForm');
 
-const searchInput = document.getElementById('search-user');
+    const searchInput = document.getElementById('search-user');
     if (searchInput) {
         const rows = document.querySelectorAll('.user-row');
 
         searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase().trim();
+            const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const term = normalize(searchInput.value.trim());
 
             rows.forEach(row => {
-                const username = row.dataset.username || '';
-                const email = row.dataset.email || '';
+                const username = normalize(row.dataset.username || '');
+                const email = normalize(row.dataset.email || '');
                 row.style.display = term.length < 2 || username.includes(term) || email.includes(term) ? '' : 'none';
             });
         });
@@ -23,11 +24,9 @@ const searchInput = document.getElementById('search-user');
     if (!overlay || !menu || !openBtn) return;
 
     const openFilters = () => {
-        
         overlay.classList.remove('hidden');
 
         setTimeout(() => {
-            
             overlay.classList.add('opacity-100');
             menu.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
             menu.classList.add('opacity-100', 'translate-y-0');
@@ -39,13 +38,11 @@ const searchInput = document.getElementById('search-user');
     };
 
     const closeFilters = () => {
-        
         overlay.classList.remove('opacity-100');
         menu.classList.remove('opacity-100', 'translate-y-0');
         menu.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
 
         setTimeout(() => {
-            
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
             menu.setAttribute('aria-hidden', 'true');
@@ -53,7 +50,7 @@ const searchInput = document.getElementById('search-user');
         }, 500);
     };
 
-menu.addEventListener('keydown', (e) => {
+    menu.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
         const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
         const first = focusable[0];
@@ -65,15 +62,15 @@ menu.addEventListener('keydown', (e) => {
         }
     });
 
-openBtn.addEventListener('click', openFilters);
+    openBtn.addEventListener('click', openFilters);
     if (closeBtn) closeBtn.addEventListener('click', closeFilters);
     overlay.addEventListener('click', closeFilters);
 
-document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-document.querySelectorAll('.mobile-accordion-header').forEach(header => {
+    document.querySelectorAll('.mobile-accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
             const svg = header.querySelector('svg');
@@ -88,7 +85,7 @@ document.querySelectorAll('.mobile-accordion-header').forEach(header => {
         });
     });
 
-if (filterForm) {
+    if (filterForm) {
         filterForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const formData = new FormData(filterForm);

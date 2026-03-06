@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('item_id', itemId);
             formData.append('csrf_token', csrfToken);
 
-            fetch('components/utils/toggle_wishlist.php', {
+            fetch('actions/toggle_wishlist.php', {
                 method: 'POST',
                 body: formData
             })

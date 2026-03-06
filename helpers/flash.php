@@ -1,12 +1,8 @@
 <?php
 
-
-
 function set_flash(string $type, string $message): void {
     $_SESSION['flash'] = ['type' => $type, 'message' => $message];
 }
-
-
 
 function get_flash(): ?array {
     if (!isset($_SESSION['flash'])) return null;

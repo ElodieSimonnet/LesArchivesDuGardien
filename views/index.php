@@ -7,8 +7,9 @@
     <meta name="description" content="Suivez et gérez votre collection de montures et mascottes World of Warcraft. Consultez les dernières nouveautés et gardez une trace de vos trésors d'Azeroth.">
     <link href="assets/css/output.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
 </head>
 <body class="min-h-screen flex flex-col">
 
@@ -52,18 +53,5 @@
 
     <?php require __DIR__ . '/layout/footer.php'; ?>
     <?php require __DIR__ . '/layout/modals.php'; ?>
-    <script src="assets/js/modal.js" defer></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const msg = document.getElementById('flash-message');
-            if (msg) {
-                setTimeout(() => {
-                    msg.style.transition = 'opacity 0.5s';
-                    msg.style.opacity = '0';
-                    setTimeout(() => msg.remove(), 500);
-                }, 3000);
-            }
-        });
-    </script>
 </body>
 </html>

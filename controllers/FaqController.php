@@ -9,16 +9,16 @@ class FaqController
         $this->model = new FaqModel();
     }
 
-public function list(): void
+    public function list(): void
     {
         $faq_by_category = $this->model->getAllGroupedByCategory();
 
         require __DIR__ . '/../views/faq.php';
     }
 
-public function adminList(): void
+    public function adminList(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $all_faq = $this->model->getAll();
@@ -26,9 +26,9 @@ public function adminList(): void
         require __DIR__ . '/../views/admin/faq_management.php';
     }
 
-public function showAddForm(): void
+    public function showAddForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $categories = $this->model->getCategories();
@@ -36,9 +36,9 @@ public function showAddForm(): void
         require __DIR__ . '/../views/admin/add_faq.php';
     }
 
-public function showEditForm(): void
+    public function showEditForm(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $faq_id = (int) ($_GET['id'] ?? 0);
@@ -58,9 +58,9 @@ public function showEditForm(): void
         require __DIR__ . '/../views/admin/edit_faq.php';
     }
 
-public function adminView(): void
+    public function adminView(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         $faq_id = (int) ($_GET['id'] ?? 0);
@@ -78,9 +78,9 @@ public function adminView(): void
         require __DIR__ . '/../views/admin/view_faq.php';
     }
 
-public function create(): void
+    public function create(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -117,9 +117,9 @@ public function create(): void
         }
     }
 
-public function update(): void
+    public function update(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if (!isset($_POST['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
@@ -158,9 +158,9 @@ public function update(): void
         }
     }
 
-public function delete(): void
+    public function delete(): void
     {
-        require_once __DIR__ . '/../components/utils/is_admin.php';
+        require_once __DIR__ . '/../helpers/is_admin.php';
         restrictToAdmin();
 
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

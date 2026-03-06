@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.append('item_id', itemId);
             formData.append('csrf_token', csrfToken);
 
-            fetch('components/utils/toggle_collection.php', {
+            fetch('actions/toggle_collection.php', {
                 method: 'POST',
                 body: formData
             })
@@ -55,6 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                const wishlistBtn = this.closest('li')?.querySelector('.wishlist-btn')
+                    ?? this.parentElement?.querySelector('.wishlist-btn');
+
                 if (data.status === 'added') {
                     this.classList.add('is-owned', 'bg-primary-orange', 'text-primary-black');
                     this.classList.remove('text-primary-orange', 'hover:bg-primary-orange', 'hover:text-primary-black');
@@ -65,6 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.classList.remove('sepia', 'hover:sepia-0');
                     }
                     if (lockBadge) lockBadge.classList.add('hidden');
+                    if (wishlistBtn) wishlistBtn.classList.add('hidden');
                 } else if (data.status === 'removed') {
                     this.classList.remove('is-owned', 'bg-primary-orange', 'text-primary-black');
                     this.classList.add('text-primary-orange', 'hover:bg-primary-orange', 'hover:text-primary-black');
@@ -75,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         card.classList.add('sepia', 'hover:sepia-0');
                     }
                     if (lockBadge) lockBadge.classList.remove('hidden');
+                    if (wishlistBtn) wishlistBtn.classList.remove('hidden');
                 }
             })
             .catch(() => showToast('Une erreur réseau est survenue.'));

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/phosphor-icons"></script>
-    <script src="assets/js/modal.js" defer></script>
-    <script src="assets/js/burger-menu.js" defer></script>
+    <script src="https://unpkg.com/phosphor-icons" defer></script>
+    <script src="assets/js/auth-modals.js" defer></script>
+    <script src="assets/js/burger-mobile-menu.js" defer></script>
     <link href="assets/css/output.css" rel="stylesheet">
     <title>Mon profil | Les Archives du Gardien</title>
     <meta name="description" content="Gérez votre profil et suivez l'avancement de vos collections de montures et mascottes World of Warcraft.">
@@ -18,7 +18,7 @@
         <div class="max-w-4xl mx-auto px-4 flex flex-col gap-6">
             <section class="grid md:grid-cols-3 gap-6" aria-label="Informations du profil">
                 <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-2xl">
-                    <form action="components/utils/upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
+                    <form action="actions/upload_avatar.php" method="POST" enctype="multipart/form-data" id="profileAvatarForm">
                         <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                         <label for="profileAvatarInput" class="relative w-32 h-32 mb-4 flex items-center justify-center group cursor-pointer" aria-label="Changer votre avatar">
 
@@ -82,7 +82,7 @@
                             </div>
                         <?php endif; ?>
 
-<form action="components/utils/update_profile.php" method="POST">
+<form action="actions/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="email">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -104,7 +104,7 @@
                                     <div class="relative flex-1">
                                         <input type="password" id="email-password" name="current_password" placeholder="Confirmez votre mot de passe" required
                                         autocomplete="current-password"
-                                        class="w-full bg-black/40 border border-amber-900 rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                        class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             <svg class="eye-closed hidden w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21"/></svg>
@@ -112,13 +112,13 @@
                                     </div>
                                 </div>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('email', '<?= htmlspecialchars($user['email'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="button" onclick="cancelEdit('email', '<?= htmlspecialchars($user['email'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
                                     <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
 
-<form action="components/utils/update_profile.php" method="POST">
+<form action="actions/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="username">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -140,7 +140,7 @@
                                     <div class="relative flex-1">
                                         <input type="password" id="username-password" name="current_password" placeholder="Confirmez votre mot de passe" required
                                         autocomplete="current-password"
-                                        class="w-full bg-black/40 border border-amber-900 rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                        class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             <svg class="eye-closed hidden w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21"/></svg>
@@ -148,13 +148,13 @@
                                     </div>
                                 </div>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('username', '<?= htmlspecialchars($user['username'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="button" onclick="cancelEdit('username', '<?= htmlspecialchars($user['username'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
                                     <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
 
-<form action="components/utils/update_profile.php" method="POST">
+<form action="actions/update_profile.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="type" value="password">
                             <div class="flex flex-col md:flex-row md:items-center gap-4">
@@ -175,7 +175,7 @@
                                     <div class="relative flex-1">
                                         <input type="password" id="current-password" name="current_password" placeholder="Mot de passe actuel" required
                                         autocomplete="current-password"
-                                        class="w-full bg-black/40 border border-amber-900 rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                        class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             <svg class="eye-closed hidden w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21"/></svg>
@@ -187,7 +187,7 @@
                                     <div class="relative flex-1">
                                         <input type="password" id="new-password" name="new_password" placeholder="Nouveau mot de passe" required
                                         autocomplete="new-password"
-                                        class="password-strength-input w-full bg-black/40 border border-amber-900 rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange"
+                                        class="password-strength-input w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange"
                                         data-strength="strength-profile">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -208,7 +208,7 @@
                                     <div class="relative flex-1">
                                         <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirmez le nouveau mot de passe" required
                                         autocomplete="new-password"
-                                        class="w-full bg-black/40 border border-amber-900 rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                        class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             <svg class="eye-closed hidden w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21"/></svg>
@@ -217,13 +217,13 @@
                                 </div>
                                 <p class="text-xs lg:text-sm text-a11y-gray">Min. 12 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.</p>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('password')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded hover:bg-primary-orange hover:text-primary-black transition-all">Annuler</button>
+                                    <button type="button" onclick="cancelEdit('password')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
                                     <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
 
-                        <form id="deleteAccountForm" action="components/utils/delete_account.php" method="POST">
+                        <form id="deleteAccountForm" action="actions/delete_account.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="confirm_delete" value="1">
                             <button type="button" id="openDeleteModal" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm lg:text-base tracking-widest transition-all active:scale-[0.98]">
@@ -248,9 +248,10 @@
                             <input type="text" id="battletag" aria-label="BattleTag" placeholder="BattleTag"
                             class="w-full bg-black/40 border border-primary-orange rounded-lg py-3 px-4 text-center text-white placeholder:text-a11y-gray focus:ring-1 focus:ring-primary-orange outline-none font-mono">
                         </div>
-                        <button type="button" class="w-full max-w-[280px] bg-primary-orange hover:bg-amber-500 text-primary-black font-black py-3 px-10 rounded-lg uppercase text-sm">
-                        Synchroniser
+                        <button type="button" disabled class="w-full max-w-[280px] bg-primary-orange/40 text-primary-black/60 font-black py-3 px-10 rounded-lg uppercase text-sm cursor-not-allowed">
+                            Synchroniser
                         </button>
+                        <p class="text-a11y-gray text-xs italic text-center">Fonctionnalité à venir</p>
                     </div>
                 </section>
 
@@ -268,7 +269,7 @@
             </p>
             <div class="flex gap-4 justify-center">
                 <button type="button" id="cancelDeleteBtn"
-                    class="px-6 py-3 border-2 border-primary-orange text-primary-orange font-bold uppercase text-sm rounded-lg hover:bg-primary-orange hover:text-primary-black transition-all">
+                    class="px-6 py-3 border-2 border-primary-orange text-primary-orange font-bold uppercase text-sm rounded-lg btn-orange-hover">
                     Annuler
                 </button>
                 <button type="button" id="confirmDeleteBtn"
@@ -282,94 +283,7 @@
     <?php require __DIR__ . '/layout/footer.php'; ?>
     <?php require __DIR__ . '/layout/modals.php'; ?>
 
-    <script>
-        const openDeleteBtn   = document.getElementById('openDeleteModal');
-        const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
-        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
-        const deleteModal     = document.getElementById('confirmDeleteModal');
-        const deleteForm      = document.getElementById('deleteAccountForm');
-
-        function openDeleteModal() {
-            deleteModal.classList.remove('hidden');
-            deleteModal.setAttribute('aria-hidden', 'false');
-            cancelDeleteBtn.focus();
-        }
-
-        function closeDeleteModal() {
-            deleteModal.classList.add('hidden');
-            deleteModal.setAttribute('aria-hidden', 'true');
-            openDeleteBtn.focus();
-        }
-
-        if (openDeleteBtn)    openDeleteBtn.addEventListener('click', openDeleteModal);
-        if (cancelDeleteBtn)  cancelDeleteBtn.addEventListener('click', closeDeleteModal);
-        if (confirmDeleteBtn) confirmDeleteBtn.addEventListener('click', () => deleteForm.submit());
-
-        document.addEventListener('keydown', function(e) {
-            if (!deleteModal || deleteModal.classList.contains('hidden')) return;
-            if (e.key === 'Escape') { closeDeleteModal(); return; }
-            if (e.key === 'Tab') {
-                const focusable = Array.from(deleteModal.querySelectorAll('button')).filter(el => el.offsetParent !== null);
-                const first = focusable[0];
-                const last  = focusable[focusable.length - 1];
-                if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-                else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-            }
-        });
-
-        deleteModal.addEventListener('click', function(e) {
-            if (e.target === deleteModal) closeDeleteModal();
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const msg = document.getElementById('flash-message');
-            if (msg) {
-                setTimeout(() => {
-                    msg.style.transition = 'opacity 0.5s';
-                    msg.style.opacity = '0';
-                    setTimeout(() => msg.remove(), 500);
-                }, 3000);
-            }
-        });
-
-        function toggleEdit(field) {
-            const editBlock = document.getElementById('edit-' + field);
-            const editBtn = document.getElementById('btn-edit-' + field);
-            editBlock.classList.remove('hidden');
-            editBtn.classList.add('hidden');
-
-            if (field === 'email') {
-                const input = document.getElementById('email');
-                input.removeAttribute('readonly');
-                input.focus();
-            } else if (field === 'username') {
-                const input = document.getElementById('name');
-                input.removeAttribute('readonly');
-                input.focus();
-            }
-        }
-
-        function cancelEdit(field, originalValue) {
-            const editBlock = document.getElementById('edit-' + field);
-            const editBtn = document.getElementById('btn-edit-' + field);
-            editBlock.classList.add('hidden');
-            editBtn.classList.remove('hidden');
-
-            if (field === 'email') {
-                const input = document.getElementById('email');
-                input.setAttribute('readonly', true);
-                if (originalValue) input.value = originalValue;
-            } else if (field === 'username') {
-                const input = document.getElementById('name');
-                input.setAttribute('readonly', true);
-                if (originalValue) input.value = originalValue;
-            } else if (field === 'password') {
-                document.getElementById('current-password').value = '';
-                document.getElementById('new-password').value = '';
-                document.getElementById('confirm-password').value = '';
-            }
-        }
-    </script>
+    <script src="assets/js/profile-settings.js" defer></script>
 
 </body>
 </html>

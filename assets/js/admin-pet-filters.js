@@ -5,15 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeBtn = document.getElementById('close-filters');
     const filterForm = document.getElementById('filterForm');
 
-const searchInput = document.getElementById('search-pet');
+    const searchInput = document.getElementById('search-pet');
     if (searchInput) {
         const rows = document.querySelectorAll('.pet-row');
 
         searchInput.addEventListener('input', () => {
-            const term = searchInput.value.toLowerCase().trim();
+            const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+            const term = normalize(searchInput.value.trim());
 
             rows.forEach(row => {
-                const name = row.dataset.name || '';
+                const name = normalize(row.dataset.name || '');
                 row.style.display = term.length < 2 || name.includes(term) ? '' : 'none';
             });
         });
@@ -23,6 +24,7 @@ const searchInput = document.getElementById('search-pet');
 
     const openFilters = () => {
         overlay.classList.remove('hidden');
+
         setTimeout(() => {
             overlay.classList.add('opacity-100');
             menu.classList.remove('opacity-0', 'translate-y-8', 'pointer-events-none');
@@ -30,6 +32,7 @@ const searchInput = document.getElementById('search-pet');
             menu.setAttribute('aria-hidden', 'false');
             if (closeBtn) closeBtn.focus();
         }, 10);
+
         document.body.style.overflow = 'hidden';
     };
 
@@ -37,6 +40,7 @@ const searchInput = document.getElementById('search-pet');
         overlay.classList.remove('opacity-100');
         menu.classList.remove('opacity-100', 'translate-y-0');
         menu.classList.add('opacity-0', 'translate-y-8', 'pointer-events-none');
+
         setTimeout(() => {
             overlay.classList.add('hidden');
             document.body.style.overflow = 'auto';
@@ -45,7 +49,7 @@ const searchInput = document.getElementById('search-pet');
         }, 500);
     };
 
-menu.addEventListener('keydown', (e) => {
+    menu.addEventListener('keydown', (e) => {
         if (e.key !== 'Tab' || overlay.classList.contains('hidden')) return;
         const focusable = Array.from(menu.querySelectorAll('button, input, [tabindex]:not([tabindex="-1"])'));
         const first = focusable[0];
@@ -65,7 +69,7 @@ menu.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeFilters();
     });
 
-document.querySelectorAll('.select-all').forEach(selectAll => {
+    document.querySelectorAll('.select-all').forEach(selectAll => {
         const section = selectAll.closest('.mobile-accordion-content');
         const checkboxes = section.querySelectorAll('.filter-checkbox');
 

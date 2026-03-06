@@ -6,11 +6,13 @@
       --color-primary-black: oklch(0.1349 0.0142 301.09);
       --color-primary-white: oklch(0.9702 0 0);
       --color-primary-brown: oklch(0.1772 0.0316 24.1);
+      --color-card-brown: oklch(0.23 0.0316 24.1);
       --color-primary-grey: oklch(0.8853 0 0);
       --color-row-dark: oklch(0.2666 0.003 17.34);
       --color-row-light: oklch(0.3639 0.0155 17.88);
       --color-line-faq: oklch(0.76 0.17 64.32);
       --color-a11y-gray: oklch(0.7696 0.006 308.37);
+      --color-admin-dark: oklch(0.1 0.02 24.1);
 }
 
 @layer utilities {
@@ -31,6 +33,30 @@
   .text-a11y-gray {
     color: #B5B3B7;
   }
+}
+
+@utility btn-orange-hover {
+  @apply hover:bg-primary-orange hover:text-primary-black transition-all;
+}
+
+@utility card-bordered {
+  @apply border-2 border-primary-orange rounded-xl;
+}
+
+@utility form-field {
+  @apply bg-black/60 border border-primary-orange rounded p-3 text-primary-white;
+}
+
+@utility form-input {
+  @apply bg-black/60 border border-primary-orange rounded p-3 text-primary-white focus:border-primary-orange outline-none transition-all;
+}
+
+@utility form-select {
+  @apply bg-black/60 border border-primary-orange rounded p-3 text-primary-white focus:border-primary-orange outline-none cursor-pointer;
+}
+
+@utility label-orange {
+  @apply text-sm font-black uppercase text-primary-orange tracking-widest;
 }
 
 @layer base {
@@ -58,12 +84,30 @@
     scroll-behavior: smooth;
   }
 
+  /* Scrollbar orange globale (Webkit) */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: oklch(0.8274 0.1415 71.71);
+    border-radius: 4px;
+  }
+
+  /* Scrollbar orange globale (Firefox) */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.8274 0.1415 71.71) transparent;
+  }
+
   /* Supprime le fond jaune autofill du navigateur sur les champs password */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
   input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px oklch(0.2666 0.003 17.34) inset !important;
+    -webkit-box-shadow: 0 0 0 1000px oklch(0.1772 0.0316 24.1) inset !important;
     -webkit-text-fill-color: #d1d5db !important;
     transition: background-color 5000s ease-in-out 0s;
   }

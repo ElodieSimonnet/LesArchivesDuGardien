@@ -4,7 +4,7 @@
 
     <div class="flex justify-between items-center px-8 h-28 border-b border-primary-orange bg-primary-black shrink-0">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
-        <button id="close-filters" type="button" aria-label="Fermer les filtres" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all">
+        <button id="close-filters" type="button" aria-label="Fermer les filtres" class="text-primary-orange p-2 card-bordered btn-orange-hover">
             <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -36,6 +36,10 @@
                     <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
                         Manquantes
                         <input type="radio" name="filter-status-mobile" value="0" class="status-radio-mobile accent-primary-orange w-6 h-6">
+                    </label>
+                    <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
+                        En wishlist
+                        <input type="radio" name="filter-status-mobile" value="wishlist" class="status-radio-mobile accent-primary-orange w-6 h-6">
                     </label>
                 </div>
             </section>

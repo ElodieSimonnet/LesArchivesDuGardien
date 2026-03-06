@@ -1,8 +1,8 @@
 <?php $currentPage = basename($_SERVER['PHP_SELF']); ?>
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:bg-primary-orange focus:text-primary-black focus:px-4 focus:py-2 focus:font-bold">Aller au contenu principal</a>
-<div class="min-h-screen flex flex-col">
+<div class="h-screen flex flex-col overflow-hidden">
 
-    <header class="sticky top-0 z-50 flex justify-between items-center p-4 bg-[#1a0f0a] border-b border-primary-orange/70 w-full h-30 shrink-0">
+    <header class="sticky top-0 z-50 flex justify-between items-center p-4 bg-admin-dark border-b border-primary-orange/70 w-full h-30 shrink-0">
         <div class="flex items-center gap-3">
             <button type="button" id="admin-burger" class="lg:hidden flex flex-col justify-center items-center w-8 h-8 gap-1.5 text-primary-orange cursor-pointer" aria-label="Ouvrir le menu de navigation" aria-expanded="false" aria-controls="admin-sidebar">
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
@@ -37,12 +37,9 @@
 
             <div class="h-8 w-px bg-primary-orange/30"></div>
 
-            <form action="logout.php" method="POST">
-                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                <button type="submit" class="flex items-center justify-center text-primary-orange hover:text-red-500 transition-all group" aria-label="Se déconnecter">
-                    <i class="ph ph-sign-out text-3xl xl:text-4xl group-hover:translate-x-1 transition-transform" aria-hidden="true"></i>
-                </button>
-            </form>
+            <a href="../index.php" class="flex items-center justify-center text-primary-orange hover:text-amber-400 hover:scale-125 transition-all" aria-label="Retour au site">
+                <i class="ph ph-house text-3xl xl:text-4xl" aria-hidden="true"></i>
+            </a>
         </div>
     </header>
 
@@ -50,7 +47,7 @@
 
     <div class="flex flex-1 overflow-hidden">
 
-      <aside id="admin-sidebar" class="flex w-64 flex-col bg-[#1a0f0a] border-r border-primary-orange/70 fixed top-30 bottom-0 z-[60] -translate-x-full lg:translate-x-0 transition-transform duration-300">
+      <aside id="admin-sidebar" class="flex w-64 flex-col bg-admin-dark border-r border-primary-orange/70 fixed top-30 bottom-0 z-[60] -translate-x-full lg:translate-x-0 transition-transform duration-300">
 
         <div class="p-6 flex flex-col items-center">
           <nav class="w-full space-y-8 mt-4" aria-label="Navigation administration">
@@ -74,4 +71,15 @@
             </a>
           </nav>
         </div>
+
+        <div class="mt-8 p-6 border-t border-primary-orange/30">
+            <form action="logout.php" method="POST">
+                <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                <button type="submit" class="w-full flex items-center justify-center gap-3 py-3.5 px-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold rounded-lg uppercase text-xs tracking-widest transition-all active:scale-[0.98]">
+                    <i class="ph ph-sign-out text-base" aria-hidden="true"></i> Déconnexion
+                </button>
+            </form>
+        </div>
       </aside>
+    <script src="../assets/js/flash-messages.js" defer></script>
+    <script src="../assets/js/admin-mobile-sidebar.js" defer></script>

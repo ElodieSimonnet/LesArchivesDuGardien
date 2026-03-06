@@ -14,7 +14,7 @@
 
     <div class="flex justify-between items-center px-8 h-24 border-b border-primary-orange bg-primary-black shrink-0 lg:rounded-t-2xl">
         <span class="text-primary-orange font-bold uppercase tracking-widest text-xl">Filtres</span>
-        <button type="button" id="close-filters" class="text-primary-orange p-2 border-2 border-primary-orange rounded-xl hover:bg-primary-orange hover:text-primary-black transition-all" aria-label="Fermer les filtres">
+        <button type="button" id="close-filters" class="text-primary-orange p-2 card-bordered btn-orange-hover" aria-label="Fermer les filtres">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
