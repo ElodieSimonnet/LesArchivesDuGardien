@@ -22,11 +22,11 @@ fetch('../actions/admin_login.php', {
         .then(data => {
             if (data.status === "success") {
                 
-                window.location.href = 'user_management.php';
+                window.location.href = 'dashboard.php';
             } else {
                 
                 if (errorDiv) {
-                    errorDiv.innerText = data.message;
+                    errorDiv.textContent = data.message;
                     errorDiv.classList.remove('hidden');
                 }
             }

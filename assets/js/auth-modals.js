@@ -77,7 +77,7 @@ if (registerForm) {
 
         
         if (password.value !== confirm.value) {
-            errorDiv.innerText = "Les mots de passe ne correspondent pas.";
+            errorDiv.textContent = "Les mots de passe ne correspondent pas.";
             errorDiv.classList.remove('hidden');
             confirm.classList.add('border-red-500');
             return;
@@ -86,27 +86,27 @@ if (registerForm) {
         
         const pwd = password.value;
         if (pwd.length < 12) {
-            errorDiv.innerText = "Le mot de passe doit contenir au moins 12 caractères.";
+            errorDiv.textContent = "Le mot de passe doit contenir au moins 12 caractères.";
             errorDiv.classList.remove('hidden');
             return;
         }
         if (!/[A-Z]/.test(pwd)) {
-            errorDiv.innerText = "Le mot de passe doit contenir au moins une majuscule.";
+            errorDiv.textContent = "Le mot de passe doit contenir au moins une majuscule.";
             errorDiv.classList.remove('hidden');
             return;
         }
         if (!/[a-z]/.test(pwd)) {
-            errorDiv.innerText = "Le mot de passe doit contenir au moins une minuscule.";
+            errorDiv.textContent = "Le mot de passe doit contenir au moins une minuscule.";
             errorDiv.classList.remove('hidden');
             return;
         }
         if (!/[0-9]/.test(pwd)) {
-            errorDiv.innerText = "Le mot de passe doit contenir au moins un chiffre.";
+            errorDiv.textContent = "Le mot de passe doit contenir au moins un chiffre.";
             errorDiv.classList.remove('hidden');
             return;
         }
         if (!/[^A-Za-z0-9]/.test(pwd)) {
-            errorDiv.innerText = "Le mot de passe doit contenir au moins un caractère spécial.";
+            errorDiv.textContent = "Le mot de passe doit contenir au moins un caractère spécial.";
             errorDiv.classList.remove('hidden');
             return;
         }
@@ -118,7 +118,7 @@ if (registerForm) {
             if (data.status === 'success') {
                 window.location.href = data.redirect;
             } else {
-                errorDiv.innerText = data.message;
+                errorDiv.textContent = data.message;
                 errorDiv.classList.remove('hidden');
             }
         });
@@ -139,7 +139,7 @@ if (loginForm) {
             if (data.status === "success") {
                 window.location.href = data.redirect;
             } else {
-                errorDiv.innerText = data.message;
+                errorDiv.textContent = data.message;
                 errorDiv.classList.remove('hidden');
             }
         });

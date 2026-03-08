@@ -12,8 +12,8 @@
 </head>
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center min-h-screen pt-16 pb-16
-                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center min-h-screen pt-16 pb-16
+                 md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)]">
         <h1 class="sr-only">Mon Profil</h1>
         <div class="max-w-4xl mx-auto px-4 flex flex-col gap-6">
             <section class="grid md:grid-cols-3 gap-6" aria-label="Informations du profil">
@@ -24,7 +24,7 @@
 
                             <div class="absolute inset-0 border-4 border-double border-primary-orange rounded-full transition-colors"></div>
 
-                            <img src="<?= !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/images/avatar-profile.webp' ?>"
+                            <img src="<?= !empty($user['avatar']) ? htmlspecialchars($user['avatar']) : 'assets/avatars/mage-feu-femme.webp' ?>"
                             alt="Portrait de <?= htmlspecialchars($user['username']) ?>"
                             class="rounded-full w-[110px] h-[110px] object-cover group-hover:opacity-40 transition-opacity">
 
@@ -52,7 +52,7 @@
 
                 <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
-                        <img src="assets/images/home_icons/dragon_icon.png" alt="Icone Monture" class="w-[110px] h-[110px] object-contain">
+                        <img src="assets/images/home_icons/dragon-icon.webp" alt="Icone Monture" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Montures obtenues</h2>
                     <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?= $countOwnedMounts ?> / <?= $countTotalMounts ?></p>
@@ -60,7 +60,7 @@
 
                 <div class="flex flex-col items-center justify-center bg-primary-brown border-2 border-primary-orange rounded-lg p-6 text-center shadow-lg">
                     <div class="w-32 h-32 mb-4 border-2 border-primary-orange rounded-full flex items-center justify-center">
-                        <img src="assets/images/home_icons/cat_icon.png" alt="Icone Mascotte" class="w-[110px] h-[110px] object-contain">
+                        <img src="assets/images/home_icons/cat-icon.webp" alt="Icone Mascotte" class="w-[110px] h-[110px] object-contain">
                     </div>
                     <h2 class="text-primary-orange text-lg font-bold uppercase tracking-tight">Mascottes obtenues</h2>
                     <p class="text-primary-white text-xl font-bold mt-2 font-mono"><?= $countOwnedPets ?> / <?= $countTotalPets ?></p>
@@ -236,7 +236,7 @@
                 <section class="bg-primary-brown border-2 border-primary-orange rounded-lg overflow-hidden flex flex-col shadow-2xl">
                     <div class="pt-6">
                         <div class="flex items-center justify-center gap-3">
-                            <img src="assets/images/icon-bnet.png" alt="Battle.net" class="w-8 h-8">
+                            <img src="assets/images/home_icons/icon-bnet.png" alt="Battle.net" class="w-8 h-8">
                             <h2 class="text-primary-orange text-2xl font-bold uppercase tracking-widest">Battle•net</h2>
                         </div>
                         <div class="h-[1px] bg-primary-orange w-full mt-4"></div>

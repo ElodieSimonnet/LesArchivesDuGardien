@@ -232,7 +232,7 @@ class UserModel
 
     public function resetFailedAttempts(int $id): void
     {
-        $this->db->prepare("UPDATE adg_users SET failed_attempts = 0, locked_until = NULL WHERE id = ?")
+        $this->db->prepare("UPDATE adg_users SET failed_attempts = 0, locked_until = NULL, last_activity = NOW() WHERE id = ?")
             ->execute([$id]);
     }
 

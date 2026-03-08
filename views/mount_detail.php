@@ -15,8 +15,8 @@
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
 
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
-                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
+                 md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none
                             lg:w-full mb-8">
@@ -99,23 +99,23 @@
 
                     <dl class="space-y-6 lg:px-12 lg:space-y-10">
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Source :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['source'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Source :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($mount['source'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Type :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['type'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Type :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($mount['type'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Faction :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['faction'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Faction :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($mount['faction'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Prix :</dt>
-                            <dd class="text-xl text-primary-white text-center">
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Prix :</dt>
+                            <dd class="text-base text-primary-white text-center">
                                 <?php if (!empty($mount['cost']) && !empty($mount['currency_name'])): ?>
                                     <?= htmlspecialchars($mount['cost'], ENT_QUOTES, 'UTF-8') ?> <?= htmlspecialchars($mount['currency_name'], ENT_QUOTES, 'UTF-8') ?>
                                 <?php else: ?>
@@ -125,23 +125,23 @@
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['droprate'] !== null ? htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Chance :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= $mount['droprate'] !== null ? htmlspecialchars($mount['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Extension :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($mount['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Extension :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($mount['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Zone :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['zone'] ? htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Zone :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= $mount['zone'] ? htmlspecialchars($mount['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-2xl text-primary-orange text-center lg:text-left lg:w-2/5">Cible :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $mount['target'] ? htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
+                            <dt class="font-semibold text-base text-primary-orange text-center lg:text-left lg:w-2/5">Cible :</dt>
+                            <dd class="text-base text-primary-white text-center"><?= $mount['target'] ? htmlspecialchars($mount['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
                 </section>

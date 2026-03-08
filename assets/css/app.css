@@ -1,28 +1,26 @@
 @import "tailwindcss";
 
 @theme {
-      --color-primary-orange: oklch(0.8274 0.1415 71.71);
-      --color-primary-orange-hover: oklch(0.88 0.16 75);
-      --color-primary-black: oklch(0.1349 0.0142 301.09);
-      --color-primary-white: oklch(0.9702 0 0);
-      --color-primary-brown: oklch(0.1772 0.0316 24.1);
-      --color-card-brown: oklch(0.23 0.0316 24.1);
-      --color-primary-grey: oklch(0.8853 0 0);
-      --color-row-dark: oklch(0.2666 0.003 17.34);
-      --color-row-light: oklch(0.3639 0.0155 17.88);
-      --color-line-faq: oklch(0.76 0.17 64.32);
-      --color-a11y-gray: oklch(0.7696 0.006 308.37);
-      --color-admin-dark: oklch(0.1 0.02 24.1);
+  --color-primary-orange: oklch(0.8274 0.1415 71.71);
+  --color-primary-orange-hover: oklch(0.88 0.16 75);
+  --color-primary-black: oklch(0.1349 0.0142 301.09);
+  --color-primary-white: oklch(0.9702 0 0);
+  --color-primary-brown: oklch(0.1772 0.0316 24.1);
+  --color-card-brown: oklch(0.23 0.0316 24.1);
+  --color-primary-grey: oklch(0.8853 0 0);
+  --color-row-dark: oklch(0.2666 0.003 17.34);
+  --color-row-light: oklch(0.3639 0.0155 17.88);
+  --color-line-faq: oklch(0.76 0.17 64.32);
+  --color-a11y-gray: oklch(0.7696 0.006 308.37);
+  --color-admin-dark: oklch(0.1 0.02 24.1);
 }
 
 @layer utilities {
-  /* Focus visible accessible global */
   *:focus-visible {
     outline: 3px solid oklch(0.8274 0.1415 71.71);
     outline-offset: 3px;
   }
 
-  /* Focus visible accessible pour les cartes interactives */
   .mount-card:focus-visible,
   .pet-card:focus-visible {
     outline: 3px solid oklch(0.8274 0.1415 71.71);
@@ -31,7 +29,7 @@
   }
 
   .text-a11y-gray {
-    color: #B5B3B7;
+    color: #b5b3b7;
   }
 }
 
@@ -60,16 +58,14 @@
 }
 
 @layer base {
-  /* Couleur des placeholders */
   input::placeholder,
   textarea::placeholder {
-    color: #B5B3B7;
+    color: #b5b3b7;
     opacity: 1;
   }
 }
 
 @layer base {
-  /* Assombrit les images de fond sans affecter le contenu */
   main {
     background-color: rgba(0, 0, 0, 0.3);
     background-blend-mode: darken;
@@ -78,31 +74,18 @@
 
 @layer base {
   html {
-    /* Réserve l'espace de la scrollbar pour éviter que tout bouge à gauche */
     scrollbar-gutter: stable;
-    /* assure une fluidité de scroll sur toute la page */
     scroll-behavior: smooth;
   }
 
-  /* Scrollbar orange globale (Webkit) */
   ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: oklch(0.8274 0.1415 71.71);
-    border-radius: 4px;
+    display: none;
   }
 
-  /* Scrollbar orange globale (Firefox) */
   * {
-    scrollbar-width: thin;
-    scrollbar-color: oklch(0.8274 0.1415 71.71) transparent;
+    scrollbar-width: none;
   }
 
-  /* Supprime le fond jaune autofill du navigateur sur les champs password */
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,

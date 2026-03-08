@@ -9,7 +9,7 @@
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
                 <span class="block w-6 h-0.5 bg-current" aria-hidden="true"></span>
             </button>
-            <img src="../assets/images/home_icons/dragon_logo.png" alt="Les Archives du Gardien" class="h-30 w-auto hidden lg:block">
+            <img src="../assets/images/home_icons/dragon-logo.webp" alt="Les Archives du Gardien" class="h-30 w-auto hidden lg:block">
             <div class="flex flex-col text-[10px] uppercase font-bold text-amber-800 md:text-sm">
                 <span>Les Archives Du Gardien</span>
                 <?php

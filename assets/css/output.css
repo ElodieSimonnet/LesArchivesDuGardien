@@ -844,9 +844,6 @@
   .gap-8 {
     gap: calc(var(--spacing) * 8);
   }
-  .gap-10 {
-    gap: calc(var(--spacing) * 10);
-  }
   .gap-12 {
     gap: calc(var(--spacing) * 12);
   }
@@ -1266,8 +1263,8 @@
   .bg-row-light {
     background-color: var(--color-row-light);
   }
-  .bg-\[url\(\.\.\/images\/lava_cave_mob\.webp\)\] {
-    background-image: url(../images/lava_cave_mob.webp);
+  .bg-\[url\(\.\.\/images\/backgrounds\/lava-cave-mob\.webp\)\] {
+    background-image: url(../images/backgrounds/lava-cave-mob.webp);
   }
   .bg-cover {
     background-size: cover;
@@ -1553,9 +1550,6 @@
   .break-all {
     word-break: break-all;
   }
-  .whitespace-nowrap {
-    white-space: nowrap;
-  }
   .text-a11y-gray {
     color: var(--color-a11y-gray);
   }
@@ -1808,14 +1802,6 @@
     -webkit-user-select: all;
     user-select: all;
   }
-  .group-hover\:translate-x-1 {
-    &:is(:where(.group):hover *) {
-      @media (hover: hover) {
-        --tw-translate-x: calc(var(--spacing) * 1);
-        translate: var(--tw-translate-x) var(--tw-translate-y);
-      }
-    }
-  }
   .group-hover\:scale-100 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {
@@ -2054,16 +2040,6 @@
       }
     }
   }
-  .hover\:bg-red-500\/10 {
-    &:hover {
-      @media (hover: hover) {
-        background-color: color-mix(in srgb, oklch(63.7% 0.237 25.331) 10%, transparent);
-        @supports (color: color-mix(in lab, red, red)) {
-          background-color: color-mix(in oklab, var(--color-red-500) 10%, transparent);
-        }
-      }
-    }
-  }
   .hover\:bg-red-600 {
     &:hover {
       @media (hover: hover) {
@@ -2120,20 +2096,6 @@
     &:hover {
       @media (hover: hover) {
         color: var(--color-primary-white);
-      }
-    }
-  }
-  .hover\:text-red-400 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-red-400);
-      }
-    }
-  }
-  .hover\:text-red-500 {
-    &:hover {
-      @media (hover: hover) {
-        color: var(--color-red-500);
       }
     }
   }
@@ -2440,14 +2402,14 @@
       gap: calc(var(--spacing) * 20);
     }
   }
-  .md\:bg-\[url\(\.\.\/images\/lava_cave_tab\.webp\)\] {
+  .md\:bg-\[url\(\.\.\/images\/backgrounds\/lava-cave-tab\.webp\)\] {
     @media (width >= 48rem) {
-      background-image: url(../images/lava_cave_tab.webp);
+      background-image: url(../images/backgrounds/lava-cave-tab.webp);
     }
   }
-  .md\:bg-\[url\(\.\.\/images\/lava_cave_without_f2_tab\.webp\)\] {
+  .md\:bg-\[url\(\.\.\/images\/backgrounds\/lava-cave-without-f2-tab\.webp\)\] {
     @media (width >= 48rem) {
-      background-image: url(../images/lava_cave_without_f2_tab.webp);
+      background-image: url(../images/backgrounds/lava-cave-without-f2-tab.webp);
     }
   }
   .md\:p-6 {
@@ -2724,14 +2686,14 @@
       border-top-right-radius: var(--radius-2xl);
     }
   }
-  .lg\:bg-\[url\(\.\.\/images\/lava_cave\.webp\)\] {
+  .lg\:bg-\[url\(\.\.\/images\/backgrounds\/lava-cave-without-f2\.webp\)\] {
     @media (width >= 64rem) {
-      background-image: url(../images/lava_cave.webp);
+      background-image: url(../images/backgrounds/lava-cave-without-f2.webp);
     }
   }
-  .lg\:bg-\[url\(\.\.\/images\/lava_cave_without_f2\.webp\)\] {
+  .lg\:bg-\[url\(\.\.\/images\/backgrounds\/lava-cave\.webp\)\] {
     @media (width >= 64rem) {
-      background-image: url(../images/lava_cave_without_f2.webp);
+      background-image: url(../images/backgrounds/lava-cave.webp);
     }
   }
   .lg\:p-6 {
@@ -2924,12 +2886,12 @@
     border-radius: 0.75rem;
   }
   .text-a11y-gray {
-    color: #B5B3B7;
+    color: #b5b3b7;
   }
 }
 @layer base {
   input::placeholder, textarea::placeholder {
-    color: #B5B3B7;
+    color: #b5b3b7;
     opacity: 1;
   }
 }
@@ -2945,18 +2907,10 @@
     scroll-behavior: smooth;
   }
   ::-webkit-scrollbar {
-    width: 5px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: oklch(0.8274 0.1415 71.71);
-    border-radius: 4px;
+    display: none;
   }
   * {
-    scrollbar-width: thin;
-    scrollbar-color: oklch(0.8274 0.1415 71.71) transparent;
+    scrollbar-width: none;
   }
   input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus, input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 1000px oklch(0.1772 0.0316 24.1) inset !important;

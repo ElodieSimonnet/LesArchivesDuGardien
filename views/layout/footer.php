@@ -1,7 +1,7 @@
 <footer class="bg-primary-black text-primary-white border-t border-primary-orange py-8 px-4">
         <div class="max-w-6xl mx-auto flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-4">
             <nav aria-label="Navigation secondaire">
-                <ul class="flex flex-row items-center gap-10 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
+                <ul class="flex flex-row flex-wrap justify-center items-center gap-6 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
                     <li>
                         <a href="news.php" class="hover:text-primary-orange uppercase">Nouveautés</a>
                     </li>
@@ -17,7 +17,7 @@
             <span class="text-primary-orange font-extrabold uppercase tracking-widest text-base lg:text-lg">
                 Suivez-nous :
             </span>
-            <div class="flex items-center gap-8">
+            <div class="flex flex-wrap justify-center items-center gap-8">
                 <a href="https://www.facebook.com/WorldofWarcraft.fr/?brand_redir=138011799033" target="_blank" rel="noopener noreferrer" class="w-10 h-10 bg-primary-white rounded-full flex items-center justify-center hover:bg-primary-orange group" aria-label="Facebook (s'ouvre dans un nouvel onglet)">
                     <img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/facebook.svg" class="w-6 h-6" alt="">
                 </a>

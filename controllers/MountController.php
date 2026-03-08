@@ -32,7 +32,7 @@ class MountController
             exit;
         }
 
-$mountTypeLink = 'assets/images/mounts/' . $mount['type'] . '.png';
+$mountTypeLink = 'assets/images/mounts/' . str_replace('_', '-', $mount['type']) . '.webp';
 
 $isOwnedMount     = (bool) ($mount['is_owned'] ?? false);
         $isWishlistedMount = (bool) ($mount['is_wishlisted'] ?? false);

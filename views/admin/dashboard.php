@@ -10,7 +10,7 @@
 <body class="bg-black">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] text-primary-white font-sans p-4 xl:p-8 lg:ml-64">
 
         <div class="mb-10 text-center">
             <h1 class="text-2xl font-black text-primary-orange uppercase">Archives Centrales</h1>

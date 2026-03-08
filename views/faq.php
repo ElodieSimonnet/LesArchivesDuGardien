@@ -13,8 +13,8 @@
 </head>
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
-    <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed
-                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] text-primary-white font-sans p-4 md:p-10">
+    <main id="main-content" class="min-h-screen bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed
+                 md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)] text-primary-white font-sans p-4 md:p-10">
         <section class="max-w-4xl mx-auto">
             <header class="border-2 border-primary-orange bg-primary-brown rounded-lg p-4 mb-8 text-center shadow-lg">
                 <h1 class="text-2xl md:text-4xl font-bold uppercase tracking-widest text-primary-orange">

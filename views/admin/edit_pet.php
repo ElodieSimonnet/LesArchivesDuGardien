@@ -10,7 +10,7 @@
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] p-4 xl:p-8 lg:ml-64">
 
         <div class="mb-8">
             <a href="pet_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -19,7 +19,7 @@
         </div>
 
         <div class="max-w-4xl mx-auto">
-            <h1 class="text-2xl font-black uppercase tracking-widest mb-8 border-b-2 border-primary-orange pb-4 inline-block">
+            <h1 class="text-2xl font-black uppercase tracking-widest mb-8 inline-block">
                 Modifier la mascotte
             </h1>
 

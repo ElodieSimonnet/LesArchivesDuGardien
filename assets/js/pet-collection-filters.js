@@ -85,11 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (statusLabel) {
-            const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes', 'wishlist': 'Statut : Wishlist' };
-            statusLabel.innerText = labels[statusValue] ?? 'Statut : Toutes';
+            const labels = { 'all': 'Statut : Toutes', '1': 'Statut : Acquises', '0': 'Statut : Manquantes', 'wishlist': 'Statut : Souhaitées' };
+            statusLabel.textContent = labels[statusValue] ?? 'Statut : Toutes';
         }
 
-        const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+        const normalize = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+        const searchTerm = searchInput ? normalize(searchInput.value.trim()) : '';
 
         let matchCount = 0;
         petItems.forEach(item => {
@@ -109,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
-            const cardName = (card.querySelector('h2')?.textContent || '').trim().toLowerCase();
-            const matchSearch = !searchTerm || cardName.startsWith(searchTerm);
+            const cardName = normalize((card.querySelector('h2')?.textContent || '').trim());
+            const matchSearch = !searchTerm || cardName.includes(searchTerm);
 
             const matchAll = matchStatus && matchCategories && matchSearch;
             if (matchAll) {
@@ -148,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (statusValue !== 'all') {
             hasFilters = true;
-            const statusText = statusValue === '1' ? 'Acquises' : statusValue === 'wishlist' ? 'Wishlist' : 'Manquantes';
+            const statusText = statusValue === '1' ? 'Acquises' : statusValue === 'wishlist' ? 'Souhaitées' : 'Manquantes';
             createBadge(container, 'Statut', statusText, () => {
                 const allRadios = document.querySelectorAll('input[value="all"]');
                 allRadios.forEach(r => r.checked = true);
@@ -214,25 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
-    document.querySelectorAll('.mobile-accordion-header').forEach(header => {
-        header.addEventListener('click', () => {
-            const content = header.nextElementSibling;
-            const svgIcon = header.querySelector('svg:not(.w-9)');
 
-            const isOpening = content.classList.contains('hidden');
-            content.classList.toggle('hidden');
-
-            if (isOpening) {
-                header.classList.add('active');
-                if(svgIcon) svgIcon.style.transform = 'rotate(180deg)';
-            } else {
-                header.classList.remove('active');
-                if(svgIcon) svgIcon.style.transform = 'rotate(0deg)';
-            }
-        });
-    });
-
-    
     applyAllFilters();
 });

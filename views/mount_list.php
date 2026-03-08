@@ -18,7 +18,7 @@
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
 
-   <main id="main-content" class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] text-primary-white font-sans p-4 md:p-10">
+   <main id="main-content" class="min-h-screen bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] text-primary-white font-sans p-4 md:p-10">
     <div class="max-w-7xl mx-auto">
 
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des montures</h1>
@@ -82,7 +82,7 @@
                         </label>
                         <label class="flex items-center w-full gap-3 p-2 hover:bg-primary-orange/10 cursor-pointer rounded">
                             <input type="radio" name="filter-status" value="wishlist" class="status-radio accent-primary-orange w-4 h-4">
-                            <span class="text-sm">En wishlist</span>
+                            <span class="text-sm">Souhaitées</span>
                         </label>
                     </div>
                 </div>
@@ -192,7 +192,7 @@
             </ul>
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
-                <p id="load-more-count" aria-live="polite" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 whitespace-nowrap"></p>
+                <p id="load-more-count" aria-live="polite" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3"></p>
                 <button type="button" id="load-more-btn" class="w-full max-w-sm text-center bg-primary-brown border border-primary-orange rounded-xl px-4 py-3 text-primary-white font-bold uppercase tracking-widest btn-orange-hover duration-300 shadow-[0_0_15px_rgba(249,115,22,0.2)]">
                     Charger plus
                 </button>

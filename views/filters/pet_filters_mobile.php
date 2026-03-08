@@ -38,7 +38,7 @@
                         <input type="radio" name="filter-status-mobile" value="0" class="status-radio-mobile accent-primary-orange w-6 h-6">
                     </label>
                     <label class="flex items-center justify-between p-4 bg-amber-500/15 border-l-4 border-primary-orange rounded-r-lg cursor-pointer active:bg-amber-500/30 transition-all text-sm font-bold uppercase italic text-primary-white">
-                        En wishlist
+                        Souhaitées
                         <input type="radio" name="filter-status-mobile" value="wishlist" class="status-radio-mobile accent-primary-orange w-6 h-6">
                     </label>
                 </div>

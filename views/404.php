@@ -7,7 +7,7 @@
     <meta name="description" content="La page que vous recherchez n'existe pas ou a été déplacée.">
     <link href="assets/css/output.css" rel="stylesheet">
 </head>
-<body class="min-h-screen bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)] flex items-center justify-center p-4">
+<body class="min-h-screen bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)] flex items-center justify-center p-4">
 
     <main id="main-content" class="text-center max-w-lg mx-auto bg-black/80 card-bordered p-8 md:p-12 backdrop-blur-sm shadow-2xl">
 

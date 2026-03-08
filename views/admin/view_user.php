@@ -10,7 +10,7 @@
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] p-4 xl:p-8 lg:ml-64">
 
         <div class="mb-8">
             <a href="user_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -20,7 +20,7 @@
 
         <div class="max-w-4xl mx-auto">
             <div class="flex items-center justify-between mb-8">
-                <h1 class="text-2xl font-black uppercase tracking-widest border-b-2 border-primary-orange pb-4 inline-block">
+                <h1 class="text-2xl font-black uppercase tracking-widest inline-block">
                     Profil utilisateur
                 </h1>
                 <a href="edit_user.php?id=<?= $user['id'] ?>" class="px-6 py-3 border border-primary-orange text-primary-orange font-black uppercase text-xs rounded btn-orange-hover flex items-center gap-2">
@@ -33,7 +33,7 @@
 
                     <div class="flex flex-col items-center gap-2 md:col-span-2">
                         <span class="label-orange">Avatar</span>
-                        <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.webp' ?>"
+                        <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/avatars/mage-feu-femme.webp' ?>"
                              alt="Avatar de <?= htmlspecialchars($user['username']) ?>"
                              class="w-24 h-24 rounded-full object-cover border-2 border-primary-orange mt-2">
                     </div>

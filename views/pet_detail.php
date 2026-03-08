@@ -14,8 +14,8 @@
 </head>
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
-                 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
+                 md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none
                             lg:w-full mb-8">
@@ -91,27 +91,27 @@
                     <dl class="space-y-4
                                lg:px-12 flex-grow lg:space-y-10">
                         <div class="flex flex-col lg:flex-row items-center lg:items-start mt-8">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Source :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($pet['source'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($pet['source'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Famille :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Faction :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($pet['faction'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($pet['faction'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Prix :</dt>
-                            <dd class="text-xl text-primary-white text-center">
+                            <dd class="text-base text-primary-white text-center">
                                 <?php if (!empty($pet['cost']) && !empty($pet['currency_name'])): ?>
                                     <?= htmlspecialchars($pet['cost'], ENT_QUOTES, 'UTF-8') ?> <?= htmlspecialchars($pet['currency_name'], ENT_QUOTES, 'UTF-8') ?>
                                 <?php else: ?>
@@ -121,27 +121,27 @@
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Chance :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= $pet['droprate'] !== null ? htmlspecialchars($pet['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= $pet['droprate'] !== null ? htmlspecialchars($pet['droprate'], ENT_QUOTES, 'UTF-8') . '%' : 'N/A' ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-4/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Extension :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= htmlspecialchars($pet['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= htmlspecialchars($pet['expansion'], ENT_QUOTES, 'UTF-8') ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Zone :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= !empty($pet['zone']) ? htmlspecialchars($pet['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= !empty($pet['zone']) ? htmlspecialchars($pet['zone'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                             <div class="my-6 bg-primary-orange h-0.5 w-2/5 mx-auto lg:hidden" aria-hidden="true"></div>
                         </div>
                         <div class="flex flex-col lg:flex-row items-center lg:items-start mb-8">
-                            <dt class="font-semibold text-xl text-primary-orange text-center
+                            <dt class="font-semibold text-base text-primary-orange text-center
                                        lg:text-left lg:w-2/5">Cible :</dt>
-                            <dd class="text-xl text-primary-white text-center"><?= !empty($pet['target']) ? htmlspecialchars($pet['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
+                            <dd class="text-base text-primary-white text-center"><?= !empty($pet['target']) ? htmlspecialchars($pet['target'], ENT_QUOTES, 'UTF-8') : 'N/A' ?></dd>
                         </div>
                     </dl>
                 </section>
@@ -152,7 +152,7 @@
                 <ul class="flex flex-wrap justify-around gap-3 md:gap-4 lg:gap-6">
                     <?php for ($i = 1; $i <= 6; $i++):
                         $spell = $petSpells[$i] ?? null;
-                        $spellImg = $spell ? htmlspecialchars($spell['icon'], ENT_QUOTES, 'UTF-8') : 'assets/images/pets/placeholder.png';
+                        $spellImg = $spell ? htmlspecialchars($spell['icon'], ENT_QUOTES, 'UTF-8') : 'assets/images/pets/beast.webp';
                         $spellName = $spell ? htmlspecialchars($spell['name'], ENT_QUOTES, 'UTF-8') : '';
                         $spellDesc = $spell ? htmlspecialchars($spell['description'], ENT_QUOTES, 'UTF-8') : '';
                     ?>

@@ -22,7 +22,7 @@
         </div>
     <?php endif; ?>
 
-    <main id="main-content" class="bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center pt-16 flex-grow px-16 md:bg-[url(../images/lava_cave_tab.webp)] lg:bg-[url(../images/lava_cave.webp)]">
+    <main id="main-content" class="bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center pt-16 flex-grow px-16 md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)]">
 
     <header class="mx-auto max-w-[16rem] md:max-w-[42rem] bg-primary-brown rounded-lg border-2 border-primary-orange p-2 text-center">
         <h1 class="text-primary-orange text-3xl p-5 md:text-3xl">Les Archives Du Gardien</h1>
@@ -35,14 +35,14 @@
 
             <li>
                 <a href="mount_list.php" class="flex flex-col items-center justify-center gap-2 aspect-square bg-primary-brown rounded-xl shadow-md p-4 border-2 border-primary-orange transition-transform hover:scale-105">
-                    <img src="assets/images/home_icons/dragon_icon.webp" alt="" aria-hidden="true" class="max-w-[6rem] md:max-w-[12rem]">
+                    <img src="assets/images/home_icons/dragon-icon.webp" alt="" aria-hidden="true" class="max-w-[6rem] md:max-w-[12rem]">
                     <span class="text-center font-bold text-xl text-primary-orange uppercase">Montures</span>
                 </a>
             </li>
 
             <li>
                 <a href="pet_list.php" class="flex flex-col items-center justify-center gap-2 aspect-square bg-primary-brown rounded-xl p-4 border-2 border-primary-orange transition-transform hover:scale-105">
-                    <img src="assets/images/home_icons/cat_icon.webp" alt="" aria-hidden="true" class="max-w-[6rem] md:max-w-[12rem]">
+                    <img src="assets/images/home_icons/cat-icon.webp" alt="" aria-hidden="true" class="max-w-[6rem] md:max-w-[12rem]">
                     <span class="text-center font-bold text-xl text-primary-orange uppercase">Mascottes</span>
                 </a>
             </li>

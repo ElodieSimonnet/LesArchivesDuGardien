@@ -10,7 +10,7 @@
 <body class="bg-black text-primary-white">
     <?php require __DIR__ . '/sidebar.php'; ?>
 
-    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/lava_cave_mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/lava_cave_without_f2_tab.webp)] lg:bg-[url(../images/lava_cave_without_f2.webp)] p-4 xl:p-8 xl:ml-64">
+    <main id="main-content" class="flex-1 overflow-y-auto bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] p-4 xl:p-8 lg:ml-64">
 
         <div class="mb-8">
             <a href="user_management.php" class="text-primary-orange hover:text-amber-400 flex items-center gap-2 transition-colors uppercase text-xs font-bold tracking-widest">
@@ -79,7 +79,7 @@
 <section class="mt-6 bg-admin-dark border border-primary-orange rounded-lg p-6 lg:p-10 shadow-2xl" aria-labelledby="avatar-heading">
                 <h2 id="avatar-heading" class="label-orange mb-4">Avatar actuel</h2>
                 <div class="flex items-center justify-between">
-                    <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/images/avatar-profile.webp' ?>"
+                    <img src="<?= !empty($user['avatar']) ? '../' . htmlspecialchars($user['avatar']) : '../assets/avatars/mage-feu-femme.webp' ?>"
                          alt="Avatar de <?= htmlspecialchars($user['username']) ?>"
                          class="w-28 h-28 rounded-full object-cover border-2 border-primary-orange">
 
