@@ -18,8 +18,8 @@
 <body>
     <?php require __DIR__ . '/layout/header.php'; ?>
 
-   <main id="main-content" class="min-h-screen bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] text-primary-white font-sans p-4 md:p-10">
-    <div class="max-w-7xl mx-auto">
+   <main id="main-content" class="min-h-screen bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center md:bg-[url(../images/backgrounds/lava-cave-without-f2-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave-without-f2.webp)] text-primary-white font-sans py-6 md:py-10">
+    <div class="px-6 md:max-w-7xl md:mx-auto">
 
         <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center">Liste des montures</h1>
 
@@ -34,7 +34,7 @@
                     </span>
                     <label for="search-input" class="sr-only">Rechercher une monture</label>
                     <input type="text" id="search-input"
-                           placeholder="Rechercher une monture par son nom"
+                           placeholder="Rechercher une monture"
                            class="w-full h-full bg-primary-brown border border-primary-orange rounded-md py-2 pl-10 pr-4 focus:outline-none focus:border-primary-orange italic text-sm text-white transition-all">
                 </div>
 
@@ -63,7 +63,7 @@
             <div class="hidden md:flex relative items-center w-full gap-4 mb-12 z-[200]" role="group" aria-label="Filtres">
                 <?php if (isset($_SESSION['user_id'])): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
+                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group cursor-pointer" aria-expanded="false" aria-haspopup="listbox">
                         <span id="current-status-label" class="truncate">Statut : Toutes</span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black" aria-hidden="true"></i>
                     </button>
@@ -97,7 +97,7 @@
                 ];
                 foreach ($filterGroups as $group): ?>
                 <div class="relative flex-1 dropdown-container">
-                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group" aria-expanded="false" aria-haspopup="listbox">
+                    <button class="dropdown-button w-full bg-primary-brown border border-primary-orange rounded-lg px-4 py-2 text-sm flex items-center justify-between hover:bg-primary-orange hover:text-primary-black transition-colors group cursor-pointer" aria-expanded="false" aria-haspopup="listbox">
                         <span class="truncate"><?= $group['label'] ?></span>
                         <i class="ph-caret-down text-primary-orange transition-transform duration-300 pointer-events-none group-hover:text-primary-black" aria-hidden="true"></i>
                     </button>
@@ -138,11 +138,11 @@
                 ?>
                 <li class="mount-item relative flex flex-col">
                     <?php if (isset($_SESSION['user_id'])): ?>
-                    <button class="wishlist-btn group absolute top-4 right-4 z-10 <?= $mount['is_wishlisted'] ? 'is-favorite' : '' ?> <?= $mount['is_owned'] ? 'hidden' : '' ?>"
+                    <button class="wishlist-btn group absolute top-4 right-6 z-10 wishlist-cursor <?= $mount['is_wishlisted'] ? 'is-favorite' : '' ?> <?= $mount['is_owned'] ? 'hidden' : '' ?>"
                             data-type="mount" data-id="<?= $mount['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                             aria-label="<?= $mount['is_wishlisted'] ? 'Retirer ' . $eName . ' des favoris' : 'Ajouter ' . $eName . ' aux favoris' ?>"
                             aria-pressed="<?= $mount['is_wishlisted'] ? 'true' : 'false' ?>">
-                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-10 w-10 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
+                        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-10 w-10 lg:h-14 lg:w-14 transition-all duration-300 text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                         </svg>
                     </button>
@@ -158,9 +158,11 @@
                        aria-label="Voir la fiche de <?= $eName ?>"
                        class="mount-card w-full h-full bg-card-brown card-bordered overflow-hidden flex flex-col <?= $hoverColor ?> transition-all duration-300 group shadow-2xl <?= (isset($_SESSION['user_id']) && !$mount['is_owned']) ? 'sepia hover:sepia-0' : '' ?>">
 
+                        <header class="flex pl-2 <?= strtolower($mount['type']) === 'terrestre' ? 'pt-3' : (strtolower($mount['type']) === 'volante' ? 'pt-2' : '') ?>">
+                            <img src="assets/images/mounts/<?= $eType ?>.webp" alt="Icône <?= $eType ?>" class="<?= strtolower($mount['type']) === 'volante' ? 'w-14 h-14 md:w-16 md:h-16 lg:w-20 lg:h-20' : (strtolower($mount['type']) === 'terrestre' ? 'w-12 h-12 md:w-16 md:h-16' : 'w-16 h-16 lg:w-20 lg:h-20') ?>" loading="lazy">
+                        </header>
                         <div class="relative p-6 flex-grow flex flex-col items-center">
-                            <span class="absolute top-4 left-4"><img src="assets/images/mounts/<?= $eType ?>.webp" alt="Icône <?= $eType ?>" class="w-12 h-12" loading="lazy"></span>
-                            <img src="<?= $eImage ?>" alt="<?= $eName ?>" class="w-full h-48 object-contain mt-12 transition-transform group-hover:scale-105" loading="lazy">
+                            <img src="<?= $eImage ?>" alt="<?= $eName ?>" class="w-full h-48 object-contain transition-transform group-hover:scale-105" loading="lazy">
                             <h2 class="text-xs font-black uppercase text-center mt-auto tracking-widest text-white"><?= $eName ?></h2>
                         </div>
 
@@ -190,6 +192,10 @@
                 </li>
                 <?php endforeach; ?>
             </ul>
+
+            <p id="no-results" class="hidden text-center text-primary-orange font-bold uppercase tracking-widest py-8 px-6 bg-primary-brown border-2 border-primary-orange rounded-xl max-w-xl mx-auto" aria-live="polite">
+                Aucune monture ne correspond à vos filtres.
+            </p>
 
             <div id="load-more-container" class="w-full flex flex-col items-center mt-12 mb-8 gap-4">
                 <p id="load-more-count" aria-live="polite" class="w-full max-w-sm text-center text-sm text-primary-orange font-bold uppercase tracking-widest bg-primary-brown border border-primary-orange rounded-xl px-4 py-3"></p>

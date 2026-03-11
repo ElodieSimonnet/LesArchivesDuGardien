@@ -17,6 +17,9 @@
     <main id="main-content" class="bg-[url(../images/backgrounds/lava-cave-mob.webp)] bg-cover bg-center bg-fixed pt-16 pb-36
                  md:bg-[url(../images/backgrounds/lava-cave-tab.webp)] lg:bg-[url(../images/backgrounds/lava-cave.webp)]">
         <div class="lg:max-w-5xl lg:mx-auto px-4 lg:px-12">
+            <a href="pet_list.php" class="inline-flex items-center gap-2 text-primary-orange text-sm font-bold uppercase tracking-wider hover:underline mb-6">
+                &larr; Retourner à la liste
+            </a>
             <section class="bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none
                             lg:w-full mb-8">
                 <h1 class="text-xl font-semibold text-center uppercase text-primary-orange pt-4
@@ -30,11 +33,11 @@
             <div class="lg:grid lg:grid-cols-2 lg:gap-12">
               <div class="relative flex flex-col w-4/5 max-w-md lg:max-w-none mx-auto lg:mx-0 lg:w-full">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                <button class="wishlist-btn group absolute top-6 right-[12%] lg:right-2 z-10 pr-2 pt-2 cursor-pointer <?= $isWishlistedPet ? 'is-favorite' : '' ?> <?= $isOwnedPet ? 'hidden' : '' ?>"
+                <button class="wishlist-btn group absolute top-6 right-6 z-10 pt-1.5 wishlist-cursor <?= $isWishlistedPet ? 'is-favorite' : '' ?> <?= $isOwnedPet ? 'hidden' : '' ?>"
                     data-type="pet" data-id="<?= (int)$pet['id'] ?>" data-csrf="<?= $_SESSION['csrf_token'] ?>"
                     aria-label="<?= $isWishlistedPet ? 'Retirer ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' des favoris' : 'Ajouter ' . htmlspecialchars($pet['name'], ENT_QUOTES, 'UTF-8') . ' aux favoris' ?>"
                     aria-pressed="<?= $isWishlistedPet ? 'true' : 'false' ?>">
-                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-16 w-16 transition-all duration-300
+                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="h-10 w-10 md:h-16 md:w-16 transition-all duration-300
                     text-red-600 stroke-current fill-transparent group-[.is-favorite]:text-red-600 group-[.is-favorite]:fill-current" viewBox="0 0 24 24" stroke-width="2">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
                     </svg>
@@ -45,7 +48,7 @@
                                 data-owned="<?= $isOwnedPet ? '1' : '0' ?>">
 
                     <header class="flex px-4 py-2">
-                        <img src="<?= htmlspecialchars($petFamilyIcon, ENT_QUOTES, 'UTF-8') ?>" alt="icône <?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?>" class="w-20 h-auto pt-1">
+                        <img src="<?= htmlspecialchars($petFamilyIcon, ENT_QUOTES, 'UTF-8') ?>" alt="icône <?= htmlspecialchars($pet['family'], ENT_QUOTES, 'UTF-8') ?>" class="<?= in_array($pet['family'], ['Machine', 'Bestiole']) ? 'w-14 md:w-20' : 'w-12 md:w-20' ?> h-auto">
                     </header>
 
                     <div class="flex flex-col justify-center items-center flex-grow">
@@ -149,7 +152,7 @@
 
             <section class="mt-8 bg-primary-brown rounded-xl border-2 border-primary-orange w-4/5 mx-auto max-w-md lg:max-w-none lg:w-full p-4 lg:p-6 shadow-xl" aria-labelledby="sorts-heading">
                 <h2 id="sorts-heading" class="sr-only">Capacités de la mascotte</h2>
-                <ul class="flex flex-wrap justify-around gap-3 md:gap-4 lg:gap-6">
+                <ul class="grid grid-cols-3 justify-items-center gap-3 md:flex md:flex-wrap md:justify-around md:gap-4 lg:gap-6">
                     <?php for ($i = 1; $i <= 6; $i++):
                         $spell = $petSpells[$i] ?? null;
                         $spellImg = $spell ? htmlspecialchars($spell['icon'], ENT_QUOTES, 'UTF-8') : 'assets/images/pets/beast.webp';

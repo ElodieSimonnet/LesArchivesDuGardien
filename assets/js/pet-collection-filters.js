@@ -11,10 +11,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('search-input');
     const loadMoreBtn = document.getElementById('load-more-btn');
     const loadMoreCount = document.getElementById('load-more-count');
+    const noResults = document.getElementById('no-results');
 
     
     const ITEMS_PER_PAGE = 12;
     let currentLimit = ITEMS_PER_PAGE;
+    const STORAGE_KEY = 'petFiltersState';
+
+    function saveFiltersState() {
+        const state = {
+            checkboxes: [],
+            status: document.querySelector('input[name="filter-status"]:checked, input[name="filter-status-mobile"]:checked')?.value ?? 'all',
+            search: searchInput ? searchInput.value : '',
+            limit: currentLimit
+        };
+        checkboxes.forEach(chk => {
+            if (chk.checked) state.checkboxes.push({ filter: chk.dataset.filter, value: chk.value });
+        });
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    }
+
+    function restoreFiltersState() {
+        const raw = sessionStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        sessionStorage.removeItem(STORAGE_KEY);
+        const state = JSON.parse(raw);
+        state.checkboxes.forEach(({ filter, value }) => {
+            document.querySelectorAll(`.filter-checkbox[data-filter="${filter}"][value="${value}"]`)
+                .forEach(cb => cb.checked = true);
+        });
+        statusRadios.forEach(r => { if (r.value === state.status) r.checked = true; });
+        if (searchInput && state.search) searchInput.value = state.search;
+        currentLimit = state.limit ?? ITEMS_PER_PAGE;
+    }
 
     
     function closeAllDropdowns() {
@@ -47,14 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         content?.addEventListener('click', (e) => e.stopPropagation());
+        content?.addEventListener('mousedown', (e) => e.preventDefault());
 
         
-        container.addEventListener('focusout', (e) => {
-            if (!container.contains(e.relatedTarget)) {
-                content.classList.add('hidden');
-                if (btn) btn.setAttribute('aria-expanded', 'false');
-                if (icon) icon.classList.remove('rotate-180');
-            }
+        container.addEventListener('focusout', () => {
+            setTimeout(() => {
+                if (!container.contains(document.activeElement)) {
+                    content.classList.add('hidden');
+                    if (btn) btn.setAttribute('aria-expanded', 'false');
+                    if (icon) icon.classList.remove('rotate-180');
+                }
+            }, 0);
         });
     });
 
@@ -73,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (chk.checked) {
                 const category = chk.dataset.filter;
                 if (!activeFilters[category]) activeFilters[category] = [];
-                activeFilters[category].push(chk.value);
+                if (!activeFilters[category].includes(chk.value)) activeFilters[category].push(chk.value);
             }
         });
 
@@ -129,6 +161,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (loadMoreBtn) {
             loadMoreBtn.style.display = matchCount > currentLimit ? '' : 'none';
+        }
+        if (noResults) {
+            noResults.classList.toggle('hidden', matchCount > 0);
         }
 
         updateBadges(activeFilters, statusValue);
@@ -216,5 +251,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+    document.querySelectorAll('.pet-card').forEach(card => {
+        card.addEventListener('click', saveFiltersState);
+    });
+
+    restoreFiltersState();
     applyAllFilters();
 });

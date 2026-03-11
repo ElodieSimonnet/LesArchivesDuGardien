@@ -1,10 +1,10 @@
 <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-[999] focus:bg-primary-orange focus:text-primary-black focus:px-4 focus:py-2 focus:font-bold">Aller au contenu principal</a>
-<header class="bg-primary-black border-primary-orange border-b px-8 py-2">
-    <nav class="max-w-full mx-auto flex items-center justify-between" aria-label="Navigation principale">
+<header class="bg-primary-black border-primary-orange border-b h-28 flex items-center">
+    <nav class="w-full px-6 md:max-w-7xl md:mx-auto flex items-center justify-between" aria-label="Navigation principale">
 
         <div class="flex items-center gap-8">
             <a href="index.php" class="flex-shrink-0">
-                <img src="assets/images/home_icons/dragon-logo.webp" alt="Les Archives du Gardien - Accueil" class="h-24 w-24 md:h-30 md:w-30">
+                <img src="assets/images/home_icons/dragon-logo-adg.png" alt="Les Archives du Gardien - Accueil" class="h-14 w-14 lg:h-20 lg:w-20">
             </a>
 
             <ul class="hidden lg:flex items-center gap-12 text-primary-white font-semibold uppercase text-lg tracking-wider">
@@ -30,18 +30,18 @@
                     <?php endif; ?>
                     <form action="logout.php" method="POST" class="inline">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                        <button type="submit" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-red-600 hover:text-primary-white transition-all shadow-md border-2 border-transparent">
+                        <button type="submit" class="bg-primary-orange text-primary-black font-bold py-2 px-6 rounded uppercase text-lg hover:bg-red-600 hover:text-primary-white transition-all shadow-md border-2 border-transparent cursor-pointer">
                             Déconnexion
                         </button>
                     </form>
                 <?php else: ?>
-                    <button type="button" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Connexion</button>
-                    <button type="button" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors">Inscription</button>
+                    <button type="button" onclick="toggleModal('loginModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors cursor-pointer">Connexion</button>
+                    <button type="button" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange font-bold py-2 px-6 rounded uppercase text-lg hover:bg-primary-orange hover:text-primary-black transition-colors cursor-pointer">Inscription</button>
                 <?php endif; ?>
             </div>
 
-            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange p-2 rounded-xl text-primary-black" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
-                <svg class="w-9 h-9" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <button id="open-menu" type="button" class="lg:hidden bg-primary-orange h-12 w-12 flex items-center justify-center rounded-xl text-primary-black" aria-label="Menu" aria-expanded="false" aria-controls="mobile-menu">
+                <svg class="w-8 h-8" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M4 6h16M4 12h16M4 18h16"></path>
                 </svg>
             </button>
@@ -107,14 +107,14 @@
                     <?php endif; ?>
                     <form action="logout.php" method="POST" class="w-full">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                        <button type="submit" class="w-full bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg">
+                        <button type="submit" class="w-full bg-red-600 text-primary-white text-center py-4 rounded font-bold uppercase text-lg cursor-pointer">
                             Déconnexion
                         </button>
                     </form>
                 </div>
             <?php else: ?>
                 <div class="flex flex-col gap-4">
-                    <button type="button" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg">Connexion</button>
+                    <button type="button" onclick="toggleModal('loginModal')" class="bg-primary-orange text-primary-black text-center py-4 rounded font-bold uppercase text-lg cursor-pointer">Connexion</button>
                     <button type="button" onclick="toggleModal('registerModal')" class="border-2 border-primary-orange text-primary-orange text-center py-4 rounded font-bold uppercase text-lg">Inscription</button>
                 </div>
             <?php endif; ?>

@@ -48,14 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
+                const card = this.closest('li')?.querySelector('.mount-card, .pet-card');
+
                 if (data.status === 'added') {
                     this.classList.add('is-favorite');
                     this.setAttribute('aria-pressed', 'true');
                     this.setAttribute('aria-label', this.getAttribute('aria-label').replace('Ajouter', 'Retirer').replace('aux favoris', 'des favoris'));
+                    if (card) card.dataset.wishlisted = '1';
                 } else if (data.status === 'removed') {
                     this.classList.remove('is-favorite');
                     this.setAttribute('aria-pressed', 'false');
                     this.setAttribute('aria-label', this.getAttribute('aria-label').replace('Retirer', 'Ajouter').replace('des favoris', 'aux favoris'));
+                    if (card) card.dataset.wishlisted = '0';
                 }
             })
             .catch(() => showToast('Une erreur réseau est survenue.'));

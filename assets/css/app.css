@@ -33,6 +33,10 @@
   }
 }
 
+@utility wishlist-cursor {
+  cursor: grab;
+}
+
 @utility btn-orange-hover {
   @apply hover:bg-primary-orange hover:text-primary-black transition-all;
 }

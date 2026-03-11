@@ -1,7 +1,7 @@
 <footer class="bg-primary-black text-primary-white border-t border-primary-orange py-8 px-4">
         <div class="max-w-6xl mx-auto flex flex-col items-center gap-12 lg:flex-row lg:justify-between lg:gap-4">
             <nav aria-label="Navigation secondaire">
-                <ul class="flex flex-row flex-wrap justify-center items-center gap-6 text-sm font-bold tracking-wide md:gap-20 md:text-base lg:text-lg">
+                <ul class="flex flex-col items-center gap-6 text-sm font-bold tracking-wide md:flex-row md:gap-20 md:text-base lg:text-lg">
                     <li>
                         <a href="news.php" class="hover:text-primary-orange uppercase">Nouveautés</a>
                     </li>
@@ -30,7 +30,7 @@
             </div>
         </div>
         </div>
-        <p class="text-center text-xs text-zinc-500 mt-8 max-w-2xl mx-auto">
+        <p class="text-center text-sm lg:text-base text-zinc-400 mt-8 max-w-2xl mx-auto">
             <small>Les Archives du Gardien est un site de fan non officiel, non affilié à Blizzard Entertainment. World of Warcraft®, Warcraft® et Blizzard Entertainment® sont des marques déposées de Blizzard Entertainment, Inc.</small>
         </p>
     </footer>

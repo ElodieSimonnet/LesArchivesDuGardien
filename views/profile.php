@@ -89,9 +89,9 @@
                                 <label for="email" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Email :</label>
                                 <div class="flex flex-1 gap-3">
                                     <input type="email" id="email" name="email" value="<?= htmlspecialchars($user['email']) ?>" readonly
-                                    autocomplete="email"
+                                    autocomplete="off"
                                     class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
-                                    <button type="button" onclick="toggleEdit('email')" id="btn-edit-email" aria-label="Modifier l'email" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
+                                    <button type="button" onclick="toggleEdit('email')" id="btn-edit-email" aria-label="Modifier l'email" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group cursor-pointer">
                                         <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
@@ -102,8 +102,8 @@
                                 <div class="flex flex-col md:flex-row md:items-center gap-4">
                                     <label for="email-password" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Mot de passe :</label>
                                     <div class="relative flex-1">
-                                        <input type="password" id="email-password" name="current_password" placeholder="Confirmez votre mot de passe" required
-                                        autocomplete="current-password"
+                                        <input type="password" id="email-password" name="current_password" placeholder="Mot de passe actuel" required
+                                        autocomplete="off"
                                         class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -112,8 +112,8 @@
                                     </div>
                                 </div>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('email', '<?= htmlspecialchars($user['email'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
-                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                    <button type="button" onclick="cancelEdit('email', '<?= htmlspecialchars($user['email'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover cursor-pointer">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all cursor-pointer">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -125,9 +125,9 @@
                                 <label for="name" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Nom d'utilisateur :</label>
                                 <div class="flex flex-1 gap-3">
                                     <input type="text" id="name" name="username" value="<?= htmlspecialchars($user['username']) ?>" readonly
-                                    autocomplete="username"
+                                    autocomplete="off"
                                     class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
-                                    <button type="button" onclick="toggleEdit('username')" id="btn-edit-username" aria-label="Modifier le nom d'utilisateur" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group">
+                                    <button type="button" onclick="toggleEdit('username')" id="btn-edit-username" aria-label="Modifier le nom d'utilisateur" class="border border-primary-orange rounded-xl p-3 hover:bg-primary-orange transition-all group cursor-pointer">
                                         <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
@@ -138,8 +138,8 @@
                                 <div class="flex flex-col md:flex-row md:items-center gap-4">
                                     <label for="username-password" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Mot de passe :</label>
                                     <div class="relative flex-1">
-                                        <input type="password" id="username-password" name="current_password" placeholder="Confirmez votre mot de passe" required
-                                        autocomplete="current-password"
+                                        <input type="password" id="username-password" name="current_password" placeholder="Mot de passe actuel" required
+                                        autocomplete="off"
                                         class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -148,8 +148,8 @@
                                     </div>
                                 </div>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('username', '<?= htmlspecialchars($user['username'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
-                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                    <button type="button" onclick="cancelEdit('username', '<?= htmlspecialchars($user['username'], ENT_QUOTES) ?>')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover cursor-pointer">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all cursor-pointer">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -162,7 +162,7 @@
                                 <div class="flex flex-1 gap-3">
                                     <input type="password" id="password-display" value="********" readonly disabled
                                     class="flex-1 bg-black/40 border border-primary-orange rounded-lg px-4 py-3 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none">
-                                    <button type="button" onclick="toggleEdit('password')" id="btn-edit-password" aria-label="Modifier le mot de passe" class="border border-primary-orange rounded-lg p-3 hover:bg-primary-orange transition-all group">
+                                    <button type="button" onclick="toggleEdit('password')" id="btn-edit-password" aria-label="Modifier le mot de passe" class="border border-primary-orange rounded-lg p-3 hover:bg-primary-orange transition-all group cursor-pointer">
                                         <svg class="w-6 h-6 text-primary-orange group-hover:text-primary-black transition-transform" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                         </svg>
@@ -174,7 +174,7 @@
                                     <label for="current-password" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Actuel :</label>
                                     <div class="relative flex-1">
                                         <input type="password" id="current-password" name="current_password" placeholder="Mot de passe actuel" required
-                                        autocomplete="current-password"
+                                        autocomplete="off"
                                         class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
@@ -206,9 +206,10 @@
                                 <div class="flex flex-col md:flex-row md:items-center gap-4">
                                     <label for="confirm-password" class="text-primary-orange text-sm lg:text-base font-bold w-32 shrink-0">Confirmer :</label>
                                     <div class="relative flex-1">
-                                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirmez le nouveau mot de passe" required
+                                        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirmation" required
                                         autocomplete="new-password"
-                                        class="w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
+                                        data-confirm-for="new-password"
+                                        class="password-confirm-input w-full bg-black/40 border border-primary-orange rounded-lg px-4 py-3 pr-12 text-sm lg:text-base text-a11y-gray font-mono focus:outline-none focus:ring-1 focus:ring-primary-orange">
                                         <button type="button" class="toggle-password absolute inset-y-0 right-3 flex items-center text-a11y-gray hover:text-primary-orange transition-colors cursor-pointer" aria-label="Afficher/masquer le mot de passe">
                                             <svg class="eye-open w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                                             <svg class="eye-closed hidden w-5 h-5" aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.542 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21"/></svg>
@@ -217,8 +218,8 @@
                                 </div>
                                 <p class="text-xs lg:text-sm text-a11y-gray">Min. 12 caractères, 1 majuscule, 1 minuscule, 1 chiffre, 1 caractère spécial.</p>
                                 <div class="flex gap-3 justify-end">
-                                    <button type="button" onclick="cancelEdit('password')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover">Annuler</button>
-                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all">Enregistrer</button>
+                                    <button type="button" onclick="cancelEdit('password')" class="px-5 py-2 border border-primary-orange text-primary-orange font-bold uppercase text-xs lg:text-sm rounded btn-orange-hover cursor-pointer">Annuler</button>
+                                    <button type="submit" class="px-5 py-2 bg-primary-orange text-primary-black font-bold uppercase text-xs lg:text-sm rounded hover:bg-amber-500 transition-all cursor-pointer">Enregistrer</button>
                                 </div>
                             </div>
                         </form>
@@ -226,7 +227,7 @@
                         <form id="deleteAccountForm" action="actions/delete_account.php" method="POST">
                             <input type="hidden" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?>">
                             <input type="hidden" name="confirm_delete" value="1">
-                            <button type="button" id="openDeleteModal" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm lg:text-base tracking-widest transition-all active:scale-[0.98]">
+                            <button type="button" id="openDeleteModal" class="w-full mt-4 bg-primary-orange hover:bg-red-600 text-primary-black hover:text-primary-white font-bold py-3.5 rounded-lg uppercase text-sm lg:text-base tracking-widest transition-all active:scale-[0.98] cursor-pointer">
                                 Supprimer son compte
                             </button>
                         </form>
@@ -269,11 +270,11 @@
             </p>
             <div class="flex gap-4 justify-center">
                 <button type="button" id="cancelDeleteBtn"
-                    class="px-6 py-3 border-2 border-primary-orange text-primary-orange font-bold uppercase text-sm rounded-lg btn-orange-hover">
+                    class="px-6 py-3 border-2 border-primary-orange text-primary-orange font-bold uppercase text-sm rounded-lg btn-orange-hover cursor-pointer">
                     Annuler
                 </button>
                 <button type="button" id="confirmDeleteBtn"
-                    class="px-6 py-3 bg-red-600 text-white font-bold uppercase text-sm rounded-lg hover:bg-red-700 transition-all">
+                    class="px-6 py-3 bg-red-600 text-white font-bold uppercase text-sm rounded-lg hover:bg-red-700 transition-all cursor-pointer">
                     Confirmer la suppression
                 </button>
             </div>

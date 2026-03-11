@@ -40,7 +40,7 @@
             btn.textContent = i + 1;
             btn.setAttribute('aria-label', 'Voir l\'actualité ' + (i + 1));
             btn.setAttribute('aria-pressed', i === current ? 'true' : 'false');
-            btn.className = 'flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-brown border-2 rounded-xl text-primary-white font-black text-lg md:text-xl ' +
+            btn.className = 'flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary-brown border-2 rounded-xl text-primary-white font-black text-lg md:text-xl cursor-pointer ' +
                 (i === current ? 'border-primary-orange' : 'border-primary-orange/40');
             btn.addEventListener('click', () => showSlide(i));
             pageNumbers.appendChild(btn);

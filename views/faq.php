@@ -36,7 +36,7 @@
                         <?php foreach ($faqs as $faq): ?>
                         <div class="group border-2 border-primary-orange rounded-lg overflow-hidden shadow-xl transition-all duration-300">
                             <dt>
-                                <button type="button" aria-expanded="false" aria-controls="faq-content-<?= (int)$faq['id'] ?>" class="faq-trigger w-full flex justify-between items-center p-4 text-left bg-primary-brown hover:brightness-110 focus:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-primary-orange transition-all duration-300">
+                                <button type="button" aria-expanded="false" aria-controls="faq-content-<?= (int)$faq['id'] ?>" class="faq-trigger w-full flex justify-between items-center p-4 text-left bg-primary-brown hover:brightness-110 focus:outline-none focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-primary-orange transition-all duration-300 cursor-pointer">
                                     <span class="text-base md:text-lg font-semibold text-primary-orange pr-4 transition-colors duration-300 group-[.is-active]:text-primary-black">
                                         Q. <?= htmlspecialchars($faq['question'], ENT_QUOTES, 'UTF-8') ?>
                                     </span>

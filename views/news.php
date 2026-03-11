@@ -30,7 +30,7 @@
 <h2 class="sr-only">Actualités récentes</h2>
         <div class="relative flex items-center group">
 
-            <button type="button" id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Précédent">
+            <button type="button" id="btn-prev" class="hidden md:flex absolute -left-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)] cursor-pointer" aria-label="Précédent">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -92,7 +92,7 @@
                 <?php endforeach; ?>
             </div>
 
-            <button type="button" id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)]" aria-label="Suivant">
+            <button type="button" id="btn-next" class="hidden md:flex absolute -right-8 z-10 bg-primary-brown border-2 border-primary-orange p-3 rounded-lg text-primary-orange btn-orange-hover shadow-[0_0_15px_rgba(255,165,0,0.3)] cursor-pointer" aria-label="Suivant">
                 <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7" />
                 </svg>
@@ -117,13 +117,14 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                 <?php foreach ($list_news as $article): ?>
-                <a href="news_detail.php?id=<?= (int)$article['id'] ?>" aria-label="Lire l'article : <?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" class="group">
-                    <article class="bg-primary-brown card-bordered overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">
+                    <article class="group bg-primary-brown card-bordered overflow-hidden shadow-2xl flex flex-col h-full transition-all duration-300 hover:shadow-[0_0_25px_rgba(255,165,0,0.2)] hover:border-primary-orange/80">
 
                         <?php if (!empty($article['image_url'])): ?>
+                        <a href="news_detail.php?id=<?= (int)$article['id'] ?>" aria-label="Lire l'article : <?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" tabindex="-1">
                         <figure class="overflow-hidden h-48 w-full relative m-0">
                             <img src="<?= htmlspecialchars($article['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($article['title'], ENT_QUOTES, 'UTF-8') ?>" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
                         </figure>
+                        </a>
                         <?php endif; ?>
 
                         <div class="p-5 flex flex-col flex-grow">
@@ -138,21 +139,20 @@
                                 ?>
                             </p>
 
-                            <span class="text-primary-orange text-xs font-bold uppercase tracking-wider mt-3 group-hover:underline">
+                            <a href="news_detail.php?id=<?= (int)$article['id'] ?>" class="text-primary-orange text-xs font-bold uppercase tracking-wider mt-3 hover:underline">
                                 Lire la suite &rarr;
-                            </span>
+                            </a>
 
                             <footer class="mt-4 pt-3 border-t border-zinc-800/50 flex justify-between items-center">
                                 <p class="text-primary-orange/70 text-xs italic">
                                     <time datetime="<?= date('Y-m-d', strtotime($article['created_at'])) ?>"><?= date('d/m/Y', strtotime($article['created_at'])) ?></time> — <span class="font-bold uppercase text-primary-white/70"><?= htmlspecialchars($article['author'] ?? 'Ancien membre', ENT_QUOTES, 'UTF-8') ?></span>
                                 </p>
                                 <?php if (!empty($article['source_news'])): ?>
-                                <span class="text-primary-orange/70 text-xs font-bold uppercase hover:underline">Source</span>
+                                <a href="<?= htmlspecialchars($article['source_news'], ENT_QUOTES, 'UTF-8') ?>" target="_blank" rel="noopener noreferrer" class="text-primary-orange/70 text-xs font-bold uppercase hover:underline">Source</a>
                                 <?php endif; ?>
                             </footer>
                         </div>
                     </article>
-                </a>
                 <?php endforeach; ?>
             </div>
 
